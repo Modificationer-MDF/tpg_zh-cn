@@ -1,0 +1,240 @@
+@font-face {
+    font-family: "basic";
+    src: url("../fonts/Basic Modification Light.ttf") format("truetype");
+}
+
+h1 h2 {
+    color: white;
+    font-weight: 100;
+}
+
+body {
+    overflow-x: hidden;
+    background-color: #000000;
+    font-family: "basic";
+    font-weight: 100;
+}
+
+p {
+    font-size: 30px;
+    color: white;
+}
+
+/* 第 1 部分。 */
+
+@keyframes -head {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.head {
+    opacity: 0;
+    font-size: 25px;
+    text-align: center;
+    padding: 5px 5px;
+}
+
+@keyframes -top {
+    from {
+        width: 55vw;
+        background-color: #02211d00;
+    }
+    to {
+        width: 100vw;
+        background-color: #02211d9f;
+    }
+}
+
+.top {
+    margin-top: 30px;
+    margin-left: -14px;
+    background-color: #02211d00;
+    border-radius: 5px;
+    height: auto;
+    padding: 7px 7px;
+}
+
+@keyframes -head1 { /* 进入动画。 */
+    from {
+        transform: translateX(50vw);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(5vw);
+        opacity: 1;
+    }
+}
+
+.head1 {
+    font-size: 60px;
+    animation: -head1 1.4s forwards cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+@keyframes -head2 {
+    from {
+        transform: translateX(30vw);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(5vw);
+        opacity: 1;
+    }
+}
+
+.head2 {
+    display: none;
+    font-size: 40px;
+}
+
+
+/* 第 2 部分。 */
+@keyframes -btn1 {
+    from {
+        transform: translateX(0);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(5vw);
+        opacity: 1;
+    }
+}
+
+@keyframes btn1- { /* btn1 被点击，btn2 和 btn3 未被点击。 */
+    from {
+        opacity: 1;
+        transform: translateX(5vw);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(0);
+    }
+}
+
+@keyframes btn2-- {
+    from {
+        transform: translateX(20vw);
+    }
+    to {
+        transform: translateX(5vw);
+    }
+}
+
+@keyframes btn3-- {
+    from {
+        transform: translateX(35vw);
+    }
+    to {
+        transform: translateX(20vw);
+    }
+}
+
+@keyframes -btn2 {
+    from {
+        transform: translateX(0);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(20vw);
+        opacity: 1;
+    }
+}
+
+@keyframes btn2- {
+    from {
+        opacity: 1;
+        transform: translateX(20vw);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateX(0);
+    }
+}
+
+@keyframes -btn3 {
+    from {
+        transform: translateX(0);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(35vw);
+        opacity: 1;
+    }
+}
+
+@keyframes btn3- {
+    from {
+        opacity: 1;
+        transform: translateX(35vw);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateX(0);
+    }
+}
+
+.btn1 {
+    opacity: 0;
+    background-color: #067676cf;
+    padding: 10px 20px;
+    margin-bottom: 30px;
+    border-radius: 5px;
+    font-size: 30px;
+    border: none;
+}
+
+.btn2 {
+    opacity: 0;
+    background-color: #10225ccf;
+    padding: 10px 20px;
+    margin-bottom: 30px;
+    border-radius: 5px;
+    font-size: 30px;
+    border: none;
+}
+
+.btn3 {
+    opacity: 0;
+    background-color: #851717cf;
+    padding: 10px 20px;
+    margin-bottom: 30px;
+    border-radius: 5px;
+    font-size: 30px;
+    border: none;
+}
+
+a {
+    font-size: 30px;
+}
+
+a:link {
+    color: cyan;
+    text-decoration: none;
+}
+
+a:visited {
+    color: mediumpurple;
+    text-decoration: none;
+}
+
+a:hover {
+    color: silver;
+    text-decoration: underline;
+}
+
+a:active {
+    color: palegreen;
+    text-decoration: underline;
+}
+
+button {
+    font-family: "basic";
+    font-weight: 100;
+}

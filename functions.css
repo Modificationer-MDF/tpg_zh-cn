@@ -1,0 +1,40 @@
+/* info 函数。 */
+.info-window {
+    z-index: 998;
+    display: flex;
+    background-color: #18a68999;
+    font-size: 25px;
+    flex-wrap: wrap;
+    width: auto;
+    margin: 10px;
+}
+
+.info-square {
+    z-index: 999;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1b7163c9;
+}
+
+.info-icon {
+    text-align: center;
+    font-size: 25px;
+    color: white;
+}
+
+.info-content {
+    padding: 14px 25px;
+    color: white;
+    flex-grow: 1;
+    max-width: calc(14ch);
+    word-break: break-word;
+    min-width: 28ch;
+}
+
+@keyframes -info {
+    from {
+        opacity: 0;
+    }
+}
