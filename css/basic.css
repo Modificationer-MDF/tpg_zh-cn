@@ -20,7 +20,7 @@ p {
     color: white;
 }
 
-/* µÚ 1 ²¿·Ö¡£ */
+/* ç¬¬ 1 éƒ¨åˆ†ã€‚ */
 
 @keyframes -head {
     from {
@@ -58,7 +58,7 @@ p {
     padding: 7px 7px;
 }
 
-@keyframes -head1 { /* ½øÈë¶¯»­¡£ */
+@keyframes -head1 { /* è¿›å…¥åŠ¨ç”»ã€‚ */
     from {
         transform: translateX(50vw);
         opacity: 0;
@@ -91,7 +91,7 @@ p {
 }
 
 
-/* µÚ 2 ²¿·Ö¡£ */
+/* ç¬¬ 2 éƒ¨åˆ†ã€‚ */
 @keyframes -btn1 {
     from {
         transform: translateX(0);
@@ -103,7 +103,7 @@ p {
     }
 }
 
-@keyframes btn1- { /* btn1 ±»µã»÷£¬btn2 ºÍ btn3 Î´±»µã»÷¡£ */
+@keyframes btn1- { /* btn1 è¢«ç‚¹å‡»ï¼Œbtn2 å’Œ btn3 æœªè¢«ç‚¹å‡»ã€‚ */
     from {
         opacity: 1;
         transform: translateX(5vw);
