@@ -1,0 +1,39 @@
+<!-- Made By [ The Play Games Team ] -->
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>The Play Games</title>
+    <link rel="stylesheet" type="text/css" href="css/basic.css" />
+    <link rel="stylesheet" type="text/css" href="css/functions.css" />
+    <script src="js/basic.js"></script>
+    <script src="js/global.js"></script>
+    <script src="js/functions.js"></script>
+</head>
+<body>
+    <div class="head">
+        <p style="font-size: 25px; text-align: center;">Version 0.9</p>
+    </div>
+    <div class="top">
+        <h1 class="head1">The Play Games</h1>
+        <h2 class="head2">Let the game-playing easier.</h2>
+        <button type="button" onclick="btn1Move()" class="btn1">介绍</button>
+        <button type="button" onclick="alert('讲个笑话，你被骗了。');" class="btn2">信息</button>
+        <button type="button" onclick="alert('你可真是太容易被骗啦！');" class="btn3">项目</button>
+    </div>
+    <script>
+        const btn1 = document.querySelector(".btn1");
+        const btn2 = document.querySelector(".btn2");
+        const btn3 = document.querySelector(".btn3");
+        function btn1Move() {
+            btn1.style.animation = "btn1- 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1)";
+            btn2.style.animation = "btn2-- 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1)";
+            btn3.style.animation = "btn3-- 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1)";
+            setTimeout(() => {
+                info("Never gonna give you up, never gonna let you down. <br />Never gonna run around and desert you. <br />Never gonna make you cry, never gonna say goodbye. <br />Never gonna tell a lie and hurt you.");
+            }, 700);
+        }
+    </script>
+</body>
+</html>
