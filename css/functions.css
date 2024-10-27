@@ -1,8 +1,12 @@
 /* info 函数。 */
 .info-window {
-    z-index: 998;
+    z-index: 1000;
     display: flex;
+    position: absolute;
+    right: 0px;
+    top: 7vh;
     background-color: #18a68999;
+    animation: -info 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1);
     font-size: 25px;
     flex-wrap: wrap;
     width: auto;
@@ -10,7 +14,7 @@
 }
 
 .info-square {
-    z-index: 999;
+    z-index: 1001;
     width: 100px;
     display: flex;
     align-items: center;
@@ -35,6 +39,527 @@
 
 @keyframes -info {
     from {
+        transform: translateX(800px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0%);
+        opacity: 1;
+    }
+}
+
+@keyframes info- {
+    from {
+        transform: translateX(0%);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(800px);
+        opacity: 0;
+    }
+}
+
+/* success 函数。 */
+.success-window {
+    z-index: 1000;
+    display: flex;
+    position: absolute;
+    right: 0px;
+    top: 7vh;
+    background-color: #1d583799;
+    animation: -success 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1);
+    font-size: 25px;
+    flex-wrap: wrap;
+    width: auto;
+    margin: 10px;
+}
+
+.success-square {
+    z-index: 1001;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #183b25c9;
+}
+
+.success-icon {
+    text-align: center;
+    font-size: 25px;
+    color: white;
+}
+
+.success-content {
+    padding: 14px 25px;
+    color: white;
+    flex-grow: 1;
+    max-width: calc(14ch);
+    word-break: break-word;
+    min-width: 28ch;
+}
+
+@keyframes -success {
+    from {
+        transform: translateX(800px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0%);
+        opacity: 1;
+    }
+}
+
+@keyframes success- {
+    from {
+        transform: translateX(0%);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(800px);
+        opacity: 0;
+    }
+}
+
+/* fail 函数。 */
+.fail-window {
+    z-index: 1000;
+    display: flex;
+    position: absolute;
+    right: 0px;
+    top: 7vh;
+    background-color: #791e1d99;
+    animation: -fail 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1);
+    font-size: 25px;
+    flex-wrap: wrap;
+    width: auto;
+    margin: 10px;
+}
+
+.fail-square {
+    z-index: 1001;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #4a1514c9;
+}
+
+.fail-icon {
+    text-align: center;
+    font-size: 25px;
+    color: white;
+}
+
+.fail-content {
+    padding: 14px 25px;
+    color: white;
+    flex-grow: 1;
+    max-width: calc(14ch);
+    word-break: break-word;
+    min-width: 28ch;
+}
+
+@keyframes -fail {
+    from {
+        transform: translateX(800px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0%);
+        opacity: 1;
+    }
+}
+
+@keyframes fail- {
+    from {
+        transform: translateX(0%);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(800px);
+        opacity: 0;
+    }
+}
+
+/* warning 函数。 */
+.warning-window {
+    z-index: 1000;
+    display: flex;
+    position: absolute;
+    right: 0px;
+    top: 7vh;
+    background-color: #84782999;
+    animation: -warning 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1);
+    font-size: 25px;
+    flex-wrap: wrap;
+    width: auto;
+    margin: 10px;
+}
+
+.warning-square {
+    z-index: 1001;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #615518c9;
+}
+
+.warning-icon {
+    text-align: center;
+    font-size: 25px;
+    color: white;
+}
+
+.warning-content {
+    padding: 14px 25px;
+    color: white;
+    flex-grow: 1;
+    max-width: calc(14ch);
+    word-break: break-word;
+    min-width: 28ch;
+}
+
+@keyframes -warning {
+    from {
+        transform: translateX(800px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0%);
+        opacity: 1;
+    }
+}
+
+@keyframes warning- {
+    from {
+        transform: translateX(0%);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(800px);
+        opacity: 0;
+    }
+}
+
+/* input 函数。 */
+.input-window {
+    z-index: 1000;
+    display: flex;
+    position: absolute;
+    right: 0px;
+    top: 7vh;
+    background-color: #23508799;
+    animation: -input 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1);
+    font-size: 25px;
+    flex-wrap: wrap;
+    width: auto;
+    margin: 10px;
+}
+
+.input-square {
+    z-index: 1001;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #183450c9;
+}
+
+.input-icon {
+    text-align: center;
+    font-size: 25px;
+    color: white;
+}
+
+.input-content {
+    padding: 14px 25px;
+    color: white;
+    flex-grow: 1;
+    max-width: calc(14ch);
+    word-break: break-word;
+    min-width: 28ch;
+}
+
+.input-box {
+    z-index: 999;
+    color: white;
+    flex-grow: 1;
+    word-break: break-word;
+    background-color: #9cdcfe99;
+    font-family: "basic";
+    border: none;
+    border-radius: 0px;
+}
+
+.input-box::placeholder {
+    color: #ffffff99;
+    text-align: center;
+}
+
+@keyframes -input {
+    from {
+        transform: translateX(800px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0%);
+        opacity: 1;
+    }
+}
+
+@keyframes input- {
+    from {
+        transform: translateX(0%);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(800px);
+        opacity: 0;
+    }
+}
+
+/* choice 函数。 */
+.choice-window {
+    z-index: 1000;
+    display: flex;
+    position: absolute;
+    right: 0px;
+    top: 7vh;
+    background-color: #7527a499;
+    animation: -choice 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1);
+    font-size: 25px;
+    flex-wrap: wrap;
+    width: auto;
+    margin: 10px;
+}
+
+.choice-square {
+    z-index: 1001;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #461c5fc9;
+}
+
+.choice-icon {
+    text-align: center;
+    font-size: 25px;
+    color: white;
+}
+
+.choice-content {
+    padding: 14px 25px;
+    color: white;
+    flex-grow: 1;
+    max-width: calc(14ch);
+    word-break: break-word;
+    min-width: 28ch;
+}
+
+@keyframes -choice {
+    from {
+        transform: translateX(800px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0%);
+        opacity: 1;
+    }
+}
+
+@keyframes choice- {
+    from {
+        transform: translateX(0%);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(800px);
+        opacity: 0;
+    }
+}
+
+/* transmit 函数。 */
+.transmit-window {
+    z-index: 1000;
+    display: flex;
+    position: absolute;
+    right: 0px;
+    top: 7vh;
+    background-color: #9e338999;
+    animation: -transmit 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1);
+    font-size: 25px;
+    flex-wrap: wrap;
+    width: auto;
+    margin: 10px;
+}
+
+.transmit-square {
+    z-index: 1001;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #c125abc9;
+}
+
+.transmit-icon {
+    text-align: center;
+    font-size: 25px;
+    color: white;
+}
+
+.transmit-content {
+    padding: 14px 25px;
+    color: white;
+    flex-grow: 1;
+    max-width: calc(14ch);
+    word-break: break-word;
+    min-width: 28ch;
+}
+
+@keyframes -transmit {
+    from {
+        transform: translateX(800px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0%);
+        opacity: 1;
+    }
+}
+
+@keyframes transmit- {
+    from {
+        transform: translateX(0%);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(800px);
+        opacity: 0;
+    }
+}
+
+/* feedback 函数。 */
+.feedback-window {
+    z-index: 1000;
+    display: flex;
+    position: absolute;
+    right: 0px;
+    top: 7vh;
+    background-color: #a6580d99;
+    animation: -feedback 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1);
+    font-size: 25px;
+    flex-wrap: wrap;
+    width: auto;
+    margin: 10px;
+}
+
+.feedback-square {
+    z-index: 1001;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #753e14c9;
+}
+
+.feedback-icon {
+    text-align: center;
+    font-size: 25px;
+    color: white;
+}
+
+.feedback-content {
+    padding: 14px 25px;
+    color: white;
+    flex-grow: 1;
+    max-width: calc(14ch);
+    word-break: break-word;
+    min-width: 28ch;
+}
+
+@keyframes -feedback {
+    from {
+        transform: translateX(800px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0%);
+        opacity: 1;
+    }
+}
+
+@keyframes feedback- {
+    from {
+        transform: translateX(0%);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(800px);
+        opacity: 0;
+    }
+}
+
+/* command 函数。 */
+.command-window {
+    z-index: 1000;
+    display: flex;
+    position: absolute;
+    right: 0px;
+    top: 7vh;
+    background-color: #19181899;
+    animation: -command 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1);
+    font-size: 25px;
+    flex-wrap: wrap;
+    width: auto;
+    margin: 10px;
+}
+
+.command-square {
+    z-index: 1001;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #000000c9;
+}
+
+.command-icon {
+    text-align: center;
+    font-size: 25px;
+    color: white;
+}
+
+.command-content {
+    padding: 14px 25px;
+    color: white;
+    flex-grow: 1;
+    max-width: calc(14ch);
+    word-break: break-word;
+    min-width: 28ch;
+}
+
+@keyframes -command {
+    from {
+        transform: translateX(800px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0%);
+        opacity: 1;
+    }
+}
+
+@keyframes command- {
+    from {
+        transform: translateX(0%);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(800px);
         opacity: 0;
     }
 }
