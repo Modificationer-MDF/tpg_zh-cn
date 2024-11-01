@@ -244,6 +244,7 @@
 
 /* input 函数。 */
 .input-window {
+    transform: translateX(50%);
     z-index: 1000;
     display: flex;
     position: absolute;
@@ -283,6 +284,7 @@
 
 .input-box {
     z-index: 999;
+    font-size: 25px;
     color: white;
     flex-grow: 1;
     word-break: break-word;
@@ -297,25 +299,26 @@
     text-align: center;
 }
 
+
 @keyframes -input {
     from {
-        transform: translateX(800px);
+        transform: translateY(-600px);
         opacity: 0;
     }
 
     to {
-        transform: translateX(0%);
+        transform: translateY(0%);
         opacity: 1;
     }
 }
 
 @keyframes input- {
     from {
-        transform: translateX(0%);
+        transform: translateY(0%);
         opacity: 1;
     }
     to {
-        transform: translateX(800px);
+        transform: translateY(-600px);
         opacity: 0;
     }
 }
@@ -361,22 +364,22 @@
 
 @keyframes -choice {
     from {
-        transform: translateX(800px);
+        transform: translateY(-600px);
         opacity: 0;
     }
     to {
-        transform: translateX(0%);
+        transform: translateY(0%);
         opacity: 1;
     }
 }
 
 @keyframes choice- {
     from {
-        transform: translateX(0%);
+        transform: translateY(0%);
         opacity: 1;
     }
     to {
-        transform: translateX(800px);
+        transform: translateY(-600px);
         opacity: 0;
     }
 }
@@ -544,22 +547,22 @@
 
 @keyframes -command {
     from {
-        transform: translateX(800px);
+        transform: translateY(-600px);
         opacity: 0;
     }
     to {
-        transform: translateX(0%);
+        transform: translateY(0%);
         opacity: 1;
     }
 }
 
 @keyframes command- {
     from {
-        transform: translateX(0%);
+        transform: translateY(0%);
         opacity: 1;
     }
     to {
-        transform: translateX(800px);
+        transform: translateY(-600px);
         opacity: 0;
     }
 }
