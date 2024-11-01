@@ -1,8 +1,3 @@
-@font-face {
-    font-family: "basic";
-    src: url("../fonts/Basic Modification Light.ttf") format("truetype");
-}
-
 h1 h2 {
     color: white;
     font-weight: 100;
