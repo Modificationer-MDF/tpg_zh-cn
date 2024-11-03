@@ -3,7 +3,6 @@
 <meta charset="utf-8">
 <html lang="en">
 <head>
-    <meta charset="utf-8">
     <title>The Play Games</title>
     <link rel="stylesheet" type="text/css" href="css/basic.css" />
     <link rel="stylesheet" type="text/css" href="css/functions.css" />
@@ -18,21 +17,30 @@
     <script src="js/functions.js"></script>
 </head>
 <body>
+    <script>
+        function fn1() {
+            choice('Never gonna give you up. Never gonna let you down. Never gonna run around and desert you. Never gonna make you cry. Never gonna say goodbye. Never gonna tell a lie and hurt you.', "Yes, XD.","No, you're joking!");
+        }
+
+        async function fn2() {
+            var a = await input("Never gonna give you up. Never gonna let you down. Never gonna run around and desert you. Never gonna make you cry. Never gonna say goodbye. Never gonna tell a lie and hurt you.", "Have something to say?");
+            a = a.toLowerCase();
+            if (a.includes("fuck") || a.includes("wcsndm") || a.includes("damn") || a.includes("shit") || a.includes("idiot") || a.includes("fa q") || a.includes("sb") || a.includes("nigger") || a.includes("wdnmd") || a.includes("faggot") || a.includes("bitch") || a.includes("asshole") || a.includes("retard") || a.includes("cnm"))  {
+                await warning('Modificationer: "Shut up, you are fucking retarded."');
+            } else if (a === "") {
+                await choice("D*mn it, you didn't say a word.");
+            } else {
+                await info("You said: " + a);
+            }
+        }
+    </script>
     <div class="head">
         <p style="font-size: 25px; text-align: center;">Version 0.9</p>
     </div>
     <div class="top">
         <h1 class="head1">The Play Games</h1>
         <h2 class="head2">Let the game-playing easier.</h2>
-        <button type="button" onclick="info('Never gonna give you up. Never gonna let you down. Never gonna run around and desert you. Never gonna make you cry. Never gonna say goodbye. Never gonna tell a lie and hurt you.');">info</button>
-        <button type="button" onclick="success('Never gonna give you up. Never gonna let you down. Never gonna run around and desert you. Never gonna make you cry. Never gonna say goodbye. Never gonna tell a lie and hurt you.');">success</button>
-        <button type="button" onclick="fail('Never gonna give you up. Never gonna let you down. Never gonna run around and desert you. Never gonna make you cry. Never gonna say goodbye. Never gonna tell a lie and hurt you.');">fail</button>
-        <button type="button" onclick="warning('Never gonna give you up. Never gonna let you down. Never gonna run around and desert you. Never gonna make you cry. Never gonna say goodbye. Never gonna tell a lie and hurt you.');">warning</button>
-        <button type="button" onclick="input('Never gonna give you up. Never gonna let you down. Never gonna run around and desert you. Never gonna make you cry. Never gonna say goodbye. Never gonna tell a lie and hurt you.');">input</button>
-        <button type="button" onclick="transmit('Never gonna give you up. Never gonna let you down. Never gonna run around and desert you. Never gonna make you cry. Never gonna say goodbye. Never gonna tell a lie and hurt you.');">transmit</button>
-        <button type="button" onclick="feedback('Never gonna give you up. Never gonna let you down. Never gonna run around and desert you. Never gonna make you cry. Never gonna say goodbye. Never gonna tell a lie and hurt you.');">feedback</button>
-        <button type="button" onclick="choice('Never gonna give you up. Never gonna let you down. Never gonna run around and desert you. Never gonna make you cry. Never gonna say goodbye. Never gonna tell a lie and hurt you.');">choice</button>
-        <button type="button" onclick="command('Never gonna give you up. Never gonna let you down. Never gonna run around and desert you. Never gonna make you cry. Never gonna say goodbye. Never gonna tell a lie and hurt you.');">command</button>
+        <button class="head3" onclick="functions()">特性</button>
     </div>
 </body>
 </html>
