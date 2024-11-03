@@ -299,7 +299,6 @@
     text-align: center;
 }
 
-
 @keyframes -input {
     from {
         transform: translateY(-600px);
@@ -354,6 +353,7 @@
 }
 
 .choice-content {
+    margin-bottom: 90px;
     padding: 14px 25px;
     color: white;
     flex-grow: 1;
@@ -362,24 +362,50 @@
     min-width: 28ch;
 }
 
+.choice-true {
+    background-color: #7160e8b0;
+    border: none;
+    padding: 14px 25px;
+    text-align: center;
+    cursor: pointer;
+    color: white;
+    position: absolute;
+    flex: 1;
+    bottom: 20px;
+    left: 120px;
+}
+
+.choice-false {
+    background-color: #1b135ab0;
+    border: none;
+    padding: 14px 25px;
+    flex: 1;
+    text-align: center;
+    cursor: pointer;
+    color: white;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
 @keyframes -choice {
     from {
-        transform: translateY(-600px);
+        transform: translateX(800px);
         opacity: 0;
     }
     to {
-        transform: translateY(0%);
+        transform: translateX(0%);
         opacity: 1;
     }
 }
 
 @keyframes choice- {
     from {
-        transform: translateY(0%);
+        transform: translateX(0%);
         opacity: 1;
     }
     to {
-        transform: translateY(-600px);
+        transform: translateX(800px);
         opacity: 0;
     }
 }
@@ -445,22 +471,22 @@
     }
 }
 
-/* feedback 函数。 */
-.feedback-window {
+/* link 函数。 */
+.link-window {
     z-index: 1000;
     display: flex;
     position: absolute;
     right: 0px;
     top: 7vh;
     background-color: #a6580d99;
-    animation: -feedback 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1);
+    animation: -link 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1);
     font-size: 25px;
     flex-wrap: wrap;
     width: auto;
     margin: 10px;
 }
 
-.feedback-square {
+.link-square {
     z-index: 1001;
     width: 100px;
     display: flex;
@@ -469,13 +495,13 @@
     background-color: #753e14c9;
 }
 
-.feedback-icon {
+.link-icon {
     text-align: center;
     font-size: 25px;
     color: white;
 }
 
-.feedback-content {
+.link-content {
     padding: 14px 25px;
     color: white;
     flex-grow: 1;
@@ -484,7 +510,20 @@
     min-width: 28ch;
 }
 
-@keyframes -feedback {
+.link-btn {
+    background-color: #715213b0;
+    border: none;
+    padding: 14px 25px;
+    text-align: center;
+    cursor: pointer;
+    color: white;
+    position: absolute;
+    flex: 1;
+    bottom: 20px;
+    left: 120px;
+}
+
+@keyframes -link {
     from {
         transform: translateX(800px);
         opacity: 0;
@@ -495,7 +534,7 @@
     }
 }
 
-@keyframes feedback- {
+@keyframes link- {
     from {
         transform: translateX(0%);
         opacity: 1;
