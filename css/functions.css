@@ -505,6 +505,7 @@
     padding: 14px 25px;
     color: white;
     flex-grow: 1;
+    margin-bottom: 70px;
     max-width: calc(14ch);
     word-break: break-word;
     min-width: 28ch;
