@@ -85,7 +85,7 @@ p {
     font-size: 40px;
 }
 
-.head3 {
+.head3, .head4 {
     opacity: 0;
     background-color: #000000b0;
     padding: 14px 25px;
@@ -109,11 +109,37 @@ p {
 @keyframes head3- {
     from {
         opacity: 1;
+        height: 140px;
         transform: translateX(5vw);
     }
     to {
         opacity: 1;
-        transform: translateX(45vw);
+        height: 190px;
+        transform: translateX(25vw);
+    }
+}
+
+@keyframes -head4 {
+    from {
+        opacity: 0;
+        transform: translateX(0vw);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(25vw);
+    }
+}
+
+@keyframes head4- {
+    from {
+        opacity: 1;
+        transform: translateX(25vw);
+        height: 140px;
+    }
+    to {
+        opacity: 1;
+        transform: translateX(5vw);
+        height: 300px;
     }
 }
 
