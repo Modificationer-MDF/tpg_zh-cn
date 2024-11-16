@@ -77,24 +77,6 @@ function fn1() {
     }
 
     div.style.animation = "head3- 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1)";
-    div.addEventListener("animationend", (e) => {
-        if (e.animationName === "head3-") {
-            p.style.animation = "head3 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1)";
-        }
-    });
-    p.addEventListener("animationend", (e) => {
-        if (e.animationName === "head3") {
-            infoBtn.style.animation = "-btn1 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1)";
-            successBtn.style.animation = "-btn2 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1)";
-            failBtn.style.animation = "-btn3 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1)";
-            warningBtn.style.animation = "-btn4 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1)";
-            inputBtn.style.animation = "-btn5 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1)";
-            transmitBtn.style.animation = "-btn6 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1)";
-            choiceBtn.style.animation = "-btn7 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1)";
-            linkBtn.style.animation = "-btn8 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1)";
-            commandBtn.style.animation = "-btn9 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1)";
-        }
-    });
 
     infoBtn.onclick = () => {
         var a = prompt("请输入要显示的文字。")
