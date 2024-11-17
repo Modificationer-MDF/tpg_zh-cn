@@ -89,13 +89,13 @@ p {
     opacity: 0;
     background-color: #000000b0;
     padding: 14px 25px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     border-radius: 5px;
     font-size: 30px;
     border: none;
 }
 
-@keyframes -head3 {
+@keyframes _head3 {
     from {
         opacity: 0;
         transform: translateX(0);
@@ -114,12 +114,12 @@ p {
     }
     to {
         opacity: 1;
-        height: 190px;
-        transform: translateX(25vw);
+        height: 220px;
+        transform: translateX(5vw);
     }
 }
 
-@keyframes -head4 {
+@keyframes _head4 {
     from {
         opacity: 0;
         transform: translateX(0vw);
@@ -138,8 +138,21 @@ p {
     }
     to {
         opacity: 1;
-        transform: translateX(5vw);
-        height: 300px;
+        transform: translateX(25vw);
+        height: 1020px;
+    }
+}
+
+@keyframes -head4 {
+    from {
+        opacity: 1;
+        transform: translateX(25vw);
+        height: 1020px;
+    }
+    to {
+        opacity: 1;
+        transform: translateX(25vw);
+        height: 140px;
     }
 }
 
@@ -244,10 +257,11 @@ p {
 }
 
 .btn1 {
+    margin-top: 120px;
     opacity: 0;
     background-color: #18a689b0;
     padding: 14px 25px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     border-radius: 5px;
     font-size: 30px;
     border: none;
@@ -257,7 +271,7 @@ p {
     opacity: 0;
     background-color: #1d5837b0;
     padding: 14px 25px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     border-radius: 5px;
     font-size: 30px;
     border: none;
@@ -267,7 +281,7 @@ p {
     opacity: 0;
     background-color: #791e1db0;
     padding: 14px 25px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     border-radius: 5px;
     font-size: 30px;
     border: none;
@@ -277,7 +291,7 @@ p {
     opacity: 0;
     background-color: #847829b0;
     padding: 14px 25px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     border-radius: 5px;
     font-size: 30px;
     border: none;
@@ -287,7 +301,7 @@ p {
     opacity: 0;
     background-color: #235087b0;
     padding: 14px 25px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     border-radius: 5px;
     font-size: 30px;
     border: none;
@@ -297,7 +311,7 @@ p {
     opacity: 0;
     background-color: #9e3389b0;
     padding: 14px 25px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     border-radius: 5px;
     font-size: 30px;
     border: none;
@@ -307,7 +321,7 @@ p {
     opacity: 0;
     background-color: #7527a4b0;
     padding: 14px 25px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     border-radius: 5px;
     font-size: 30px;
     border: none;
@@ -317,7 +331,7 @@ p {
     opacity: 0;
     background-color: #a6580d99;
     padding: 14px 25px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     border-radius: 5px;
     font-size: 30px;
     border: none;
@@ -327,13 +341,13 @@ p {
     opacity: 0;
     background-color: #19181899;
     padding: 14px 25px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     border-radius: 5px;
     font-size: 30px;
     border: none;
 }
 
-@keyframes  -para {
+@keyframes -para {
     from {
         opacity:  0;
         transform: translateX(0);
@@ -378,4 +392,14 @@ a:active {
 button {
     font-family: "basic";
     font-weight: 100;
+}
+
+.dakai {
+    z-index: 999;
+    margin-left: 30px;
+    background-color: #ffe20099;
+    padding: 14px 25px;
+    border-radius: 5px;
+    font-size: 30px;
+    border: none;
 }
