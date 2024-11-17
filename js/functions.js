@@ -82,6 +82,7 @@ function info(string) {
     create(window); // 添加窗口。
 
     icon.innerHTML = `第 ${infoNum} 条信息`;
+    // icon.src = "images/Info.png";
     content.innerHTML = string;
 
     const line = Math.ceil(string.length / 14);
@@ -115,7 +116,7 @@ function success(string) {
     const square = document.createElement("div");
     square.className = "success-square";
     const icon = document.createElement("div");
-    icon.className = "success-icon";
+    // icon.src = "images/Success.png";
     const content = document.createElement("div");
     content.className = "success-content";
 
@@ -170,6 +171,7 @@ function fail(string) {
     square.appendChild(icon);
 
     icon.innerHTML = `第 ${failNum} 条错误消息`;
+    // icon.src = "images/Fail.png";
     content.innerHTML = string;
 
     const line = Math.ceil(string.length / 14);
@@ -214,6 +216,7 @@ function warning(string) {
     square.appendChild(icon);
 
     icon.innerHTML = `第 ${warningNum} 条警告消息`;
+    // icon.src = "images/Warning.png";
     content.innerHTML = string;
 
     const line = Math.ceil(string.length / 14);
@@ -265,6 +268,7 @@ function input(string, holder) {
         square.appendChild(icon);
 
         icon.innerHTML = `第 ${inputNum} 项输入`;
+        // icon.src = "images/Input.png";
         content.innerHTML = string;
 
         const line = Math.ceil(string.length / 14);
@@ -320,6 +324,7 @@ function choice(string, name1, name2) {
         square.appendChild(icon);
 
         icon.innerHTML = `第 ${choiceNum} 项选择`;
+        // icon.src = "images/Choice.png";
         content.innerHTML = string;
 
         const line = Math.ceil(string.length / 14);
@@ -328,6 +333,7 @@ function choice(string, name1, name2) {
 
         const True = document.createElement("button");
         True.innerHTML = name1;
+        True.focus();
         True.className = "choice-true";
         True.onclick = () => {
             resolve(true);
@@ -385,6 +391,7 @@ function transmit(string) {
     square.appendChild(icon);
 
     icon.innerHTML = `第 ${transmitNum} 次传输`;
+    // icon.src = "images/Transmit.png";
     content.innerHTML = string;
 
     const line = Math.ceil(string.length / 14);
@@ -438,6 +445,7 @@ function link(string, url) {
     square.appendChild(icon);
 
     icon.innerHTML = `第 ${linkNum} 个链接`;
+    // icon.src = "images/Link.png";
     content.innerHTML = string;
     btn.innerHTML = `跳转至 ${url}`;
     content.appendChild(btn);
@@ -485,6 +493,7 @@ function command(string) {
     square.appendChild(icon);
 
     icon.innerHTML = `第 ${commandNum} 个终端窗口`;
+    // icon.src = "images/Command.png";
     content.innerHTML = string;
 
     const line = Math.ceil(string.length / 14);
