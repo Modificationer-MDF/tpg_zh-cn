@@ -5,7 +5,8 @@ h1 h2 {
 
 body {
     overflow-x: hidden;
-    background-color: #000000;
+    background-color: black;
+    color: white;
     font-family: "basic";
     font-weight: 100;
 }
@@ -114,7 +115,7 @@ p {
     }
     to {
         opacity: 1;
-        height: 220px;
+        height: 880px;
         transform: translateX(5vw);
     }
 }
@@ -139,125 +140,13 @@ p {
     to {
         opacity: 1;
         transform: translateX(25vw);
-        height: 1020px;
-    }
-}
-
-@keyframes -head4 {
-    from {
-        opacity: 1;
-        transform: translateX(25vw);
-        height: 1020px;
-    }
-    to {
-        opacity: 1;
-        transform: translateX(25vw);
-        height: 140px;
+        height: 2380px;
     }
 }
 
 /* 第 2 部分。 */
-@keyframes -btn1 {
-    from {
-        transform: translateX(0);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(9vw);
-        opacity: 1;
-    }
-}
-
-@keyframes -btn2 {
-    from {
-        transform: translateX(0);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(18vw);
-        opacity: 1;
-    }
-}
-
-@keyframes -btn3 {
-    from {
-        transform: translateX(0);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(27vw);
-        opacity: 1;
-    }
-}
-
-@keyframes -btn4 {
-    from {
-        transform: translateX(0);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(36vw);
-        opacity: 1;
-    }
-}
-
-@keyframes -btn5 {
-    from {
-        transform: translateX(0);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(45vw);
-        opacity: 1;
-    }
-}
-
-@keyframes -btn6 {
-    from {
-        transform: translateX(0);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(54vw);
-        opacity: 1;
-    }
-}
-
-@keyframes -btn7 {
-    from {
-        transform: translateX(0);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(63vw);
-        opacity: 1;
-    }
-}
-
-@keyframes -btn8 {
-    from {
-        transform: translateX(0);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(72vw);
-        opacity: 1;
-    }
-}
-
-@keyframes -btn9 {
-    from {
-        transform: translateX(0);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(81vw);
-        opacity: 1;
-    }
-}
 
 .btn1 {
-    margin-top: 120px;
     opacity: 0;
     background-color: #18a689b0;
     padding: 14px 25px;
@@ -399,6 +288,200 @@ button {
     margin-left: 30px;
     background-color: #ffe20099;
     padding: 14px 25px;
+    border-radius: 5px;
+    font-size: 30px;
+    border: none;
+}
+
+.fn-1 {
+    opacity: 0;
+    background-color: #a123bf99;
+    padding: 14px 25px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 30px;
+    border: none;
+}
+
+.fn-2 {
+    opacity: 0;
+    background-color: #ff573399;
+    padding: 14px 25px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 30px;
+    border: none;
+}
+
+.btn10 {
+    opacity: 0;
+    background-color: #ff339999;
+    color: black;
+    padding: 14px 25px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 30px;
+    border: none;
+}
+
+.btn11 {
+    opacity: 0;
+    background-color: #33ffb399;
+    padding: 14px 25px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 30px;
+    border: none;
+}
+
+.btn12 {
+    opacity: 0;
+    background-color: #c7000399;
+    padding: 14px 25px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 30px;
+    border: none;
+}
+
+.btn13 {
+    opacity: 0;
+    background-color: #900c3999;
+    padding: 14px 25px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 30px;
+    border: none;
+}
+
+.btn14 {
+    opacity: 0;
+    background-color: #58184599;
+    padding: 14px 25px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 30px;
+    border: none;
+}
+
+.btn15 {
+    opacity: 0;
+    background-color: #ffc30099;
+    padding: 14px 25px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 30px;
+    border: none;
+}
+
+.btn16 {
+    opacity: 0;
+    background-color: #ff573399;
+    padding: 14px 25px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 30px;
+    border: none;
+}
+
+.btn17 {
+    opacity: 0;
+    background-color: #1c1c1c99;
+    padding: 14px 25px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 30px;
+    border: none;
+}
+
+.btn18 {
+    opacity: 0;
+    background-color: #3498db99;
+    padding: 14px 25px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 30px;
+    border: none;
+}
+
+.btn19 {
+    opacity: 0;
+    background-color: #8e44ad99;
+    padding: 14px 25px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 30px;
+    border: none;
+}
+
+.btn20 {
+    opacity: 0;
+    background-color: #e74c3c99;
+    padding: 14px 25px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 30px;
+    border: none;
+}
+
+.btn21 {
+    opacity: 0;
+    background-color: #2ecc7199;
+    padding: 14px 25px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 30px;
+    border: none;
+}
+
+.btn22 {
+    opacity: 0;
+    background-color: #66999999;
+    padding: 14px 25px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 30px;
+    border: none;
+}
+
+.div1 {
+    font-weight: bold;
+    margin-top: 30px;
+    width: auto;
+    background-color: #F39C1249;
+    border-radius: 5px; 
+    font-size: 33px;
+    text-align: center;
+    padding: 15px 15px;
+}
+
+.div2 {
+    font-weight: bold;
+    margin-top: 30px;
+    width: auto;
+    background-color: #1ABC9C49;
+    border-radius: 5px;
+    font-size: 33px;
+    text-align: center;
+    padding: 15px 15px;
+}
+
+.div3 {
+    font-weight: bold;
+    margin-top: 30px;
+    width: auto;
+    background-color: #8E44AD49;
+    border-radius: 5px;
+    font-size: 33px;
+    text-align: center;
+    padding: 15px 15px;
+}
+
+.btn23 {
+    opacity: 0;
+    background-color: #11451499;
+    padding: 14px 25px;
+    margin-bottom: 15px;
     border-radius: 5px;
     font-size: 30px;
     border: none;
