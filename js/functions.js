@@ -20,11 +20,11 @@ let urlEndings = [
 // 更新窗口位置的函数
 function updateSelectedWindowPos() {
     let total = 7 * window.innerHeight / 100; // 初始位置距离页面顶部的偏移（7vh）
-    windows.forEach((window, index) => {
+    windows.forEach((window) => {
         const wh = window.offsetHeight; // 获取当前窗口的高度。
         window.style.transition = "top 0.3s cubic-bezier(0.33, 1, 0.68, 1)";
         // 更新每个窗口的位置，保持适当的间隔
-        window.style.top = `${total}px`; 
+        window.style.top = `${total}px`;
         total += wh + 7; // 增加窗口高度和7px间距
     });
 }
@@ -54,6 +54,66 @@ function monitor() {
     }
 }
 
+function updatePos() {
+    // 初始化总偏移量
+    let totalHeight = 10; // 10px 的起始间距
+    windows.forEach(win => {
+        const wh = win.offsetHeight; // 获取当前窗口的高度
+        win.style.position = "fixed"; // 确保窗口是绝对定位的
+        win.style.top = `${totalHeight}px`; // 设置窗口的 top 值
+        totalHeight += wh + 10; // 更新总偏移量，增加窗口高度和10px间距
+    });
+}
+
+function log(string, time) {
+    if (time == null || time == undefined) {
+        time = 3000;
+    }
+    const windowElement = document.createElement("div");
+    windowElement.className = "log-window";
+    windowElement.style.position = "fixed";
+    windowElement.style.zIndex = 1000;
+
+    const content = document.createElement("div");
+    content.className = "log-content";
+    content.textContent = string;
+
+    const line = Math.ceil(string.length / 14);
+    const lineHeight = parseInt(windowElement.style.lineHeight) || 20;
+    content.style.height = `${line * lineHeight}px`;
+
+    document.body.appendChild(windowElement);
+    windowElement.appendChild(content);
+
+    create(windowElement);
+
+    // 确保窗口在视口内并不重叠
+    const rect = windowElement.getBoundingClientRect();
+    const viewportHeight = window.innerHeight;
+
+    // 计算当前窗口的top位置，避免重叠
+    let totalHeight = 0;
+    windows.forEach(win => {
+        totalHeight += win.offsetHeight + 5;
+    });
+
+    // 固定位置到直到超出视口底部
+    if (totalHeight + rect.height > viewportHeight) {
+        windowElement.style.top = `${viewportHeight - rect.height - 10}px`;
+    } else {
+        windowElement.style.top = `${totalHeight}px`;
+    }
+
+    setTimeout(() => {
+        windowElement.style.animation = "log- 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1)";
+        setTimeout(() => {
+            document.body.removeChild(windowElement);
+            windows = windows.filter(win => win !== windowElement);
+            updatePos();
+        }, 700);
+    }, time);
+}
+
 // info 函数。
 function info(string) {
     if (string == null || string == undefined) {
@@ -61,7 +121,8 @@ function info(string) {
         fail("所输入内容不能为 null 或 undefined。");
         monitor();
         return 39;
-    } if (nullCount > 26) {
+    }
+    if (nullCount > 26) {
         return "你已被禁止调用函数。";
     }
 
@@ -79,24 +140,39 @@ function info(string) {
     window.appendChild(square);
     window.appendChild(content);
     square.appendChild(icon);
-    create(window); // 添加窗口。
+    create(window);
 
     icon.innerHTML = `第 ${infoNum} 条信息`;
-    // icon.src = "images/Info.png";
     content.innerHTML = string;
 
     const line = Math.ceil(string.length / 14);
     const lineHeight = parseInt(window.style.lineHeight);
     content.style.height = `${line * lineHeight}px`;
 
+    // 检查窗口是否在视口内。
+    const visible = () => {
+        const rect = window.getBoundingClientRect();
+        const viewport = (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+        if (viewport === false) {
+            log(`你有 1 条未读的 info 窗口。`);
+        }
+    };
+
     setTimeout(() => {
         window.style.animation = "info- 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1)";
         setTimeout(() => {
             document.body.removeChild(window);
-            close(window) // 移除窗口。
+            close(window);
         }, 700);
     }, 3000);
+    setTimeout(visible, 3000);
 }
+
 
 // success 函数。
 
@@ -133,6 +209,19 @@ function success(string) {
     var lineHeight = parseInt(window.style.lineHeight);
     content.style.height = `${line * lineHeight}px`;
 
+    const visible = () => {
+        const rect = window.getBoundingClientRect();
+        const viewport = (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+        if (viewport === false) {
+            log(`你有 1 条未读的 success 窗口。`);
+        }
+    };
+
     setTimeout(() => {
         window.style.animation = "success- 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1)";
         setTimeout(() => {
@@ -140,6 +229,7 @@ function success(string) {
             close(window) // 移除窗口。
         }, 700);
     }, 3000);
+    setTimeout(visible, 3000);
 }
 
 // fail 函数。
@@ -178,6 +268,19 @@ function fail(string) {
     var lineHeight = parseInt(window.style.lineHeight);
     content.style.height = `${line * lineHeight}px`;
 
+    const visible = () => {
+        const rect = window.getBoundingClientRect();
+        const viewport = (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+        if (viewport === false) {
+            log(`你有 1 条未读的 fail 窗口。`);
+        }
+    };
+
     setTimeout(() => {
         window.style.animation = "fail- 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1)";
         setTimeout(() => {
@@ -185,6 +288,7 @@ function fail(string) {
             close(window) // 移除窗口。
         }, 700);
     }, 3000);
+    setTimeout(visible, 3000);
 }
 
 // warning 函数。
@@ -223,6 +327,19 @@ function warning(string) {
     var lineHeight = parseInt(window.style.lineHeight);
     content.style.height = `${line * lineHeight}px`;
 
+    const visible = () => {
+        const rect = window.getBoundingClientRect();
+        const viewport = (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+        if (viewport === false) {
+            log(`你有 1 条未读的 warning 窗口。`);
+        }
+    };
+
     setTimeout(() => {
         window.style.animation = "warning- 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1)";
         setTimeout(() => {
@@ -230,6 +347,7 @@ function warning(string) {
             close(window) // 移除窗口。
         }, 700);
     }, 3000);
+    setTimeout(visible, 3000);
 }
 
 // input 函数。
@@ -398,6 +516,19 @@ function transmit(string) {
     var lineHeight = parseInt(window.style.lineHeight);
     content.style.height = `${line * lineHeight}px`;
 
+    const visible = () => {
+        const rect = window.getBoundingClientRect();
+        const viewport = (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+        if (viewport === false) {
+            log(`你有 1 条未读的 transmit 窗口。`);
+        }
+    };
+
     setTimeout(() => {
         window.style.animation = "transmit- 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1)";
         setTimeout(() => {
@@ -405,6 +536,7 @@ function transmit(string) {
             close(window) // 移除窗口。
         }, 700);
     }, 3000);
+    setTimeout(visible, 3000);
 }
 
 // link 函数。
@@ -500,11 +632,169 @@ function command(string) {
     var lineHeight = parseInt(window.style.lineHeight);
     content.style.height = `${line * lineHeight}px`;
 
+    const visible = () => {
+        const rect = window.getBoundingClientRect();
+        const viewport = (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+        if (viewport === false) {
+            log(`你有 1 条未读的 command 窗口。`);
+        }
+    };
+
     setTimeout(() => {
         window.style.animation = "command- 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1)";
         setTimeout(() => {
             document.body.removeChild(window);
-            close(window) // 移除窗口。        
+            close(window) // 移除窗口。
         }, 700);
     }, 3000);
+    setTimeout(visible, 3000);
+}
+
+async function important(msg) {
+    return new Promise((resolve) => {
+        // 模拟一些异步操作。
+        setTimeout(() => {
+            const window = document.createElement("div");
+            window.className = "important-window";
+            const left = document.createElement("div");
+            left.className = "important-left";
+            const right = document.createElement("div");
+            right.className = "important-right";
+            const top = document.createElement("div");
+            top.className = "important-top";
+            const bottom = document.createElement("div");
+            bottom.className = "important-bottom";
+            const modal = document.createElement("div");
+            modal.className = "important-modal";
+            document.body.appendChild(modal);
+            document.body.appendChild(window);
+            document.body.appendChild(left);
+            document.body.appendChild(right);
+            document.body.appendChild(top);
+            document.body.appendChild(bottom);
+            // 移除之前的动画。
+            window.classList.remove("mainin", "mainout");
+            left.classList.remove("leftmovein", "leftmoveout");
+            right.classList.remove("rightmovein", "rightmoveout");
+            top.classList.remove("topmovein", "topmoveout");
+            bottom.classList.remove("bottommovein", "bottommoveout");
+            // 显示窗口和边框。
+            window.style.display = "block";
+            left.style.display = "block";
+            right.style.display = "block";
+            top.style.display = "block";
+            bottom.style.display = "block";
+            modal.style.display = "block";
+            // 禁用页面滚动。
+            document.body.style.overflow = "hidden";
+            // 进入动画。
+            window.classList.add("mainin");
+            left.classList.add("leftmovein");
+            right.classList.add("rightmovein");
+            top.classList.add("topmovein");
+            bottom.classList.add("bottommovein");
+            const txt = document.createElement("div");
+            txt.className = "important-txt";
+            txt.textContent = msg;
+            window.appendChild(txt);
+            const btn = document.createElement("button");
+            btn.className = "important-confirm";
+            btn.textContent = "确定";
+            btn.onclick = () => {
+                window.classList.add("mainout");
+                left.classList.add("leftmoveout");
+                right.classList.add("rightmoveout");
+                top.classList.add("topmoveout");
+                bottom.classList.add("bottommoveout");
+                const handleAnimationEnd = () => {
+                    window.removeChild(txt);
+                    window.removeChild(btn);
+                    window.style.display = "none";
+                    left.style.display = "none";
+                    right.style.display = "none";
+                    top.style.display = "none";
+                    bottom.style.display = "none";
+                    modal.style.display = "none";
+                    document.body.style.overflow = "";
+                    document.body.removeChild(modal);
+                    window.removeEventListener("animationend", handleAnimationEnd);
+                };
+                window.addEventListener("animationend", handleAnimationEnd);
+                resolve(); // 解析 Promise，继续执行下一行代码。
+            };
+            window.appendChild(btn);
+        }, 666); // 模拟异步操作的延迟时间。
+    });
+}
+
+async function keyin(msg) {
+    return new Promise((resolve) => {
+        const modal = document.createElement("div");
+        modal.className = "important-modal";
+        document.body.appendChild(modal);
+        const window = document.createElement("div");
+        window.className = "information-window";
+        document.body.appendChild(window);
+        // 移除之前的动画类
+        window.classList.remove("windowin", "windowout");
+        // 显示窗口和模态层
+        window.style.display = "block";
+        window.style.backgroundColor = "#ffffff9a";
+        modal.style.display = "block";
+        // 禁用页面滚动
+        document.body.style.overflow = "hidden";
+        // 进入动画
+        window.classList.add("windowin");
+        // 信息
+        const txt = document.createElement("div");
+        txt.className = "important-txt";
+        txt.textContent = msg;
+        txt.style.color = "#000000";
+        window.appendChild(txt);
+        // 输入框
+        const inp = document.createElement("input");
+        inp.type = "text";
+        inp.focus();
+        inp.placeholder = "在此输入……";
+        inp.style.fontFamily = "basic";
+        inp.style.display = "block";
+        inp.style.width = "500px";
+        inp.style.height = "50px";
+        inp.style.marginBottom = "10px";
+        inp.style.position = "fixed";
+        inp.style.top = "50%";
+        inp.style.backgroundColor = "#ffffff9a";
+        inp.style.color = "#000000";
+        inp.style.left = "100%";
+        window.appendChild(inp);
+        // 确认按钮
+        const btn = document.createElement("button");
+        btn.className = "important-confirm";
+        btn.textContent = "确定";
+        btn.onclick = () => {
+            // 获取输入的内容
+            const value = inp.value;
+            // 退出动画
+            window.classList.add("windowout");
+            // 监听动画结束事件
+            const handleAnimationEnd = () => {
+                window.removeChild(txt);
+                window.removeChild(inp);
+                window.removeChild(btn);
+                window.style.display = "none";
+                modal.style.display = "none";
+                document.body.style.overflow = ""; // 恢复页面滚动
+                document.body.removeChild(modal); // 移除模态层
+                window.removeEventListener("animationend", handleAnimationEnd); // 移除事件监听器
+                resolve(value); // 解析 Promise，继续执行下一行代码
+            };
+            window.addEventListener("animationend", handleAnimationEnd, { once: true });
+        };
+        window.appendChild(btn);
+    });
 }
