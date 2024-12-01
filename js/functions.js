@@ -1,14 +1,8 @@
-var infoNum = 0;
-var warningNum = 0;
-var failNum = 0;
-var successNum = 0;
-var choiceNum = 0;
-var inputNum = 0;
-var transmitNum = 0;
-var linkNum = 0;
-var commandNum = 0;
+var lognum = 0;
 var nullCount = 0;
-var windows = []; // 窗口数组。
+var windows = []; // 信息数组。
+let logwin = []; // log() 信息数组。
+let totalHeight = 0; // log() 的总高度。
 let urlEndings = [
     ".com", ".net", ".cn", ".org", ".edu", ".gov", ".mil",
     ".biz", ".info", ".name", ".pro", ".aero", ".coop",
@@ -19,13 +13,13 @@ let urlEndings = [
 
 // 更新窗口位置的函数
 function updateSelectedWindowPos() {
-    let total = 7 * window.innerHeight / 100; // 初始位置距离页面顶部的偏移（7vh）
+    let total = 7 * window.innerHeight / 100; // 初始位置距离页面顶部的偏移（7vh）。
     windows.forEach((window) => {
         const wh = window.offsetHeight; // 获取当前窗口的高度。
         window.style.transition = "top 0.3s cubic-bezier(0.33, 1, 0.68, 1)";
-        // 更新每个窗口的位置，保持适当的间隔
+        // 更新每个窗口的位置，保持适当的间隔。
         window.style.top = `${total}px`;
-        total += wh + 7; // 增加窗口高度和7px间距
+        total += wh + 7; // 增加窗口高度和7px间距。
     });
 }
 
@@ -54,87 +48,78 @@ function monitor() {
     }
 }
 
-function updatePos() {
-    // 初始化总偏移量
-    let totalHeight = 10; // 10px 的起始间距
-    windows.forEach(win => {
-        const wh = win.offsetHeight; // 获取当前窗口的高度
-        win.style.position = "fixed"; // 确保窗口是绝对定位的
-        win.style.top = `${totalHeight}px`; // 设置窗口的 top 值
-        totalHeight += wh + 10; // 更新总偏移量，增加窗口高度和10px间距
-    });
-}
-
 function log(string, time) {
+    lognum++;
+    function re() {
+        totalHeight = logwin.reduce((acc, w) => acc + w.offsetHeight, 0);
+    }
+
     if (time == null || time == undefined) {
         time = 3000;
     }
-    const windowElement = document.createElement("div");
-    windowElement.className = "log-window";
-    windowElement.style.position = "fixed";
-    windowElement.style.zIndex = 1000;
+
+    const window = document.createElement("div");
+    window.className = "log-window";
+    window.style.opacity = 0;
 
     const content = document.createElement("div");
     content.className = "log-content";
     content.textContent = string;
 
-    const line = Math.ceil(string.length / 14);
-    const lineHeight = parseInt(windowElement.style.lineHeight) || 20;
-    content.style.height = `${line * lineHeight}px`;
+    const line = Math.ceil(string.size / 14);
+    content.style.height = `calc(${line * 20}px)`;
 
-    document.body.appendChild(windowElement);
-    windowElement.appendChild(content);
+    document.body.appendChild(window);
+    window.appendChild(content);
 
-    create(windowElement);
+    window.style.top = `calc(${totalHeight}px + ${lognum}vh)`;
+    totalHeight += window.offsetHeight;
+    logwin.push(window);
 
-    // 确保窗口在视口内并不重叠
-    const rect = windowElement.getBoundingClientRect();
-    const viewportHeight = window.innerHeight;
-
-    // 计算当前窗口的top位置，避免重叠
-    let totalHeight = 0;
-    windows.forEach(win => {
-        totalHeight += win.offsetHeight + 5;
+    requestAnimationFrame(() => {
+        window.style.animation = "-log 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1)";
     });
 
-    // 固定位置到直到超出视口底部
-    if (totalHeight + rect.height > viewportHeight) {
-        windowElement.style.top = `${viewportHeight - rect.height - 10}px`;
-    } else {
-        windowElement.style.top = `${totalHeight}px`;
-    }
-
     setTimeout(() => {
-        windowElement.style.animation = "log- 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1)";
+        window.style.animation = "log- 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1)";
         setTimeout(() => {
-            document.body.removeChild(windowElement);
-            windows = windows.filter(win => win !== windowElement);
-            updatePos();
+            document.body.removeChild(window);
+            logwin = logwin.filter(w => w !== window);
+            re();
+            lognum--;
         }, 700);
     }, time);
 }
 
 // info 函数。
+
 function info(string) {
+    let replaced = string.replace(/\s+/g, "");
     if (string == null || string == undefined) {
         nullCount++;
         fail("所输入内容不能为 null 或 undefined。");
         monitor();
         return 39;
+    } else if (replaced === "") {
+        fail("所输入内容不能为空字符串。");
+        return -39;
     }
     if (nullCount > 26) {
         return "你已被禁止调用函数。";
     }
 
-    infoNum++;
     const window = document.createElement("div");
     window.className = "info-window";
     const square = document.createElement("div");
     square.className = "info-square";
-    const icon = document.createElement("div");
-    icon.className = "info-icon";
+    const icon = document.createElement("img");
+    icon.src = "images/Inf.png";
     const content = document.createElement("div");
     content.className = "info-content";
+    if (theme === "Neon") {
+        window.style.backdropFilter = "blur(14px) saturate(250%)";
+        square.style.backdropFilter = "blur(14px) saturate(250%)";
+    }
 
     document.body.appendChild(window);
     window.appendChild(square);
@@ -142,14 +127,9 @@ function info(string) {
     square.appendChild(icon);
     create(window);
 
-    icon.innerHTML = `第 ${infoNum} 条信息`;
+    // icon.innerHTML = `第 ${infoNum} 条信息`;
     content.innerHTML = string;
 
-    const line = Math.ceil(string.length / 14);
-    const lineHeight = parseInt(window.style.lineHeight);
-    content.style.height = `${line * lineHeight}px`;
-
-    // 检查窗口是否在视口内。
     const visible = () => {
         const rect = window.getBoundingClientRect();
         const viewport = (
@@ -159,9 +139,13 @@ function info(string) {
             rect.right <= (window.innerWidth || document.documentElement.clientWidth)
         );
         if (viewport === false) {
-            log(`你有 1 条未读的 info 窗口。`);
+            log(`你有 1 条未读完的 info() 信息。`);
         }
     };
+
+    const line = Math.ceil(string.size / 14);
+    const lineHeight = parseInt(window.style.lineHeight);
+    content.style.height = `${line * lineHeight}px`;
 
     setTimeout(() => {
         window.style.animation = "info- 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1)";
@@ -173,28 +157,35 @@ function info(string) {
     setTimeout(visible, 3000);
 }
 
-
 // success 函数。
 
 function success(string) {
+    let replaced = string.replace(/\s+/g, "");
     if (string == null || string == undefined) {
         nullCount++;
         fail("所输入内容不能为 null 或 undefined。");
         monitor();
         return 39;
-    } if (nullCount > 26) {
+    } else if (replaced === "") {
+        fail("所输入内容不能为空字符串。");
+        return -39;
+    }
+    if (nullCount > 26) {
         return "你已被禁止调用函数。";
     }
 
-    successNum++;
     const window = document.createElement("div");
     window.className = "success-window";
     const square = document.createElement("div");
     square.className = "success-square";
-    const icon = document.createElement("div");
-    // icon.src = "images/Success.png";
+    const icon = document.createElement("img");
+    icon.src = "images/Pass.png";
     const content = document.createElement("div");
     content.className = "success-content";
+    if (theme === "Neon") {
+        window.style.backdropFilter = "blur(14px) saturate(250%)";
+        square.style.backdropFilter = "blur(14px) saturate(250%)";
+    }
 
     create(window); // 添加窗口。
     document.body.appendChild(window);
@@ -202,10 +193,10 @@ function success(string) {
     window.appendChild(content);
     square.appendChild(icon);
 
-    icon.innerHTML = `第 ${successNum} 条成功消息`;
+    // icon.innerHTML = `第 ${successNum} 条成功消息`;
     content.innerHTML = string;
 
-    const line = Math.ceil(string.length / 14);
+    const line = Math.ceil(string.size / 14);
     var lineHeight = parseInt(window.style.lineHeight);
     content.style.height = `${line * lineHeight}px`;
 
@@ -218,7 +209,7 @@ function success(string) {
             rect.right <= (window.innerWidth || document.documentElement.clientWidth)
         );
         if (viewport === false) {
-            log(`你有 1 条未读的 success 窗口。`);
+            log(`你有 1 条未读完的 success() 信息。`);
         }
     };
 
@@ -235,24 +226,32 @@ function success(string) {
 // fail 函数。
 
 function fail(string) {
+    let replaced = string.replace(/\s+/g, "");
     if (string == null || string == undefined) {
         nullCount++;
         fail("所输入内容不能为 null 或 undefined。");
         monitor();
         return 39;
-    } if (nullCount > 26) {
+    } else if (replaced === "") {
+        fail("所输入内容不能为空字符串。");
+        return -39;
+    }
+    if (nullCount > 26) {
         return "你已被禁止调用函数。";
     }
 
-    failNum++;
     const window = document.createElement("div");
     window.className = "fail-window";
     const square = document.createElement("div");
     square.className = "fail-square";
-    const icon = document.createElement("div");
+    const icon = document.createElement("img");
     icon.className = "fail-icon";
     const content = document.createElement("div");
     content.className = "fail-content";
+    if (theme === "Neon") {
+        window.style.backdropFilter = "blur(14px) saturate(250%)";
+        square.style.backdropFilter = "blur(14px) saturate(250%)";
+    }
 
     create(window); // 添加窗口。
     document.body.appendChild(window);
@@ -260,11 +259,10 @@ function fail(string) {
     window.appendChild(content);
     square.appendChild(icon);
 
-    icon.innerHTML = `第 ${failNum} 条错误消息`;
-    // icon.src = "images/Fail.png";
+    icon.src = "images/Error.png";
     content.innerHTML = string;
 
-    const line = Math.ceil(string.length / 14);
+    const line = Math.ceil(string.size / 14);
     var lineHeight = parseInt(window.style.lineHeight);
     content.style.height = `${line * lineHeight}px`;
 
@@ -277,7 +275,7 @@ function fail(string) {
             rect.right <= (window.innerWidth || document.documentElement.clientWidth)
         );
         if (viewport === false) {
-            log(`你有 1 条未读的 fail 窗口。`);
+            log(`你有 1 条未读完的 fail() 信息。`);
         }
     };
 
@@ -294,24 +292,32 @@ function fail(string) {
 // warning 函数。
 
 function warning(string) {
+    let replaced = string.replace(/\s+/g, "");
     if (string == null || string == undefined) {
         nullCount++;
         fail("所输入内容不能为 null 或 undefined。");
         monitor();
         return 39;
-    } if (nullCount > 26) {
+    } else if (replaced === "") {
+        fail("所输入内容不能为空字符串。");
+        return -39;
+    }
+    if (nullCount > 26) {
         return "你已被禁止调用函数。";
     }
 
-    warningNum++;
     const window = document.createElement("div");
     window.className = "warning-window";
     const square = document.createElement("div");
     square.className = "warning-square";
-    const icon = document.createElement("div");
+    const icon = document.createElement("img");
     icon.className = "warning-icon";
     const content = document.createElement("div");
     content.className = "warning-content";
+    if (theme === "Neon") {
+        window.style.backdropFilter = "blur(14px) saturate(250%)";
+        square.style.backdropFilter = "blur(14px) saturate(250%)";
+    }
 
     create(window); // 添加窗口。
     document.body.appendChild(window);
@@ -319,11 +325,10 @@ function warning(string) {
     window.appendChild(content);
     square.appendChild(icon);
 
-    icon.innerHTML = `第 ${warningNum} 条警告消息`;
-    // icon.src = "images/Warning.png";
+    icon.src = "images/Exclamation Mark.png";
     content.innerHTML = string;
 
-    const line = Math.ceil(string.length / 14);
+    const line = Math.ceil(string.size / 14);
     var lineHeight = parseInt(window.style.lineHeight);
     content.style.height = `${line * lineHeight}px`;
 
@@ -336,7 +341,7 @@ function warning(string) {
             rect.right <= (window.innerWidth || document.documentElement.clientWidth)
         );
         if (viewport === false) {
-            log(`你有 1 条未读的 warning 窗口。`);
+            log(`你有 1 条未读完的 warning() 信息。`);
         }
     };
 
@@ -354,12 +359,13 @@ function warning(string) {
 
 function input(string, holder) {
     return new Promise((resolve) => {
-        inputNum++;
+        let replaced1 = string.replace(/\s+/g, "");
+        let replaced2 = holder.replace(/\s+/g, "");
         const window = document.createElement("div");
         window.className = "input-window";
         const square = document.createElement("div");
         square.className = "input-square";
-        const icon = document.createElement("div");
+        const icon = document.createElement("img");
         icon.className = "input-icon";
         const content = document.createElement("div");
         content.className = "input-content";
@@ -370,13 +376,22 @@ function input(string, holder) {
             fail("所输入内容不能为 null 或 undefined。");
             monitor();
             return 39;
-        } if (nullCount > 26) {
+        } else if (replaced1 === "" || replaced2 === "") {
+            fail("所输入内容不能为空字符串。");
+            return -39;
+        }
+        if (nullCount > 26) {
             return "你已被禁止调用函数。";
         }
         const box = document.createElement("input");
         box.type = "text";
         box.className = "input-box";
         box.placeholder = holder;
+        if (theme === "Neon") {
+            window.style.backdropFilter = "blur(14px) saturate(250%)";
+            square.style.backdropFilter = "blur(14px) saturate(250%)";
+            box.style.backgroundFilter = "blur(14px) saturate(250%)";
+        }
 
         create(window); // 添加窗口。
         document.body.appendChild(window);
@@ -384,12 +399,11 @@ function input(string, holder) {
         window.appendChild(content);
         window.appendChild(box);
         square.appendChild(icon);
-
-        icon.innerHTML = `第 ${inputNum} 项输入`;
-        // icon.src = "images/Input.png";
+        
+        icon.src = "images/Inp.png";
         content.innerHTML = string;
 
-        const line = Math.ceil(string.length / 14);
+        const line = Math.ceil(string.size / 14);
         var lineHeight = parseInt(window.style.lineHeight);
         content.style.height = `${line * lineHeight}px`;
 
@@ -410,42 +424,51 @@ function input(string, holder) {
     });
 }
 
-
 // choice 函数。
 
 function choice(string, name1, name2) {
     return new Promise((resolve) => {
-        choiceNum++;
+        let replaced1 = string.replace(/\s+/g, "");
+        let replaced2 = name1.replace(/\s+/g, "");
+        let replaced3 = name2.replace(/\s+/g, "");
         const window = document.createElement("div");
         window.className = "choice-window";
         const square = document.createElement("div");
         square.className = "choice-square";
-        const icon = document.createElement("div");
+        const icon = document.createElement("img");
         icon.className = "choice-icon";
         const content = document.createElement("div");
         content.className = "choice-content";
         if (name1 === "" || name2 === "") {
             name1 = "确定";
             name2 = "取消";
-        } if (string == null || string == undefined || name1 === undefined || name2 === undefined || name1 === null || name2 === null) {
+        } else if (string == null || string == undefined || name1 === undefined || name2 === undefined || name1 === null || name2 === null) {
             nullCount++;
             fail("所输入内容不能为 null 或 undefined。");
             monitor();
             return 39;
-        } if (nullCount > 26) {
+        } else if (replaced1 === "" || replaced2 === "" || replaced3 === "") {
+            fail("所输入内容不能为空字符串。");
+            return -39;
+        }
+        if (nullCount > 26) {
             return "你已被禁止调用函数。";
         }
+        if (theme === "Neon") {
+            window.style.backdropFilter = "blur(14px) saturate(250%)";
+            square.style.backdropFilter = "blur(14px) saturate(250%)";
+        }
+
         create(window); // 添加窗口。
         document.body.appendChild(window);
         window.appendChild(square);
         window.appendChild(content);
         square.appendChild(icon);
 
-        icon.innerHTML = `第 ${choiceNum} 项选择`;
-        // icon.src = "images/Choice.png";
+        icon.src = "images/Choose.png";
         content.innerHTML = string;
 
-        const line = Math.ceil(string.length / 14);
+        const line = Math.ceil(string.size / 14);
         var lineHeight = parseInt(window.style.lineHeight);
         content.style.height = `${line * lineHeight}px`;
 
@@ -483,24 +506,32 @@ function choice(string, name1, name2) {
 // transmit 函数。
 
 function transmit(string) {
+    let replaced = string.replace(/\s+/g, "");
     if (string == null || string == undefined) {
         nullCount++;
         fail("所输入内容不能为 null 或 undefined。");
         monitor();
         return 39;
-    } if (nullCount > 26) {
+    } else if (replaced === "") {
+        fail("所输入内容不能为空字符串。");
+        return -39;
+    }
+    if (nullCount > 26) {
         return "你已被禁止调用函数。";
     }
 
-    transmitNum++;
     const window = document.createElement("div");
     window.className = "transmit-window";
     const square = document.createElement("div");
     square.className = "transmit-square";
-    const icon = document.createElement("div");
+    const icon = document.createElement("img");
     icon.className = "transmit-icon";
     const content = document.createElement("div");
     content.className = "transmit-content";
+    if (theme === "Neon") {
+        window.style.backdropFilter = "blur(14px) saturate(250%)";
+        square.style.backdropFilter = "blur(14px) saturate(250%)";
+    }
 
     create(window); // 添加窗口。
     document.body.appendChild(window);
@@ -508,11 +539,10 @@ function transmit(string) {
     window.appendChild(content);
     square.appendChild(icon);
 
-    icon.innerHTML = `第 ${transmitNum} 次传输`;
-    // icon.src = "images/Transmit.png";
+    icon.src = "images/Trans.png";
     content.innerHTML = string;
 
-    const line = Math.ceil(string.length / 14);
+    const line = Math.ceil(string.size / 14);
     var lineHeight = parseInt(window.style.lineHeight);
     content.style.height = `${line * lineHeight}px`;
 
@@ -525,7 +555,7 @@ function transmit(string) {
             rect.right <= (window.innerWidth || document.documentElement.clientWidth)
         );
         if (viewport === false) {
-            log(`你有 1 条未读的 transmit 窗口。`);
+            log(`你有 1 条未读完的 transmit() 信息。`);
         }
     };
 
@@ -542,6 +572,9 @@ function transmit(string) {
 // link 函数。
 
 function link(string, url) {
+    url = String(url);
+    let replaced1 = string.replace(/\s+/g, "");
+    let replaced2 = url.replace(/\s+/g, "");
     if (string == null || string == undefined || url == null || url == undefined) {
         nullCount++;
         fail("所输入内容不能为 null 或 undefined。");
@@ -551,24 +584,30 @@ function link(string, url) {
         url = "https://" + url;
     } else if (urlEndings.some(ending => url.endsWith(ending)) == false) {
         warning("请检查你所输入的网址是否正确！");
-    } if (nullCount > 26) {
+    } else if (replaced1 === "" || replaced2 === "") {
+        fail("所输入内容不能为空字符串。");
+        return -39;
+    }
+    if (nullCount > 26) {
         return "你已被禁止调用函数。";
     }
 
-    linkNum++;
     const window = document.createElement("div");
     window.className = "link-window";
     const square = document.createElement("div");
     square.className = "link-square";
-    const icon = document.createElement("div");
+    const icon = document.createElement("img");
     icon.className = "link-icon";
     const content = document.createElement("div");
     content.className = "link-content";
     const btn = document.createElement("button");
     btn.className = "link-btn";
-    var line_ = Math.ceil(url.length / 14);
-    console.log(line_);
-    content.style.marginBottom = `calc(70px + ${Math.round(line_ / 2)}em)`;
+    var line_ = Math.ceil(url.size / 14);
+    content.style.marginBottom = `calc(70px + ${line_ * lineHeight}vh)`;
+    if (theme === "Neon") {
+        window.style.backdropFilter = "blur(14px) saturate(250%)";
+        square.style.backdropFilter = "blur(14px) saturate(250%)";
+    }
 
     create(window); // 添加窗口。
     document.body.appendChild(window);
@@ -576,18 +615,17 @@ function link(string, url) {
     window.appendChild(content);
     square.appendChild(icon);
 
-    icon.innerHTML = `第 ${linkNum} 个链接`;
-    // icon.src = "images/Link.png";
+    icon.src = "images/Link.png";
     content.innerHTML = string;
     btn.innerHTML = `跳转至 ${url}`;
     content.appendChild(btn);
 
-    const line = Math.ceil(string.length / 14);
+    const line = Math.ceil(string.size / 14);
     var lineHeight = parseInt(window.style.lineHeight);
     content.style.height = `${line * lineHeight}px`;
 
     btn.onclick = () => {
-        open(url, "_blank", "width=1000, height=700")
+        open(url, "_blank", "width=1024, height=768")
         window.style.animation = "link- 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1)";
         setTimeout(() => {
             document.body.removeChild(window);
@@ -599,24 +637,32 @@ function link(string, url) {
 // command 函数。
 
 function command(string) {
+    let replaced = string.replace(/\s+/g, "");
     if (string == null || string == undefined) {
         nullCount++;
         fail("所输入内容不能为 null 或 undefined。");
         monitor();
         return 39;
-    } if (nullCount > 26) {
+    } else if (replaced === "") {
+        fail("所输入内容不能为空字符串。");
+        return -39;
+    }
+    if (nullCount > 26) {
         return "你已被禁止调用函数。";
     }
 
-    commandNum++;
     const window = document.createElement("div");
     window.className = "command-window";
     const square = document.createElement("div");
     square.className = "command-square";
-    const icon = document.createElement("div");
+    const icon = document.createElement("img");
     icon.className = "command-icon";
     const content = document.createElement("div");
     content.className = "command-content";
+    if (theme === "Neon") {
+        window.style.backdropFilter = "blur(14px) saturate(250%)";
+        square.style.backdropFilter = "blur(14px) saturate(250%)";
+    }
 
     create(window); // 添加窗口。
     document.body.appendChild(window);
@@ -624,11 +670,10 @@ function command(string) {
     window.appendChild(content);
     square.appendChild(icon);
 
-    icon.innerHTML = `第 ${commandNum} 个终端窗口`;
-    // icon.src = "images/Command.png";
+    icon.src = "images/Command.png";
     content.innerHTML = string;
 
-    const line = Math.ceil(string.length / 14);
+    const line = Math.ceil(string.size / 14);
     var lineHeight = parseInt(window.style.lineHeight);
     content.style.height = `${line * lineHeight}px`;
 
@@ -641,7 +686,7 @@ function command(string) {
             rect.right <= (window.innerWidth || document.documentElement.clientWidth)
         );
         if (viewport === false) {
-            log(`你有 1 条未读的 command 窗口。`);
+            log(`你有 1 条未读完的 command() 信息。`);
         }
     };
 
@@ -655,146 +700,121 @@ function command(string) {
     setTimeout(visible, 3000);
 }
 
-async function important(msg) {
+// important 函数。
+
+async function important(string) {
     return new Promise((resolve) => {
-        // 模拟一些异步操作。
-        setTimeout(() => {
-            const window = document.createElement("div");
-            window.className = "important-window";
-            const left = document.createElement("div");
-            left.className = "important-left";
-            const right = document.createElement("div");
-            right.className = "important-right";
-            const top = document.createElement("div");
-            top.className = "important-top";
-            const bottom = document.createElement("div");
-            bottom.className = "important-bottom";
-            const modal = document.createElement("div");
-            modal.className = "important-modal";
-            document.body.appendChild(modal);
-            document.body.appendChild(window);
-            document.body.appendChild(left);
-            document.body.appendChild(right);
-            document.body.appendChild(top);
-            document.body.appendChild(bottom);
-            // 移除之前的动画。
-            window.classList.remove("mainin", "mainout");
-            left.classList.remove("leftmovein", "leftmoveout");
-            right.classList.remove("rightmovein", "rightmoveout");
-            top.classList.remove("topmovein", "topmoveout");
-            bottom.classList.remove("bottommovein", "bottommoveout");
-            // 显示窗口和边框。
-            window.style.display = "block";
-            left.style.display = "block";
-            right.style.display = "block";
-            top.style.display = "block";
-            bottom.style.display = "block";
-            modal.style.display = "block";
-            // 禁用页面滚动。
-            document.body.style.overflow = "hidden";
-            // 进入动画。
-            window.classList.add("mainin");
-            left.classList.add("leftmovein");
-            right.classList.add("rightmovein");
-            top.classList.add("topmovein");
-            bottom.classList.add("bottommovein");
-            const txt = document.createElement("div");
-            txt.className = "important-txt";
-            txt.textContent = msg;
-            window.appendChild(txt);
-            const btn = document.createElement("button");
-            btn.className = "important-confirm";
-            btn.textContent = "确定";
-            btn.onclick = () => {
-                window.classList.add("mainout");
-                left.classList.add("leftmoveout");
-                right.classList.add("rightmoveout");
-                top.classList.add("topmoveout");
-                bottom.classList.add("bottommoveout");
-                const handleAnimationEnd = () => {
-                    window.removeChild(txt);
-                    window.removeChild(btn);
-                    window.style.display = "none";
-                    left.style.display = "none";
-                    right.style.display = "none";
-                    top.style.display = "none";
-                    bottom.style.display = "none";
-                    modal.style.display = "none";
-                    document.body.style.overflow = "";
-                    document.body.removeChild(modal);
-                    window.removeEventListener("animationend", handleAnimationEnd);
-                };
-                window.addEventListener("animationend", handleAnimationEnd);
-                resolve(); // 解析 Promise，继续执行下一行代码。
+        if (string == null || string == undefined) {
+            nullCount++;
+            fail("所输入内容不能为 null 或 undefined。");
+            monitor();
+            return 39;
+        } if (nullCount > 26) {
+            return "你已被禁止调用函数。";
+        }
+        const window = document.createElement("div");
+        window.className = "important-window";
+        let clicked = false;
+        document.body.appendChild(window);
+        window.style.display = "block";
+        window.style.animation = "-important forwards 0.7s cubic-bezier(0.33, 1, 0.68, 1)";
+        const txt = document.createElement("div");
+        txt.className = "windows-text";
+        txt.innerHTML = string;
+        window.appendChild(txt);
+        const btn = document.createElement("button");
+        btn.className = "important-confirm";
+        btn.textContent = "确定";
+        window.appendChild(btn);
+        btn.onclick = () => {
+            window.style.animation = "important- forwards 0.7s cubic-bezier(0.33, 1, 0.68, 1)";
+            if (clicked) {
+                warning("请勿多次点击。");
+            }
+            clicked = true;
+            const ani_end = () => {
+                window.removeChild(txt);
+                window.removeChild(btn);
+                window.style.display = "none";
+                window.removeEventListener("animationend", ani_end);
             };
-            window.appendChild(btn);
-        }, 666); // 模拟异步操作的延迟时间。
+            window.addEventListener("animationend", ani_end);
+            resolve();
+            setTimeout(() => {
+                document.body.removeChild(window);
+            }, 700);
+        };
     });
 }
 
-async function keyin(msg) {
+async function keyin(string, holder) {
     return new Promise((resolve) => {
-        const modal = document.createElement("div");
-        modal.className = "important-modal";
-        document.body.appendChild(modal);
+        if (string == null || string == undefined || holder == null || holder == undefined) {
+            nullCount++;
+            fail("所输入内容不能为 null 或 undefined。");
+            monitor();
+            return 39;
+        } if (nullCount > 26) {
+            return "你已被禁止调用函数。";
+        }
+        if (holder === "") {
+            holder = "在此输入……";
+        }
         const window = document.createElement("div");
-        window.className = "information-window";
-        document.body.appendChild(window);
-        // 移除之前的动画类
-        window.classList.remove("windowin", "windowout");
-        // 显示窗口和模态层
+        let clicked = false;
+        window.className = "keyin-window";
         window.style.display = "block";
         window.style.backgroundColor = "#ffffff9a";
-        modal.style.display = "block";
-        // 禁用页面滚动
-        document.body.style.overflow = "hidden";
-        // 进入动画
-        window.classList.add("windowin");
-        // 信息
+        document.body.appendChild(window);
+        window.style.animation = "-keyin forwards 0.7s cubic-bezier(0.33, 1, 0.68, 1)";
         const txt = document.createElement("div");
-        txt.className = "important-txt";
-        txt.textContent = msg;
+        txt.className = "windows-text";
+        txt.innerHTML = string;
         txt.style.color = "#000000";
         window.appendChild(txt);
-        // 输入框
         const inp = document.createElement("input");
         inp.type = "text";
         inp.focus();
-        inp.placeholder = "在此输入……";
+        inp.placeholder = holder;
         inp.style.fontFamily = "basic";
         inp.style.display = "block";
         inp.style.width = "500px";
-        inp.style.height = "50px";
+        inp.style.height = "100px";
         inp.style.marginBottom = "10px";
         inp.style.position = "fixed";
         inp.style.top = "50%";
         inp.style.backgroundColor = "#ffffff9a";
+        inp.style.backgroundFilter = "blur(14px) saturate(250%)";
         inp.style.color = "#000000";
         inp.style.left = "100%";
         window.appendChild(inp);
-        // 确认按钮
         const btn = document.createElement("button");
         btn.className = "important-confirm";
         btn.textContent = "确定";
+        window.appendChild(btn);
         btn.onclick = () => {
-            // 获取输入的内容
             const value = inp.value;
-            // 退出动画
-            window.classList.add("windowout");
-            // 监听动画结束事件
-            const handleAnimationEnd = () => {
+            window.style.animation = "keyin- forwards 0.7s cubic-bezier(0.33, 1, 0.68, 1)";
+            clicked = true;
+            if (clicked) {
+                warning("请勿多次点击。");
+            }
+            const ani_end = () => {
                 window.removeChild(txt);
                 window.removeChild(inp);
                 window.removeChild(btn);
                 window.style.display = "none";
-                modal.style.display = "none";
-                document.body.style.overflow = ""; // 恢复页面滚动
-                document.body.removeChild(modal); // 移除模态层
-                window.removeEventListener("animationend", handleAnimationEnd); // 移除事件监听器
-                resolve(value); // 解析 Promise，继续执行下一行代码
+                window.removeEventListener("animationend", ani_end);
+                resolve(value);
             };
-            window.addEventListener("animationend", handleAnimationEnd, { once: true });
+            window.addEventListener("animationend", ani_end);
+            setTimeout(() => {
+                document.body.removeChild(window);
+            }, 700);
         };
-        window.appendChild(btn);
     });
+}
+
+function alert(string) {
+    important(string);
 }
