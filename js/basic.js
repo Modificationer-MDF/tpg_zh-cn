@@ -37,35 +37,36 @@ function fn1() {
     infoBtn.innerHTML = "info";
     infoBtn.className = "btn1";
     infoBtn.onclick = async () => {
-        var res = await keyin("输入你想显示在 info 窗口上的信息。");
+        var res = await keyin("输入你想显示在 info 窗口上的信息。", "");
+        // log(res);
         info(res);
     };
     const successBtn = document.createElement("button");
     successBtn.innerHTML = "success";
     successBtn.className = "btn2";
     successBtn.onclick = async () => {
-        var res = await keyin("输入你想显示在 success 窗口上的信息。");
+        var res = await keyin("输入你想显示在 success 窗口上的信息。", "");
         success(res);
     };
     const failBtn = document.createElement("button");
     failBtn.innerHTML = "fail";
     failBtn.className = "btn3";
     failBtn.onclick = async () => {
-        var res = await keyin("输入你想显示在 fail 窗口上的信息。");
+        var res = await keyin("输入你想显示在 fail 窗口上的信息。", "");
         fail(res);
     };
     const warningBtn = document.createElement("button");
     warningBtn.innerHTML = "warning";
     warningBtn.className = "btn4";
     warningBtn.onclick = async () => {
-        var res = await keyin("输入你想显示在 warning 窗口上的信息。");
+        var res = await keyin("输入你想显示在 warning 窗口上的信息。", "");
         warning(res);
     };
     const inputBtn = document.createElement("button");
     inputBtn.innerHTML = "input";
     inputBtn.className = "btn5";
     inputBtn.onclick = async () => {
-        var res = await keyin("输入你想显示在 input 窗口上的信息。");
+        var res = await keyin("输入你想显示在 input 窗口上的信息。", "");
         var ult = await keyin("请输入 input 窗口上 placeholder 的文字。");
         input(res, ult);
     };
@@ -73,14 +74,14 @@ function fn1() {
     transmitBtn.innerHTML = "transmit";
     transmitBtn.className = "btn6";
     transmitBtn.onclick = async () => {
-        var res = await keyin("输入你想显示在 transmit 窗口上的信息。");
+        var res = await keyin("输入你想显示在 transmit 窗口上的信息。", "");
         transmit(res);
     };
     const choiceBtn = document.createElement("button");
     choiceBtn.innerHTML = "choice";
     choiceBtn.className = "btn7";
     choiceBtn.onclick = async () => {
-        var res = await keyin("输入你想显示在 choice 窗口上的信息。");
+        var res = await keyin("输入你想显示在 choice 窗口上的信息。", "");
         var choice1 = await keyin("请输入第一个选项。");
         var choice2 = await keyin("请输入第二个选项。");
         choice(res, choice1, choice2);
@@ -89,7 +90,7 @@ function fn1() {
     linkBtn.innerHTML = "link";
     linkBtn.className = "btn8";
     linkBtn.onclick = async () => {
-        var res = await keyin("输入你想显示在 link 窗口上的信息。");
+        var res = await keyin("输入你想显示在 link 窗口上的信息。", "");
         var url = await keyin("请输入你要链接的地址。");
         link(res, url);
     };
@@ -97,18 +98,63 @@ function fn1() {
     commandBtn.innerHTML = "command";
     commandBtn.className = "btn9";
     commandBtn.onclick = async () => {
-        var res = await keyin("输入你想显示在 command 窗口上的信息。");
+        var res = await keyin("输入你想显示在 command 窗口上的信息。", "");
         command(res);
     };
     const importantBtn = document.createElement("button");
     importantBtn.innerHTML = "important";
     importantBtn.className = "btn22";
     importantBtn.onclick = async () => {
-        var res = await keyin("输入你想显示在 important 窗口上的信息。");
+        var res = await keyin("输入你想显示在 important 窗口上的信息。", "");
         important(res);
+    };
+    const settings = document.createElement("button");
+    settings.innerHTML = "设置";
+    settings.className = "btn24";
+    settings.onclick = async () => {
+        var set = await choice("请选择以下函数使用的主题。", "Aero", "Neon");
+        if (set) {
+            theme = "Aero";
+        } else {
+            theme = "Neon";
+        }
+    };
+    const logBtn = document.createElement("button");
+    logBtn.innerHTML = "日志";
+    logBtn.className = "btn25";
+    logBtn.onclick = async () => {
+        let date = new Date();
+        const day = String(date.getDate()).padStart(2, "0");
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const year = date.getFullYear();
+        date = `${year} 年 ${month} 月 ${day} 日`;
+        await important(`
+        我在这里写一下我开发该网页的日志吧。
+        <br /> （按 [确定] 继续。）`);
+        await important(`
+        创建日期：2024 年（几月我忘了）；
+        <br /> 版本号：0.9 。
+        <br /> 你正在查看的是 ${date} 的版本。
+        <br /> （按 [确定] 继续。）`);
+        await important(`
+        在开发过程中我遇到了很多困难，开发速度也非常缓慢。
+        <br /> 一周更新 1 次，只有周五（也许）、周六、周日有时间更新。（甚至微机课上都在检查网页）
+        <br /> 这些函数也可能会存在较多的 bug，但我会努力修复它们。`);
+        await important(`
+        也不知道为什么，但我还是很开心。我的编程水平也得到了进步。
+        <br /> （按 [确定] 继续。）`);
+        await important(`
+        我将会继续维护 The Play Games 的网页。但与此同时，主程序的下一次更新可能需要等到 2025 年。
+        <br /> （按 [确定] 继续。）`);
+        await important(`
+        最后，感谢你使用 The Play Games！
+        <br /> （按 [确定] 继续。）`);
+        await info(`你可以在 [设置] 中应用更现代化的 Neon 主题！当前主题：${theme}。`);
     };
 
     const all = [
+        settings,
+        logBtn,
         infoBtn,
         successBtn,
         failBtn,
@@ -308,13 +354,13 @@ function fn2() {
     imp.textContent = "important";
     imp.className = "btn22";
     imp.onclick = () => {
-        important("This is an important message!");
+        important("This is an important message! <br /> (Background covered with acrylic material.)");
     };
     const key = document.createElement("button");
     key.textContent = "keyin";
     key.className = "btn23";
     key.onclick = () => {
-        keyin("Keyin is a function that can be used to input keys like input().");
+        keyin("Keyin() is a function that can be used to input keys like input().");
     };
 
     const all = [
@@ -349,6 +395,7 @@ function fn2() {
     div2.style.display = "none";
     div3.style.display = "none";
     all.forEach(btn => {
+        btn.type = "button";
         btn.style.display = "none";
     });
 
