@@ -86,7 +86,7 @@ p {
     font-size: 40px;
 }
 
-.head3, .head4 {
+.head3, .head4, head5 {
     opacity: 0;
     background-color: #000000b0;
     padding: 14px 25px;
@@ -115,7 +115,7 @@ p {
     }
     to {
         opacity: 1;
-        height: 880px;
+        height: calc(100% - 50px);
         transform: translateX(5vw);
     }
 }
@@ -140,7 +140,7 @@ p {
     to {
         opacity: 1;
         transform: translateX(25vw);
-        height: 2380px;
+        height: calc(100% - 50px);
     }
 }
 
@@ -480,6 +480,26 @@ button {
 .btn23 {
     opacity: 0;
     background-color: #11451499;
+    padding: 14px 25px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 30px;
+    border: none;
+}
+
+.btn24 {
+    opacity: 0;
+    background-color: #41541199;
+    padding: 14px 25px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 30px;
+    border: none;
+}
+
+.btn25 {
+    opacity: 0;
+    background-color: #14253699;
     padding: 14px 25px;
     margin-bottom: 15px;
     border-radius: 5px;
