@@ -854,5 +854,5 @@ function prompt(string, holder) {
 }
 
 async function confirm(string, name1, name2) {
-    return choice(string, name1, name2);
+    return await choice(string, name1, name2);
 }
