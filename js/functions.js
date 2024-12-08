@@ -1,5 +1,5 @@
 var lognum = 0;
-var nullCount = 0;
+var nullcount = 0;
 var windows = []; // 信息数组。
 let logwin = []; // log() 信息数组。
 let totalHeight = 0; // log() 的总高度。
@@ -35,13 +35,13 @@ function close(window) {
 }
 
 function monitor() {
-    if (nullCount >= 3 && nullCount < 7) {
-        warning(`你已连续 ${nullCount} 次输入 null 或 undefined。请检查你所输入的内容。`)
-    } else if (nullCount >= 7 && nullCount < 14) {
-        warning(`再次警告！你已连续输入 null 或 undefined ${nullCount} 次。请检查你所输入的内容。`)
-    } else if (nullCount >= 14 && nullCount < 25) {
+    if (nullcount >= 3 && nullcount < 7) {
+        warning(`你已连续 ${nullcount} 次输入 null 或 undefined。请检查你所输入的内容。`)
+    } else if (nullcount >= 7 && nullcount < 14) {
+        warning(`再次警告！你已连续输入 null 或 undefined ${nullcount} 次。请检查你所输入的内容。`)
+    } else if (nullcount >= 14 && nullcount < 25) {
         info(`null 和 undefined 是指，变量的值为 null 或 undefined，即你在 prompt 输入框中点击了取消或者在函数的参数中传入了 null 或 undefined。请检查你所输入的内容。`);
-    } else if (nullCount >= 25 && nullCount < 30) {
+    } else if (nullcount >= 25 && nullcount < 30) {
         fail("你已被禁止调用任何函数。");
         console.warn("你已被禁止调用任何函数。");
         warning("请查看控制台。");
@@ -94,18 +94,21 @@ function log(string, time) {
 // info 函数。
 
 function info(string) {
-    let replaced = string.replace(/\s+/g, "");
     if (string == null || string == undefined) {
-        nullCount++;
+        nullcount++;
         fail("所输入内容不能为 null 或 undefined。");
         monitor();
         return 39;
-    } else if (replaced === "") {
+    } else {
+        string = string.toString();
+    }
+    let replaced = string.replace(/\s+/g, "");
+    if (replaced === "") {
         fail("所输入内容不能为空字符串。");
         return -39;
     }
-    if (nullCount > 26) {
-        return "你已被禁止调用函数。";
+    if (nullcount > 26) {
+        log("你已被禁止调用函数。");
     }
 
     const window = document.createElement("div");
@@ -160,18 +163,21 @@ function info(string) {
 // success 函数。
 
 function success(string) {
-    let replaced = string.replace(/\s+/g, "");
     if (string == null || string == undefined) {
-        nullCount++;
+        nullcount++;
         fail("所输入内容不能为 null 或 undefined。");
         monitor();
         return 39;
-    } else if (replaced === "") {
+    } else {
+        string = string.toString();
+    }
+    let replaced = string.replace(/\s+/g, "");
+    if (replaced === "") {
         fail("所输入内容不能为空字符串。");
         return -39;
     }
-    if (nullCount > 26) {
-        return "你已被禁止调用函数。";
+    if (nullcount > 26) {
+        log("你已被禁止调用函数。");
     }
 
     const window = document.createElement("div");
@@ -226,18 +232,21 @@ function success(string) {
 // fail 函数。
 
 function fail(string) {
-    let replaced = string.replace(/\s+/g, "");
     if (string == null || string == undefined) {
-        nullCount++;
+        nullcount++;
         fail("所输入内容不能为 null 或 undefined。");
         monitor();
         return 39;
-    } else if (replaced === "") {
+    } else {
+        string = string.toString();
+    }
+    let replaced = string.replace(/\s+/g, "");
+    if (replaced === "") {
         fail("所输入内容不能为空字符串。");
         return -39;
     }
-    if (nullCount > 26) {
-        return "你已被禁止调用函数。";
+    if (nullcount > 26) {
+        log("你已被禁止调用函数。");
     }
 
     const window = document.createElement("div");
@@ -292,18 +301,21 @@ function fail(string) {
 // warning 函数。
 
 function warning(string) {
-    let replaced = string.replace(/\s+/g, "");
     if (string == null || string == undefined) {
-        nullCount++;
+        nullcount++;
         fail("所输入内容不能为 null 或 undefined。");
         monitor();
         return 39;
-    } else if (replaced === "") {
+    } else {
+        string = string.toString();
+    }
+    let replaced = string.replace(/\s+/g, "");
+    if (replaced === "") {
         fail("所输入内容不能为空字符串。");
         return -39;
     }
-    if (nullCount > 26) {
-        return "你已被禁止调用函数。";
+    if (nullcount > 26) {
+        log("你已被禁止调用函数。");
     }
 
     const window = document.createElement("div");
@@ -359,8 +371,25 @@ function warning(string) {
 
 function input(string, holder) {
     return new Promise((resolve) => {
+        if (string === null || string === undefined || holder === undefined || holder === null) {
+            nullcount++;
+            fail("所输入内容不能为 null 或 undefined。");
+            monitor();
+            return 39;
+        } else {
+            string = string.toString();
+            holder = holder.toString();
+        }
         let replaced1 = string.replace(/\s+/g, "");
         let replaced2 = holder.replace(/\s+/g, "");
+        if (replaced1 === "" || replaced2 === "") {
+            fail("所输入内容不能为空字符串。");
+            return -39;
+        }
+        if (nullcount > 26) {
+            log("你已被禁止调用函数。");
+        }
+
         const window = document.createElement("div");
         window.className = "input-window";
         const square = document.createElement("div");
@@ -369,20 +398,7 @@ function input(string, holder) {
         icon.className = "input-icon";
         const content = document.createElement("div");
         content.className = "input-content";
-        if (holder === "") {
-            holder = "在此输入……";
-        } else if (string === null || string === undefined || holder === undefined || holder === null) {
-            nullCount++;
-            fail("所输入内容不能为 null 或 undefined。");
-            monitor();
-            return 39;
-        } else if (replaced1 === "" || replaced2 === "") {
-            fail("所输入内容不能为空字符串。");
-            return -39;
-        }
-        if (nullCount > 26) {
-            return "你已被禁止调用函数。";
-        }
+
         const box = document.createElement("input");
         box.type = "text";
         box.className = "input-box";
@@ -428,9 +444,6 @@ function input(string, holder) {
 
 function choice(string, name1, name2) {
     return new Promise((resolve) => {
-        let replaced1 = string.replace(/\s+/g, "");
-        let replaced2 = name1.replace(/\s+/g, "");
-        let replaced3 = name2.replace(/\s+/g, "");
         const window = document.createElement("div");
         window.className = "choice-window";
         const square = document.createElement("div");
@@ -439,20 +452,27 @@ function choice(string, name1, name2) {
         icon.className = "choice-icon";
         const content = document.createElement("div");
         content.className = "choice-content";
+
         if (name1 === "" || name2 === "") {
             name1 = "确定";
             name2 = "取消";
         } else if (string == null || string == undefined || name1 === undefined || name2 === undefined || name1 === null || name2 === null) {
-            nullCount++;
+            nullcount++;
             fail("所输入内容不能为 null 或 undefined。");
             monitor();
             return 39;
-        } else if (replaced1 === "" || replaced2 === "" || replaced3 === "") {
+        } else {
+            string = string.toString();
+            name1 = name1.toString();
+            name2 = name2.toString();
+        }
+        let replaced1 = string.replace(/\s+/g, "");
+        if (replaced1 === "") {
             fail("所输入内容不能为空字符串。");
             return -39;
         }
-        if (nullCount > 26) {
-            return "你已被禁止调用函数。";
+        if (nullcount > 26) {
+            log("你已被禁止调用函数。");
         }
         if (theme === "Neon") {
             window.style.backdropFilter = "blur(14px) saturate(250%)";
@@ -506,18 +526,21 @@ function choice(string, name1, name2) {
 // transmit 函数。
 
 function transmit(string) {
-    let replaced = string.replace(/\s+/g, "");
     if (string == null || string == undefined) {
-        nullCount++;
+        nullcount++;
         fail("所输入内容不能为 null 或 undefined。");
         monitor();
         return 39;
-    } else if (replaced === "") {
+    } else {
+        string = string.toString();
+    }
+    let replaced = string.replace(/\s+/g, "");
+    if (replaced === "") {
         fail("所输入内容不能为空字符串。");
         return -39;
     }
-    if (nullCount > 26) {
-        return "你已被禁止调用函数。";
+    if (nullcount > 26) {
+        log("你已被禁止调用函数。");
     }
 
     const window = document.createElement("div");
@@ -572,24 +595,27 @@ function transmit(string) {
 // link 函数。
 
 function link(string, url) {
-    url = String(url);
-    let replaced1 = string.replace(/\s+/g, "");
-    let replaced2 = url.replace(/\s+/g, "");
     if (string == null || string == undefined || url == null || url == undefined) {
-        nullCount++;
+        nullcount++;
         fail("所输入内容不能为 null 或 undefined。");
         monitor();
         return 39;
-    } else if (url.startsWith("https") != true) {
-        url = "https://" + url;
+    } else {
+        string = string.toString();
+        url = url.toString();
+    }
+    let replaced1 = string.replace(/\s+/g, "");
+    let replaced2 = url.replace(/\s+/g, "");
+    if (replaced2.startsWith("https") != true) {
+        url = "https://" + replaced2;
     } else if (urlEndings.some(ending => url.endsWith(ending)) == false) {
         warning("请检查你所输入的网址是否正确！");
     } else if (replaced1 === "" || replaced2 === "") {
         fail("所输入内容不能为空字符串。");
         return -39;
     }
-    if (nullCount > 26) {
-        return "你已被禁止调用函数。";
+    if (nullcount > 26) {
+        log("你已被禁止调用函数。");
     }
 
     const window = document.createElement("div");
@@ -637,18 +663,21 @@ function link(string, url) {
 // command 函数。
 
 function command(string) {
-    let replaced = string.replace(/\s+/g, "");
     if (string == null || string == undefined) {
-        nullCount++;
+        nullcount++;
         fail("所输入内容不能为 null 或 undefined。");
         monitor();
         return 39;
-    } else if (replaced === "") {
+    } else {
+        string = string.toString();
+    }
+    let replaced = string.replace(/\s+/g, "");
+    if (replaced === "") {
         fail("所输入内容不能为空字符串。");
         return -39;
     }
-    if (nullCount > 26) {
-        return "你已被禁止调用函数。";
+    if (nullcount > 26) {
+        log("你已被禁止调用函数。");
     }
 
     const window = document.createElement("div");
@@ -705,12 +734,12 @@ function command(string) {
 async function important(string) {
     return new Promise((resolve) => {
         if (string == null || string == undefined) {
-            nullCount++;
+            nullcount++;
             fail("所输入内容不能为 null 或 undefined。");
             monitor();
             return 39;
-        } if (nullCount > 26) {
-            return "你已被禁止调用函数。";
+        } if (nullcount > 26) {
+            log("你已被禁止调用函数。");
         }
         const window = document.createElement("div");
         window.className = "important-window";
@@ -750,11 +779,12 @@ async function important(string) {
 async function keyin(string, holder) {
     return new Promise((resolve) => {
         if (string == null || string == undefined || holder == null || holder == undefined) {
-            nullCount++;
+            nullcount++;
             fail("所输入内容不能为 null 或 undefined。");
             monitor();
             return 39;
-        } if (nullCount > 26) {
+        } if (nullcount > 26) {
+            log("你已被禁止调用函数。");
             return "你已被禁止调用函数。";
         }
         if (holder === "") {
@@ -795,10 +825,10 @@ async function keyin(string, holder) {
         btn.onclick = () => {
             const value = inp.value;
             window.style.animation = "keyin- forwards 0.7s cubic-bezier(0.33, 1, 0.68, 1)";
-            clicked = true;
             if (clicked) {
                 warning("请勿多次点击。");
             }
+            clicked = true;
             const ani_end = () => {
                 window.removeChild(txt);
                 window.removeChild(inp);
@@ -817,4 +847,12 @@ async function keyin(string, holder) {
 
 function alert(string) {
     important(string);
+}
+
+function prompt(string, holder) {
+    return keyin(string, holder);
+}
+
+async function confirm(string, name1, name2) {
+    return choice(string, name1, name2);
 }
