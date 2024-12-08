@@ -1,4 +1,4 @@
-/* info 函数。 */
+/* info() 函数。 */
 .info-window {
     z-index: 1000;
     display: flex;
@@ -59,7 +59,7 @@
     }
 }
 
-/* success 函数。 */
+/* success() 函数。 */
 .success-window {
     z-index: 1000;
     display: flex;
@@ -120,7 +120,7 @@
     }
 }
 
-/* fail 函数。 */
+/* fail() 函数。 */
 .fail-window {
     z-index: 1000;
     display: flex;
@@ -181,7 +181,7 @@
     }
 }
 
-/* warning 函数。 */
+/* warning() 函数。 */
 .warning-window {
     z-index: 1000;
     display: flex;
@@ -242,7 +242,7 @@
     }
 }
 
-/* input 函数。 */
+/* input() 函数。 */
 .input-window {
     transform: translateX(50%);
     z-index: 1000;
@@ -322,7 +322,7 @@
     }
 }
 
-/* choice 函数。 */
+/* choice() 函数。 */
 .choice-window {
     z-index: 1000;
     display: flex;
@@ -410,7 +410,7 @@
     }
 }
 
-/* transmit 函数。 */
+/* transmit() 函数。 */
 .transmit-window {
     z-index: 1000;
     display: flex;
@@ -471,7 +471,7 @@
     }
 }
 
-/* link 函数。 */
+/* link() 函数。 */
 .link-window {
     z-index: 1000;
     display: flex;
@@ -546,7 +546,7 @@
     }
 }
 
-/* command 函数。 */
+/* command() 函数。 */
 .command-window {
     z-index: 1000;
     display: flex;
@@ -603,6 +603,164 @@
     }
     to {
         transform: translateY(-600px);
+        opacity: 0;
+    }
+}
+
+/* important() 函数。（优化后） */
+.important-window {
+    width: 65vw;
+    height: 50vh;
+    background-color: #0000009a;
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    transition: transform 0.7s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+@keyframes -important {
+    from {
+        opacity: 0;
+        backdrop-filter: blur(0px) saturate(100%);
+        transform: translate(-50%, -25%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+        backdrop-filter: blur(14px) saturate(250%);
+    }
+}
+
+@keyframes important- {
+    from {
+        opacity: 1;
+        backdrop-filter: blur(14px) saturate(250%);
+        transform: translate(-50%, -50%);
+    }
+    to {
+        opacity: 0;
+        backdrop-filter: blur(0px) saturate(100%);
+        opacity: 0;
+        transform: translate(-50%, -75%);
+    }
+}
+
+.windows-text {
+    color: white;
+    font-size: 25px;
+    padding: 14px 25px;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 1;
+}
+
+.important-confirm {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 14px 25px;
+    background-color: #003516b0;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.windows-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 998;
+    display: none;
+}
+
+/* keyin() 函数。（优化后） */
+.keyin-window {
+    width: 25vw;
+    height: 50vh;
+    top: 10px;
+    transform-origin: left left;
+    background-color: #0000009a;
+    display: none;
+    position: fixed;
+    transition: transform 0.7s cubic-bezier(0.33, 1, 0.68, 1);
+    z-index: 999;
+}
+
+@keyframes -keyin {
+    from {
+        opacity: 0;
+        backdrop-filter: blur(0px) saturate(100%);
+        transform: translate(100%, 50%);
+    }
+    to {
+        opacity: 1;
+        backdrop-filter: blur(14px) saturate(250%);
+        transform: translate(50%, 0%);
+    }
+}
+
+@keyframes keyin- {
+    from {
+        opacity: 1;
+        backdrop-filter: blur(14px) saturate(250%);
+        transform: translate(50%, 0%);
+    }
+    to {
+        opacity: 0;
+        backdrop-filter: blur(0px) saturate(100%);
+        transform: translate(-50%, 100%);
+    }
+}
+
+/* log 函数。 */
+.log-window {
+    z-index: 100;
+    background-color: #b2186d99;
+    display: flex;
+    position: fixed;
+    padding: 14px 25px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    top: 50%;
+    left: 14px;
+    z-index: 1000;
+}
+
+.log-content {
+    padding: 14px 25px;
+    color: white;
+    flex-grow: 1;
+    max-width: calc(14ch);
+    word-break: break-word;
+    min-width: 28ch;
+}
+
+@keyframes -log {
+    from {
+        backdrop-filter: blur(0px) saturate(100%);
+        opacity: 0;
+    }
+    to {
+        backdrop-filter: blur(14px) saturate(250%);
+        opacity: 1;
+    }
+}
+
+@keyframes log- {
+    from {
+        backdrop-filter: blur(14px) saturate(250%);
+        opacity: 1;
+    }
+    to {
+        backdrop-filter: blur(0px) saturate(100%);
         opacity: 0;
     }
 }

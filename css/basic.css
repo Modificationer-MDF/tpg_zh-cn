@@ -5,7 +5,8 @@ h1 h2 {
 
 body {
     overflow-x: hidden;
-    background-color: #000000;
+    background-color: black;
+    color: white;
     font-family: "basic";
     font-weight: 100;
 }
@@ -85,17 +86,17 @@ p {
     font-size: 40px;
 }
 
-.head3, .head4 {
+.head3, .head4, .head5 {
     opacity: 0;
     background-color: #000000b0;
     padding: 14px 25px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     border-radius: 5px;
     font-size: 30px;
     border: none;
 }
 
-@keyframes -head3 {
+@keyframes _head3 {
     from {
         opacity: 0;
         transform: translateX(0);
@@ -114,140 +115,66 @@ p {
     }
     to {
         opacity: 1;
-        height: 190px;
-        transform: translateX(25vw);
+        height: calc(100% - 50px);
+        transform: translateX(5vw);
     }
 }
 
-@keyframes -head4 {
+@keyframes _head4 {
     from {
         opacity: 0;
         transform: translateX(0vw);
     }
     to {
         opacity: 1;
-        transform: translateX(25vw);
+        transform: translateX(20vw);
     }
 }
 
 @keyframes head4- {
     from {
         opacity: 1;
-        transform: translateX(25vw);
+        transform: translateX(20vw);
         height: 140px;
     }
     to {
         opacity: 1;
         transform: translateX(5vw);
-        height: 300px;
+        height: calc(100% - 50px);
+    }
+}
+
+@keyframes _head5 {
+    from {
+        opacity: 0;
+        transform: translateX(0vw);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(35vw);
+    }
+}
+
+@keyframes head5- {
+    from {
+        opacity: 1;
+        transform: translateX(35vw);
+        height: 140px;
+    }
+    to {
+        opacity: 1;
+        transform: translateX(5vw);
+        height: calc(100% - 50px);
     }
 }
 
 /* µÚ 2 ²¿·Ö¡£ */
-@keyframes -btn1 {
-    from {
-        transform: translateX(0);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(9vw);
-        opacity: 1;
-    }
-}
-
-@keyframes -btn2 {
-    from {
-        transform: translateX(0);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(18vw);
-        opacity: 1;
-    }
-}
-
-@keyframes -btn3 {
-    from {
-        transform: translateX(0);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(27vw);
-        opacity: 1;
-    }
-}
-
-@keyframes -btn4 {
-    from {
-        transform: translateX(0);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(36vw);
-        opacity: 1;
-    }
-}
-
-@keyframes -btn5 {
-    from {
-        transform: translateX(0);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(45vw);
-        opacity: 1;
-    }
-}
-
-@keyframes -btn6 {
-    from {
-        transform: translateX(0);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(54vw);
-        opacity: 1;
-    }
-}
-
-@keyframes -btn7 {
-    from {
-        transform: translateX(0);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(63vw);
-        opacity: 1;
-    }
-}
-
-@keyframes -btn8 {
-    from {
-        transform: translateX(0);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(72vw);
-        opacity: 1;
-    }
-}
-
-@keyframes -btn9 {
-    from {
-        transform: translateX(0);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(81vw);
-        opacity: 1;
-    }
-}
 
 .btn1 {
     opacity: 0;
     background-color: #18a689b0;
     padding: 14px 25px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     border-radius: 5px;
     font-size: 30px;
     border: none;
@@ -257,7 +184,7 @@ p {
     opacity: 0;
     background-color: #1d5837b0;
     padding: 14px 25px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     border-radius: 5px;
     font-size: 30px;
     border: none;
@@ -267,7 +194,7 @@ p {
     opacity: 0;
     background-color: #791e1db0;
     padding: 14px 25px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     border-radius: 5px;
     font-size: 30px;
     border: none;
@@ -277,7 +204,7 @@ p {
     opacity: 0;
     background-color: #847829b0;
     padding: 14px 25px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     border-radius: 5px;
     font-size: 30px;
     border: none;
@@ -287,7 +214,7 @@ p {
     opacity: 0;
     background-color: #235087b0;
     padding: 14px 25px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     border-radius: 5px;
     font-size: 30px;
     border: none;
@@ -297,7 +224,7 @@ p {
     opacity: 0;
     background-color: #9e3389b0;
     padding: 14px 25px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     border-radius: 5px;
     font-size: 30px;
     border: none;
@@ -307,7 +234,7 @@ p {
     opacity: 0;
     background-color: #7527a4b0;
     padding: 14px 25px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     border-radius: 5px;
     font-size: 30px;
     border: none;
@@ -317,7 +244,7 @@ p {
     opacity: 0;
     background-color: #a6580d99;
     padding: 14px 25px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     border-radius: 5px;
     font-size: 30px;
     border: none;
@@ -327,13 +254,13 @@ p {
     opacity: 0;
     background-color: #19181899;
     padding: 14px 25px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     border-radius: 5px;
     font-size: 30px;
     border: none;
 }
 
-@keyframes  -para {
+@keyframes -para {
     from {
         opacity:  0;
         transform: translateX(0);
@@ -378,4 +305,228 @@ a:active {
 button {
     font-family: "basic";
     font-weight: 100;
+}
+
+.dakai {
+    z-index: 999;
+    margin-left: 30px;
+    background-color: #ffe20099;
+    padding: 14px 25px;
+    border-radius: 5px;
+    font-size: 30px;
+    border: none;
+}
+
+.fn-1 {
+    opacity: 0;
+    background-color: #a123bf99;
+    padding: 14px 25px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 30px;
+    border: none;
+}
+
+.fn-2 {
+    opacity: 0;
+    background-color: #ff573399;
+    padding: 14px 25px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 30px;
+    border: none;
+}
+
+.btn10 {
+    opacity: 0;
+    background-color: #ff339999;
+    color: black;
+    padding: 14px 25px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 30px;
+    border: none;
+}
+
+.btn11 {
+    opacity: 0;
+    background-color: #33ffb399;
+    padding: 14px 25px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 30px;
+    border: none;
+}
+
+.btn12 {
+    opacity: 0;
+    background-color: #c7000399;
+    padding: 14px 25px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 30px;
+    border: none;
+}
+
+.btn13 {
+    opacity: 0;
+    background-color: #900c3999;
+    padding: 14px 25px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 30px;
+    border: none;
+}
+
+.btn14 {
+    opacity: 0;
+    background-color: #58184599;
+    padding: 14px 25px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 30px;
+    border: none;
+}
+
+.btn15 {
+    opacity: 0;
+    background-color: #ffc30099;
+    padding: 14px 25px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 30px;
+    border: none;
+}
+
+.btn16 {
+    opacity: 0;
+    background-color: #ff573399;
+    padding: 14px 25px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 30px;
+    border: none;
+}
+
+.btn17 {
+    opacity: 0;
+    background-color: #1c1c1c99;
+    padding: 14px 25px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 30px;
+    border: none;
+}
+
+.btn18 {
+    opacity: 0;
+    background-color: #3498db99;
+    padding: 14px 25px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 30px;
+    border: none;
+}
+
+.btn19 {
+    opacity: 0;
+    background-color: #8e44ad99;
+    padding: 14px 25px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 30px;
+    border: none;
+}
+
+.btn20 {
+    opacity: 0;
+    background-color: #e74c3c99;
+    padding: 14px 25px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 30px;
+    border: none;
+}
+
+.btn21 {
+    opacity: 0;
+    background-color: #2ecc7199;
+    padding: 14px 25px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 30px;
+    border: none;
+}
+
+.btn22 {
+    opacity: 0;
+    background-color: #66999999;
+    padding: 14px 25px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 30px;
+    border: none;
+}
+
+.div1 {
+    font-weight: bold;
+    margin-top: 30px;
+    width: auto;
+    background-color: #F39C1249;
+    border-radius: 5px; 
+    font-size: 33px;
+    text-align: center;
+    padding: 15px 15px;
+}
+
+.div2 {
+    font-weight: bold;
+    margin-top: 30px;
+    width: auto;
+    background-color: #1ABC9C49;
+    border-radius: 5px;
+    font-size: 33px;
+    text-align: center;
+    padding: 15px 15px;
+}
+
+.div3 {
+    font-weight: bold;
+    margin-top: 30px;
+    width: auto;
+    background-color: #8E44AD49;
+    border-radius: 5px;
+    font-size: 33px;
+    text-align: center;
+    padding: 15px 15px;
+}
+
+.btn23 {
+    opacity: 0;
+    background-color: #11451499;
+    padding: 14px 25px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 30px;
+    border: none;
+}
+
+.btn24 {
+    opacity: 0;
+    background-color: #41541199;
+    padding: 14px 25px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 30px;
+    border: none;
+}
+
+.btn25 {
+    opacity: 0;
+    background-color: #14253699;
+    padding: 14px 25px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 30px;
+    border: none;
 }
