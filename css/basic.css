@@ -86,7 +86,7 @@ p {
     font-size: 40px;
 }
 
-.head3, .head4, head5 {
+.head3, .head4, .head5 {
     opacity: 0;
     background-color: #000000b0;
     padding: 14px 25px;
@@ -127,19 +127,43 @@ p {
     }
     to {
         opacity: 1;
-        transform: translateX(25vw);
+        transform: translateX(20vw);
     }
 }
 
 @keyframes head4- {
     from {
         opacity: 1;
-        transform: translateX(25vw);
+        transform: translateX(20vw);
         height: 140px;
     }
     to {
         opacity: 1;
-        transform: translateX(25vw);
+        transform: translateX(5vw);
+        height: calc(100% - 50px);
+    }
+}
+
+@keyframes _head5 {
+    from {
+        opacity: 0;
+        transform: translateX(0vw);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(35vw);
+    }
+}
+
+@keyframes head5- {
+    from {
+        opacity: 1;
+        transform: translateX(35vw);
+        height: 140px;
+    }
+    to {
+        opacity: 1;
+        transform: translateX(5vw);
         height: calc(100% - 50px);
     }
 }
