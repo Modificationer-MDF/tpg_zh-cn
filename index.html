@@ -2,62 +2,56 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <html lang="en">
-<head>
-    <title>The Play Games</title>
-    <link rel="stylesheet" type="text/css" href="css/basic.css" />
-    <link rel="stylesheet" type="text/css" href="css/functions.css" />
-    <!-- 
-    以下代码已被 JavaScript 替代。    
-    <style>
-        @font-face {
-            font-family: "basic";
-            src: url("fonts/Basic Modification Light.woff2") format("woff2");
-        }
-    </style> -->
-    <script src="js/basic.js"></script>
-    <script src="js/global.js"></script>
-    <script src="js/functions.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var font = new FontFace('basic', 'url("fonts/Basic Modification Light.woff2")');
-            font.load().then(function(f) {
-                document.fonts.add(f);
-                success(`成功加载字体：Basic Modification Light。`);
-            }).catch(function(error) {
-                    fail(`字体加载失败。（${error}）`);
+    <head>
+        <title>The Play Games</title>
+        <link rel="stylesheet" type="text/css" href="css/basic.css" />
+        <link rel="stylesheet" type="text/css" href="css/functions.css" />
+        <script src="js/basic.js"></script>
+        <script src="js/global.tpg"></script>
+        <script src="js/functions.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                var start = performance.now();
+                var font = new FontFace('basic', 'url("fonts/Basic Modification Light.woff2")');
+                font.load().then(function(f) {
+                    var end = performance.now();
+                    document.fonts.add(f);
+                    success(`成功加载字体：Basic Modification Light。用时 ${((end - start) / 1000).toFixed(3)} 秒。`);
+                }).catch(function(error) {
+                        fail(`字体加载失败。（${error}）请打开 [控制台（F12） -> 网络] 查看详情。`);
+                });
             });
-        });
-    </script>
-</head>
-<body>
-    <script>
-        let theme = "Aero";
+        </script>
+    </head>
+    <body>
+        <script>
+            let theme = "Aero";
 
-        var taboos = [
-            "fuck", "wcsndm", "damn", "shit", "idiot", "fa q", "sb", "nigger", "wdnmd", "faggot", "bitch", "asshole", "retard", "cnm", "faq", "shabi", "baka", "woc",
-        ];
-        var zanghua = [
-            "傻逼", "操你妈", "我操", "卧槽", "尼玛", "我淦", "我阐述你的梦", "死妈", "好死", "傻比", "你妈逼", "你妈死了", "典", "急", "孝", "乐", "绷", "赢", "麻", "4000+", "死全家"
-        ];
-        var tabu_ = [
-            "あほ", "あほう", "アホ", "アホウ", "阿呆", "くさ", "臭い", "くさい", "クサイ", "しね", "死ね", "シネ", "ばか", "バカ", "やろう", "野郎", "ヤロウ", "馬鹿",
-            "畜生", "雑魚", "ざこ", "ザコ"
-        ];
+            var taboos = [
+                "fuck", "wcsndm", "damn", "shit", "idiot", "fa q", "sb", "nigger", "wdnmd", "faggot", "bitch", "asshole", "retard", "cnm", "faq", "shabi", "baka", "woc",
+            ];
+            var zanghua = [
+                "傻逼", "操你妈", "我操", "卧槽", "尼玛", "我淦", "我阐述你的梦", "死妈", "好死", "傻比", "你妈逼", "你妈死了", "典", "急", "孝", "乐", "绷", "赢", "麻", "4000+", "死全家", "畜生"
+            ];
+            var tabu_ = [
+                "あほ", "あほう", "アホ", "アホウ", "阿呆", "くさ", "臭い", "くさい", "クサイ", "しね", "死ね", "シネ", "ばか", "バカ", "やろう", "野郎", "ヤロウ", "馬鹿",
+                "雑魚", "ざこ", "ザコ"
+            ];
 
-        function fn_1() {
-            choice('Never gonna give you up. Never gonna let you down. Never gonna run around and desert you. Never gonna make you cry. Never gonna say goodbye. Never gonna tell a lie and hurt you.', "Yes, XD.","No, you're joking!");
-        }
+            function fn_1() {
+                choice('Never gonna give you up. Never gonna let you down. Never gonna run around and desert you. Never gonna make you cry. Never gonna say goodbye. Never gonna tell a lie and hurt you.', "Yes, XD.","No, you're joking!");
+            }
 
-        async function fn_2() {
-            var a = await input("Never gonna give you up. Never gonna let you down. Never gonna run around and desert you. Never gonna make you cry. Never gonna say goodbye. Never gonna tell a lie and hurt you.", "Have something to say?");
-            a = a.toLowerCase();
-            if (taboos.some(word => a.includes(word)))  {
-                await warning("Shut up, you are fucking retarded.");
-                await info("Fuck your whole family, you ARE AN IDIOT!")
-                var b = await choice("Are you an IDIOT?", "Yes, I am.", "No, I'm not.")
-                if (b) {
-                    await success("You truly know yourself well, do not you?");
-                } else {
+            async function fn_2() {
+                var a = await input("Never gonna give you up. Never gonna let you down. Never gonna run around and desert you. Never gonna make you cry. Never gonna say goodbye. Never gonna tell a lie and hurt you.", "Have something to say?");
+                a = a.toLowerCase();
+                if (taboos.some(word => a.includes(word)))  {
+                    await warning("Shut up, you are fucking retarded.");
+                    await info("Fuck your whole family, you ARE AN IDIOT!")
+                    var b = await choice("Are you an IDIOT?", "Yes, I am.", "No, I'm not.")
+                    if (b) {
+                        await success("You truly know yourself well, do not you?");
+                    } else {
                         await fail("Oh, in my opinion, you ARE.");
                     }
                 } else if (zanghua.some(word => a.includes(word))) {
@@ -69,34 +63,38 @@
                     } else {
                         await fail("哦，在我看来，你是的。");
                     }
-            } else if (tabu_.some(word => a.includes(word))) {
-                await warning("（翻訳：DeepL） 黙れ、お前はクソいまいましい。");
-                await info("家族全員くたばれ、お前はバカだ！")
-                var b = await choice("お前はバカだ！", "イエス。", "ノー。");
-                if (b) {
-                    await success("お前は本当に知ってる！");
+                } else if (tabu_.some(word => a.includes(word))) {
+                    await warning("（翻訳：DeepL） 黙れ、お前はクソいまいましい。");
+                    await info("家族全員くたばれ、お前はバカだ！")
+                    var b = await choice("お前はバカだ！", "イエス。", "ノー。");
+                    if (b) {
+                        await success("お前は本当に知ってる！");
+                    } else {
+                        await fail("ああ、私の意見では、君ハソウだ。");
+                    }
                 } else {
-                    await fail("ああ、私の意見では、君ハソウだ。");
+                    await info(`You said: "${a}".`);
                 }
-            } else {
-                await info(`You said: "${a}".`);
             }
-        }
-    </script>
-    <div class="head">
-        <p style="font-size: 25px; text-align: center;">Version 0.9</p>
-    </div>
-    <div class="top">
-        <h1 class="head1">The Play Games</h1>
-        <h2 class="head2">Let the game-playing easier.</h2>
-        <div class="head3">
-            函数展示
-            <button type="button" class="dakai" id="1" onclick="fn1()">打开</button>
+        </script>
+        <div class="head">
+            <p style="font-size: 25px; text-align: center;">Version 0.9</p>
         </div>
-        <div class="head4" onclick="fn2()">
-            演示与调试
-            <button type="button" class="dakai" id="2" onclick="fn2()">打开</button>
+        <div class="top">
+            <h1 class="head1">The Play Games</h1>
+            <h2 class="head2">Let the game-playing easier.</h2>
+            <div class="head3">
+                函数展示
+                <button type="button" class="dakai" id="1" onclick="fn1()">打开</button>
+            </div>
+            <div class="head4" onclick="fn2()">
+                演示与调试
+                <button type="button" class="dakai" id="2" onclick="fn2()">打开</button>
+            </div>
+            <div class="head5">
+                The Play Games 版本
+                <button type="button" class="dakai" id="3" onclick="fn3()">打开</button>
+            </div>
         </div>
-    </div>
-</body>
+    </body>
 </html>
