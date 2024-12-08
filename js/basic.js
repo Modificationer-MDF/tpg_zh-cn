@@ -1,3 +1,4 @@
+let flag = false;
 /* 第一部分。 */
 document.addEventListener("DOMContentLoaded", () => {
     const h1 = document.querySelector(".head1"); // h1 标签。
@@ -6,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const head = document.querySelector(".head"); // The Play Games 版本标签。
     const f1 = document.querySelector(".head3"); // 功能按钮组。
     const f2 = document.querySelector(".head4"); // 功能按钮组。
+    const f3 = document.querySelector(".head5"); // 功能按钮组。
 
     h1.addEventListener("animationend", (e) => {
         if (e.animationName === "-head1") {
@@ -23,6 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (e.animationName === "-top") {
             f1.style.animation = "_head3 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1)";
             f2.style.animation = "_head4 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1)";
+            f3.style.animation = "_head5 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1)";
         }
     });
 });
@@ -149,7 +152,7 @@ function fn1() {
         await important(`
         最后，感谢你使用 The Play Games！
         <br /> （按 [确定] 继续。）`);
-        await info(`你可以在 [设置] 中应用更现代化的 Neon 主题！当前主题：${theme}。`);
+        await info(`你可以在 [函数展示 -> 设置] 中应用更现代化的 Neon 主题！当前主题：${theme}。`);
     };
 
     const all = [
@@ -180,7 +183,7 @@ function fn1() {
     div.style.animation = "head3- 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1)";
     dakai.style.backgroundColor = "#001dff99";
     dakai.style.width = "540px";
-    dakai.textContent = "The Play Games 将预装以下函数。";
+    dakai.textContent = "你可以在此设置和演示这些新函数。";
 
     div.addEventListener("animationend", (e) => {
         if (e.animationName === "head3-") {
@@ -291,64 +294,11 @@ function fn2() {
         info(undefined);
     };
     const numBtn = document.createElement("button");
-    numBtn.innerHTML = "重置 nullCount 的值";
+    numBtn.innerHTML = "重置 nullcount 的值";
     numBtn.className = "btn12";
     numBtn.onclick = () => {
-        nullCount = 0;
-    };
-    const infoNumBtn = document.createElement("button");
-    infoNumBtn.innerHTML = "重置 infoNum 的值";
-    infoNumBtn.className = "btn13";
-    infoNumBtn.onclick = () => {
-        infoNum = 0;
-    };
-    const successNumBtn = document.createElement("button");
-    successNumBtn.innerHTML = "重置 successNum 的值";
-    successNumBtn.className = "btn14";
-    successNumBtn.onclick = () => {
-        successNum = 0;
-    };
-    const failNumBtn = document.createElement("button");
-    failNumBtn.innerHTML = "重置 failNum 的值";
-    failNumBtn.className = "btn15";
-    failNumBtn.onclick = () => {
-        failNum = 0;
-    };
-    const warningNumBtn = document.createElement("button");
-    warningNumBtn.innerHTML = "重置 warningNum 的值";
-    warningNumBtn.className = "btn16";
-    warningNumBtn.onclick = () => {
-        warningNum = 0;
-    };
-    const inputNumBtn = document.createElement("button");
-    inputNumBtn.innerHTML = "重置 inputNum 的值";
-    inputNumBtn.className = "btn17";
-    inputNumBtn.onclick = () => {
-        inputNum = 0;
-    };
-    const transmitNumBtn = document.createElement("button");
-    transmitNumBtn.innerHTML = "重置 transmitNum 的值";
-    transmitNumBtn.className = "btn18";
-    transmitNumBtn.onclick = () => {
-        transmitNum = 0;
-    };
-    const choiceNumBtn = document.createElement("button");
-    choiceNumBtn.innerHTML = "重置 choiceNum 的值";
-    choiceNumBtn.className = "btn19";
-    choiceNumBtn.onclick = () => {
-        choiceNum = 0;
-    };
-    const linkNumBtn = document.createElement("button");
-    linkNumBtn.innerHTML = "重置 linkNum 的值";
-    linkNumBtn.className = "btn20";
-    linkNumBtn.onclick = () => {
-        linkNum = 0;
-    };
-    const commandNumBtn = document.createElement("button");
-    commandNumBtn.innerHTML = "重置 commandNum 的值";
-    commandNumBtn.className = "btn21";
-    commandNumBtn.onclick = () => {
-        commandNum = 0;
+        log(`Nullcount: ${nullcount} -> 0。`);
+        nullcount = 0;
     };
     const imp = document.createElement("button");
     imp.textContent = "important";
@@ -360,7 +310,7 @@ function fn2() {
     key.textContent = "keyin";
     key.className = "btn23";
     key.onclick = () => {
-        keyin("Keyin() is a function that can be used to input keys like input().");
+        keyin("Keyin() is a function that can be used to input keys like input().", "Enter here:");
     };
 
     const all = [
@@ -380,15 +330,6 @@ function fn2() {
         nullBtn,
         undefinedBtn,
         numBtn,
-        infoNumBtn,
-        successNumBtn,
-        failNumBtn,
-        warningNumBtn,
-        inputNumBtn,
-        transmitNumBtn,
-        choiceNumBtn,
-        linkNumBtn,
-        commandNumBtn,
     ];
 
     div1.style.display = "none";
@@ -443,6 +384,91 @@ function fn2() {
                 div1.style.opacity = "1";
                 div2.style.opacity = "1";
                 div3.style.opacity = "1";
+            }, 0);
+        }
+    });
+}
+
+async function fn3() {
+    if (!flag) {
+        await warning("从 0.7 版本开始，如果电脑装有 360 杀毒软件，可能会提示你下载的文件可能有病毒。但是，这是误判。");
+        var a = await choice("你确定要下载吗？", "是。", "否。");
+        if (a) {
+            await success("已打开。");
+            flag = true;
+        } else {
+            await fail("你终止了下载操作。");
+            return -39;
+        }
+    }
+    const div = document.querySelector(".head5");
+    div.style.animation = "head5- 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1)";
+    const dakai = document.getElementById("3");
+    dakai.style.transition = "all 0.7s cubic-bezier(0.33, 1, 0.68, 1)";
+    dakai.style.backgroundColor = "#001dff99";
+    dakai.style.width = "700px";
+    dakai.textContent = "你可以在此处下载 The Play Games 所有版本。";
+    const btn1 = document.createElement("button");
+    btn1.className = "btn11";
+    btn1.style.marginTop = "20px";
+    btn1.type = "button";
+    const a1 = document.createElement("a");
+    a1.href = "projects/Version_Collecting_1.zip";
+    a1.download = "Version_Collecting_1.zip";
+    a1.textContent = "下载 VC_Time 1（包含 The Play Games 0.1 ~ 0.6）";
+    a1.onmouseover = () => {
+        log("2024 年 5 月 1 日发布。");
+    };
+    const btn2 = document.createElement("button");
+    btn2.className = "btn12";
+    btn2.type = "button";
+    const a2 = document.createElement("a");
+    a2.href = "projects/The_Play_Games_0.7.zip";
+    a2.download = "The_Play_Games_0.7.zip";
+    a2.textContent = "下载 The Play Games 0.7";
+    a2.onmouseover = () => {
+        log("2024 年 8 月 22 日发布。");
+    };
+    const btn3 = document.createElement("button");
+    btn3.className = "btn13";
+    btn3.type = "button";
+    const a3 = document.createElement("a");
+    a3.href = "projects/The_Play_Games_0.8.zip";
+    a3.download = "The_Play_Games_0.8.zip";
+    a3.textContent = "下载 The Play Games 0.8";
+    a3.onmouseover = () => {
+        log("2024 年 8 月 27 日发布。");
+    };
+    const all = [
+        btn1,
+        btn2,
+        btn3,
+        a1,
+        a2,
+        a3
+    ];
+    all.forEach((btn, index) => {
+        btn.style.display = "none";
+    });
+    if (div.children.length <= 1) {
+        all.forEach((btn, index) => {
+            if (index >= 0 && index < 3) div.appendChild(btn);
+            else if (index === 3) btn1.appendChild(btn);
+            else if (index === 4) btn2.appendChild(btn);
+            else if (index === 5) btn3.appendChild(btn);
+        });
+    }
+    div.addEventListener("animationend", (e) => {
+        if (e.animationName === "head5-") {
+            all.forEach(btn => {
+                btn.style.display = "block";
+                btn.style.opacity = "0"; // 初始化为 0 。
+                btn.style.transition = "opacity 0.7s cubic-bezier(0.33, 1, 0.68, 1)";
+            });
+            setTimeout(() => {
+                all.forEach(btn => {
+                    btn.style.opacity = "1"; // 显示。
+                });
             }, 0);
         }
     });
