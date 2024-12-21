@@ -845,14 +845,38 @@ async function keyin(string, holder) {
     });
 }
 
-function alert(string) {
-    important(string);
+async function alert(string) {
+    await important(string);
 }
 
-function prompt(string, holder) {
-    return keyin(string, holder);
+async function prompt(string, holder) {
+    return await keyin(string, holder);
 }
 
 async function confirm(string, name1, name2) {
     return await choice(string, name1, name2);
+}
+
+function consolecheck() {
+    if (typeof window.console !== "undefined" && console.log) {
+        return "console";
+    }
+    try {
+        console.log();
+        return "console";
+    } catch (e) {
+        return "system";
+    }
+}
+
+function jia(varia, num, permission) {
+    permission = consolecheck();
+    if (permission == "system") {
+        varia += num;
+        success(`${varia} 增加了 ${num}。`);
+        return varia;
+    } else {
+        fail("权限不足。");
+        return;
+    }
 }
