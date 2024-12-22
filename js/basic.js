@@ -423,8 +423,8 @@ async function fn3() {
     btn2.className = "btn12";
     btn2.type = "button";
     const a2 = document.createElement("a");
-    a2.href = "projects/The_Play_Games_0.7.zip";
-    a2.download = "The_Play_Games_0.7.zip";
+    a2.href = "projects/Version_0.7.zip";
+    a2.download = "Version_0.7.zip";
     a2.textContent = "下载 The Play Games 0.7";
     a2.onmouseover = () => {
         log("2024 年 8 月 22 日发布。");
@@ -433,8 +433,8 @@ async function fn3() {
     btn3.className = "btn13";
     btn3.type = "button";
     const a3 = document.createElement("a");
-    a3.href = "projects/The_Play_Games_0.8.zip";
-    a3.download = "The_Play_Games_0.8.zip";
+    a3.href = "projects/Version_0.8.zip";
+    a3.download = "Version_0.8.zip";
     a3.textContent = "下载 The Play Games 0.8";
     a3.onmouseover = () => {
         log("2024 年 8 月 27 日发布。");

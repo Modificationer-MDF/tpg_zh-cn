@@ -93,7 +93,7 @@ function log(string, time) {
 
 // info 函数。
 
-function info(string) {
+async function info(string) {
     if (string == null || string == undefined) {
         nullcount++;
         fail("所输入内容不能为 null 或 undefined。");
@@ -162,7 +162,7 @@ function info(string) {
 
 // success 函数。
 
-function success(string) {
+async function success(string) {
     if (string == null || string == undefined) {
         nullcount++;
         fail("所输入内容不能为 null 或 undefined。");
@@ -231,7 +231,7 @@ function success(string) {
 
 // fail 函数。
 
-function fail(string) {
+async function fail(string) {
     if (string == null || string == undefined) {
         nullcount++;
         fail("所输入内容不能为 null 或 undefined。");
@@ -300,7 +300,7 @@ function fail(string) {
 
 // warning 函数。
 
-function warning(string) {
+async function warning(string) {
     if (string == null || string == undefined) {
         nullcount++;
         fail("所输入内容不能为 null 或 undefined。");
@@ -369,7 +369,7 @@ function warning(string) {
 
 // input 函数。
 
-function input(string, holder) {
+async function input(string, holder) {
     return new Promise((resolve) => {
         if (string === null || string === undefined || holder === undefined || holder === null) {
             nullcount++;
@@ -442,7 +442,7 @@ function input(string, holder) {
 
 // choice 函数。
 
-function choice(string, name1, name2) {
+async function choice(string, name1, name2) {
     return new Promise((resolve) => {
         const window = document.createElement("div");
         window.className = "choice-window";
@@ -525,7 +525,7 @@ function choice(string, name1, name2) {
 
 // transmit 函数。
 
-function transmit(string) {
+async function transmit(string) {
     if (string == null || string == undefined) {
         nullcount++;
         fail("所输入内容不能为 null 或 undefined。");
@@ -594,7 +594,7 @@ function transmit(string) {
 
 // link 函数。
 
-function link(string, url) {
+async function link(string, url) {
     if (string == null || string == undefined || url == null || url == undefined) {
         nullcount++;
         fail("所输入内容不能为 null 或 undefined。");
@@ -662,7 +662,7 @@ function link(string, url) {
 
 // command 函数。
 
-function command(string) {
+async function command(string) {
     if (string == null || string == undefined) {
         nullcount++;
         fail("所输入内容不能为 null 或 undefined。");
