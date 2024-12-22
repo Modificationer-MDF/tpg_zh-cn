@@ -85,9 +85,13 @@ function fn1() {
     choiceBtn.className = "btn7";
     choiceBtn.onclick = async () => {
         var res = await keyin("输入你想显示在 choice 窗口上的信息。", "");
-        var choice1 = await keyin("请输入第一个选项。");
-        var choice2 = await keyin("请输入第二个选项。");
-        choice(res, choice1, choice2);
+        var n = await keyin("请输入 choice 窗口上选项的数量。");
+        n = Number(n);
+        var array = new Array(n);
+        for (var i = 0; i <= n - 1; i++) {
+            array[i] = await keyin(`请输入 choice 窗口上第 ${i + 1} 个选项。`);
+        }
+        choice(res, n, array);
     };
     const linkBtn = document.createElement("button");
     linkBtn.innerHTML = "link";

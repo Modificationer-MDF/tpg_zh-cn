@@ -442,8 +442,12 @@ async function input(string, holder) {
 
 // choice 函数。
 
-async function choice(string, name1, name2) {
+async function choice(string, n, names) {
     return new Promise((resolve) => {
+        if (n === null || n === undefined) n = 2;
+        n = Math.ceil(Number(n));
+        names[n] = {};
+        const name = names[n];
         const window = document.createElement("div");
         window.className = "choice-window";
         const square = document.createElement("div");
@@ -492,26 +496,16 @@ async function choice(string, name1, name2) {
         var lineHeight = parseInt(window.style.lineHeight);
         content.style.height = `${line * lineHeight}px`;
 
-        const True = document.createElement("button");
-        True.innerHTML = name1;
-        True.focus();
-        True.className = "choice-true";
-        True.onclick = () => {
-            resolve(true);
-            rm();
-        };
-
-        const False = document.createElement("button");
-        False.innerHTML = name2;
-        False.className = "choice-false";
-        False.onclick = () => {
-            resolve(false);
-            rm();
-        };
-
-        // 将按钮添加到内容中。
-        content.appendChild(True);
-        content.appendChild(False);
+        for (var i = 1; i <= n; i++) {
+            const btn = document.createElement("button"); // 创建按钮
+            btn.innerHTML = names[i];
+            btn.focus();
+            btn.onclick = () => {
+                resolve(names[i]);
+                rm();
+            };
+            content.appendChild(btn); 
+        }
 
         function rm() {
             window.style.animation = "choice- 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1)"; // 播放出场动画
