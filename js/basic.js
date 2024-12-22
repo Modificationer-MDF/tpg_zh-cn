@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
 function fn1() {
     const div = document.querySelector(".head3");
     const dakai = document.getElementById("1");
-    dakai.style.transition = "all 0.7s cubic-bezier(0.33, 1, 0.68, 1)"
+    dakai.style.transition = "all 0.7s cubic-bezier(0.33, 1, 0.68, 1)";
     const infoBtn = document.createElement("button");
     infoBtn.style.marginTop = "15px";
     infoBtn.innerHTML = "info";
@@ -70,7 +70,7 @@ function fn1() {
     inputBtn.className = "btn5";
     inputBtn.onclick = async () => {
         var res = await keyin("输入你想显示在 input 窗口上的信息。", "");
-        var ult = await keyin("请输入 input 窗口上 placeholder 的文字。");
+        var ult = await keyin("请输入 input 窗口上 placeholder 的文字。", "");
         input(res, ult);
     };
     const transmitBtn = document.createElement("button");
