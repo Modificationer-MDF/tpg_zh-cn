@@ -446,8 +446,8 @@ async function choice(string, n, names) {
     return new Promise((resolve) => {
         if (n === null || n === undefined) n = 2;
         n = Math.ceil(Number(n));
-        names[n] = {};
-        const name = names[n];
+        const array = Array.from(names);
+
         const window = document.createElement("div");
         window.className = "choice-window";
         const square = document.createElement("div");
@@ -457,18 +457,13 @@ async function choice(string, n, names) {
         const content = document.createElement("div");
         content.className = "choice-content";
 
-        if (name1 === "" || name2 === "") {
-            name1 = "确定";
-            name2 = "取消";
-        } else if (string == null || string == undefined || name1 === undefined || name2 === undefined || name1 === null || name2 === null) {
+        if (string == null || string == undefined) {
             nullcount++;
             fail("所输入内容不能为 null 或 undefined。");
             monitor();
             return 39;
         } else {
             string = string.toString();
-            name1 = name1.toString();
-            name2 = name2.toString();
         }
         let replaced1 = string.replace(/\s+/g, "");
         if (replaced1 === "") {
@@ -496,14 +491,46 @@ async function choice(string, n, names) {
         var lineHeight = parseInt(window.style.lineHeight);
         content.style.height = `${line * lineHeight}px`;
 
-        for (var i = 1; i <= n; i++) {
+        const tohex = (r, g, b) => {
+            const tohex_ = (value) => {
+                const hex = value.toString(16);
+                return hex.length === 1 ? '0' + hex : hex;
+            };
+            return `#${tohex_(r)}${tohex_(g)}${tohex_(b)}`;
+        };
+        // 将 GRB 转换为 16 进制颜色。
+
+        const color = () => {
+            const r = Math.floor(Math.random() * 128);
+            const g = Math.floor(Math.random() * 64);
+            const b = Math.floor(Math.random() * 255);
+            return tohex(r, g, b);
+        }
+        // 在紫色区域内随机生成颜色。
+
+        for (let i = 1; i <= n; i++) {
             const btn = document.createElement("button"); // 创建按钮
-            btn.innerHTML = names[i];
+            btn.id = `btn${i}`;
+            btn.innerHTML = array[i - 1];
             btn.focus();
+
+            btn.style.backgroundColor =`${color()}b0`;
+            btn.style.border = "none";
+            btn.style.padding = "14px 25px";
+            btn.style.textAlign = "center";
+            btn.style.cursor = "pointer";
+            btn.style.color = "white";
+            btn.style.position = "absolute";
+            btn.style.flex = "1";
+            btn.style.bottom = `${20 + (i - 1) * 70}px`;
+            content.style.marginBottom = `calc(80px + ${20 + (i - 1) * 60}px)`;
+            btn.style.left = "120px";
+
             btn.onclick = () => {
-                resolve(names[i]);
+                resolve(array[i - 1]);
                 rm();
             };
+    
             content.appendChild(btn); 
         }
 
@@ -848,5 +875,5 @@ async function prompt(string, holder) {
 }
 
 async function confirm(string, name1, name2) {
-    return await choice(string, name1, name2);
+    return await choice(string, 2, [name1, name2]);
 }

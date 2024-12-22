@@ -85,13 +85,13 @@ function fn1() {
     choiceBtn.className = "btn7";
     choiceBtn.onclick = async () => {
         var res = await keyin("输入你想显示在 choice 窗口上的信息。", "");
-        var n = await keyin("请输入 choice 窗口上选项的数量。");
+        var n = await keyin("请输入 choice 窗口上选项的数量。", "");
         n = Number(n);
         var array = new Array(n);
         for (var i = 0; i <= n - 1; i++) {
-            array[i] = await keyin(`请输入 choice 窗口上第 ${i + 1} 个选项。`);
+            array[i] = await keyin(`请输入 choice 窗口上第 ${i + 1} 个选项。`, "");
         }
-        choice(res, n, array);
+        choice(res, n, [array]);
     };
     const linkBtn = document.createElement("button");
     linkBtn.innerHTML = "link";
@@ -119,8 +119,8 @@ function fn1() {
     settings.innerHTML = "设置";
     settings.className = "btn24";
     settings.onclick = async () => {
-        var set = await choice("请选择以下函数使用的主题。", "Aero", "Neon");
-        if (set) {
+        var set = await choice("请选择以下函数使用的主题。", 2, ["Aero", "Neon"]);
+        if (set === "Aerp") {
             theme = "Aero";
         } else {
             theme = "Neon";
@@ -259,7 +259,7 @@ function fn2() {
     choiceBtn.innerHTML = "choice";
     choiceBtn.className = "btn7";
     choiceBtn.onclick = () => {
-        choice("How do you like The functions above?", "Excellent", "Terrible");
+        choice("How do you like The functions above?", 2, ["Excellent.", "Terrible."]);
     };
     const linkBtn = document.createElement("button");
     linkBtn.innerHTML = "link";
@@ -396,7 +396,7 @@ function fn2() {
 async function fn3() {
     if (!flag) {
         await warning("从 0.7 版本开始，如果电脑装有 360 杀毒软件，可能会提示你下载的文件可能有病毒。但是，这是误判。");
-        var a = await choice("你确定要下载吗？", "是。", "否。");
+        var a = await choice("你确定要下载吗？", 2, ["是。", "否。"]);
         if (a) {
             await success("已打开。");
             flag = true;

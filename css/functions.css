@@ -362,32 +362,6 @@
     min-width: 28ch;
 }
 
-.choice-true {
-    background-color: #7160e8b0;
-    border: none;
-    padding: 14px 25px;
-    text-align: center;
-    cursor: pointer;
-    color: white;
-    position: absolute;
-    flex: 1;
-    bottom: 20px;
-    left: 120px;
-}
-
-.choice-false {
-    background-color: #1b135ab0;
-    border: none;
-    padding: 14px 25px;
-    flex: 1;
-    text-align: center;
-    cursor: pointer;
-    color: white;
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-}
-
 @keyframes -choice {
     from {
         transform: translateX(800px);
