@@ -447,6 +447,7 @@ async function choice(string, n, names) {
         if (n === null || n === undefined) n = 2;
         n = Math.ceil(Number(n));
         const array = Array.from(names);
+        array.reverse();
 
         const window = document.createElement("div");
         window.className = "choice-window";
@@ -498,7 +499,6 @@ async function choice(string, n, names) {
             };
             return `#${tohex_(r)}${tohex_(g)}${tohex_(b)}`;
         };
-        // 将 GRB 转换为 16 进制颜色。
 
         const color = () => {
             const r = Math.floor(Math.random() * 128);
@@ -509,7 +509,7 @@ async function choice(string, n, names) {
         // 在紫色区域内随机生成颜色。
 
         for (let i = 1; i <= n; i++) {
-            const btn = document.createElement("button"); // 创建按钮
+            const btn = document.createElement("button");
             btn.id = `btn${i}`;
             btn.innerHTML = array[i - 1];
             btn.focus();
