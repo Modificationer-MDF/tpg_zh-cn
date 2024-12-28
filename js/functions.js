@@ -8,7 +8,7 @@ let urlEndings = [
     ".biz", ".info", ".name", ".pro", ".aero", ".coop",
     ".museum", ".jobs", ".travel", ".xxx", ".top", ".site",
     ".wiki", ".cc", ".tv", ".mobi", ".me", ".bid", ".club",
-    ".online", ".store", ".work", ".tech", ".bid"
+    ".online", ".store", ".work", ".tech"
 ]; // 常见的 URL 后缀。
 
 // 更新窗口位置的函数。
