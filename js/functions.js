@@ -924,3 +924,70 @@ async function keyin(string, holder) {
     });
 }
 
+//function timer(string, seconds) {
+//    if (string == null || string == undefined || seconds == null || seconds == undefined) {
+//        nullcount++;
+//        fail("所输入内容不能为 null 或 undefined。");
+//        monitor();
+//        return 39;
+//    } else {
+//        string = string.toString();
+//        seconds = Number(seconds);
+//    }
+//    let replaced = string.replace(/\s+/g, "");
+//    if (replaced === "") {
+//        fail("所输入内容不能为空字符串。");
+//        return -39;
+//    }
+//    if (nullcount > 26) {
+//        log("你已被禁止调用函数。");
+//    }
+
+//    const window = document.createElement("div");
+//    window.className = "timer-window";
+//    const square = document.createElement("div");
+//    square.className = "timer-square";
+//    const icon = document.createElement("img");
+//    icon.className = "timer-icon";
+//    const content = document.createElement("div");
+//    content.className = "timer-content";
+//    if (theme === "Neon") {
+//        window.style.backdropFilter = "blur(14px) saturate(250%)";
+//        square.style.backdropFilter = "blur(14px) saturate(250%)";
+//    }
+
+//    create(window); // 添加窗口。
+//    document.body.appendChild(window);
+//    window.appendChild(square);
+//    window.appendChild(content);
+//    square.appendChild(icon);
+
+//    icon.src = "images/Timer.png";
+//    content.innerHTML = string;
+
+//    const line = Math.ceil(string.size / 14);
+//    var lineHeight = parseInt(window.style.lineHeight);
+//    content.style.height = `${line * lineHeight}px`;
+
+//    const visible = () => {
+//        const rect = window.getBoundingClientRect();
+//        const viewport = (
+//            rect.top >= 0 &&
+//            rect.left >= 0 &&
+//            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+//            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+//        );
+//        if (viewport === false) {
+//            log(`你有 1 条未读完的 timer() 信息。`);
+//        }
+//    };
+
+//    setTimeout(() => {
+//        window.style.animation = "timer- 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1)";
+//        setTimeout(() => {
+//            document.body.removeChild(window);
+//            close(window) // 移除窗口。
+//        }, 700);
+//    }, seconds * 1000);
+//    setTimeout(visible, seconds * 1000);
+//}
