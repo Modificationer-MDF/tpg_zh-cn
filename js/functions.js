@@ -1,5 +1,5 @@
-var lognum = 0;
-var nullcount = 0;
+var lognum = 0; // log() 目前存在的数量。
+var nullcount = 0; // 连续输入 null 或 undefined 的次数。
 var windows = []; // 信息数组。
 let logwin = []; // log() 信息数组。
 let totalHeight = 0; // log() 的总高度。
@@ -9,21 +9,22 @@ let urlEndings = [
     ".museum", ".jobs", ".travel", ".xxx", ".top", ".site",
     ".wiki", ".cc", ".tv", ".mobi", ".me", ".bid", ".club",
     ".online", ".store", ".work", ".tech", ".bid"
-];
+]; // 常见的 URL 后缀。
 
-// 更新窗口位置的函数
+// 更新窗口位置的函数。
+
 function updateSelectedWindowPos() {
-    let total = 7 * window.innerHeight / 100; // 初始位置距离页面顶部的偏移（7vh）。
+    let total = 7 * window.innerHeight / 100;
     windows.forEach((window) => {
-        const wh = window.offsetHeight; // 获取当前窗口的高度。
+        const wh = window.offsetHeight;
         window.style.transition = "top 0.3s cubic-bezier(0.33, 1, 0.68, 1)";
-        // 更新每个窗口的位置，保持适当的间隔。
         window.style.top = `${total}px`;
-        total += wh + 7; // 增加窗口高度和7px间距。
+        total += wh + 7;
     });
 }
 
 // 创建窗口函数和关闭窗口函数。
+
 function create(window) {
     windows.push(window);
     updateSelectedWindowPos(); // 更新所有窗口位置。
@@ -47,6 +48,8 @@ function monitor() {
         warning("请查看控制台。");
     }
 }
+
+// log 函数。
 
 function log(string, time) {
     lognum++;
@@ -93,7 +96,7 @@ function log(string, time) {
 
 // info 函数。
 
-async function info(string) {
+function info(string) {
     if (string == null || string == undefined) {
         nullcount++;
         fail("所输入内容不能为 null 或 undefined。");
@@ -119,6 +122,9 @@ async function info(string) {
     icon.src = "images/Inf.png";
     const content = document.createElement("div");
     content.className = "info-content";
+    const bar = document.createElement("div");
+    bar.className = "info-progressbar";
+
     if (theme === "Neon") {
         window.style.backdropFilter = "blur(14px) saturate(250%)";
         square.style.backdropFilter = "blur(14px) saturate(250%)";
@@ -127,6 +133,7 @@ async function info(string) {
     document.body.appendChild(window);
     window.appendChild(square);
     window.appendChild(content);
+    window.appendChild(bar);
     square.appendChild(icon);
     create(window);
 
@@ -150,6 +157,16 @@ async function info(string) {
     const lineHeight = parseInt(window.style.lineHeight);
     content.style.height = `${line * lineHeight}px`;
 
+    const time = 3000;
+    let pro = 0; // 进度条进度。 
+    const interval = setInterval(() => {
+        pro += 100 / (time / 100);
+        bar.style.width = `${pro}%`;
+        if (time <= 0) {
+            clearInterval(interval);
+        }
+    }, 100);
+
     setTimeout(() => {
         window.style.animation = "info- 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1)";
         setTimeout(() => {
@@ -162,7 +179,7 @@ async function info(string) {
 
 // success 函数。
 
-async function success(string) {
+function success(string) {
     if (string == null || string == undefined) {
         nullcount++;
         fail("所输入内容不能为 null 或 undefined。");
@@ -188,16 +205,19 @@ async function success(string) {
     icon.src = "images/Pass.png";
     const content = document.createElement("div");
     content.className = "success-content";
+    const bar = document.createElement("div");
+    bar.className = "success-progressbar";
     if (theme === "Neon") {
         window.style.backdropFilter = "blur(14px) saturate(250%)";
         square.style.backdropFilter = "blur(14px) saturate(250%)";
     }
 
-    create(window); // 添加窗口。
     document.body.appendChild(window);
     window.appendChild(square);
     window.appendChild(content);
+    window.appendChild(bar);
     square.appendChild(icon);
+    create(window); // 添加窗口s。
 
     // icon.innerHTML = `第 ${successNum} 条成功消息`;
     content.innerHTML = string;
@@ -205,6 +225,16 @@ async function success(string) {
     const line = Math.ceil(string.size / 14);
     var lineHeight = parseInt(window.style.lineHeight);
     content.style.height = `${line * lineHeight}px`;
+
+    const time = 3000;
+    let pro = 0;
+    const interval = setInterval(() => {
+        pro += 100 / (time / 100);
+        bar.style.width = `${pro}%`;
+        if (time <= 0) {
+            clearInterval(interval);
+        }
+    }, 100);
 
     const visible = () => {
         const rect = window.getBoundingClientRect();
@@ -231,7 +261,7 @@ async function success(string) {
 
 // fail 函数。
 
-async function fail(string) {
+function fail(string) {
     if (string == null || string == undefined) {
         nullcount++;
         fail("所输入内容不能为 null 或 undefined。");
@@ -257,16 +287,19 @@ async function fail(string) {
     icon.className = "fail-icon";
     const content = document.createElement("div");
     content.className = "fail-content";
+    const bar = document.createElement("div");
+    bar.className = "fail-progressbar";
     if (theme === "Neon") {
         window.style.backdropFilter = "blur(14px) saturate(250%)";
         square.style.backdropFilter = "blur(14px) saturate(250%)";
     }
 
-    create(window); // 添加窗口。
     document.body.appendChild(window);
     window.appendChild(square);
     window.appendChild(content);
+    window.appendChild(bar);
     square.appendChild(icon);
+    create(window); // 添加窗口。
 
     icon.src = "images/Error.png";
     content.innerHTML = string;
@@ -274,6 +307,16 @@ async function fail(string) {
     const line = Math.ceil(string.size / 14);
     var lineHeight = parseInt(window.style.lineHeight);
     content.style.height = `${line * lineHeight}px`;
+
+    const time = 3000;
+    let pro = 0;
+    const interval = setInterval(() => {
+        pro += 100 / (time / 100);
+        bar.style.width = `${pro}%`;
+        if (time <= 0) {
+            clearInterval(interval);
+        }
+    }, 100);
 
     const visible = () => {
         const rect = window.getBoundingClientRect();
@@ -300,7 +343,7 @@ async function fail(string) {
 
 // warning 函数。
 
-async function warning(string) {
+function warning(string) {
     if (string == null || string == undefined) {
         nullcount++;
         fail("所输入内容不能为 null 或 undefined。");
@@ -326,16 +369,19 @@ async function warning(string) {
     icon.className = "warning-icon";
     const content = document.createElement("div");
     content.className = "warning-content";
+    const bar = document.createElement("div");
+    bar.className = "warning-progressbar";
     if (theme === "Neon") {
         window.style.backdropFilter = "blur(14px) saturate(250%)";
         square.style.backdropFilter = "blur(14px) saturate(250%)";
     }
 
-    create(window); // 添加窗口。
     document.body.appendChild(window);
     window.appendChild(square);
     window.appendChild(content);
+    window.appendChild(bar);
     square.appendChild(icon);
+    create(window); // 添加窗口。
 
     icon.src = "images/Exclamation Mark.png";
     content.innerHTML = string;
@@ -343,6 +389,16 @@ async function warning(string) {
     const line = Math.ceil(string.size / 14);
     var lineHeight = parseInt(window.style.lineHeight);
     content.style.height = `${line * lineHeight}px`;
+
+    const time = 3000;
+    let pro = 0;
+    const interval = setInterval(() => {
+        pro += 100 / (time / 100);
+        bar.style.width = `${pro}%`;
+        if (time <= 0) {
+            clearInterval(interval);
+        }
+    }, 100);
 
     const visible = () => {
         const rect = window.getBoundingClientRect();
@@ -546,7 +602,7 @@ async function choice(string, n, names) {
 
 // transmit 函数。
 
-async function transmit(string) {
+function transmit(string) {
     if (string == null || string == undefined) {
         nullcount++;
         fail("所输入内容不能为 null 或 undefined。");
@@ -615,7 +671,7 @@ async function transmit(string) {
 
 // link 函数。
 
-async function link(string, url) {
+function link(string, url) {
     if (string == null || string == undefined || url == null || url == undefined) {
         nullcount++;
         fail("所输入内容不能为 null 或 undefined。");
@@ -797,6 +853,8 @@ async function important(string) {
     });
 }
 
+// keyin 函数。
+
 async function keyin(string, holder) {
     return new Promise((resolve) => {
         if (string == null || string == undefined || holder == null || holder == undefined) {
@@ -866,14 +924,3 @@ async function keyin(string, holder) {
     });
 }
 
-async function alert(string) {
-    await important(string);
-}
-
-async function prompt(string, holder) {
-    return await keyin(string, holder);
-}
-
-async function confirm(string, name1, name2) {
-    return await choice(string, 2, [name1, name2]);
-}

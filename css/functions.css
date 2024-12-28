@@ -37,6 +37,15 @@
     min-width: 28ch;
 }
 
+.info-progressbar {
+    width: 0;
+    height: 5px;
+    background-color: #06b48499;
+    overflow: hidden;
+    transition: width 0.1s ease;
+    position: relative;
+}
+
 @keyframes -info {
     from {
         transform: translateX(800px);
@@ -96,6 +105,15 @@
     max-width: calc(14ch);
     word-break: break-word;
     min-width: 28ch;
+}
+
+.success-progressbar {
+    width: 0;
+    height: 5px;
+    background-color: #14be6b99;
+    overflow: hidden;
+    transition: width 0.1s ease;
+    position: relative;
 }
 
 @keyframes -success {
@@ -159,6 +177,15 @@
     min-width: 28ch;
 }
 
+.fail-progressbar {
+    width: 0;
+    height: 5px;
+    background-color: #e0111199;
+    overflow: hidden;
+    transition: width 0.1s ease;
+    position: relative;
+}
+
 @keyframes -fail {
     from {
         transform: translateX(800px);
@@ -218,6 +245,15 @@
     max-width: calc(14ch);
     word-break: break-word;
     min-width: 28ch;
+}
+
+.warning-progressbar {
+    width: 0;
+    height: 5px;
+    background-color: #ffad0099;
+    overflow: hidden;
+    transition: width 0.1s ease;
+    position: relative;
 }
 
 @keyframes -warning {
