@@ -40,91 +40,89 @@ function fn1() {
     infoBtn.innerHTML = "info";
     infoBtn.className = "btn1";
     infoBtn.onclick = async () => {
-        var res = await keyin("输入你想显示在 info 窗口上的信息。", "");
-        // log(res);
-        info(res);
+        let res = await input("输入你想显示在 info 窗口上的信息。", "在此输入。");
+        let time = await input("输入你想显示 info 窗口的持续时间（单位：毫秒）。", "在此输入。");
+        let sty = await input("输入你想使用的主题。", "在此输入。");
+        info(res, Number(time), sty);
     };
     const successBtn = document.createElement("button");
     successBtn.innerHTML = "success";
     successBtn.className = "btn2";
     successBtn.onclick = async () => {
-        var res = await keyin("输入你想显示在 success 窗口上的信息。", "");
-        success(res);
+        let res = await input("输入你想显示在 success 窗口上的信息。", "在此输入。");
+        let time = await input("输入你想显示 success 窗口的持续时间（单位：毫秒）。", "在此输入。");
+        let sty = await input("输入你想使用的主题。", "在此输入。");
+        success(res, Number(time), sty);
     };
     const failBtn = document.createElement("button");
     failBtn.innerHTML = "fail";
     failBtn.className = "btn3";
     failBtn.onclick = async () => {
-        var res = await keyin("输入你想显示在 fail 窗口上的信息。", "");
-        fail(res);
+        let res = await input("输入你想显示在 fail 窗口上的信息。", "在此输入。");
+        let time = await input("输入你想显示 fail 窗口的持续时间（单位：毫秒）。", "在此输入。");
+        let sty = await input("输入你想使用的主题。", "在此输入。");
+        fail(res, Number(time), sty);
     };
     const warningBtn = document.createElement("button");
     warningBtn.innerHTML = "warning";
     warningBtn.className = "btn4";
     warningBtn.onclick = async () => {
-        var res = await keyin("输入你想显示在 warning 窗口上的信息。", "");
-        warning(res);
+        let res = await input("输入你想显示在 warning 窗口上的信息。", "在此输入。");
+        let time = await input("输入你想显示 warning 窗口的持续时间（单位：毫秒）。", "在此输入。");
+        let sty = await input("输入你想使用的主题。", "在此输入。");
+        warning(res, Number(time), sty);
     };
     const inputBtn = document.createElement("button");
     inputBtn.innerHTML = "input";
     inputBtn.className = "btn5";
     inputBtn.onclick = async () => {
-        var res = await keyin("输入你想显示在 input 窗口上的信息。", "");
-        var ult = await keyin("请输入 input 窗口上 placeholder 的文字。", "");
-        input(res, ult);
+        await input("这就是 input 窗口。", "可以在这里输入一些文字。");
     };
     const transmitBtn = document.createElement("button");
     transmitBtn.innerHTML = "transmit";
     transmitBtn.className = "btn6";
     transmitBtn.onclick = async () => {
-        var res = await keyin("输入你想显示在 transmit 窗口上的信息。", "");
-        transmit(res);
+        let res = await input("输入你想显示在 transmit 窗口上的信息。", "在此输入。");
+        let sty = await input("输入你想使用的主题。", "在此输入。");
+        transmit(res, sty);
     };
     const choiceBtn = document.createElement("button");
     choiceBtn.innerHTML = "choice";
     choiceBtn.className = "btn7";
     choiceBtn.onclick = async () => {
-        var res = await keyin("输入你想显示在 choice 窗口上的信息。", "");
-        var n = await keyin("请输入 choice 窗口上选项的数量。", "");
+        let res = await input("输入你想显示在 choice 窗口上的信息。", "在此输入。");
+        let n = await input("请输入 choice 窗口上选项的数量。", "在此输入。");
         n = Number(n);
-        var array = new Array(n);
-        for (var i = 0; i <= n - 1; i++) {
-            array[i] = await keyin(`请输入 choice 窗口上第 ${i + 1} 个选项。`, "");
+        let array = new Array(n);
+        for (let i = 0; i <= n - 1; i++) {
+            array[i] = await input(`请输入 choice 窗口上第 ${i + 1} 个选项。`, "在此输入。");
         }
-        choice(res, n, [array]);
+        let sty = await input("输入你想使用的主题。", "在此输入。");
+        choice(res, n, array, sty);
     };
     const linkBtn = document.createElement("button");
     linkBtn.innerHTML = "link";
     linkBtn.className = "btn8";
     linkBtn.onclick = async () => {
-        var res = await keyin("输入你想显示在 link 窗口上的信息。", "");
-        var url = await keyin("请输入你要链接的地址。");
-        link(res, url);
+        let res = await input("输入你想显示在 link 窗口上的信息。", "在此输入。");
+        let url = await input("请输入你要链接的地址。");
+        let sty = await input("输入你想使用的主题。", "在此输入。");
+        link(res, url, sty);
     };
     const commandBtn = document.createElement("button");
     commandBtn.innerHTML = "command";
     commandBtn.className = "btn9";
     commandBtn.onclick = async () => {
-        var res = await keyin("输入你想显示在 command 窗口上的信息。", "");
-        command(res);
+        let res = await input("输入你想显示在 command 窗口上的信息。", "在此输入。");
+        let sty = await input("输入你想使用的主题。", "在此输入。");
+        command(res, sty);
     };
     const importantBtn = document.createElement("button");
     importantBtn.innerHTML = "important";
     importantBtn.className = "btn22";
     importantBtn.onclick = async () => {
-        var res = await keyin("输入你想显示在 important 窗口上的信息。", "");
+        let res = await input("输入你想显示在 important 窗口上的信息。", "在此输入。");
         important(res);
-    };
-    const settings = document.createElement("button");
-    settings.innerHTML = "设置";
-    settings.className = "btn24";
-    settings.onclick = async () => {
-        var set = await choice("请选择以下函数使用的主题。", 2, ["Aero", "Neon"]);
-        if (set === "Aerp") {
-            theme = "Aero";
-        } else {
-            theme = "Neon";
-        }
     };
     const logBtn = document.createElement("button");
     logBtn.innerHTML = "日志";
@@ -156,11 +154,10 @@ function fn1() {
         await important(`
         最后，感谢你使用 The Play Games！
         <br /> （按 [确定] 继续。）`);
-        await info(`你可以在 [函数展示 -> 设置] 中应用更现代化的 Neon 主题！当前主题：${theme}。`);
+        await info(`你可以在 [函数展示 -> 设置] 中应用更现代化的 Neon 主题！当前主题：${theme}。`, 4000);
     };
 
     const all = [
-        settings,
         logBtn,
         infoBtn,
         successBtn,
@@ -223,25 +220,25 @@ function fn2() {
     infoBtn.innerHTML = "info";
     infoBtn.className = "btn1";
     infoBtn.onclick = () => {
-        info("Hello, The Play Games!");
+        info("Hello, The Play Games!", 3000);
     };
     const successBtn = document.createElement("button");
     successBtn.innerHTML = "success";
     successBtn.className = "btn2";
     successBtn.onclick = () => {
-        success("Very nice to meet you!");
+        success("Very nice to meet you!", 3000);
     };
     const failBtn = document.createElement("button");
     failBtn.innerHTML = "fail";
     failBtn.className = "btn3";
     failBtn.onclick = () => {
-        fail("Sorry, sometimes this may not be able to work.");
+        fail("Sorry, sometimes this may not be able to work.", 3000);
     };
     const warningBtn = document.createElement("button");
     warningBtn.innerHTML = "warning";
     warningBtn.className = "btn4";
     warningBtn.onclick = () => {
-        warning("But you can still continue to use it.");
+        warning("But you can still continue to use it.", 3000);
     };
     const inputBtn = document.createElement("button");
     inputBtn.innerHTML = "input";
@@ -297,24 +294,58 @@ function fn2() {
     undefinedBtn.onclick = () => {
         info(undefined);
     };
-    const numBtn = document.createElement("button");
-    numBtn.innerHTML = "重置 nullcount 的值";
-    numBtn.className = "btn12";
-    numBtn.onclick = () => {
-        log(`Nullcount: ${nullcount} -> 0。`);
-        nullcount = 0;
+    const settings = document.createElement("button");
+    settings.innerHTML = "设置";
+    settings.className = "btn24";
+    settings.onclick = async () => {
+        let arr = await choice("你要修改哪些设置？", 2, ["重新设置主题。", "修改特殊变量的值。"]);
+        if (arr === "重新设置主题。") {
+            let set = await choice("请选择以下函数使用的主题。", 2, ["Aero", "Neon"]);
+            if (set === "Aero") {
+                if (theme === "Aero") {
+                    warning("你已经在使用 Aero 主题。", 3000);
+                    return 0;
+                }
+                theme = "Aero";
+                info("已切换到 Aero 主题。", 2000);
+            } else {
+                if (theme === "Neon") {
+                    warning("你已经在使用 Neon 主题。", 3000);
+                    return 0;
+                }
+                theme = "Neon";
+                info("已切换到 Neon 主题。", 2000);
+            }
+        } else if (arr === "修改特殊变量的值。") {
+            let set = await choice("请选择以下特殊变量。", 2, ["nullcount", "lognum"]);
+            if (set === "nullcount") {
+                let count = await input("请输入 nullcount 的值。", "在此输入。");
+                try {
+                    count = Number(count);
+                } catch (e) {
+                    fail(`请输入一个 number 类型的数字。而非 ${typeof count} 类型。`, 3000);
+                    return 0;
+                }
+                nullcount = count;
+                info(`nullcount 已被设置为 ${count}。`, 2000);
+            } else if (set === "lognum") {
+                let count = await input("请输入 lognum 的值。", "在此输入。");
+                try {
+                    count = Number(count);
+                } catch (e) {
+                    fail(`请输入一个数字。而非 ${typeof count} 类型。`, 3000);
+                    return 0;
+                }
+                lognum = count;
+                info(`lognum 已被设置为 ${count}。`, 2000);
+            }
+        }
     };
     const imp = document.createElement("button");
     imp.textContent = "important";
     imp.className = "btn22";
     imp.onclick = () => {
         important("This is an important message! <br /> (Background covered with acrylic material.)");
-    };
-    const key = document.createElement("button");
-    key.textContent = "keyin";
-    key.className = "btn23";
-    key.onclick = () => {
-        keyin("Keyin() is a function that can be used to input keys like input().", "Enter here:");
     };
 
     const all = [
@@ -328,12 +359,11 @@ function fn2() {
         linkBtn,
         commandBtn,
         imp,
-        key,
         Fn_1,
         Fn_2,
+        settings,
         nullBtn,
         undefinedBtn,
-        numBtn,
     ];
 
     div1.style.display = "none";
@@ -349,9 +379,9 @@ function fn2() {
         div.appendChild(div2);
         div.appendChild(div3);
         all.forEach((btn, index) => {
-            if (index >= 0 && index < 11) {
+            if (index >= 0 && index < 10) {
                 div1.appendChild(btn);
-            } else if (index >= 11 && index < 13) {
+            } else if (index >= 10 && index < 12) {
                 div2.appendChild(btn);
             } else {
                 div3.appendChild(btn);
@@ -395,13 +425,13 @@ function fn2() {
 
 async function fn3() {
     if (!flag) {
-        await warning("从 0.7 版本开始，如果电脑装有 360 杀毒软件，可能会提示你下载的文件可能有病毒。但是，这是误判。");
-        var a = await choice("你确定要下载吗？", 2, ["是。", "否。"]);
+        await warning("从 0.7 版本开始，如果电脑装有 360 杀毒软件，可能会提示你下载的文件可能有病毒。但是，这是误判。", 5000);
+        let a = await choice("你确定要下载吗？", 2, ["是。", "否。"]);
         if (a) {
-            await success("已打开。");
+            await success("已打开。", 2000);
             flag = true;
         } else {
-            await fail("你终止了下载操作。");
+            await fail("你终止了下载操作。", 3000);
             return -39;
         }
     }
@@ -451,7 +481,7 @@ async function fn3() {
         a2,
         a3
     ];
-    all.forEach((btn, index) => {
+    all.forEach(btn => {
         btn.style.display = "none";
     });
     if (div.children.length <= 1) {

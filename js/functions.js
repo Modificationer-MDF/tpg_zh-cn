@@ -96,7 +96,7 @@ function log(string, time) {
 
 // info 函数。
 
-function info(string) {
+function info(string, ms, style) {
     if (string == null || string == undefined) {
         nullcount++;
         fail("所输入内容不能为 null 或 undefined。");
@@ -109,7 +109,8 @@ function info(string) {
     if (replaced === "") {
         fail("所输入内容不能为空字符串。");
         return -39;
-    }
+    } else if (style === undefined || style === null) style = theme;
+    else if (ms === undefined || ms === null || ms === NaN) { fail("请指定正确的显示时间。", 3000); return 0; }
     if (nullcount > 26) {
         log("你已被禁止调用函数。");
     }
@@ -125,7 +126,7 @@ function info(string) {
     const bar = document.createElement("div");
     bar.className = "info-progressbar";
 
-    if (theme === "Neon") {
+    if (style === "Neon") {
         window.style.backdropFilter = "blur(14px) saturate(250%)";
         square.style.backdropFilter = "blur(14px) saturate(250%)";
     }
@@ -157,15 +158,14 @@ function info(string) {
     const lineHeight = parseInt(window.style.lineHeight);
     content.style.height = `${line * lineHeight}px`;
 
-    const time = 3000;
     let pro = 0; // 进度条进度。 
     const interval = setInterval(() => {
-        pro += 100 / (time / 100);
+        pro += 16 / (ms / 100);
         bar.style.width = `${pro}%`;
-        if (time <= 0) {
+        if (pro >= 100) {
             clearInterval(interval);
         }
-    }, 100);
+    }, 16);
 
     setTimeout(() => {
         window.style.animation = "info- 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1)";
@@ -173,13 +173,13 @@ function info(string) {
             document.body.removeChild(window);
             close(window);
         }, 700);
-    }, 3000);
-    setTimeout(visible, 3000);
+    }, ms);
+    setTimeout(visible, ms);
 }
 
 // success 函数。
 
-function success(string) {
+function success(string, ms, style) {
     if (string == null || string == undefined) {
         nullcount++;
         fail("所输入内容不能为 null 或 undefined。");
@@ -192,7 +192,8 @@ function success(string) {
     if (replaced === "") {
         fail("所输入内容不能为空字符串。");
         return -39;
-    }
+    } else if (style === undefined || style === null) style = theme;
+    else if (ms === undefined || ms === null || ms === NaN) { fail("请指定正确的显示时间。", 3000); return 0; }
     if (nullcount > 26) {
         log("你已被禁止调用函数。");
     }
@@ -226,15 +227,14 @@ function success(string) {
     var lineHeight = parseInt(window.style.lineHeight);
     content.style.height = `${line * lineHeight}px`;
 
-    const time = 3000;
     let pro = 0;
     const interval = setInterval(() => {
-        pro += 100 / (time / 100);
+        pro += 16 / (ms / 100);
         bar.style.width = `${pro}%`;
-        if (time <= 0) {
+        if (pro >= 100) {
             clearInterval(interval);
         }
-    }, 100);
+    }, 16);
 
     const visible = () => {
         const rect = window.getBoundingClientRect();
@@ -255,13 +255,13 @@ function success(string) {
             document.body.removeChild(window);
             close(window) // 移除窗口。
         }, 700);
-    }, 3000);
-    setTimeout(visible, 3000);
+    }, ms);
+    setTimeout(visible, ms);
 }
 
 // fail 函数。
 
-function fail(string) {
+function fail(string, ms, style) {
     if (string == null || string == undefined) {
         nullcount++;
         fail("所输入内容不能为 null 或 undefined。");
@@ -274,7 +274,8 @@ function fail(string) {
     if (replaced === "") {
         fail("所输入内容不能为空字符串。");
         return -39;
-    }
+    } else if (style === undefined || style === null) style = theme;
+    else if (ms === undefined || ms === null || ms === NaN) { fail("请指定正确的显示时间。", 3000); return 0; }
     if (nullcount > 26) {
         log("你已被禁止调用函数。");
     }
@@ -308,15 +309,14 @@ function fail(string) {
     var lineHeight = parseInt(window.style.lineHeight);
     content.style.height = `${line * lineHeight}px`;
 
-    const time = 3000;
     let pro = 0;
     const interval = setInterval(() => {
-        pro += 100 / (time / 100);
+        pro += 16 / (ms / 100);
         bar.style.width = `${pro}%`;
-        if (time <= 0) {
+        if (pro >= 100) {
             clearInterval(interval);
         }
-    }, 100);
+    }, 16);
 
     const visible = () => {
         const rect = window.getBoundingClientRect();
@@ -343,7 +343,7 @@ function fail(string) {
 
 // warning 函数。
 
-function warning(string) {
+function warning(string, ms, style) {
     if (string == null || string == undefined) {
         nullcount++;
         fail("所输入内容不能为 null 或 undefined。");
@@ -356,7 +356,8 @@ function warning(string) {
     if (replaced === "") {
         fail("所输入内容不能为空字符串。");
         return -39;
-    }
+    } else if (style === undefined || style === null) style = theme;
+    else if (ms === undefined || ms === null || ms === NaN) { fail("请指定正确的显示时间。", 3000); return 0; }
     if (nullcount > 26) {
         log("你已被禁止调用函数。");
     }
@@ -390,15 +391,14 @@ function warning(string) {
     var lineHeight = parseInt(window.style.lineHeight);
     content.style.height = `${line * lineHeight}px`;
 
-    const time = 3000;
     let pro = 0;
     const interval = setInterval(() => {
-        pro += 100 / (time / 100);
+        pro += 16 / (ms / 100);
         bar.style.width = `${pro}%`;
-        if (time <= 0) {
+        if (pro >= 100) {
             clearInterval(interval);
         }
-    }, 100);
+    }, 16);
 
     const visible = () => {
         const rect = window.getBoundingClientRect();
@@ -425,7 +425,7 @@ function warning(string) {
 
 // input 函数。
 
-async function input(string, holder) {
+async function input(string, holder, style) {
     return new Promise((resolve) => {
         if (string === null || string === undefined || holder === undefined || holder === null) {
             nullcount++;
@@ -441,7 +441,7 @@ async function input(string, holder) {
         if (replaced1 === "" || replaced2 === "") {
             fail("所输入内容不能为空字符串。");
             return -39;
-        }
+        } else if (style === undefined || style === null) style = theme;
         if (nullcount > 26) {
             log("你已被禁止调用函数。");
         }
@@ -498,7 +498,7 @@ async function input(string, holder) {
 
 // choice 函数。
 
-async function choice(string, n, names) {
+async function choice(string, n, names, style) {
     return new Promise((resolve) => {
         if (n === null || n === undefined) n = 2;
         n = Math.ceil(Number(n));
@@ -526,7 +526,7 @@ async function choice(string, n, names) {
         if (replaced1 === "") {
             fail("所输入内容不能为空字符串。");
             return -39;
-        }
+        } else if (style === undefined || style === null) style = theme;
         if (nullcount > 26) {
             log("你已被禁止调用函数。");
         }
@@ -562,10 +562,10 @@ async function choice(string, n, names) {
             const b = Math.floor(Math.random() * 255);
             return tohex(r, g, b);
         }
-        // 在紫色区域内随机生成颜色。
 
         for (let i = 1; i <= n; i++) {
             const btn = document.createElement("button");
+            array[i - 1] = String(array[i - 1]);
             btn.id = `btn${i}`;
             btn.innerHTML = array[i - 1];
             btn.focus();
@@ -579,7 +579,7 @@ async function choice(string, n, names) {
             btn.style.position = "absolute";
             btn.style.flex = "1";
             btn.style.bottom = `${20 + (i - 1) * 70}px`;
-            content.style.marginBottom = `calc(80px + ${20 + (i - 1) * 60}px)`;
+            content.style.marginBottom = `calc(${20 + i * 70}px)`;
             btn.style.left = "120px";
 
             btn.onclick = () => {
@@ -602,7 +602,7 @@ async function choice(string, n, names) {
 
 // transmit 函数。
 
-function transmit(string) {
+async function transmit(string, ms) {
     if (string == null || string == undefined) {
         nullcount++;
         fail("所输入内容不能为 null 或 undefined。");
@@ -615,7 +615,7 @@ function transmit(string) {
     if (replaced === "") {
         fail("所输入内容不能为空字符串。");
         return -39;
-    }
+    } else if (style === undefined || style === null) style = theme;
     if (nullcount > 26) {
         log("你已被禁止调用函数。");
     }
@@ -671,7 +671,7 @@ function transmit(string) {
 
 // link 函数。
 
-function link(string, url) {
+async function link(string, url, style) {
     if (string == null || string == undefined || url == null || url == undefined) {
         nullcount++;
         fail("所输入内容不能为 null 或 undefined。");
@@ -690,7 +690,7 @@ function link(string, url) {
     } else if (replaced1 === "" || replaced2 === "") {
         fail("所输入内容不能为空字符串。");
         return -39;
-    }
+    } else if (style === undefined || style === null) style = theme;
     if (nullcount > 26) {
         log("你已被禁止调用函数。");
     }
@@ -739,7 +739,7 @@ function link(string, url) {
 
 // command 函数。
 
-async function command(string) {
+async function command(string, style) {
     if (string == null || string == undefined) {
         nullcount++;
         fail("所输入内容不能为 null 或 undefined。");
@@ -752,7 +752,7 @@ async function command(string) {
     if (replaced === "") {
         fail("所输入内容不能为空字符串。");
         return -39;
-    }
+    } else if (style === undefined || style === null) style = theme;
     if (nullcount > 26) {
         log("你已被禁止调用函数。");
     }
@@ -853,141 +853,71 @@ async function important(string) {
     });
 }
 
-// keyin 函数。
 
-async function keyin(string, holder) {
-    return new Promise((resolve) => {
-        if (string == null || string == undefined || holder == null || holder == undefined) {
-            nullcount++;
-            fail("所输入内容不能为 null 或 undefined。");
-            monitor();
-            return 39;
-        } if (nullcount > 26) {
-            log("你已被禁止调用函数。");
-            return "你已被禁止调用函数。";
+function timer(string, seconds) {
+    if (string == null || string == undefined || seconds == null || seconds == undefined) {
+        nullcount++;
+        fail("所输入内容不能为 null 或 undefined。");
+        monitor();
+        return 39;
+    } else {
+        string = string.toString();
+        seconds = Number(seconds);
+    }
+    let replaced = string.replace(/\s+/g, "");
+    if (replaced === "") {
+        fail("所输入内容不能为空字符串。");
+        return -39;
+    }
+    if (nullcount > 26) {
+        log("你已被禁止调用函数。");
+    }
+
+    const window = document.createElement("div");
+    window.className = "timer-window";
+    const square = document.createElement("div");
+    square.className = "timer-square";
+    const icon = document.createElement("img");
+    icon.className = "timer-icon";
+    const content = document.createElement("div");
+    content.className = "timer-content";
+    if (theme === "Neon") {
+        window.style.backdropFilter = "blur(14px) saturate(250%)";
+        square.style.backdropFilter = "blur(14px) saturate(250%)";
+    }
+
+    create(window); // 添加窗口。
+    document.body.appendChild(window);
+    window.appendChild(square);
+    window.appendChild(content);
+    square.appendChild(icon);
+
+    icon.src = "images/Timer.png";
+    content.innerHTML = string;
+
+    const line = Math.ceil(string.size / 14);
+    var lineHeight = parseInt(window.style.lineHeight);
+    content.style.height = `${line * lineHeight}px`;
+
+    const visible = () => {
+        const rect = window.getBoundingClientRect();
+        const viewport = (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+        if (viewport === false) {
+            log(`你有 1 条未读完的 timer() 信息。`);
         }
-        if (holder === "") {
-            holder = "在此输入……";
-        }
-        const window = document.createElement("div");
-        let clicked = false;
-        window.className = "keyin-window";
-        window.style.display = "block";
-        window.style.backgroundColor = "#ffffff9a";
-        document.body.appendChild(window);
-        window.style.animation = "-keyin forwards 0.7s cubic-bezier(0.33, 1, 0.68, 1)";
-        const txt = document.createElement("div");
-        txt.className = "windows-text";
-        txt.innerHTML = string;
-        txt.style.color = "#000000";
-        window.appendChild(txt);
-        const inp = document.createElement("input");
-        inp.type = "text";
-        inp.focus();
-        inp.placeholder = holder;
-        inp.style.fontFamily = "basic";
-        inp.style.display = "block";
-        inp.style.width = "500px";
-        inp.style.height = "100px";
-        inp.style.marginBottom = "10px";
-        inp.style.position = "fixed";
-        inp.style.top = "50%";
-        inp.style.backgroundColor = "#ffffff9a";
-        inp.style.backgroundFilter = "blur(14px) saturate(250%)";
-        inp.style.color = "#000000";
-        inp.style.left = "100%";
-        window.appendChild(inp);
-        const btn = document.createElement("button");
-        btn.className = "important-confirm";
-        btn.textContent = "确定";
-        window.appendChild(btn);
-        btn.onclick = () => {
-            const value = inp.value;
-            window.style.animation = "keyin- forwards 0.7s cubic-bezier(0.33, 1, 0.68, 1)";
-            if (clicked) {
-                warning("请勿多次点击。");
-            }
-            clicked = true;
-            const ani_end = () => {
-                window.removeChild(txt);
-                window.removeChild(inp);
-                window.removeChild(btn);
-                window.style.display = "none";
-                window.removeEventListener("animationend", ani_end);
-                resolve(value);
-            };
-            window.addEventListener("animationend", ani_end);
-            setTimeout(() => {
-                document.body.removeChild(window);
-            }, 700);
-        };
-    });
+    };
+
+    setTimeout(() => {
+        window.style.animation = "timer- 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1)";
+        setTimeout(() => {
+            document.body.removeChild(window);
+            close(window) // 移除窗口。
+        }, 700);
+    }, seconds * 1000);
+    setTimeout(visible, seconds * 1000);
 }
-
-//function timer(string, seconds) {
-//    if (string == null || string == undefined || seconds == null || seconds == undefined) {
-//        nullcount++;
-//        fail("所输入内容不能为 null 或 undefined。");
-//        monitor();
-//        return 39;
-//    } else {
-//        string = string.toString();
-//        seconds = Number(seconds);
-//    }
-//    let replaced = string.replace(/\s+/g, "");
-//    if (replaced === "") {
-//        fail("所输入内容不能为空字符串。");
-//        return -39;
-//    }
-//    if (nullcount > 26) {
-//        log("你已被禁止调用函数。");
-//    }
-
-//    const window = document.createElement("div");
-//    window.className = "timer-window";
-//    const square = document.createElement("div");
-//    square.className = "timer-square";
-//    const icon = document.createElement("img");
-//    icon.className = "timer-icon";
-//    const content = document.createElement("div");
-//    content.className = "timer-content";
-//    if (theme === "Neon") {
-//        window.style.backdropFilter = "blur(14px) saturate(250%)";
-//        square.style.backdropFilter = "blur(14px) saturate(250%)";
-//    }
-
-//    create(window); // 添加窗口。
-//    document.body.appendChild(window);
-//    window.appendChild(square);
-//    window.appendChild(content);
-//    square.appendChild(icon);
-
-//    icon.src = "images/Timer.png";
-//    content.innerHTML = string;
-
-//    const line = Math.ceil(string.size / 14);
-//    var lineHeight = parseInt(window.style.lineHeight);
-//    content.style.height = `${line * lineHeight}px`;
-
-//    const visible = () => {
-//        const rect = window.getBoundingClientRect();
-//        const viewport = (
-//            rect.top >= 0 &&
-//            rect.left >= 0 &&
-//            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-//            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-//        );
-//        if (viewport === false) {
-//            log(`你有 1 条未读完的 timer() 信息。`);
-//        }
-//    };
-
-//    setTimeout(() => {
-//        window.style.animation = "timer- 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1)";
-//        setTimeout(() => {
-//            document.body.removeChild(window);
-//            close(window) // 移除窗口。
-//        }, 700);
-//    }, seconds * 1000);
-//    setTimeout(visible, seconds * 1000);
-//}

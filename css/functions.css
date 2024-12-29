@@ -42,7 +42,7 @@
     height: 5px;
     background-color: #06b48499;
     overflow: hidden;
-    transition: width 0.1s ease;
+    transition: width 16ms ease;
     position: relative;
 }
 
@@ -112,7 +112,7 @@
     height: 5px;
     background-color: #14be6b99;
     overflow: hidden;
-    transition: width 0.1s ease;
+    transition: width 16ms ease;
     position: relative;
 }
 
@@ -182,7 +182,7 @@
     height: 5px;
     background-color: #e0111199;
     overflow: hidden;
-    transition: width 0.1s ease;
+    transition: width 16ms ease;
     position: relative;
 }
 
@@ -252,7 +252,7 @@
     height: 5px;
     background-color: #ffad0099;
     overflow: hidden;
-    transition: width 0.1s ease;
+    transition: width 16ms ease;
     position: relative;
 }
 
@@ -680,55 +680,6 @@
     color: white;
     border: none;
     cursor: pointer;
-}
-
-.windows-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 998;
-    display: none;
-}
-
-/* keyin() 函数。（优化后） */
-.keyin-window {
-    width: 25vw;
-    height: 50vh;
-    top: 10px;
-    transform-origin: left left;
-    background-color: #0000009a;
-    display: none;
-    position: fixed;
-    transition: transform 0.7s cubic-bezier(0.33, 1, 0.68, 1);
-    z-index: 999;
-}
-
-@keyframes -keyin {
-    from {
-        opacity: 0;
-        backdrop-filter: blur(0px) saturate(100%);
-        transform: translate(100%, 50%);
-    }
-    to {
-        opacity: 1;
-        backdrop-filter: blur(14px) saturate(250%);
-        transform: translate(50%, 0%);
-    }
-}
-
-@keyframes keyin- {
-    from {
-        opacity: 1;
-        backdrop-filter: blur(14px) saturate(250%);
-        transform: translate(50%, 0%);
-    }
-    to {
-        opacity: 0;
-        backdrop-filter: blur(0px) saturate(100%);
-        transform: translate(-50%, 100%);
-    }
 }
 
 /* log 函数。 */
