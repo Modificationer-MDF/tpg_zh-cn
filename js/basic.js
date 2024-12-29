@@ -453,6 +453,9 @@ async function fn3() {
     a1.onmouseover = () => {
         log("2024 年 5 月 1 日发布。");
     };
+    a1.onclick = async () => {
+        await transmit("下载 Version_Collecting_1.zip。");
+    };
     const btn2 = document.createElement("button");
     btn2.className = "btn12";
     btn2.type = "button";

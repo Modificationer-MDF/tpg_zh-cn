@@ -459,6 +459,15 @@
     min-width: 28ch;
 }
 
+.transmit-progressbar {
+    width: 0;
+    height: 5px;
+    background-color: #ff39ac99;
+    overflow: hidden;
+    transition: width 16ms ease;
+    position: relative;
+}
+
 @keyframes -transmit {
     from {
         transform: translateX(800px);
