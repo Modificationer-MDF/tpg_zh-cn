@@ -604,6 +604,23 @@
     min-width: 28ch;
 }
 
+.command-box {
+    z-index: 999;
+    font-size: 25px;
+    color: white;
+    flex-grow: 1;
+    word-break: break-word;
+    background-color: #22222299;
+    font-family: "basic";
+    border: none;
+    border-radius: 0px;
+}
+
+.command-box::placeholder {
+    color: #ffffff99;
+    text-align: center;
+}
+
 @keyframes -command {
     from {
         transform: translateY(-600px);

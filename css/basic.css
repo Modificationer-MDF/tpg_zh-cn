@@ -530,3 +530,25 @@ button {
     font-size: 30px;
     border: none;
 }
+
+.btn26 {
+    opacity: 1;
+    background-color: #ffffff99;
+    padding: 14px 25px;
+    margin-bottom: 15px;
+    color: black;
+    border-radius: 5px;
+    font-size: 30px;
+    border: none;
+}
+
+.btn27 {
+    opacity: 1;
+    background-color: #aaaaaa99;
+    padding: 14px 25px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 30px;
+    border: none;
+    color: black;
+}
