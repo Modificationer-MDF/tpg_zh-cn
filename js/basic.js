@@ -41,7 +41,7 @@ function fn1() {
     infoBtn.className = `btn1`;
     infoBtn.onclick = async () => {
         let res = await input(`输入你想显示在 info 窗口上的信息。`, `在此输入。`);
-        let time = await input(`输入你想显示 info 窗口的持续时间（单位：毫秒）。`, `在此输入。`);
+        let time = await input(`输入你想显示 info 窗口的持续时间。（单位：毫秒。输入的值必须大于等于 700。）`, `在此输入。`);
         let sty = await input(`输入你想使用的主题。`, `在此输入。`);
         info(res, Number(time), sty);
     };
@@ -50,7 +50,7 @@ function fn1() {
     successBtn.className = `btn2`;
     successBtn.onclick = async () => {
         let res = await input(`输入你想显示在 success 窗口上的信息。`, `在此输入。`);
-        let time = await input(`输入你想显示 success 窗口的持续时间（单位：毫秒）。`, `在此输入。`);
+        let time = await input(`输入你想显示 success 窗口的持续时间。（单位：毫秒。输入的值必须大于等于 700。）`, `在此输入。`);
         let sty = await input(`输入你想使用的主题。`, `在此输入。`);
         success(res, Number(time), sty);
     };
@@ -59,7 +59,7 @@ function fn1() {
     failBtn.className = `btn3`;
     failBtn.onclick = async () => {
         let res = await input(`输入你想显示在 fail 窗口上的信息。`, `在此输入。`);
-        let time = await input(`输入你想显示 fail 窗口的持续时间（单位：毫秒）。`, `在此输入。`);
+        let time = await input(`输入你想显示 fail 窗口的持续时间。（单位：毫秒。输入的值必须大于等于 700。）`, `在此输入。`);
         let sty = await input(`输入你想使用的主题。`, `在此输入。`);
         fail(res, Number(time), sty);
     };
@@ -68,7 +68,7 @@ function fn1() {
     warningBtn.className = `btn4`;
     warningBtn.onclick = async () => {
         let res = await input(`输入你想显示在 warning 窗口上的信息。`, `在此输入。`);
-        let time = await input(`输入你想显示 warning 窗口的持续时间（单位：毫秒）。`, `在此输入。`);
+        let time = await input(`输入你想显示 warning 窗口的持续时间。（单位：毫秒。输入的值必须大于等于 700。）`, `在此输入。`);
         let sty = await input(`输入你想使用的主题。`, `在此输入。`);
         warning(res, Number(time), sty);
     };
@@ -107,7 +107,7 @@ function fn1() {
         let res = await input(`输入你想显示在 link 窗口上的信息。`, `在此输入。`);
         let url = await input(`请输入你要链接的地址。`);
         let sty = await input(`输入你想使用的主题。`, `在此输入。`);
-        link(res, "website", url, sty);
+        link(res, url, sty);
     };
     const commandBtn = document.createElement(`button`);
     commandBtn.innerHTML = `command`;
@@ -117,12 +117,12 @@ function fn1() {
         let sty = await input(`输入你想使用的主题。`, `在此输入。`);
         command(res, sty);
     };
-    const importantBtn = document.createElement(`button`);
-    importantBtn.innerHTML = `important`;
-    importantBtn.className = `btn22`;
-    importantBtn.onclick = async () => {
-        let res = await input(`输入你想显示在 important 窗口上的信息。`, `在此输入。`);
-        important(res);
+    const readBtn = document.createElement(`button`);
+    readBtn.innerHTML = `read`;
+    readBtn.className = `btn22`;
+    readBtn.onclick = async () => {
+        let res = await input(`输入你想显示在 read 窗口上的信息。`, `在此输入。`);
+        read(res);
     };
     const logBtn = document.createElement(`button`);
     logBtn.innerHTML = `日志`;
@@ -133,25 +133,25 @@ function fn1() {
         const month = String(date.getMonth() + 1).padStart(2, `0`);
         const year = date.getFullYear();
         date = `${year} 年 ${month} 月 ${day} 日`;
-        await important(`
+        await read(`
         我在这里写一下我开发该网页的日志吧。
         <br /> （按 [确定] 继续。）`);
-        await important(`
+        await read(`
         创建日期：2024 年（几月我忘了）；
         <br /> 版本号：0.9 。
         <br /> 你正在查看的是 ${date} 的版本。
         <br /> （按 [确定] 继续。）`);
-        await important(`
+        await read(`
         在开发过程中我遇到了很多困难，开发速度也非常缓慢。
         <br /> 一周更新 1 次，只有周五（也许）、周六、周日有时间更新。（甚至微机课上都在检查网页）
         <br /> 这些函数也可能会存在较多的 bug，但我会努力修复它们。`);
-        await important(`
+        await read(`
         也不知道为什么，但我还是很开心。我的编程水平也得到了进步。
         <br /> （按 [确定] 继续。）`);
-        await important(`
+        await read(`
         我将会继续维护 The Play Games 的网页。但与此同时，主程序的下一次更新可能需要等到 2025 年。
         <br /> （按 [确定] 继续。）`);
-        await important(`
+        await read(`
         最后，感谢你使用 The Play Games！
         <br /> （按 [确定] 继续。）`);
         await info(`你可以在 [函数展示 -> 设置] 中应用更现代化的 Neon 主题！当前主题：${theme}。`, 4000);
@@ -172,7 +172,7 @@ function fn1() {
         choiceBtn,
         linkBtn,
         commandBtn,
-        importantBtn
+        readBtn
     ];
 
     all.forEach(btn => {
@@ -194,6 +194,7 @@ function fn1() {
         if (e.animationName === `head3-`) {
             all.forEach(btn => {
                 btn.style.display = `block`;
+                btn.style.color = "#ffffff";
                 btn.style.opacity = `0`; // 初始化为 0 。
                 btn.style.transition = `opacity 0.7s ${easing}`;
             });
@@ -266,13 +267,13 @@ function fn2() {
     linkBtn.innerHTML = `link`;
     linkBtn.className = `btn8`;
     linkBtn.onclick = () => {
-        link(`Click here to visit our information website!`, "website", `https://modificationer-mdf.github.io/tpg_info/`);
+        link(`Click here to visit our information website!`, `https://modificationer-mdf.github.io/tpg_info/`);
     };
     const commandBtn = document.createElement(`button`);
     commandBtn.innerHTML = `command`;
     commandBtn.className = `btn9`;
     commandBtn.onclick = () => {
-        command(`This function is still developing......`);
+        command("Type codes here.");
     };
     const Fn_1 = document.createElement(`button`);
     Fn_1.innerHTML = `fn_1`;
@@ -303,10 +304,10 @@ function fn2() {
     settings.className = `btn24`;
     settings.onclick = async () => { set() };
     const imp = document.createElement(`button`);
-    imp.textContent = `important`;
+    imp.textContent = `read`;
     imp.className = `btn22`;
     imp.onclick = () => {
-        important(`This is an important message! <br /> (Background covered with acrylic material.)`);
+        read(`This is a "read" message! <br /> (Background covered with acrylic material.)`);
     };
 
     const all = [
@@ -360,6 +361,7 @@ function fn2() {
         if (e.animationName === `head4-`) {
             all.forEach(btn => {
                 btn.style.display = `block`;
+                btn.style.color = "#ffffff";
                 btn.style.opacity = `0`; // 初始化为 0 。
                 btn.style.transition = `opacity 0.7s ${easing}`;
             });
@@ -388,7 +390,7 @@ async function fn3() {
     if (!flag) {
         await warning(`从 0.7 版本开始，如果电脑装有 360 杀毒软件，可能会提示你下载的文件可能有病毒。但是，这是误判。`, 5000);
         let a = await choice(`你确定要下载吗？`, 2, [`是。`, `否。`]);
-        if (a) {
+        if (a == "是。") {
             await success(`已打开。`, 2000);
             flag = true;
         } else {
@@ -460,6 +462,7 @@ async function fn3() {
         if (e.animationName === `head5-`) {
             all.forEach(btn => {
                 btn.style.display = `block`;
+                btn.color = "#ffffff";
                 btn.style.opacity = `0`; // 初始化为 0 。
                 btn.style.transition = `opacity 0.7s ${easing}`;
             });
@@ -525,4 +528,11 @@ async function set() {
             info(`easing 已被设置为 ${ease}。`, 2000);
         }
     }
+}
+
+function totop() {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 }

@@ -59,15 +59,16 @@ function log(string, time) {
 
     if (time == null || time == undefined) {
         time = 3000;
+    } else if (string.includes("\n")) {
+        string = string.replace(/\n/g, `<br />`);
     }
 
     const window = document.createElement(`div`);
     window.className = `log-window`;
     window.style.opacity = 0;
-
     const content = document.createElement(`div`);
     content.className = `log-content`;
-    content.textContent = string;
+    content.innerHTML = string;
 
     const line = Math.ceil(string.length / 14);
     content.style.height = `calc(${line * 20}px)`;
@@ -102,6 +103,8 @@ function info(string, ms, style) {
         fail(`所输入内容不能为 null 或 undefined。`, 3000);
         monitor();
         return 39;
+    } else if (string.includes("\n")) {
+        string = string.replace(/\n/g, `<br />`);
     } else {
         string = string.toString();
     }
@@ -109,7 +112,7 @@ function info(string, ms, style) {
     if (replaced === ``) {
         fail(`所输入内容不能为空字符串。`, 3000);
         return -39;
-    } else if (ms === undefined || ms === null || Number.isNaN(ms)) {
+    } else if (ms === undefined || ms === null || Number.isNaN(ms) || Number(ms) < 700) {
         fail(`请指定正确的显示时间。`, 3000);
         return 0;
     } else if (style === undefined || style === null) {
@@ -154,7 +157,7 @@ function info(string, ms, style) {
             rect.right <= (window.innerWidth || document.documentElement.clientWidth)
         );
         if (viewport === false) {
-            log(`你有 1 条未读完的 info() 信息。`);
+            log(`你有 1 条未读完的 info() 信息。 <button type="button" class="btn28" onclick="totop()">回到网页顶部</button>`);
         }
     };
 
@@ -190,6 +193,8 @@ function success(string, ms, style) {
         fail(`所输入内容不能为 null 或 undefined。`, 3000);
         monitor();
         return 39;
+    } else if (string.includes("\n")) {
+        string = string.replace(/\n/g, `<br />`);
     } else {
         string = string.toString();
     }
@@ -197,7 +202,7 @@ function success(string, ms, style) {
     if (replaced === ``) {
         fail(`所输入内容不能为空字符串。`, 3000);
         return -39;
-    } else if (ms === undefined || ms === null || Number.isNaN(ms)) {
+    } else if (ms === undefined || ms === null || Number.isNaN(ms) || Number(ms) <= 0) {
         fail(`请指定正确的显示时间。`, 3000);
         return 0;
     } else if (style === undefined || style === null) {
@@ -254,7 +259,7 @@ function success(string, ms, style) {
             rect.right <= (window.innerWidth || document.documentElement.clientWidth)
         );
         if (viewport === false) {
-            log(`你有 1 条未读完的 success() 信息。`);
+            log(`你有 1 条未读完的 success() 信息。 <button type="button" class="btn28" onclick="totop()">回到网页顶部</button>`);
         }
     };
 
@@ -277,6 +282,8 @@ function fail(string, ms, style) {
         fail(`所输入内容不能为 null 或 undefined。`, 3000);
         monitor();
         return 39;
+    } else if (string.includes("\n")) {
+        string = string.replace(/\n/g, `<br />`);
     } else {
         string = string.toString();
     }
@@ -284,7 +291,7 @@ function fail(string, ms, style) {
     if (replaced === ``) {
         fail(`所输入内容不能为空字符串。`, 3000);
         return -39;
-    } else if (ms === undefined || ms === null || Number.isNaN(ms)) {
+    } else if (ms === undefined || ms === null || Number.isNaN(ms) || Number(ms) <= 0) {
         fail(`请指定正确的显示时间。`, 3000);
         return 0;
     } else if (style === undefined || style === null) {
@@ -341,7 +348,7 @@ function fail(string, ms, style) {
             rect.right <= (window.innerWidth || document.documentElement.clientWidth)
         );
         if (viewport === false) {
-            log(`你有 1 条未读完的 fail() 信息。`);
+            log(`你有 1 条未读完的 fail() 信息。 <button type="button" class="btn28" onclick="totop()">回到网页顶部</button>`);
         }
     };
 
@@ -364,6 +371,8 @@ function warning(string, ms, style) {
         fail(`所输入内容不能为 null 或 undefined。`, 3000);
         monitor();
         return 39;
+    } else if (string.includes("\n")) {
+        string = string.replace(/\n/g, `<br />`);
     } else {
         string = string.toString();
     }
@@ -371,7 +380,7 @@ function warning(string, ms, style) {
     if (replaced === ``) {
         fail(`所输入内容不能为空字符串。`, 3000);
         return -39;
-    } else if (ms === undefined || ms === null || Number.isNaN(ms)) {
+    } else if (ms === undefined || ms === null || Number.isNaN(ms) || Number(ms) <= 0) {
         fail(`请指定正确的显示时间。`, 3000);
         return 0;
     } else if (style === undefined || style === null) {
@@ -428,7 +437,7 @@ function warning(string, ms, style) {
             rect.right <= (window.innerWidth || document.documentElement.clientWidth)
         );
         if (viewport === false) {
-            log(`你有 1 条未读完的 warning() 信息。`);
+            log(`你有 1 条未读完的 warning() 信息。 <button type="button" class="btn28" onclick="totop()">回到网页顶部</button>`);
         }
     };
 
@@ -452,6 +461,8 @@ async function input(string, holder, style) {
             fail(`所输入内容不能为 null 或 undefined。`, 3000);
             monitor();
             return 39;
+        } else if (string.includes("\n")) {
+            string = string.replace(/\n/g, `<br />`);
         } else {
             string = string.toString();
             holder = holder.toString();
@@ -540,6 +551,8 @@ async function choice(string, n, names, style) {
             fail(`所输入内容不能为 null 或 undefined。`, 3000);
             monitor();
             return 39;
+        } else if (string.includes("\n")) {
+            string = string.replace(/\n/g, `<br />`);
         } else {
             string = string.toString();
         }
@@ -629,6 +642,8 @@ async function transmit(string, style) {
         fail(`所输入内容不能为 null 或 undefined。`, 3000);
         monitor();
         return 39;
+    } else if (string.includes("\n")) {
+        string = string.replace(/\n/g, `<br />`);
     } else {
         string = string.toString();
     }
@@ -679,7 +694,7 @@ async function transmit(string, style) {
             rect.right <= (window.innerWidth || document.documentElement.clientWidth)
         );
         if (viewport === false) {
-            log(`你有 1 条未读完的 transmit() 信息。`);
+            log(`你有 1 条未读完的 transmit() 信息。 <button type="button" class="btn28" onclick="totop()">回到网页顶部</button>`);
         }
     };
     
@@ -701,6 +716,8 @@ async function link(string, url, style) {
         fail(`所输入内容不能为 null 或 undefined。`, 3000);
         monitor();
         return 39;
+    } else if (string.includes("\n")) {
+        string = string.replace(/\n/g, `<br />`);
     } else {
         string = string.toString();
         url = url.toString();
@@ -772,6 +789,8 @@ async function command(string, style) {
             fail(`所输入内容不能为 null 或 undefined。`, 3000);
             monitor();
             return 39;
+        } else if (string.includes("\n")) {
+            string = string.replace(/\n/g, `<br />`);
         } else {
             string = string.toString();
         }
@@ -782,6 +801,7 @@ async function command(string, style) {
         } else if (style === undefined || style === null) style = theme;
         if (nullcount > 26) {
             log(`你已被禁止调用函数。`);
+            return 0;
         }
 
         const window = document.createElement(`div`);
@@ -802,7 +822,7 @@ async function command(string, style) {
         btn.onclick = async () => {
             let res = await choice("请选择功能。", 3, ["查看内容", "换行", "清空"]);
             if (res === "查看内容") {
-                important(box.value);
+                read(box.value);
             } else if (res === "换行") {
                 box.value += "\n";
             } else if (res === "清空") {
@@ -854,49 +874,91 @@ async function command(string, style) {
     });
 }
 
-// important 函数。
+// read 函数。
 
-async function important(string) {
+async function read(string) {
     return new Promise((resolve) => {
+        totop();
+        let clicked = false;
         if (string == null || string == undefined) {
             nullcount++;
             fail(`所输入内容不能为 null 或 undefined。`, 3000);
             monitor();
-            return 39;
-        } if (nullcount > 26) {
-            log(`你已被禁止调用函数。`);
+            resolve(39);
+            return;
+        } else if (string.includes("\n")) {
+            string = string.replace(/\n/g, `<br />`);
         }
+        if (nullcount > 26) {
+            log(`你已被禁止调用函数。`);
+            return 0;
+        }
+
         const window = document.createElement(`div`);
-        window.className = `important-window`;
-        let clicked = false;
-        document.body.appendChild(window);
-        window.style.display = `block`;
-        window.style.animation = `-important forwards 0.7s ${easing}`;
+        window.className = `read-window`;
         const txt = document.createElement(`div`);
-        txt.className = `windows-text`;
+        txt.className = `read-content`;
         txt.innerHTML = string;
-        window.appendChild(txt);
         const btn = document.createElement(`button`);
-        btn.className = `important-confirm`;
+        btn.type = `button`;
+        btn.className = `read-confirm`;
         btn.textContent = `确定`;
+        const left = document.createElement(`div`);
+        left.className = `read-left`;
+        const right = document.createElement(`div`);
+        right.className = `read-right`;
+
+        document.body.appendChild(window);
+        window.appendChild(left);
+        window.appendChild(right);
+        window.appendChild(txt);
         window.appendChild(btn);
-        btn.onclick = () => {
-            window.style.animation = `important- forwards 0.7s ${easing}`;
-            if (clicked) {
-                warning(`请勿多次点击。`, 2000);
+
+        window.style.animation = `--read 0.7s forwards ${easing}`;
+        left.style.animation = `__solid 0.7s forwards ${easing}`;
+        right.style.animation = `__solid 0.7s forwards ${easing}`;
+        window.addEventListener(`animationend`, (e) => {
+            if (e.animationName === "--read") {
+                window.style.animation = `-read 0.7s forwards ${easing}`;
+                right.style.animation = `_right forwards 0.7s ${easing}`;
+                window.addEventListener(`animationend`, (f) => {
+                    if (f.animationName === "-read") {
+                        txt.style.animation = `_txt forwards 0.7s ${easing}`;
+                        btn.style.animation = `_btn forwards 0.7s ${easing}`;
+                    }
+                });
             }
-            clicked = true;
-            const ani_end = () => {
-                window.removeChild(txt);
-                window.removeChild(btn);
-                window.style.display = `none`;
-                window.removeEventListener(`animationend`, ani_end);
+
+            btn.onclick = () => {
+                if (clicked) {
+                    warning(`请勿多次点击。`, 2000);
+                    return;
+                }
+                txt.style.animation = `txt_ 0.7s forwards ${easing}`;
+                btn.style.animation = `btn_ 0.7s forwards ${easing}`;
+                txt.addEventListener(`animationend`, (g) => {
+                    if (g.animationName === "txt_") {
+                        window.style.animation = `read- 0.7s forwards ${easing}`;
+                        left.style.animation = `left_ 0.7s forwards ${easing}`;
+                        window.addEventListener(`animationend`, (h) => {
+                            if (h.animationName === "read-") {
+                                window.style.animation = `read-- 0.7s forwards ${easing}`;
+                                left.style.animation = `solid__ 0.7s forwards ${easing}`;
+                                right.style.animation = `solid__ 0.7s forwards ${easing}`;
+                            }
+                        });
+                    }
+                });
+                clicked = true;
+                const ani_end = () => {
+                    window.removeEventListener(`animationend`, ani_end);
+                };
+                window.addEventListener(`animationend`, ani_end);
+                resolve();
+                setTimeout(() => {
+                    document.body.removeChild(window);
+                }, 2100);
             };
-            window.addEventListener(`animationend`, ani_end);
-            resolve();
-            setTimeout(() => {
-                document.body.removeChild(window);
-            }, 700);
-        };
+        });
     });
 }

@@ -308,6 +308,7 @@ button {
 }
 
 .dakai {
+    color: #ffffff;
     z-index: 999;
     margin-left: 30px;
     background-color: #ffe20099;
@@ -545,6 +546,17 @@ button {
 .btn27 {
     opacity: 1;
     background-color: #aaaaaa99;
+    padding: 14px 25px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 30px;
+    border: none;
+    color: black;
+}
+
+.btn28 {
+    opacity: 1;
+    background-color: #9cdcfe99;
     padding: 14px 25px;
     margin-bottom: 15px;
     border-radius: 5px;
