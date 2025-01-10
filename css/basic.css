@@ -16,6 +16,12 @@ p {
     color: white;
 }
 
+pre {
+    font-family: "lan";
+    font-weight: 400;
+    font-size: 25px;
+}
+
 /* µÚ 1 ²¿·Ö¡£ */
 
 @keyframes -head {

@@ -117,12 +117,12 @@ function fn1() {
         let sty = await input(`输入你想使用的主题。`, `在此输入。`);
         command(res, sty);
     };
-    const readBtn = document.createElement(`button`);
-    readBtn.innerHTML = `read`;
-    readBtn.className = `btn22`;
-    readBtn.onclick = async () => {
-        let res = await input(`输入你想显示在 read 窗口上的信息。`, `在此输入。`);
-        read(res);
+    const wenziBtn = document.createElement(`button`);
+    wenziBtn.innerHTML = `wenzi`;
+    wenziBtn.className = `btn22`;
+    wenziBtn.onclick = async () => {
+        let res = await input(`输入你想显示在 wenzi 窗口上的信息。`, `在此输入。`);
+        wenzi(res);
     };
     const logBtn = document.createElement(`button`);
     logBtn.innerHTML = `日志`;
@@ -133,25 +133,25 @@ function fn1() {
         const month = String(date.getMonth() + 1).padStart(2, `0`);
         const year = date.getFullYear();
         date = `${year} 年 ${month} 月 ${day} 日`;
-        await read(`
+        await wenzi(`
         我在这里写一下我开发该网页的日志吧。
         <br /> （按 [确定] 继续。）`);
-        await read(`
+        await wenzi(`
         创建日期：2024 年（几月我忘了）；
         <br /> 版本号：0.9 。
         <br /> 你正在查看的是 ${date} 的版本。
         <br /> （按 [确定] 继续。）`);
-        await read(`
+        await wenzi(`
         在开发过程中我遇到了很多困难，开发速度也非常缓慢。
         <br /> 一周更新 1 次，只有周五（也许）、周六、周日有时间更新。（甚至微机课上都在检查网页）
         <br /> 这些函数也可能会存在较多的 bug，但我会努力修复它们。`);
-        await read(`
+        await wenzi(`
         也不知道为什么，但我还是很开心。我的编程水平也得到了进步。
         <br /> （按 [确定] 继续。）`);
-        await read(`
+        await wenzi(`
         我将会继续维护 The Play Games 的网页。但与此同时，主程序的下一次更新可能需要等到 2025 年。
         <br /> （按 [确定] 继续。）`);
-        await read(`
+        await wenzi(`
         最后，感谢你使用 The Play Games！
         <br /> （按 [确定] 继续。）`);
         await info(`你可以在 [函数展示 -> 设置] 中应用更现代化的 Neon 主题！当前主题：${theme}。`, 4000);
@@ -172,7 +172,7 @@ function fn1() {
         choiceBtn,
         linkBtn,
         commandBtn,
-        readBtn
+        wenziBtn
     ];
 
     all.forEach(btn => {
@@ -291,23 +291,23 @@ function fn2() {
     nullBtn.innerHTML = `在函数的值中输入 null 值`;
     nullBtn.className = `btn10`;
     nullBtn.onclick = () => {
-        info(null);
+        wenzi(null);
     };
     const undefinedBtn = document.createElement(`button`);
     undefinedBtn.innerHTML = `在函数的值中输入 undefined 值`;
     undefinedBtn.className = `btn11`;
     undefinedBtn.onclick = () => {
-        info(undefined);
+        wenzi(undefined);
     };
     const settings = document.createElement(`button`);
     settings.innerHTML = `设置`;
     settings.className = `btn24`;
     settings.onclick = async () => { set() };
     const imp = document.createElement(`button`);
-    imp.textContent = `read`;
+    imp.textContent = `wenzi`;
     imp.className = `btn22`;
     imp.onclick = () => {
-        read(`This is a "read" message! <br /> (Background covered with acrylic material.)`);
+        wenzi(`This is a "wenzi" message! <br /> (Background covered with acrylic material.)`);
     };
 
     const all = [

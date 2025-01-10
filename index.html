@@ -12,11 +12,19 @@
         <script>
             document.addEventListener("DOMContentLoaded", () => {
                 var start = performance.now();
-                var font = new FontFace('basic', 'url("fonts/Basic Modification Light.woff2")');
-                font.load().then(function(f) {
+                var font1 = new FontFace('basic', 'url("fonts/Basic Modification Light.woff2")');
+                var font2 = new FontFace('lan', 'url("fonts/Lanubu Light.woff2")');
+                font1.load().then(function(f) {
                     var end = performance.now();
                     document.fonts.add(f);
                     success(`成功加载字体：Basic Modification Light。用时 ${((end - start) / 1000).toFixed(3)} 秒。`, 3000);
+                }).catch(function(error) {
+                    fail(`字体加载失败。（${error}）请打开 [控制台（F12） -> 网络] 查看详情。`, 3000);
+                });
+                font2.load().then(function(f) {
+                    var end = performance.now();
+                    document.fonts.add(f);
+                    success(`成功加载字体：Lanubu Light。用时 ${((end - start) / 1000).toFixed(3)} 秒。`, 3000);
                 }).catch(function(error) {
                     fail(`字体加载失败。（${error}）请打开 [控制台（F12） -> 网络] 查看详情。`, 3000);
                 });

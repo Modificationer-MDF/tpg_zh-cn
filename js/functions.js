@@ -820,13 +820,33 @@ async function command(string, style) {
         btn.className = `btn26`;
         btn.textContent = "功能";
         btn.onclick = async () => {
-            let res = await choice("请选择功能。", 3, ["查看内容", "换行", "清空"]);
+            let res = await choice("请选择功能。", 6, ["查看内容", "换行", "清空", "添加制表符", "复制", "粘贴"]);
             if (res === "查看内容") {
-                read(box.value);
+                wenzi(box.value);
             } else if (res === "换行") {
                 box.value += "\n";
             } else if (res === "清空") {
                 box.value = "";
+            } else if (res === "添加制表符") {
+                box.value += "\t";
+            } else if (res === "复制") {
+                try {
+                    await navigator.clipboard.writeText(box.value);
+                    success("已复制到剪贴板。", 2000);
+                } catch (error) {
+                    fail(`复制失败。<br />${error}。`, 4000);
+                }
+            } else if (res === "粘贴") {
+                try {
+                    const text = await navigator.clipboard.readText();
+                    box.value += text;
+                } catch (error) {
+                    if (error.name === "NotAllowedError") {
+                        fail("请先允许浏览器访问剪贴板。", 4000);
+                    } else {
+                        fail(`粘贴失败。<br />${error}。`, 4000);
+                    }
+                }
             }
         };
 
@@ -874,11 +894,10 @@ async function command(string, style) {
     });
 }
 
-// read 函数。
+// wenzi 函数。
 
-async function read(string) {
+async function wenzi(string) {
     return new Promise((resolve) => {
-        totop();
         let clicked = false;
         if (string == null || string == undefined) {
             nullcount++;
@@ -895,18 +914,18 @@ async function read(string) {
         }
 
         const window = document.createElement(`div`);
-        window.className = `read-window`;
-        const txt = document.createElement(`div`);
-        txt.className = `read-content`;
+        window.className = `wenzi-window`;
+        const txt = document.createElement(`pre`);
+        txt.className = `wenzi-content`;
         txt.innerHTML = string;
         const btn = document.createElement(`button`);
         btn.type = `button`;
-        btn.className = `read-confirm`;
+        btn.className = `wenzi-confirm`;
         btn.textContent = `确定`;
         const left = document.createElement(`div`);
-        left.className = `read-left`;
+        left.className = `wenzi-left`;
         const right = document.createElement(`div`);
-        right.className = `read-right`;
+        right.className = `wenzi-right`;
 
         document.body.appendChild(window);
         window.appendChild(left);
@@ -914,15 +933,15 @@ async function read(string) {
         window.appendChild(txt);
         window.appendChild(btn);
 
-        window.style.animation = `--read 0.7s forwards ${easing}`;
+        window.style.animation = `--wenzi 0.7s forwards ${easing}`;
         left.style.animation = `__solid 0.7s forwards ${easing}`;
         right.style.animation = `__solid 0.7s forwards ${easing}`;
         window.addEventListener(`animationend`, (e) => {
-            if (e.animationName === "--read") {
-                window.style.animation = `-read 0.7s forwards ${easing}`;
+            if (e.animationName === "--wenzi") {
+                window.style.animation = `-wenzi 0.7s forwards ${easing}`;
                 right.style.animation = `_right forwards 0.7s ${easing}`;
                 window.addEventListener(`animationend`, (f) => {
-                    if (f.animationName === "-read") {
+                    if (f.animationName === "-wenzi") {
                         txt.style.animation = `_txt forwards 0.7s ${easing}`;
                         btn.style.animation = `_btn forwards 0.7s ${easing}`;
                     }
@@ -938,11 +957,11 @@ async function read(string) {
                 btn.style.animation = `btn_ 0.7s forwards ${easing}`;
                 txt.addEventListener(`animationend`, (g) => {
                     if (g.animationName === "txt_") {
-                        window.style.animation = `read- 0.7s forwards ${easing}`;
+                        window.style.animation = `wenzi- 0.7s forwards ${easing}`;
                         left.style.animation = `left_ 0.7s forwards ${easing}`;
                         window.addEventListener(`animationend`, (h) => {
-                            if (h.animationName === "read-") {
-                                window.style.animation = `read-- 0.7s forwards ${easing}`;
+                            if (h.animationName === "wenzi-") {
+                                window.style.animation = `wenzi-- 0.7s forwards ${easing}`;
                                 left.style.animation = `solid__ 0.7s forwards ${easing}`;
                                 right.style.animation = `solid__ 0.7s forwards ${easing}`;
                             }
