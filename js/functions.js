@@ -710,7 +710,7 @@ async function chuanshu(string, style) {
 
 // lianjie 函数。
 
-async function lianjie(string, url, style) {
+async function lianjie(string, url, ignore, style) {
     if (string == null || string == undefined || url == null || url == undefined) {
         nullcount++;
         cuowu(`所输入内容不能为 null 或 undefined。`, 3000);
@@ -724,7 +724,7 @@ async function lianjie(string, url, style) {
     }
     let replaced1 = string.replace(/\s+/g, ``);
     let replaced2 = url.replace(/\s+/g, ``);
-    if (replaced2.startsWith(`https`) !== true) {
+    if (replaced2.startsWith(`https`) !== true && ignore !== true) {
         url = `https://` + replaced2;
     } else if (urlEndings.some(ending => url.endsWith(ending)) === false) {
         jinggao(`请检查你所输入的网址是否正确！`, 3000);

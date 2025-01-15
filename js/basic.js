@@ -107,7 +107,7 @@ function fn1() {
         let res = await shuru(`输入你想显示在 lianjie 窗口上的信息。`, `在此输入。`);
         let url = await shuru(`请输入你要链接的地址。`);
         let sty = await shuru(`输入你想使用的主题。`, `在此输入。`);
-        lianjie(res, url, sty);
+        lianjie(res, url, false, sty);
     };
     const zhongduanBtn = document.createElement(`button`);
     zhongduanBtn.innerHTML = `zhongduan`;
@@ -231,49 +231,68 @@ function fn2() {
     chenggongBtn.innerHTML = `chenggong`;
     chenggongBtn.className = `btn2`;
     chenggongBtn.onclick = () => {
-        chenggong(`Very nice to meet you!`, 3000);
+        chenggong("当你看到这条信息时，说明你已经成功运行了主函数区的这个函数。", 3000);
     };
     const cuowuBtn = document.createElement(`button`);
     cuowuBtn.innerHTML = `cuowu`;
     cuowuBtn.className = `btn3`;
     cuowuBtn.onclick = () => {
-        cuowu(`Sorry, sometimes this may not be able to work.`, 3000);
+        cuowu("但有时候可能会报错，比如 NotAllowedError。", 3000);
     };
     const jinggaoBtn = document.createElement(`button`);
     jinggaoBtn.innerHTML = `jinggao`;
     jinggaoBtn.className = `btn4`;
     jinggaoBtn.onclick = () => {
-        jinggao(`But you can still continue to use it.`, 3000);
+        jinggao("看到这种信息时，要格外注意了。", 3000);
     };
     const shuruBtn = document.createElement(`button`);
     shuruBtn.innerHTML = `shuru`;
     shuruBtn.className = `btn5`;
     shuruBtn.onclick = () => {
-        shuru(`I am quite glad to hear your opinions.`, `Enter your sentences here:`);
+        shuru("我很想听到你的想法。", "在此输入……");
     };
     const chuanshuBtn = document.createElement(`button`);
     chuanshuBtn.innerHTML = `chuanshu`;
     chuanshuBtn.className = `btn6`;
     chuanshuBtn.onclick = () => {
-        chuanshu(`I cannot chuanshu files at this time, I feel sorry for you.`);
+        chuanshu("目前，还没有开发传输文件的功能。");
     };
     const xuanzeBtn = document.createElement(`button`);
     xuanzeBtn.innerHTML = `xuanze`;
     xuanzeBtn.className = `btn7`;
-    xuanzeBtn.onclick = () => {
-        xuanze(`How do you like The functions above?`, 2, [`Excellent.`, `Terrible.`]);
+    xuanzeBtn.onclick = async () => {
+        var res = await xuanze("你对以上的函数有什么看法？", 4, ["很不错。", "还可以。", "一般。", "有待改进的空间。"]);
+        switch (res) {
+            case "很不错。":
+                await xinxi("非常感谢！你还可以尝试其他的函数。");
+                break;
+            case "还可以。":
+                await xinxi("谢谢你的评价！");
+                break;
+            case "一般。":
+                await xinxi("我们可以做得更好。");
+                break;
+            case "有待改进的空间。":
+                var r = await xuanze("你是否想向我反馈你的建议？", 2, ["是。", "否。"]);
+                if (r) {
+                    await lianjie("点击以下链接反馈。", "mailto://Feng_14@outlook.com", true);
+                    break;
+                } else {
+                    await xinxi("好的，我们再见。");
+                }
+        }
     };
     const lianjieBtn = document.createElement(`button`);
     lianjieBtn.innerHTML = `lianjie`;
     lianjieBtn.className = `btn8`;
     lianjieBtn.onclick = () => {
-        lianjie(`Click here to visit our xinxirmation website!`, `https://modificationer-mdf.github.io/tpg_xinxi/`);
+        lianjie("点击此处浏览 The Play Games 的信息界面！", `https://modificationer-mdf.github.io/tpg_info/`);
     };
     const zhongduanBtn = document.createElement(`button`);
     zhongduanBtn.innerHTML = `zhongduan`;
     zhongduanBtn.className = `btn9`;
     zhongduanBtn.onclick = () => {
-        zhongduan("Type codes here.");
+        zhongduan("在此处输入代码。");
     };
     const Fn_1 = document.createElement(`button`);
     Fn_1.innerHTML = `fn_1`;
@@ -307,7 +326,7 @@ function fn2() {
     imp.textContent = `wenzi`;
     imp.className = `btn22`;
     imp.onclick = () => {
-        wenzi(`This is a "wenzi" message! <br /> (Background covered with acrylic material.)`);
+        wenzi("在这里可以显示文字！ <br />（背景使用了亚克力材料。）");
     };
 
     const all = [
