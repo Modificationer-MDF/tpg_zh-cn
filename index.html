@@ -17,16 +17,16 @@
                 font1.load().then(function(f) {
                     var end = performance.now();
                     document.fonts.add(f);
-                    success(`成功加载字体：Basic Modification Light。用时 ${((end - start) / 1000).toFixed(3)} 秒。`, 3000);
+                    chenggong(`成功加载字体：Basic Modification Light。用时 ${((end - start) / 1000).toFixed(3)} 秒。`, 3000);
                 }).catch(function(error) {
-                    fail(`字体加载失败。（${error}）请打开 [控制台（F12） -> 网络] 查看详情。`, 3000);
+                    cuowu(`字体加载失败。（${error}）请打开 [控制台（F12） -> 网络] 查看详情。`, 3000);
                 });
                 font2.load().then(function(f) {
                     var end = performance.now();
                     document.fonts.add(f);
-                    success(`成功加载字体：Lanubu Light。用时 ${((end - start) / 1000).toFixed(3)} 秒。`, 3000);
+                    chenggong(`成功加载字体：Lanubu Light。用时 ${((end - start) / 1000).toFixed(3)} 秒。`, 3000);
                 }).catch(function(error) {
-                    fail(`字体加载失败。（${error}）请打开 [控制台（F12） -> 网络] 查看详情。`, 3000);
+                    cuowu(`字体加载失败。（${error}）请打开 [控制台（F12） -> 网络] 查看详情。`, 3000);
                 });
             });
         </script>
@@ -48,41 +48,41 @@
             ];
 
             function fn_1() {
-                choice('Never gonna give you up. Never gonna let you down. Never gonna run around and desert you. Never gonna make you cry. Never gonna say goodbye. Never gonna tell a lie and hurt you.', 2, ["Yes, XD.","No, you're joking!"]);
+                xuanze('Never gonna give you up. Never gonna let you down. Never gonna run around and desert you. Never gonna make you cry. Never gonna say goodbye. Never gonna tell a lie and hurt you.', 2, ["Yes, XD.","No, you're joking!"]);
             }
 
             async function fn_2() {
-                var a = await input("Never gonna give you up. Never gonna let you down. Never gonna run around and desert you. Never gonna make you cry. Never gonna say goodbye. Never gonna tell a lie and hurt you.", "Have something to say?");
+                var a = await shuru("Never gonna give you up. Never gonna let you down. Never gonna run around and desert you. Never gonna make you cry. Never gonna say goodbye. Never gonna tell a lie and hurt you.", "Have something to say?");
                 a = a.toLowerCase();
                 if (taboos.some(word => a.includes(word)))  {
-                    await warning("Shut up, you are fucking retarded.", 2000);
-                    await info("Fuck your whole family, you ARE AN IDIOT!", 4000)
-                    var b = await choice("Are you an IDIOT?", 2, ["Yes, I am.", "No, I'm not."])
+                    await jinggao("Shut up, you are fucking retarded.", 2000);
+                    await xinxi("Fuck your whole family, you ARE AN IDIOT!", 4000)
+                    var b = await xuanze("Are you an IDIOT?", 2, ["Yes, I am.", "No, I'm not."])
                     if (b) {
-                        await success("You truly know yourself well, do not you?", 2000);
+                        await chenggong("You truly know yourself well, do not you?", 2000);
                     } else {
-                        await fail("Oh, in my opinion, you ARE.", 6666);
+                        await cuowu("Oh, in my opinion, you ARE.", 6666);
                     }
                 } else if (zanghua.some(word => a.includes(word))) {
-                    await warning("闭嘴，我知道你想说什么。", 2000);
-                    await info("* 你 *，* 你全家，你真 ** 是个傻 *。", 4000);
-                    var b = await choice("你是个傻 * 吗？", 2, ["是的。", "不。"]);
+                    await jinggao("闭嘴，我知道你想说什么。", 2000);
+                    await xinxi("* 你 *，* 你全家，你真 ** 是个傻 *。", 4000);
+                    var b = await xuanze("你是个傻 * 吗？", 2, ["是的。", "不。"]);
                     if (b) {
-                        await success("你还真有自知之明啊！", 2000);
+                        await chenggong("你还真有自知之明啊！", 2000);
                     } else {
-                        await fail("哦，在我看来，你是的。", 4444);
+                        await cuowu("哦，在我看来，你是的。", 4444);
                     }
                 } else if (tabu_.some(word => a.includes(word))) {
-                    await warning("（翻訳：DeepL） 黙れ、お前はクソいまいましい。", 2000);
-                    await info("家族全員くたばれ、お前はバカだ！", 4000)
-                    var b = await choice("お前はバカだ！", 2, ["イエス。", "ノー。"]);
+                    await jinggao("（翻訳：DeepL） 黙れ、お前はクソいまいましい。", 2000);
+                    await xinxi("家族全員くたばれ、お前はバカだ！", 4000)
+                    var b = await xuanze("お前はバカだ！", 2, ["イエス。", "ノー。"]);
                     if (b) {
-                        await success("お前は本当に知ってる！", 2000);
+                        await chenggong("お前は本当に知ってる！", 2000);
                     } else {
-                        await fail("ああ、私の意見では、君ハソウだ。", 4444);
+                        await cuowu("ああ、私の意見では、君ハソウだ。", 4444);
                     }
                 } else {
-                    await info(`You said: "${a}".`);
+                    await xinxi(`You said: "${a}".`);
                 }
             }
         </script>
