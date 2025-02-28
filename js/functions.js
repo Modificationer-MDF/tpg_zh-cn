@@ -1,8 +1,8 @@
-var rizhinum = 0; // rizhi() 目前存在的数量。
+var rznum = 0; // rz() 目前存在的数量。
 var nullcount = 0; // 连续输入 null 或 undefined 的次数。
 var windows = []; // 信息数组。
-let rizhiwin = []; // rizhi() 信息数组。
-let totalHeight = 0; // rizhi() 的总高度。
+let rzwin = []; // rz() 信息数组。
+let totalHeight = 0; // rz() 的总高度。
 let urlEndings = [
     `.com`, `.net`, `.cn`, `.org`, `.edu`, `.gov`, `.mil`,
     `.biz`, `.info`, `.name`, `.pro`, `.aero`, `.coop`,
@@ -17,7 +17,7 @@ function updateSelectedWindowPos() {
     let total = 7 * window.innerHeight / 100;
     windows.forEach((window) => {
         const wh = window.offsetHeight;
-        window.style.transition = `top 0.3s ${easing}`;
+        window.style.transition = `top 0.5s ${easing}`;
         window.style.top = `${total}px`;
         total += wh + 7;
     });
@@ -37,24 +37,24 @@ function close(window) {
 
 function monitor() {
     if (nullcount >= 3 && nullcount < 7) {
-        jinggao(`你已连续 ${nullcount} 次输入 null 或 undefined。请检查你所输入的内容。`)
+        warn(`你已连续 ${nullcount} 次输入 null 或 undefined。请检查你所输入的内容。`)
     } else if (nullcount >= 7 && nullcount < 14) {
-        jinggao(`再次警告！你已连续输入 null 或 undefined ${nullcount} 次。请检查你所输入的内容。`)
+        warn(`再次警告！你已连续输入 null 或 undefined ${nullcount} 次。请检查你所输入的内容。`)
     } else if (nullcount >= 14 && nullcount < 25) {
-        xinxi(`null 和 undefined 是指，变量的值为 null 或 undefined，即你在 prompt 输入框中点击了取消或者在函数的参数中传入了 null 或 undefined。请检查你所输入的内容。`);
+        info(`null 和 undefined 是指，变量的值为 null 或 undefined，即你在 prompt 输入框中点击了取消或者在函数的参数中传入了 null 或 undefined。请检查你所输入的内容。`);
     } else if (nullcount >= 25 && nullcount < 30) {
-        cuowu(`你已被禁止调用任何函数。`);
+        fail(`你已被禁止调用任何函数。`);
         console.warn(`你已被禁止调用任何函数。`);
-        jinggao(`请查看控制台。`);
+        warn(`请查看控制台。`);
     }
 }
 
-// rizhi 函数。
+// rz 函数。
 
-function rizhi(string, time) {
-    rizhinum++;
+function rz(string, time) {
+    rznum++;
     function re() {
-        totalHeight = rizhiwin.reduce((acc, w) => acc + w.offsetHeight, 0);
+        totalHeight = rzwin.reduce((acc, w) => acc + w.offsetHeight, 0);
     }
 
     if (time == null || time == undefined) {
@@ -64,10 +64,10 @@ function rizhi(string, time) {
     }
 
     const window = document.createElement(`div`);
-    window.className = `rizhi-window`;
+    window.className = `rz-window`;
     window.style.opacity = 0;
     const content = document.createElement(`div`);
-    content.className = `rizhi-content`;
+    content.className = `rz-content`;
     content.innerHTML = string;
 
     const line = Math.ceil(string.length / 14);
@@ -76,31 +76,31 @@ function rizhi(string, time) {
     document.body.appendChild(window);
     window.appendChild(content);
 
-    window.style.top = `calc(${totalHeight}px + ${rizhinum}vh)`;
+    window.style.top = `calc(${totalHeight}px + ${rznum}vh)`;
     totalHeight += window.offsetHeight;
-    rizhiwin.push(window);
+    rzwin.push(window);
 
     requestAnimationFrame(() => {
-        window.style.animation = `-rizhi 0.7s forwards ${easing}`;
+        window.style.animation = `-rz 0.5s forwards ${easing}`;
     });
 
     setTimeout(() => {
-        window.style.animation = `rizhi- 0.7s forwards ${easing}`;
+        window.style.animation = `rz- 0.5s forwards ${easing}`;
         setTimeout(() => {
             document.body.removeChild(window);
-            rizhiwin = rizhiwin.filter(w => w !== window);
+            rzwin = rzwin.filter(w => w !== window);
             re();
-            rizhinum--;
-        }, 700);
+            rznum--;
+        }, 500);
     }, time);
 }
 
-// xinxi 函数。
+// info 函数。
 
-function xinxi(string, ms, style) {
+function info(string, ms, style) {
     if (string == null || string == undefined) {
         nullcount++;
-        cuowu(`所输入内容不能为 null 或 undefined。`, 3000);
+        fail(`所输入内容不能为 null 或 undefined。`, 3000);
         monitor();
         return 39;
     } else if (string.includes("\n")) {
@@ -110,42 +110,42 @@ function xinxi(string, ms, style) {
     }
     let replaced = string.replace(/\s+/g, ``);
     if (replaced === ``) {
-        cuowu(`所输入内容不能为空字符串。`, 3000);
+        fail(`所输入内容不能为空字符串。`, 3000);
         return -39;
-    } else if (ms === undefined || ms === null || Number.isNaN(ms) || Number(ms) < 700) {
-        cuowu(`请指定正确的显示时间。`, 3000);
+    } else if (ms === undefined || ms === null || Number.isNaN(ms) || Number(ms) < 500) {
+        fail(`请指定正确的显示时间。`, 3000);
         return 0;
     } else if (style === undefined || style === null) {
         style = theme;
     }
     if (nullcount > 26) {
-        rizhi(`你已被禁止调用函数。`);
+        rz(`你已被禁止调用函数。`);
     }
 
     const window = document.createElement(`div`);
-    window.className = `xinxi-window`;
+    window.className = `info-window`;
     const square = document.createElement(`div`);
-    square.className = `xinxi-square`;
+    square.className = `info-square`;
     const icon = document.createElement(`img`);
-    icon.src = `images/Xinxi.png`;
+    icon.src = `images/Inf.png`;
     const content = document.createElement(`div`);
-    content.className = `xinxi-content`;
+    content.className = `info-content`;
     const bar = document.createElement(`div`);
-    bar.className = `xinxi-progressbar`;
+    bar.className = `info-progressbar`;
 
     if (style === `Neon`) {
         window.style.backdropFilter = `blur(14px) saturate(250%)`;
         square.style.backdropFilter = `blur(14px) saturate(250%)`;
     }
 
+    create(window);
     document.body.appendChild(window);
     window.appendChild(square);
     window.appendChild(content);
     window.appendChild(bar);
     square.appendChild(icon);
-    create(window);
 
-    // icon.innerHTML = `第 ${xinxiNum} 条信息`;
+    // icon.innerHTML = `第 ${infoNum} 条信息`;
     content.innerHTML = string;
 
     const visible = () => {
@@ -157,7 +157,10 @@ function xinxi(string, ms, style) {
             rect.right <= (window.innerWidth || document.documentElement.clientWidth)
         );
         if (viewport === false) {
-            rizhi(`你有 1 条未读完的 xinxi() 信息。 <button type="button" class="btn28" onclick="totop()">回到网页顶部</button>`);
+            rz(`你有 1 条未读完的 info() 信息。
+            <button type="button" class="btn28" onclick="totop()">
+            回到网页顶部
+            </button>`);
         }
     };
 
@@ -175,22 +178,22 @@ function xinxi(string, ms, style) {
     }, 16);
 
     setTimeout(() => {
-        window.style.animation = `xinxi- 0.7s forwards ${easing}`;
+        window.style.animation = `info- 0.5s forwards ${easing}`;
         setTimeout(() => {
             document.body.removeChild(window);
             close(window);
-        }, 700);
+        }, 500);
     }, ms);
     setTimeout(visible, ms);
     return window;
 }
 
-// chenggong 函数。
+// cg 函数。
 
-function chenggong(string, ms, style) {
+function cg(string, ms, style) {
     if (string == null || string == undefined) {
         nullcount++;
-        cuowu(`所输入内容不能为 null 或 undefined。`, 3000);
+        fail(`所输入内容不能为 null 或 undefined。`, 3000);
         monitor();
         return 39;
     } else if (string.includes("\n")) {
@@ -200,41 +203,41 @@ function chenggong(string, ms, style) {
     }
     let replaced = string.replace(/\s+/g, ``);
     if (replaced === ``) {
-        cuowu(`所输入内容不能为空字符串。`, 3000);
+        fail(`所输入内容不能为空字符串。`, 3000);
         return -39;
     } else if (ms === undefined || ms === null || Number.isNaN(ms) || Number(ms) <= 0) {
-        cuowu(`请指定正确的显示时间。`, 3000);
+        fail(`请指定正确的显示时间。`, 3000);
         return 0;
     } else if (style === undefined || style === null) {
         style = theme;
     }
     if (nullcount > 26) {
-        rizhi(`你已被禁止调用函数。`);
+        rz(`你已被禁止调用函数。`);
     }
 
     const window = document.createElement(`div`);
-    window.className = `chenggong-window`;
+    window.className = `cg-window`;
     const square = document.createElement(`div`);
-    square.className = `chenggong-square`;
+    square.className = `cg-square`;
     const icon = document.createElement(`img`);
-    icon.src = `images/Tongguo.png`;
+    icon.src = `images/Suc.png`;
     const content = document.createElement(`div`);
-    content.className = `chenggong-content`;
+    content.className = `cg-content`;
     const bar = document.createElement(`div`);
-    bar.className = `chenggong-progressbar`;
+    bar.className = `cg-progressbar`;
     if (theme === `Neon`) {
         window.style.backdropFilter = `blur(14px) saturate(250%)`;
         square.style.backdropFilter = `blur(14px) saturate(250%)`;
     }
 
+    create(window);
     document.body.appendChild(window);
     window.appendChild(square);
     window.appendChild(content);
     window.appendChild(bar);
     square.appendChild(icon);
-    create(window); 
 
-    // icon.innerHTML = `第 ${chenggongNum} 条成功消息`;
+    // icon.innerHTML = `第 ${cgNum} 条成功消息`;
     content.innerHTML = string;
 
     const line = Math.ceil(string.length / 14);
@@ -259,27 +262,30 @@ function chenggong(string, ms, style) {
             rect.right <= (window.innerWidth || document.documentElement.clientWidth)
         );
         if (viewport === false) {
-            rizhi(`你有 1 条未读完的 chenggong() 信息。 <button type="button" class="btn28" onclick="totop()">回到网页顶部</button>`);
+            rz(`你有 1 条未读完的 cg() 信息。 
+            <button type="button" class="btn28" onclick="totop()">
+            回到网页顶部
+            </button>`);
         }
     };
 
     setTimeout(() => {
-        window.style.animation = `chenggong- 0.7s forwards ${easing}`;
+        window.style.animation = `cg- 0.5s forwards ${easing}`;
         setTimeout(() => {
             document.body.removeChild(window);
-            close(window) // 移除窗口。
-        }, 700);
+            close(window)
+        }, 500);
     }, ms);
     setTimeout(visible, ms);
     return window;
 }
 
-// cuowu 函数。
+// fail 函数。
 
-function cuowu(string, ms, style) {
+function fail(string, ms, style) {
     if (string == null || string == undefined) {
         nullcount++;
-        cuowu(`所输入内容不能为 null 或 undefined。`, 3000);
+        fail(`所输入内容不能为 null 或 undefined。`, 3000);
         monitor();
         return 39;
     } else if (string.includes("\n")) {
@@ -289,41 +295,41 @@ function cuowu(string, ms, style) {
     }
     let replaced = string.replace(/\s+/g, ``);
     if (replaced === ``) {
-        cuowu(`所输入内容不能为空字符串。`, 3000);
+        fail(`所输入内容不能为空字符串。`, 3000);
         return -39;
     } else if (ms === undefined || ms === null || Number.isNaN(ms) || Number(ms) <= 0) {
-        cuowu(`请指定正确的显示时间。`, 3000);
+        fail(`请指定正确的显示时间。`, 3000);
         return 0;
     } else if (style === undefined || style === null) {
         style = theme;
     }
     if (nullcount > 26) {
-        rizhi(`你已被禁止调用函数。`);
+        rz(`你已被禁止调用函数。`);
     }
 
     const window = document.createElement(`div`);
-    window.className = `cuowu-window`;
+    window.className = `fail-window`;
     const square = document.createElement(`div`);
-    square.className = `cuowu-square`;
+    square.className = `fail-square`;
     const icon = document.createElement(`img`);
-    icon.className = `cuowu-icon`;
+    icon.className = `fail-icon`;
     const content = document.createElement(`div`);
-    content.className = `cuowu-content`;
+    content.className = `fail-content`;
     const bar = document.createElement(`div`);
-    bar.className = `cuowu-progressbar`;
+    bar.className = `fail-progressbar`;
     if (theme === `Neon`) {
         window.style.backdropFilter = `blur(14px) saturate(250%)`;
         square.style.backdropFilter = `blur(14px) saturate(250%)`;
     }
 
+    create(window);
     document.body.appendChild(window);
     window.appendChild(square);
     window.appendChild(content);
     window.appendChild(bar);
     square.appendChild(icon);
-    create(window); // 添加窗口。
 
-    icon.src = `images/Shibai.png`;
+    icon.src = `images/Err.png`;
     content.innerHTML = string;
 
     const line = Math.ceil(string.length / 14);
@@ -348,27 +354,30 @@ function cuowu(string, ms, style) {
             rect.right <= (window.innerWidth || document.documentElement.clientWidth)
         );
         if (viewport === false) {
-            rizhi(`你有 1 条未读完的 cuowu() 信息。 <button type="button" class="btn28" onclick="totop()">回到网页顶部</button>`);
+            rz(`你有 1 条未读完的 fail() 信息。 
+            <button type="button" class="btn28" onclick="totop()">
+            回到网页顶部
+            </button>`);
         }
     };
 
     setTimeout(() => {
-        window.style.animation = `cuowu- 0.7s forwards ${easing}`;
+        window.style.animation = `fail- 0.5s forwards ${easing}`;
         setTimeout(() => {
             document.body.removeChild(window);
-            close(window) // 移除窗口。
-        }, 700);
+            close(window)
+        }, 500);
     }, ms);
     setTimeout(visible, ms);
     return window;
 }
 
-// jinggao 函数。
+// warn 函数。
 
-function jinggao(string, ms, style) {
+function warn(string, ms, style) {
     if (string == null || string == undefined) {
         nullcount++;
-        cuowu(`所输入内容不能为 null 或 undefined。`, 3000);
+        fail(`所输入内容不能为 null 或 undefined。`, 3000);
         monitor();
         return 39;
     } else if (string.includes("\n")) {
@@ -378,41 +387,41 @@ function jinggao(string, ms, style) {
     }
     let replaced = string.replace(/\s+/g, ``);
     if (replaced === ``) {
-        cuowu(`所输入内容不能为空字符串。`, 3000);
+        fail(`所输入内容不能为空字符串。`, 3000);
         return -39;
     } else if (ms === undefined || ms === null || Number.isNaN(ms) || Number(ms) <= 0) {
-        cuowu(`请指定正确的显示时间。`, 3000);
+        fail(`请指定正确的显示时间。`, 3000);
         return 0;
     } else if (style === undefined || style === null) {
         style = theme;
     }
     if (nullcount > 26) {
-        rizhi(`你已被禁止调用函数。`);
+        rz(`你已被禁止调用函数。`);
     }
 
     const window = document.createElement(`div`);
-    window.className = `jinggao-window`;
+    window.className = `warn-window`;
     const square = document.createElement(`div`);
-    square.className = `jinggao-square`;
+    square.className = `warn-square`;
     const icon = document.createElement(`img`);
-    icon.className = `jinggao-icon`;
+    icon.className = `warn-icon`;
     const content = document.createElement(`div`);
-    content.className = `jinggao-content`;
+    content.className = `warn-content`;
     const bar = document.createElement(`div`);
-    bar.className = `jinggao-progressbar`;
+    bar.className = `warn-progressbar`;
     if (theme === `Neon`) {
         window.style.backdropFilter = `blur(14px) saturate(250%)`;
         square.style.backdropFilter = `blur(14px) saturate(250%)`;
     }
 
+    create(window);
     document.body.appendChild(window);
     window.appendChild(square);
     window.appendChild(content);
     window.appendChild(bar);
     square.appendChild(icon);
-    create(window); // 添加窗口。
 
-    icon.src = `images/Zhuyi.png`;
+    icon.src = `images/Exc.png`;
     content.innerHTML = string;
 
     const line = Math.ceil(string.length / 14);
@@ -437,28 +446,31 @@ function jinggao(string, ms, style) {
             rect.right <= (window.innerWidth || document.documentElement.clientWidth)
         );
         if (viewport === false) {
-            rizhi(`你有 1 条未读完的 jinggao() 信息。 <button type="button" class="btn28" onclick="totop()">回到网页顶部</button>`);
+            rz(`你有 1 条未读完的 warn() 信息。 
+            <button type="button" class="btn28" onclick="totop()">
+            回到网页顶部
+            </button>`);
         }
     };
 
     setTimeout(() => {
-        window.style.animation = `jinggao- 0.7s forwards ${easing}`;
+        window.style.animation = `warn- 0.5s forwards ${easing}`;
         setTimeout(() => {
             document.body.removeChild(window);
-            close(window) // 移除窗口。
-        }, 700);
+            close(window)
+        }, 500);
     }, ms);
     setTimeout(visible, ms);
     return window;
 }
 
-// shuru 函数。
+// inp 函数。
 
-async function shuru(string, holder, style) {
+async function inp(string, holder, style) {
     return new Promise((resolve) => {
         if (string === null || string === undefined || holder === undefined || holder === null) {
             nullcount++;
-            cuowu(`所输入内容不能为 null 或 undefined。`, 3000);
+            fail(`所输入内容不能为 null 或 undefined。`, 3000);
             monitor();
             return 39;
         } else if (string.includes("\n")) {
@@ -470,25 +482,25 @@ async function shuru(string, holder, style) {
         let replaced1 = string.replace(/\s+/g, ``);
         let replaced2 = holder.replace(/\s+/g, ``);
         if (replaced1 === `` || replaced2 === ``) {
-            cuowu(`所输入内容不能为空字符串。`, 3000);
+            fail(`所输入内容不能为空字符串。`, 3000);
             return -39;
         } else if (style === undefined || style === null) style = theme;
         if (nullcount > 26) {
-            rizhi(`你已被禁止调用函数。`);
+            rz(`你已被禁止调用函数。`);
         }
 
         const window = document.createElement(`div`);
-        window.className = `shuru-window`;
+        window.className = `inp-window`;
         const square = document.createElement(`div`);
-        square.className = `shuru-square`;
+        square.className = `inp-square`;
         const icon = document.createElement(`img`);
-        icon.className = `shuru-icon`;
+        icon.className = `inp-icon`;
         const content = document.createElement(`div`);
-        content.className = `shuru-content`;
+        content.className = `inp-content`;
 
         const box = document.createElement(`input`);
         box.type = `text`;
-        box.className = `shuru-box`;
+        box.className = `inp-box`;
         box.placeholder = holder;
         if (theme === `Neon`) {
             window.style.backdropFilter = `blur(14px) saturate(250%)`;
@@ -496,14 +508,14 @@ async function shuru(string, holder, style) {
             box.style.backgroundFilter = `blur(14px) saturate(250%)`;
         }
 
-        create(window); // 添加窗口。
         document.body.appendChild(window);
         window.appendChild(square);
         window.appendChild(content);
         window.appendChild(box);
         square.appendChild(icon);
+        create(window);
         
-        icon.src = `images/Shuruchuangkou.png`;
+        icon.src = `images/Inp.png`;
         content.innerHTML = string;
 
         const line = Math.ceil(string.length / 14);
@@ -514,41 +526,41 @@ async function shuru(string, holder, style) {
         box.addEventListener(`keypress`, (event) => {
             if (event.key === `Enter`) {
                 const value = box.value;
-                window.style.animation = `shuru- 0.7s forwards ${easing}`;
+                window.style.animation = `inp- 0.5s forwards ${easing}`;
                 setTimeout(() => {
                     if (document.body.contains(window)) {
                         document.body.removeChild(window);
                         resolve(value);
-                        close(); // 移除窗口。
+                        close();
                     }
-                }, 700);
+                }, 500);
             }
         });
     });
 }
 
-// xuanze 函数。
+// xz 函数。
 
-async function xuanze(string, n, names, style) {
+async function xz(string, n, names, style) {
     return new Promise((resolve) => {
         if (n === null || n === undefined) n = 2;
-        else if (isNaN(n)) cuowu("所输入的选项数量必须为数字。", 3000);
+        else if (isNaN(n)) fail("所输入的选项数量必须为数字。", 3000);
         n = Math.ceil(Number(n));
         const array = Array.from(names);
         array.reverse();
 
         const window = document.createElement(`div`);
-        window.className = `xuanze-window`;
+        window.className = `xz-window`;
         const square = document.createElement(`div`);
-        square.className = `xuanze-square`;
+        square.className = `xz-square`;
         const icon = document.createElement(`img`);
-        icon.className = `xuanze-icon`;
+        icon.className = `xz-icon`;
         const content = document.createElement(`div`);
-        content.className = `xuanze-content`;
+        content.className = `xz-content`;
 
         if (string == null || string == undefined) {
             nullcount++;
-            cuowu(`所输入内容不能为 null 或 undefined。`, 3000);
+            fail(`所输入内容不能为 null 或 undefined。`, 3000);
             monitor();
             return 39;
         } else if (string.includes("\n")) {
@@ -558,24 +570,24 @@ async function xuanze(string, n, names, style) {
         }
         let replaced1 = string.replace(/\s+/g, ``);
         if (replaced1 === ``) {
-            cuowu(`所输入内容不能为空字符串。`, 3000);
+            fail(`所输入内容不能为空字符串。`, 3000);
             return -39;
         } else if (style === undefined || style === null) style = theme;
         if (nullcount > 26) {
-            rizhi(`你已被禁止调用函数。`);
+            rz(`你已被禁止调用函数。`);
         }
         if (theme === `Neon`) {
             window.style.backdropFilter = `blur(14px) saturate(250%)`;
             square.style.backdropFilter = `blur(14px) saturate(250%)`;
         }
 
-        create(window); // 添加窗口。
+        create(window);
         document.body.appendChild(window);
         window.appendChild(square);
         window.appendChild(content);
         square.appendChild(icon);
 
-        icon.src = `images/Xuanxiang.png`;
+        icon.src = `images/Sel.png`;
         content.innerHTML = string;
 
         const line = Math.ceil(string.length / 14);
@@ -625,21 +637,21 @@ async function xuanze(string, n, names, style) {
         }
 
         function rm() {
-            window.style.animation = `xuanze- 0.7s forwards ${easing}`; // 播放出场动画
+            window.style.animation = `xz- 0.5s forwards ${easing}`; // 播放出场动画
             setTimeout(() => {
                 document.body.removeChild(window);
-                close(window) // 移除窗口。
-            }, 700);
+                close(window)
+            }, 500);
         }
     });
 }
 
-// chuanshu 函数。
+// tran 函数。
 
-async function chuanshu(string, style) {
+async function tran(string, style) {
     if (string == null || string == undefined) {
         nullcount++;
-        cuowu(`所输入内容不能为 null 或 undefined。`, 3000);
+        fail(`所输入内容不能为 null 或 undefined。`, 3000);
         monitor();
         return 39;
     } else if (string.includes("\n")) {
@@ -649,36 +661,36 @@ async function chuanshu(string, style) {
     }
     let replaced = string.replace(/\s+/g, ``);
     if (replaced === ``) {
-        cuowu(`所输入内容不能为空字符串。`, 3000);
+        fail(`所输入内容不能为空字符串。`, 3000);
         return -39;
     } else if (style === undefined || style === null) style = theme;
     if (nullcount > 26) {
-        rizhi(`你已被禁止调用函数。`);
+        rz(`你已被禁止调用函数。`);
     }
 
     const window = document.createElement(`div`);
-    window.className = `chuanshu-window`;
+    window.className = `tran-window`;
     const square = document.createElement(`div`);
-    square.className = `chuanshu-square`;
+    square.className = `tran-square`;
     const icon = document.createElement(`img`);
-    icon.className = `chuanshu-icon`;
+    icon.className = `tran-icon`;
     const content = document.createElement(`div`);
-    content.className = `chuanshu-content`;
+    content.className = `tran-content`;
     const bar = document.createElement(`div`);
-    bar.className = `chuanshu-progressbar`;
+    bar.className = `tran-progressbar`;
     if (theme === `Neon`) {
         window.style.backdropFilter = `blur(14px) saturate(250%)`;
         square.style.backdropFilter = `blur(14px) saturate(250%)`;
     }
 
-    create(window); // 添加窗口。
+    create(window);
     document.body.appendChild(window);
     window.appendChild(square);
     window.appendChild(content);
     window.appendChild(bar);
     square.appendChild(icon);
 
-    icon.src = `images/Chuansong.png`;
+    icon.src = `images/Tran.png`;
     content.innerHTML = string;
 
     const line = Math.ceil(string.length / 14);
@@ -694,26 +706,29 @@ async function chuanshu(string, style) {
             rect.right <= (window.innerWidth || document.documentElement.clientWidth)
         );
         if (viewport === false) {
-            rizhi(`你有 1 条未读完的 chuanshu() 信息。 <button type="button" class="btn28" onclick="totop()">回到网页顶部</button>`);
+            rz(`你有 1 条未读完的 tran() 信息。 
+            <button type="button" class="btn28" onclick="totop()">
+            回到网页顶部
+            </button>`);
         }
     };
     
     setTimeout(() => {
-        window.style.animation = `chuanshu- 0.7s forwards ${easing}`;
+        window.style.animation = `tran- 0.5s forwards ${easing}`;
         setTimeout(() => {
             document.body.removeChild(window);
-            close(window) // 移除窗口。
-        }, 700);
+            close(window)
+        }, 500);
     }, 3000);
     setTimeout(visible, 3000);
 }
 
-// lianjie 函数。
+// lj 函数。
 
-async function lianjie(string, url, ignore, style) {
+async function lj(string, url, ignore, style) {
     if (string == null || string == undefined || url == null || url == undefined) {
         nullcount++;
-        cuowu(`所输入内容不能为 null 或 undefined。`, 3000);
+        fail(`所输入内容不能为 null 或 undefined。`, 3000);
         monitor();
         return 39;
     } else if (string.includes("\n")) {
@@ -727,26 +742,26 @@ async function lianjie(string, url, ignore, style) {
     if (replaced2.startsWith(`https`) !== true && ignore !== true) {
         url = `https://` + replaced2;
     } else if (urlEndings.some(ending => url.endsWith(ending)) === false) {
-        jinggao(`请检查你所输入的网址是否正确！`, 3000);
+        warn(`请检查你所输入的网址是否正确！`, 3000);
     }
     if (replaced1 === `` || replaced2 === ``) {
-        cuowu(`所输入内容不能为空字符串。`, 3000);
+        fail(`所输入内容不能为空字符串。`, 3000);
         return -39;
     } else if (style === undefined || style === null) style = theme;
     if (nullcount > 26) {
-        rizhi(`你已被禁止调用函数。`);
+        rz(`你已被禁止调用函数。`);
     }
 
     const window = document.createElement(`div`);
-    window.className = `lianjie-window`;
+    window.className = `lj-window`;
     const square = document.createElement(`div`);
-    square.className = `lianjie-square`;
+    square.className = `lj-square`;
     const icon = document.createElement(`img`);
-    icon.className = `lianjie-icon`;
+    icon.className = `lj-icon`;
     const content = document.createElement(`div`);
-    content.className = `lianjie-content`;
+    content.className = `lj-content`;
     const btn = document.createElement(`button`);
-    btn.className = `lianjie-btn`;
+    btn.className = `lj-btn`;
     var line_ = Math.ceil(url.size / 14);
     content.style.marginBottom = `calc(70px + ${line_ * lineHeight}vh)`;
     if (theme === `Neon`) {
@@ -754,13 +769,13 @@ async function lianjie(string, url, ignore, style) {
         square.style.backdropFilter = `blur(14px) saturate(250%)`;
     }
 
-    create(window); // 添加窗口。
+    create(window);
     document.body.appendChild(window);
     window.appendChild(square);
     window.appendChild(content);
     square.appendChild(icon);
 
-    icon.src = `images/Tiaozhuan.png`;
+    icon.src = `images/Link.png`;
     content.innerHTML = string;
     btn.innerHTML = `跳转至 ${url}`;
     content.appendChild(btn);
@@ -771,22 +786,22 @@ async function lianjie(string, url, ignore, style) {
 
     btn.onclick = () => {
         open(url, `_blank`, `width=1024, height=768`)
-        window.style.animation = `lianjie- 0.7s forwards ${easing}`;
+        window.style.animation = `lj- 0.5s forwards ${easing}`;
         setTimeout(() => {
             document.body.removeChild(window);
-            close(window) // 移除窗口。
-        }, 700);
+            close(window)
+        }, 500);
     }
     return window;
 }
 
-// zhongduan 函数。
+// zd 函数。
 
-async function zhongduan(string, style) {
+async function zd(string, style) {
     return new Promise(() => {
         if (string == null || string == undefined) {
             nullcount++;
-            cuowu(`所输入内容不能为 null 或 undefined。`, 3000);
+            fail(`所输入内容不能为 null 或 undefined。`, 3000);
             monitor();
             return 39;
         } else if (string.includes("\n")) {
@@ -796,33 +811,33 @@ async function zhongduan(string, style) {
         }
         let replaced = string.replace(/\s+/g, ``);
         if (replaced === "") {
-            cuowu(`所输入内容不能为空字符串。`, 3000);
+            fail(`所输入内容不能为空字符串。`, 3000);
             return -39;
         } else if (style === undefined || style === null) style = theme;
         if (nullcount > 26) {
-            rizhi(`你已被禁止调用函数。`);
+            rz(`你已被禁止调用函数。`);
             return 0;
         }
 
         const window = document.createElement(`div`);
-        window.className = `zhongduan-window`;
+        window.className = `zd-window`;
         const square = document.createElement(`div`);
-        square.className = `zhongduan-square`;
+        square.className = `zd-square`;
         const icon = document.createElement(`img`);
-        icon.className = `zhongduan-icon`;
+        icon.className = `zd-icon`;
         const content = document.createElement(`div`);
-        content.className = `zhongduan-content`;
+        content.className = `zd-content`;
         const box = document.createElement(`textarea`);
-        box.className = `zhongduan-box`;
+        box.className = `zd-box`;
         box.placeholder = `请输入命令……`;
         box.style.resize = `none`;
         const btn = document.createElement(`button`);
         btn.className = `btn26`;
         btn.textContent = "功能";
         btn.onclick = async () => {
-            let res = await xuanze("请选择功能。", 6, ["查看内容", "换行", "清空", "添加制表符", "复制", "粘贴"]);
+            let res = await xz("请选择功能。", 6, ["查看内容", "换行", "清空", "添加制表符", "复制", "粘贴"]);
             if (res === "查看内容") {
-                wenzi(box.value);
+                wz(box.value);
             } else if (res === "换行") {
                 box.value += "\n";
             } else if (res === "清空") {
@@ -832,9 +847,9 @@ async function zhongduan(string, style) {
             } else if (res === "复制") {
                 try {
                     await navigator.clipboard.writeText(box.value);
-                    chenggong("已复制到剪贴板。", 2000);
+                    cg("已复制到剪贴板。", 2000);
                 } catch (error) {
-                    cuowu(`复制失败。<br />${error}。`, 4000);
+                    fail(`复制失败。<br />${error}。`, 4000);
                 }
             } else if (res === "粘贴") {
                 try {
@@ -842,9 +857,9 @@ async function zhongduan(string, style) {
                     box.value += text;
                 } catch (error) {
                     if (error.name === "NotAllowedError") {
-                        cuowu("请先允许浏览器访问剪贴板。", 4000);
+                        fail("请先允许浏览器访问剪贴板。", 4000);
                     } else {
-                        cuowu(`粘贴失败。<br />${error}。`, 4000);
+                        fail(`粘贴失败。<br />${error}。`, 4000);
                     }
                 }
             }
@@ -855,7 +870,7 @@ async function zhongduan(string, style) {
             square.style.backdropFilter = `blur(14px) saturate(250%)`;
         }
 
-        create(window); // 添加窗口。
+        create(window);
         document.body.appendChild(window);
         window.appendChild(square);
         window.appendChild(content);
@@ -863,7 +878,7 @@ async function zhongduan(string, style) {
         window.appendChild(box);
         square.appendChild(icon);
 
-        icon.src = `images/Zhongduan.png`;
+        icon.src = `images/Com.png`;
         content.innerHTML = string;
 
         const line = Math.ceil(string.length / 14);
@@ -875,33 +890,34 @@ async function zhongduan(string, style) {
             if (event.key === `Enter`) {
                 const value = box.value.trim();
                 if (value === "") {
-                    cuowu(`所输入内容不能为空字符串。`, 3000);
+                    fail(`所输入内容不能为空字符串。`, 3000);
                     return;
                 }
-                try { rizhi(eval(value)); }
+                try { rz(eval(value)); }
                 catch (error) {
-                    cuowu(`命令执行失败。<br />${error}。`, 4000);
+                    if (error )
+                    fail(`来自控制台的错误：${error.message}。`, 4000);
                 }
-                window.style.animation = `zhongduan- 0.7s forwards ${easing}`;
+                window.style.animation = `zd- 0.5s forwards ${easing}`;
                 setTimeout(() => {
                     if (document.body.contains(window)) {
                         document.body.removeChild(window);
-                        close(); // 移除窗口。
+                        close();
                     }
-                }, 700);
+                }, 500);
             }
         });
     });
 }
 
-// wenzi 函数。
+// wz 函数。
 
-async function wenzi(string) {
+async function wz(string) {
     return new Promise((resolve) => {
         let clicked = false;
         if (string == null || string == undefined) {
             nullcount++;
-            cuowu(`所输入内容不能为 null 或 undefined。`, 3000);
+            fail(`所输入内容不能为 null 或 undefined。`, 3000);
             monitor();
             resolve(39);
             return;
@@ -909,22 +925,22 @@ async function wenzi(string) {
             string = string.replace(/\n/g, `<br />`);
         }
         if (nullcount > 26) {
-            rizhi(`你已被禁止调用函数。`);
+            rz(`你已被禁止调用函数。`);
             return 0;
         }
 
         const window = document.createElement(`div`);
-        window.className = `wenzi-window`;
+        window.className = `wz-window`;
         const txt = document.createElement(`pre`);
-        txt.className = `wenzi-content`;
+        txt.className = `wz-content`;
         txt.innerHTML = string;
         const btn = document.createElement("div");
-        btn.className = `wenzi-confirm`;
+        btn.className = `wz-confirm`;
         btn.textContent = "确定";
         const left = document.createElement(`div`);
-        left.className = `wenzi-left`;
+        left.className = `wz-left`;
         const right = document.createElement(`div`);
-        right.className = `wenzi-right`;
+        right.className = `wz-right`;
 
         document.body.appendChild(window);
         window.appendChild(left);
@@ -932,37 +948,37 @@ async function wenzi(string) {
         window.appendChild(txt);
         window.appendChild(btn);
 
-        window.style.animation = `--wenzi 0.7s forwards ${easing}`;
-        left.style.animation = `__solid 0.7s forwards ${easing}`;
-        right.style.animation = `__solid 0.7s forwards ${easing}`;
+        window.style.animation = `--wz 0.5s forwards ${easing}`;
+        left.style.animation = `__solid 0.5s forwards ${easing}`;
+        right.style.animation = `__solid 0.5s forwards ${easing}`;
         window.addEventListener(`animationend`, (e) => {
-            if (e.animationName === "--wenzi") {
-                window.style.animation = `-wenzi 0.7s forwards ${easing}`;
-                right.style.animation = `_right forwards 0.7s ${easing}`;
+            if (e.animationName === "--wz") {
+                window.style.animation = `-wz 0.5s forwards ${easing}`;
+                right.style.animation = `_right forwards 0.5s ${easing}`;
                 window.addEventListener(`animationend`, (f) => {
-                    if (f.animationName === "-wenzi") {
-                        txt.style.animation = `_txt forwards 0.7s ${easing}`;
-                        btn.style.animation = `_btn forwards 0.7s ${easing}`;
+                    if (f.animationName === "-wz") {
+                        txt.style.animation = `_txt forwards 0.5s ${easing}`;
+                        btn.style.animation = `_btn forwards 0.5s ${easing}`;
                     }
                 });
             }
 
             btn.onclick = () => {
                 if (clicked) {
-                    jinggao(`请勿多次点击。`, 2000);
+                    warn(`请勿多次点击。`, 2000);
                     return;
                 }
-                txt.style.animation = `txt_ 0.7s forwards ${easing}`;
-                btn.style.animation = `btn_ 0.7s forwards ${easing}`;
+                txt.style.animation = `txt_ 0.5s forwards ${easing}`;
+                btn.style.animation = `btn_ 0.5s forwards ${easing}`;
                 txt.addEventListener(`animationend`, (g) => {
                     if (g.animationName === "txt_") {
-                        window.style.animation = `wenzi- 0.7s forwards ${easing}`;
-                        left.style.animation = `left_ 0.7s forwards ${easing}`;
+                        window.style.animation = `wz- 0.5s forwards ${easing}`;
+                        left.style.animation = `left_ 0.5s forwards ${easing}`;
                         window.addEventListener(`animationend`, (h) => {
-                            if (h.animationName === "wenzi-") {
-                                window.style.animation = `wenzi-- 0.7s forwards ${easing}`;
-                                left.style.animation = `solid__ 0.7s forwards ${easing}`;
-                                right.style.animation = `solid__ 0.7s forwards ${easing}`;
+                            if (h.animationName === "wz-") {
+                                window.style.animation = `wz-- 0.5s forwards ${easing}`;
+                                left.style.animation = `solid__ 0.5s forwards ${easing}`;
+                                right.style.animation = `solid__ 0.5s forwards ${easing}`;
                             }
                         });
                     }

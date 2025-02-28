@@ -580,3 +580,90 @@ button {
     border: none;
     color: black;
 }
+
+.control-pad {
+    position: fixed;
+    top: 0;
+    left: calc(-30vw - 300px);
+    width: 30vw;
+    height: 100%;
+    background-color: #0c0d0c99;
+    color: white;
+    z-index: 100;
+}
+
+@keyframes ctrl- {
+    from {
+        left: calc(-30vw - 300px);
+        backdrop-filter: blur(0px) saturate(100%);
+    }
+    to {
+        left: 0;
+        backdrop-filter: blur(14px) saturate(250%);
+    }
+}
+
+@keyframes -ctrl {
+    from {
+        left: 0;
+        backdrop-filter: blur(14px) saturate(250%);
+    }
+    to {
+        left: calc(-30vw - 300px);
+        backdrop-filter: blur(0px) saturate(100%);
+    }
+}
+
+.zhedie0 {
+    position: absolute;
+    color: #ffffff;
+    margin-left: 30px;
+    font-size: 30px;
+    top: 5vh;
+}
+
+.zhedie0-1 {
+    position: absolute;
+    color: #ffffff;
+    margin-left: 30px;
+    font-size: 30px;
+    top: 15vh;
+}
+
+.zhedie1 {
+    color: #ffffff;
+    z-index: 999;
+    margin-left: 30px;
+    background-color: #4ebebe99;
+    padding: 7px 15px;
+    border-radius: 5px;
+    font-size: 30px;
+    border: none;
+}
+
+.zhedie1-1 {
+    color: #ffffff;
+    z-index: 999;
+    margin-left: 30px;
+    background-color: #42789b99;
+    padding: 7px 15px;
+    border-radius: 5px;
+    font-size: 30px;
+    border: none;
+}
+
+.zhedie2 {
+    color: #ffffff;
+    z-index: 999;
+    margin-left: 30px;
+    background-color: #31509099;
+    padding: 7px 15px;
+    border-radius: 5px;
+    font-size: 30px;
+    border: none;
+}
+
+.img1 {
+    width: 50px;
+    height: auto;
+}

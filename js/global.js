@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", function() {
         const el = document.querySelector(name);
         el.style.width = window.innerWidth + "px";
     }
-
     setInterval(() => {
         width(".top");
     }, 300);
