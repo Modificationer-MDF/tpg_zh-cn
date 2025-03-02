@@ -582,6 +582,7 @@ button {
 }
 
 .control-pad {
+    overflow-x: hidden;
     overflow-y: auto;
     position: fixed;
     top: 0;
@@ -681,6 +682,7 @@ button {
 .inpbox {
     z-index: 999;
     height: 4vh;
+    width: 285px;
     font-size: 25px;
     color: white;
     flex-grow: 1;
