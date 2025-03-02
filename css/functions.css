@@ -805,7 +805,7 @@
     opacity: 0;
     transition: opacity 0.5s;
     scrollbar-width: thin;
-    scrollbar-color: #ffffff #00000000;
+    scrollbar-color: #ffffff99 #00000000;
 }
 
 .wz-content::-webkit-scrollbar-thumb {

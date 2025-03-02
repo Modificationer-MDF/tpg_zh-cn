@@ -582,14 +582,25 @@ button {
 }
 
 .control-pad {
+    overflow-y: auto;
     position: fixed;
     top: 0;
     left: calc(-30vw - 300px);
-    width: 30vw;
+    width: 400px;
     height: 100%;
     background-color: #0c0d0c99;
     color: white;
     z-index: 100;
+    scrollbar-width: thin;
+    scrollbar-color: #ffffff99 #00000000;
+}
+
+.control-pad::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+}
+
+.control-pad::-webkit-scrollbar-thumb:hover {
+    background-color: #828282;
 }
 
 @keyframes ctrl- {
@@ -614,45 +625,44 @@ button {
     }
 }
 
-.zhedie0 {
-    position: absolute;
+.title {
     color: #ffffff;
-    margin-left: 30px;
-    font-size: 30px;
     top: 5vh;
+    text-align: center;
+    font-size: 30px;
 }
 
-.zhedie0-1 {
+.cont {
     position: absolute;
     color: #ffffff;
-    margin-left: 30px;
-    font-size: 30px;
-    top: 15vh;
+    top: 10vh;
+    left: 15px;
+    font-size: 25px;
 }
 
-.zhedie1 {
+.zd1 {
     color: #ffffff;
     z-index: 999;
     margin-left: 30px;
     background-color: #4ebebe99;
     padding: 7px 15px;
     border-radius: 5px;
-    font-size: 30px;
+    font-size: 25px;
     border: none;
 }
 
-.zhedie1-1 {
+.zd2 {
     color: #ffffff;
     z-index: 999;
     margin-left: 30px;
     background-color: #42789b99;
     padding: 7px 15px;
     border-radius: 5px;
-    font-size: 30px;
+    font-size: 25px;
     border: none;
 }
 
-.zhedie2 {
+.zd3 {
     color: #ffffff;
     z-index: 999;
     margin-left: 30px;
@@ -663,7 +673,21 @@ button {
     border: none;
 }
 
-.img1 {
+.img {
     width: 50px;
     height: auto;
+}
+
+.inpbox {
+    z-index: 999;
+    height: 4vh;
+    font-size: 25px;
+    color: white;
+    flex-grow: 1;
+    word-break: break-word;
+    background-color: #00000099;
+    font-family: "basic";
+    border: none;
+    border-radius: 5px;
+    padding: 7px 15px;
 }

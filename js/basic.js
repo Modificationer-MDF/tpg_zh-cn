@@ -1,4 +1,10 @@
-let flag = false;
+function urcc(f, c) {
+    const cz = Array.from(f.children).find((child) =>
+        child.className === c.className && // 类名相同。
+        child.style.top === c.style.top); // top 值相同。
+    if (cz) cz.innerHTML = c.innerHTML;
+    else f.appendChild(c);
+}
 /* 第一部分。 */
 document.addEventListener(`DOMContentLoaded`, () => {
     const h1 = document.querySelector(`.head1`); // h1 标签。
@@ -28,8 +34,9 @@ document.addEventListener(`DOMContentLoaded`, () => {
             f3.style.animation = `_head5 0.5s forwards ${easing}`;
         }
     });
-    const ctrl = document.getElementById("ctrl");
+    const ctrl = document.querySelector(".control-pad");
     let moved = false;
+    fn4();
 
     document.addEventListener("mousemove", function (event) {
         let width = ctrl.getBoundingClientRect().width;
@@ -159,11 +166,6 @@ function fn1() {
         await wz(`
         最后，感谢你使用 The Play Games！
         <br /> （按 [确定] 继续。）`);
-        await info(`你可以在 [函数展示 -> 设置] 中应用更现代化的 Neon 主题！当前主题：${theme}。`, 4000);
-        let w = await info("点击该窗口跳转到设置界面。（该窗口将显示 5 秒）", 5000);
-        w.onclick = () => {
-            set()
-        };
     };
 
     const all = [
@@ -229,25 +231,25 @@ function fn2() {
     infoBtn.innerHTML = `info`;
     infoBtn.className = `btn1`;
     infoBtn.onclick = () => {
-        info("你好，欢迎使用 The Play Games！", 3000);
+        info("你好，欢迎使用 The Play Games！", deftime);
     };
     const cgBtn = document.createElement(`button`);
     cgBtn.innerHTML = `cg`;
     cgBtn.className = `btn2`;
     cgBtn.onclick = () => {
-        cg("当你看到这条信息时，说明你已经成功运行了主函数区的这个函数。", 3000);
+        cg("当你看到这条信息时，说明你已经成功运行了主函数区的这个函数。", deftime);
     };
     const failBtn = document.createElement(`button`);
     failBtn.innerHTML = `fail`;
     failBtn.className = `btn3`;
     failBtn.onclick = () => {
-        fail("但有时候可能会报错，比如 NotAllowedError。", 3000);
+        fail("但有时候可能会报错，比如 NotAllowedError。", deftime);
     };
     const warnBtn = document.createElement(`button`);
     warnBtn.innerHTML = `warn`;
     warnBtn.className = `btn4`;
     warnBtn.onclick = () => {
-        warn("看到这种信息时，要格外注意了。", 3000);
+        warn("看到这种信息时，要格外注意了。", deftime);
     };
     const inpBtn = document.createElement(`button`);
     inpBtn.innerHTML = `inp`;
@@ -268,13 +270,13 @@ function fn2() {
         var res = await xz("你对以上的函数有什么看法？", 4, ["很不错。", "还可以。", "一般。", "有待改进的空间。"]);
         switch (res) {
             case "很不错。":
-                await info("非常感谢！你还可以尝试其他的函数。");
+                await info("非常感谢！你还可以尝试其他的函数。", deftime);
                 break;
             case "还可以。":
-                await info("谢谢你的评价！");
+                await info("谢谢你的评价！", deftime);
                 break;
             case "一般。":
-                await info("我们可以做得更好。");
+                await info("我们可以做得更好。", deftime);
                 break;
             case "有待改进的空间。":
                 var r = await xz("你是否想向我反馈你的建议？", 2, ["是。", "否。"]);
@@ -282,7 +284,7 @@ function fn2() {
                     await lj("点击以下链接反馈。", "mailto://Feng_14@outlook.com", true);
                     break;
                 } else {
-                    await info("好的，我们再见。");
+                    await info("好的，我们再见。", deftime);
                 }
         }
     };
@@ -322,10 +324,6 @@ function fn2() {
     undefinedBtn.onclick = () => {
         wz(undefined);
     };
-    const settings = document.createElement(`button`);
-    settings.innerHTML = `设置`;
-    settings.className = `btn24`;
-    settings.onclick = async () => { set() };
     const imp = document.createElement(`button`);
     imp.textContent = `wz`;
     imp.className = `btn22`;
@@ -346,7 +344,6 @@ function fn2() {
         imp,
         Fn_1,
         Fn_2,
-        settings,
         nullBtn,
         undefinedBtn,
     ];
@@ -355,8 +352,8 @@ function fn2() {
     div2.style.display = `none`;
     div3.style.display = `none`;
     all.forEach(btn => {
-        btn.type = `button`;
-        btn.style.display = `none`;
+        btn.type = "button";
+        btn.style.display = "none";
     });
 
     if (div.children.length <= 1) {
@@ -385,7 +382,7 @@ function fn2() {
             all.forEach(btn => {
                 btn.style.display = `block`;
                 btn.style.color = "#ffffff";
-                btn.style.opacity = `0`; // 初始化为 0 。
+                btn.style.opacity = "0";
                 btn.style.transition = `opacity 0.5s ${easing}`;
             });
             div1.style.display = `block`;
@@ -399,7 +396,7 @@ function fn2() {
             div3.style.transition = `opacity 0.5s ${easing}`;
             setTimeout(() => {
                 all.forEach(btn => {
-                    btn.style.opacity = `1`; // 改变为 1，触发过渡。
+                    btn.style.opacity = `1`;
                 });
                 div1.style.opacity = `1`;
                 div2.style.opacity = `1`;
@@ -409,15 +406,16 @@ function fn2() {
     });
 }
 
+let flag = false;
 async function fn3() {
     if (!flag) {
         await warn(`从 0.7 版本开始，如果电脑装有 360 杀毒软件，可能会提示你下载的文件可能有病毒。但是，这是误判。`, 5000);
         let a = await xz(`你确定要下载吗？`, 2, [`是。`, `否。`]);
         if (a == "是。") {
-            await cg(`已打开。`, 2000);
+            await cg(`已打开。`, deftime);
             flag = true;
         } else {
-            await fail(`你终止了下载操作。`, 3000);
+            await fail(`你终止了下载操作。`, deftime);
             return -39;
         }
     }
@@ -498,61 +496,6 @@ async function fn3() {
     });
 }
 
-async function set() {
-    let arr = await xz(`你要修改哪些设置？`, 2, [`重新设置主题。`, `修改特殊变量的值。`]);
-    if (arr === `重新设置主题。`) {
-        let set = await xz(`请选择以下函数使用的主题。`, 2, [`Aero`, `Neon`]);
-        if (set === `Aero`) {
-            if (theme === `Aero`) {
-                warn(`你已经在使用 Aero 主题。`, 3000);
-                return 0;
-            }
-            theme = `Aero`;
-            info(`已切换到 Aero 主题。`, 2000);
-        } else {
-            if (theme === `Neon`) {
-                warn(`你已经在使用 Neon 主题。`, 3000);
-                return 0;
-            }
-            theme = `Neon`;
-            info(`已切换到 Neon 主题。`, 2000);
-        }
-    } else if (arr === `修改特殊变量的值。`) {
-        let set = await xz(`请选择以下特殊变量。`, 3, [`nullcount`, `rznum`, `easing`]);
-        if (set === `nullcount`) {
-            let count = await inp(`请输入 nullcount 的值。`, `在此输入。`);
-            count = Number(count);
-            if (count.isNaN) {
-                fail(`请输入一个 number 类型的数字。而非 ${typeof count} 类型。`, 3000);
-                return 0;
-            }
-            nullcount = count;
-            info(`nullcount 已被设置为 ${count}。`, 2000);
-        } else if (set === `rznum`) {
-            let count = await inp(`请输入 rznum 的值。`, `在此输入。`);
-            count = Number(count);
-            if (count.isNaN) {
-                fail(`请输入一个数字。而非 ${typeof count} 类型。`, 3000);
-                return 0;
-            }
-            rznum = count;
-            info(`rznum 已被设置为 ${count}。`, 2000);
-        } else if (set === `easing`) {
-            let ease = await inp(`请输入 easing 的值。`, `在此输入。`);
-            const components = ease.split(",");
-            let check = ease.startsWith("cubic-bezier(") &&
-                ease.endsWith(")") &&
-                components.length === 4;
-            if (!check) {
-                fail(`请输入一个合法的 cubic-bezier 函数。例如：cubic-bezier(0.33, 1, 0.68, 1)。`, 3000);
-                return 0;
-            }
-            easing = ease;
-            info(`easing 已被设置为 ${ease}。`, 2000);
-        }
-    }
-}
-
 function totop() {
     window.scrollTo({
         top: 0,
@@ -560,57 +503,280 @@ function totop() {
     });
 }
 
-function zd(s) {
+function zhan(s) {
     const t = s.pop();
     s.push(t);
     return t;
 }
 
 function fn4() {
-    let stack = [];
-    stack.push(0);
-    const ctrl = document.getElementById("ctrl");
-    const oc1 = document.getElementById("oc1");
-    const oc2 = document.getElementById("oc2");
+    const ctrl = document.querySelector(".control-pad");
+    const title = document.createElement("p");
+    title.innerHTML = "设置和控制台";
+    title.className = "title";
 
-    const img = document.createElement("img");
-    img.src = "images/Next.png"
-    img.className = "img1";
+    const zt = document.createElement("p");
+    zt.innerHTML = `主题`;
+    zt.className = "cont";
+    const a = document.createElement("button");
+    a.type = "button";
+    a.innerHTML = "Aero";
+    a.className = "zd1";
+    a.onclick = () => {
+        if (theme === "Aero") {
+            warn("你已经在使用 Aero 主题。", deftime);
+        } else {
+            theme = "Aero";
+            info("已切换到 Aero 主题。", deftime);
+        }
+    };
+    const n = document.createElement("button");
+    n.type = "button";
+    n.innerHTML = "Neon";
+    n.className = "zd2";
+    n.onclick = () => {
+        if (theme === "Neon") {
+            warn("你已经在使用 Neon 主题。", deftime);
+        } else {
+            theme = "Neon";
+            info("已切换到 Neon 主题。", deftime);
+        }
+    };
 
-    const content1 = document.createElement("div");
-    content1.className = "zhedie0";
-    content1.innerHTML = "调用函数。";
-    const btn1 = document.createElement("button");
-    btn1.className = "zhedie1";
-    btn1.onclick = () => {
-        stack.push(1);
+    const nullc = document.createElement("p");
+    nullc.innerHTML = `nullcount`;
+    nullc.className = "cont";
+    nullc.style.top = "20vh";
+    const inp1 = document.createElement("input");
+    let f1 = false;
+    inp1.type = "number";
+    inp1.value = nullcount;
+    inp1.className = "inpbox";
+    inp1.onclick = () => {
+        if (f1 === false) {
+            warn("nullcount 只能为正整数。", deftime);
+            f1 = true;
+        }
+    };
+    inp1.addEventListener("keypress", (event) => {
+        if (event.key === "Enter") {
+            if (Number(inp1.value) < 0) fail("请输入一个大于等于 0 的数字。", deftime);
+            else if (Number(inp1.value) % 1 !== 0) fail("请输入一个整数。", deftime);
+            else {
+                nullcount = Number(inp1.value);
+                info(`nullcount 已被设置为 ${nullcount}。`, deftime);
+            }
+        }
+    });
+
+    const eas = document.createElement("p");
+    eas.innerHTML = "easing";
+    eas.className = "cont";
+    eas.style.top = "30vh";
+    const inp2 = document.createElement("input");
+    let f2 = false;
+    inp2.type = "text";
+    inp2.className = "inpbox";
+    inp2.value = easing;
+    inp2.onclick = () => {
+        if (f2 === false) {
+            warn("cubic-bezier 函数的格式是 cubic-bezier(x1, y1, x2, y2)。", 6000);
+            f2 = true;
+        }
+    };
+    inp2.addEventListener("keypress", (event) => {
+        if (event.key === "Enter") {
+            if (!(inp2.value.startsWith("cubic-bezier(") && inp2.value.endsWith(")"))) {
+                fail("请输入一个合法的 cubic-bezier 函数。", deftime);
+            } else {
+                easing = inp2.value;
+                info(`easing 已被设置为 ${easing}。`, deftime);
+            }
+        }
+    });
+
+    const mrms = document.createElement("p");
+    mrms.innerHTML = "窗口默认停留时间";
+    mrms.className = "cont";
+    mrms.style.top = "40vh";
+    const inp3 = document.createElement("input");
+    let f3 = false;
+    inp3.type = "number";
+    inp3.value = deftime;
+    inp3.className = "inpbox";
+    inp3.onclick = () => {
+        if (f3 === false) {
+            warn("窗口默认停留时间只能为正数，且单位为毫秒。", deftime);
+            f3 = true;
+        }
+    };
+    inp3.addEventListener("keypress", (event) => {
+        if (event.key === "Enter") {
+            if (Number(inp3.value) < 500) fail("请输入一个大于等于 500 的数字。", deftime);
+            else {
+                deftime = Number(inp3.value);
+                info(`deftime 已被设置为 ${deftime} 毫秒。`, deftime);
+            }
+        }
+    });
+
+    const defw = document.createElement("p");
+    defw.innerHTML = "Link 打开窗口的宽度";
+    defw.className = "cont";
+    defw.style.top = "50vh";
+    const inp4 = document.createElement("input");
+    let f4 = false;
+    inp4.type = "number";
+    inp4.value = defwid;
+    inp4.className = "inpbox";
+    inp4.onclick = () => {
+        if (f4 === false) {
+            warn("Link 打开窗口的宽度只能为正整数。", deftime);
+            f4 = true;
+        }
+    };
+    inp4.addEventListener("keypress", (event) => {
+        if (event.key === "Enter") {
+            if (Number(inp4.value) < 0) fail("请输入一个大于等于 0 的数字。", deftime);
+            else if (Number(inp4.value) % 1 !== 0) fail("请输入一个整数。", deftime);
+            else {
+                defwid = Number(inp4.value);
+                info(`defwid 已被设置为 ${defwid}。`, deftime);
+            }
+        }
+    });
+
+    const defh = document.createElement("p");
+    defh.innerHTML = "Link 打开窗口的高度";
+    defh.className = "cont";
+    defh.style.top = "60vh";
+    const inp5 = document.createElement("input");
+    let f5 = false;
+    inp5.type = "number";
+    inp5.value = defhei;
+    inp5.className = "inpbox";
+    inp5.onclick = () => {
+        if (f5 === false) {
+            warn("Link 打开窗口的高度只能为正整数。", deftime);
+            f5 = true;
+        }
+    };
+    inp5.addEventListener("keypress", (event) => {
+        if (event.key === "Enter") {
+            if (Number(inp5.value) < 0) fail("请输入一个大于等于 0 的数字。", deftime);
+            else if (Number(inp5.value) % 1 !== 0) fail("请输入一个整数。", deftime);
+            else {
+                defhei = Number(inp5.value);
+                info(`defhei 已被设置为 ${defhei}。`, deftime);
+            }
+        }
+    });
+
+    ctrl.appendChild(title);
+    ctrl.appendChild(zt);
+    ctrl.appendChild(eas);
+    ctrl.appendChild(nullc);
+    ctrl.appendChild(mrms);
+    ctrl.appendChild(defw);
+    ctrl.appendChild(defh);
+    zt.appendChild(a);
+    zt.appendChild(n);
+    nullc.appendChild(inp1);
+    eas.appendChild(inp2);
+    mrms.appendChild(inp3);
+    defw.appendChild(inp4);
+    defh.appendChild(inp5);
+}
+
+function fn5() {
+    const ctrl = document.querySelector(".control-pad");
+    var v1 = 0;
+    var v2 = 0;
+    var v3 = 0;
+    var v4 = 0;
+    var v5 = 0;
+    var v6 = 0;
+    var v7 = 0;
+    var v8 = 0;
+    var v9 = 0;
+
+    // 计算各个窗口的数量
+    for (let i = 0; i <= windows.length - 1; i++) {
+        if (windows[i].className === "info-window") v1++;
+        else if (windows[i].className === "cg-window") v2++;
+        else if (windows[i].className === "fail-window") v3++;
+        else if (windows[i].className === "warn-window") v4++;
+        else if (windows[i].className === "inp-window") v5++;
+        else if (windows[i].className === "tran-window") v6++;
+        else if (windows[i].className === "xz-window") v7++;
+        else if (windows[i].className === "lj-window") v8++;
+        else if (windows[i].className === "zd-window") v9++;
     }
 
-    const content2 = document.createElement("div");
-    content2.className = "zhedie0-1";
-    content2.innerHTML = "演示函数。";
-    const btn2 = document.createElement("button");
-    btn2.className = "zhedie1";
-    btn2.onclick = () => {
-        stack.push(2);
-    }
+    const infoc = document.createElement("div");
+    infoc.innerHTML = `Info 窗口数量： ${v1}。`;
+    infoc.className = "cont";
+    infoc.style.top = "75vh";
+    infoc.style.color = "#18a689";
 
-    const content3 = document.createElement("div");
-    content3.className = "zhedie0-1";
-    content3.style.top = "25vh";
-    content3.innerHTML = "查看函数使用情况";
-    const btn3 = document.createElement("button");
-    btn3.className = "zhedie1";
-    btn3.onclick = () => {
-        stack.push(3);
-    }
+    const cgc = document.createElement("div");
+    cgc.innerHTML = `Cg 窗口数量： ${v2}。`;
+    cgc.className = "cont";
+    cgc.style.top = "80vh";
+    cgc.style.color = "#1d5837";
 
-    if (zd(stack) == 1) {
-        // 懒了。
-    }
-    else if (zd(stack) == 2) {
-        // 懒了。
-    } else if (zd(stack) == 3) {
-        // 懒了。
-    }
+    const failc = document.createElement("div");
+    failc.innerHTML = `Fail 窗口数量： ${v3}。`;
+    failc.className = "cont";
+    failc.style.top = "85vh";
+    failc.style.color = "#791e1d";
+
+    const warnc = document.createElement("div");
+    warnc.innerHTML = `Warn 窗口数量： ${v4}。`;
+    warnc.className = "cont";
+    warnc.style.top = "90vh";
+    warnc.style.color = "#847829";
+
+    const inpc = document.createElement("div");
+    inpc.innerHTML = `Inp 窗口数量： ${v5}。`;
+    inpc.className = "cont";
+    inpc.style.top = "95vh";
+    inpc.style.color = "#235087";
+
+    const tranc = document.createElement("div");
+    tranc.innerHTML = `Tran 窗口数量： ${v6}。`;
+    tranc.className = "cont";
+    tranc.style.top = "100vh";
+    tranc.style.color = "#9e3389";
+
+    const xzc = document.createElement("div");
+    xzc.innerHTML = `Xz 窗口数量： ${v7}。`;
+    xzc.className = "cont";
+    xzc.style.top = "105vh";
+    xzc.style.color = "#7527a4";
+
+    const ljc = document.createElement("div");
+    ljc.innerHTML = `Lj 窗口数量： ${v8}。`;
+    ljc.className = "cont";
+    ljc.style.top = "110vh";
+    ljc.style.color = "#a6580d";
+
+    const zdc = document.createElement("div");
+    zdc.innerHTML = `Zd 窗口数量： ${v9}。`;
+    zdc.className = "cont";
+    zdc.style.top = "115vh";
+    zdc.style.padding = "7px 15px";
+    zdc.style.borderRadius = "5px";
+    zdc.style.backgroundColor = "#ffffffb9";
+    zdc.style.color = "#191818";
+
+    urcc(ctrl, infoc);
+    urcc(ctrl, cgc);
+    urcc(ctrl, failc);
+    urcc(ctrl, warnc);
+    urcc(ctrl, inpc);
+    urcc(ctrl, tranc);
+    urcc(ctrl, xzc);
+    urcc(ctrl, ljc);
+    urcc(ctrl, zdc);
 }

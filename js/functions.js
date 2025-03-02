@@ -13,7 +13,7 @@ let urlEndings = [
 
 // 更新窗口位置的函数。
 
-function updateSelectedWindowPos() {
+function pos() {
     let total = 7 * window.innerHeight / 100;
     windows.forEach((window) => {
         const wh = window.offsetHeight;
@@ -23,16 +23,14 @@ function updateSelectedWindowPos() {
     });
 }
 
-// 创建窗口函数和关闭窗口函数。
-
 function create(window) {
     windows.push(window);
-    updateSelectedWindowPos(); // 更新所有窗口位置。
+    pos(); // 更新所有窗口位置。
 }
 
 function close(window) {
     windows = windows.filter(win => win !== window);
-    updateSelectedWindowPos(); // 更新所有窗口位置。
+    pos(); // 更新所有窗口位置。
 }
 
 function monitor() {
@@ -785,7 +783,7 @@ async function lj(string, url, ignore, style) {
     content.style.height = `${line * lineHeight}px`;
 
     btn.onclick = () => {
-        open(url, `_blank`, `width=1024, height=768`)
+        open(url, `_blank`, `width=${defwid}, height=${defhei}`)
         window.style.animation = `lj- 0.5s forwards ${easing}`;
         setTimeout(() => {
             document.body.removeChild(window);
@@ -798,7 +796,7 @@ async function lj(string, url, ignore, style) {
 // zd 函数。
 
 async function zd(string, style) {
-    return new Promise(() => {
+    return new Promise((resolve) => {
         if (string == null || string == undefined) {
             nullcount++;
             fail(`所输入内容不能为 null 或 undefined。`, 3000);
@@ -833,36 +831,27 @@ async function zd(string, style) {
         box.style.resize = `none`;
         const btn = document.createElement(`button`);
         btn.className = `btn26`;
-        btn.textContent = "功能";
+        btn.textContent = "确定";
         btn.onclick = async () => {
-            let res = await xz("请选择功能。", 6, ["查看内容", "换行", "清空", "添加制表符", "复制", "粘贴"]);
-            if (res === "查看内容") {
-                wz(box.value);
-            } else if (res === "换行") {
-                box.value += "\n";
-            } else if (res === "清空") {
-                box.value = "";
-            } else if (res === "添加制表符") {
-                box.value += "\t";
-            } else if (res === "复制") {
-                try {
-                    await navigator.clipboard.writeText(box.value);
-                    cg("已复制到剪贴板。", 2000);
-                } catch (error) {
-                    fail(`复制失败。<br />${error}。`, 4000);
-                }
-            } else if (res === "粘贴") {
-                try {
-                    const text = await navigator.clipboard.readText();
-                    box.value += text;
-                } catch (error) {
-                    if (error.name === "NotAllowedError") {
-                        fail("请先允许浏览器访问剪贴板。", 4000);
-                    } else {
-                        fail(`粘贴失败。<br />${error}。`, 4000);
-                    }
-                }
+            const value = box.value.trim();
+            if (value === "") {
+                fail(`所输入内容不能为空字符串。`, 3000);
+                return;
             }
+            try {
+                resolve(rz(eval(value)));
+            }
+            catch (error) {
+                fail(`来自控制台的错误：${error.message}。`, 4000);
+                resolve();
+            }
+            window.style.animation = `zd- 0.5s forwards ${easing}`;
+            setTimeout(() => {
+                if (document.body.contains(window)) {
+                    document.body.removeChild(window);
+                    close();
+                }
+            }, 500);
         };
 
         if (theme === `Neon`) {
@@ -886,27 +875,6 @@ async function zd(string, style) {
         content.style.height = `${line * lineHeight}px`;
 
         box.focus();
-        box.addEventListener(`keypress`, (event) => {
-            if (event.key === `Enter`) {
-                const value = box.value.trim();
-                if (value === "") {
-                    fail(`所输入内容不能为空字符串。`, 3000);
-                    return;
-                }
-                try { rz(eval(value)); }
-                catch (error) {
-                    if (error )
-                    fail(`来自控制台的错误：${error.message}。`, 4000);
-                }
-                window.style.animation = `zd- 0.5s forwards ${easing}`;
-                setTimeout(() => {
-                    if (document.body.contains(window)) {
-                        document.body.removeChild(window);
-                        close();
-                    }
-                }, 500);
-            }
-        });
     });
 }
 

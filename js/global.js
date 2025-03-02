@@ -5,5 +5,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     setInterval(() => {
         width(".top");
-    }, 300);
+        fn5();
+    }, 140);
 });

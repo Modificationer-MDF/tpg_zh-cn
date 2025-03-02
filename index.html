@@ -18,7 +18,7 @@
                     var end = performance.now();
                     document.fonts.add(f);
                     cg(`成功加载字体：Basic Modification Light。用时 ${((end - start) / 1000).toFixed(3)} 秒。`, 3000);
-                }).catch(function(error) {
+                }).catch(function (error) {
                     fail(`字体加载失败。（${error}）请打开 [控制台（F12） -> 网络] 查看详情。`, 3000);
                 });
                 font2.load().then(function(f) {
@@ -50,6 +50,9 @@
 
             let theme = "Aero";
             let easing = "cubic-bezier(0.33, 1, 0.68, 1)";
+            let deftime = 3000;
+            let defwid = 1024;
+            let defhei = 768;
 
             var taboos = [
                 "fuck", "wcsndm", "damn", "shit", "idiot", "fa q", "sb", "nigger", "wdnmd", "faggot", "bitch", "asshole", "retard", "cnm", "faq", "shabi", "baka", "woc",
@@ -105,20 +108,7 @@
         <div class="head">
             <p style="font-size: 25px; text-align: center;">Version 0.9</p>
         </div>
-        <div class="control-pad" id="ctrl">
-            <div class="zhedie0" id="oc1">
-                控制函数。
-                <button type="button" class="zhedie1" onclick="fn4()">
-                    <img src="images/Next.png" class="img1">
-                </button>
-            </div>
-            <div class="zhedie0-1" id="oc2">
-                设置。
-                <button type="button" class="zhedie1-1" onclick="fn5()">
-                    <img src="images/Next.png" class="img1">
-                </button>
-            </div>
-        </div>
+        <div class="control-pad"></div>
         <div class="top">
             <h1 class="head1">The Play Games</h1>
             <h2 class="head2">Let the game-playing easier.</h2>
@@ -126,7 +116,7 @@
                 十大函数展示
                 <button type="button" class="dakai" id="1" onclick="fn1()">打开</button>
             </div>
-            <div class="head4" onclick="fn2()">
+            <div class="head4">
                 演示与调试
                 <button type="button" class="dakai" id="2" onclick="fn2()">打开</button>
             </div>
