@@ -17,16 +17,16 @@
                 font1.load().then(function(f) {
                     var end = performance.now();
                     document.fonts.add(f);
-                    cg(`成功加载字体：Basic Modification Light。用时 ${((end - start) / 1000).toFixed(3)} 秒。`, 3000);
+                    cg(`成功加载字体：Basic Modification Light。用时 ${((end - start) / 1000).toFixed(3)} 秒。`, deftime);
                 }).catch(function (error) {
-                    fail(`字体加载失败。（${error}）请打开 [控制台（F12） -> 网络] 查看详情。`, 3000);
+                    fail(`字体加载失败。（${error}）请打开 [控制台（F12） -> 网络] 查看详情。`, deftime);
                 });
                 font2.load().then(function(f) {
                     var end = performance.now();
                     document.fonts.add(f);
-                    cg(`成功加载字体：Lanubu Light。用时 ${((end - start) / 1000).toFixed(3)} 秒。`, 3000);
+                    cg(`成功加载字体：Lanubu Light。用时 ${((end - start) / 1000).toFixed(3)} 秒。`, deftime);
                 }).catch(function(error) {
-                    fail(`字体加载失败。（${error}）请打开 [控制台（F12） -> 网络] 查看详情。`, 3000);
+                    fail(`字体加载失败。（${error}）请打开 [控制台（F12） -> 网络] 查看详情。`, deftime);
                 });
             });
         </script>
@@ -37,9 +37,9 @@
                 let p = await Notification.requestPermission();
                 try {
                     if (p === "granted") {
-                        cg("已授予通知权限。", 3000);
+                        cg("已授予通知权限。", deftime);
                     } else {
-                        warn("通知权限被拒绝。", 3000);
+                        warn("通知权限被拒绝。", deftime);
                     }
                 } catch (error) {
                     fail(`在请求权限时遇到了以下的错误：${error}。`, 4000);
@@ -49,7 +49,7 @@
             var b = new Notification("通知。");
 
             let theme = "Aero";
-            let easing = "cubic-bezier(0.33, 1, 0.68, 1)";
+            let easing = "cubic-bezier(0.16, 1, 0.3, 1)";
             let deftime = 3000;
             let defwid = 1024;
             let defhei = 768;

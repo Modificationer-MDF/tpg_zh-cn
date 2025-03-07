@@ -83,7 +83,6 @@ pre {
 
 .head1 {
     font-size: 60px;
-    animation: -head1 1.4s forwards cubic-bezier(0.33, 1, 0.68, 1);
 }
 
 @keyframes -head2 {
@@ -687,7 +686,7 @@ button {
     color: white;
     flex-grow: 1;
     word-break: break-word;
-    background-color: #00000099;
+    background-color: #00000079;
     font-family: "basic";
     border: none;
     border-radius: 5px;

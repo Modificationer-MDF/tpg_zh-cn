@@ -6,7 +6,6 @@
     right: 0px;
     top: 7vh;
     background-color: #18a68999;
-    animation: -info 0.5s forwards cubic-bezier(0.33, 1, 0.68, 1);
     font-size: 25px;
     flex-wrap: wrap;
     width: auto;
@@ -76,7 +75,6 @@
     right: 0px;
     top: 7vh;
     background-color: #1d583799;
-    animation: -cg 0.5s forwards cubic-bezier(0.33, 1, 0.68, 1);
     font-size: 25px;
     flex-wrap: wrap;
     width: auto;
@@ -146,7 +144,6 @@
     right: 0px;
     top: 7vh;
     background-color: #791e1d99;
-    animation: -fail 0.5s forwards cubic-bezier(0.33, 1, 0.68, 1);
     font-size: 25px;
     flex-wrap: wrap;
     width: auto;
@@ -216,7 +213,6 @@
     right: 0px;
     top: 7vh;
     background-color: #84782999;
-    animation: -warn 0.5s forwards cubic-bezier(0.33, 1, 0.68, 1);
     font-size: 25px;
     flex-wrap: wrap;
     width: auto;
@@ -287,7 +283,6 @@
     right: 0px;
     top: 7vh;
     background-color: #23508799;
-    animation: -inp 0.5s forwards cubic-bezier(0.33, 1, 0.68, 1);
     font-size: 25px;
     flex-wrap: wrap;
     width: auto;
@@ -366,7 +361,6 @@
     right: 0px;
     top: 7vh;
     background-color: #7527a499;
-    animation: -xz 0.5s forwards cubic-bezier(0.33, 1, 0.68, 1);
     font-size: 25px;
     flex-wrap: wrap;
     width: auto;
@@ -428,7 +422,6 @@
     right: 0px;
     top: 7vh;
     background-color: #9e338999;
-    animation: -tran 0.5s forwards cubic-bezier(0.33, 1, 0.68, 1);
     font-size: 25px;
     flex-wrap: wrap;
     width: auto;
@@ -498,7 +491,6 @@
     right: 0px;
     top: 7vh;
     background-color: #a6580d99;
-    animation: -lj 0.5s forwards cubic-bezier(0.33, 1, 0.68, 1);
     font-size: 25px;
     flex-wrap: wrap;
     width: auto;
@@ -573,7 +565,6 @@
     right: 0px;
     top: 7vh;
     background-color: #19181899;
-    animation: -zd 0.5s forwards cubic-bezier(0.33, 1, 0.68, 1);
     font-size: 25px;
     flex-wrap: wrap;
     width: auto;
@@ -803,7 +794,7 @@
     left: 20%;
     word-break: break-word;
     opacity: 0;
-    transition: opacity 0.5s;
+    transition: opacity 0.7s;
     scrollbar-width: thin;
     scrollbar-color: #ffffff99 #00000000;
 }
