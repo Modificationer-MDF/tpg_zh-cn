@@ -1,4 +1,5 @@
-﻿<!-- Website created by Modificationer-MDF. -->
+﻿<!-- 最后更新时间：2025 年 3 月 9 日。 -->
+<!-- Made by Modificationer-MDF. -->
 <!DOCTYPE html>
 <meta charset="utf-8">
 <html lang="zh-cn">
@@ -12,8 +13,9 @@
         <script>
             document.addEventListener("DOMContentLoaded", () => {
                 var start = performance.now();
-                var font1 = new FontFace('basic', 'url("fonts/Basic Modification Light.woff2")');
-                var font2 = new FontFace('lan', 'url("fonts/Lanubu Light.woff2")');
+                var font1 = new FontFace("basic", 'url("fonts/Basic Modification Light.woff2")');
+                var font2 = new FontFace("lan", 'url("fonts/Lanubu Light.woff2")');
+                var font3 = new FontFace("arno", 'url("fonts/Arno Pro Regular.woff2")');
                 font1.load().then(function(f) {
                     var end = performance.now();
                     document.fonts.add(f);
@@ -28,100 +30,37 @@
                 }).catch(function(error) {
                     fail(`字体加载失败。（${error}）请打开 [控制台（F12） -> 网络] 查看详情。`, deftime);
                 });
+                font3.load().then(function (f) {
+                    var end = performance.now();
+                    document.fonts.add(f);
+                    cg(`成功加载字体：Arno Pro Regular。用时 ${((end - start) / 1000).toFixed(3)} 秒。`, deftime);
+                }).catch(function (error) {
+                    fail(`字体加载失败。（${error}）请打开 [控制台（F12） -> 网络] 查看详情。`, deftime);
+                });
             });
-        </script>
-    </head>
-    <body>
-        <script>
-            async function a() {
-                let p = await Notification.requestPermission();
-                try {
-                    if (p === "granted") {
-                        cg("已授予通知权限。", deftime);
-                    } else {
-                        warn("通知权限被拒绝。", deftime);
-                    }
-                } catch (error) {
-                    fail(`在请求权限时遇到了以下的错误：${error}。`, 4000);
-                }
-            }
-            a();
-            var b = new Notification("通知。");
 
+            let mode = "Demo";
             let theme = "Aero";
             let easing = "cubic-bezier(0.16, 1, 0.3, 1)";
             let deftime = 3000;
             let defwid = 1024;
             let defhei = 768;
-
-            var taboos = [
-                "fuck", "wcsndm", "damn", "shit", "idiot", "fa q", "sb", "nigger", "wdnmd", "faggot", "bitch", "asshole", "retard", "cnm", "faq", "shabi", "baka", "woc",
-            ];
-            var zanghua = [
-                "傻逼", "操你妈", "我操", "卧槽", "尼玛", "我淦", "我阐述你的梦", "死妈", "好死", "傻比", "你妈逼", "你妈死了", "典", "急", "孝", "乐", "绷", "赢", "麻", "4000+", "死全家", "畜生"
-            ];
-            var tabu_ = [
-                "あほ", "あほう", "アホ", "アホウ", "阿呆", "くさ", "臭い", "くさい", "クサイ", "しね", "死ね", "シネ", "ばか", "バカ", "やろう", "野郎", "ヤロウ", "馬鹿",
-                "雑魚", "ざこ", "ザコ"
-            ];
-
-            function fn_1() {
-                xz("你知道吗？Do you know that?", 5, ["我知道。Yes I know.", "也不是很知道。Not quite know.", "不知道。Don't know.", "完全不知道。Definitely not.", "你在说什么？What do you mean?"]);
-                info("其实，你知道也可以，不知道也可以，最重要的是你回复了刚才的窗口。Actually, it's okey to know or not, but it's something that you replied the window recently.");
-            }
-
-            async function fn_2() {
-                var a = await inp("Never gonna give you up. Never gonna let you down. Never gonna run around and desert you. Never gonna make you cry. Never gonna say goodbye. Never gonna tell a lie and hurt you.", "Have something to say?");
-                a = a.toLowerCase();
-                if (taboos.some(word => a.includes(word)))  {
-                    await warn("Shut up, you are fucking retarded.", 2000);
-                    await info("Fuck your whole family, you ARE AN IDIOT!", 4000)
-                    var b = await xz("Are you an IDIOT?", 2, ["Yes, I am.", "No, I'm not."])
-                    if (b) {
-                        await cg("You truly know yourself well, do not you?", 2000);
-                    } else {
-                        await fail("Oh, in my opinion, you ARE.", 6666);
-                    }
-                } else if (zanghua.some(word => a.includes(word))) {
-                    await warn("闭嘴，我知道你想说什么。", 2000);
-                    await info("* 你 *，* 你全家，你真 ** 是个傻 *。", 4000);
-                    var b = await xz("你是个傻 * 吗？", 2, ["是的。", "不。"]);
-                    if (b) {
-                        await cg("你还真有自知之明啊！", 2000);
-                    } else {
-                        await fail("哦，在我看来，你是的。", 4444);
-                    }
-                } else if (tabu_.some(word => a.includes(word))) {
-                    await warn("（翻訳：DeepL） 黙れ、お前はクソいまいましい。", 2000);
-                    await info("家族全員くたばれ、お前はバカだ！", 4000)
-                    var b = await xz("お前はバカだ！", 2, ["イエス。", "ノー。"]);
-                    if (b) {
-                        await cg("お前は本当に知ってる！", 2000);
-                    } else {
-                        await fail("ああ、私の意見では、君ハソウだ。", 4444);
-                    }
-                } else {
-                    await info(`You said: "${a}".`);
-                }
-            }
         </script>
+    </head>
+    <body>
         <div class="head">
-            <p style="font-size: 25px; text-align: center;">Version 0.9</p>
+            <p style="font-size: 20px; text-align: center;">Version 0.9.2025.3</p>
         </div>
         <div class="control-pad"></div>
         <div class="top">
             <h1 class="head1">The Play Games</h1>
             <h2 class="head2">Let the game-playing easier.</h2>
             <div class="head3">
-                十大函数展示
-                <button type="button" class="dakai" id="1" onclick="fn1()">打开</button>
+                函数演示
+                <button type="button" class="dakai" id="1" onclick="fn0()">打开</button>
             </div>
             <div class="head4">
-                演示与调试
-                <button type="button" class="dakai" id="2" onclick="fn2()">打开</button>
-            </div>
-            <div class="head5">
-                The Play Games 版本
+                版本列表
                 <button type="button" class="dakai" id="3" onclick="fn3()">打开</button>
             </div>
         </div>

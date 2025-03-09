@@ -5,16 +5,21 @@ function urcc(f, c) {
     if (cz) cz.innerHTML = c.innerHTML;
     else f.appendChild(c);
 }
-/* 第一部分。 */
+
+function fn0() {
+    if (mode === "Play") fn1();
+    else fn2();
+}
+
 document.addEventListener(`DOMContentLoaded`, () => {
     const h1 = document.querySelector(`.head1`); // h1 标签。
     const h2 = document.querySelector(`.head2`); // h2 标签。
     const div = document.querySelector(`.top`); // 包含 h1 和 h2 的 div 标签。
     const head = document.querySelector(`.head`); // The Play Games 版本标签。
     const f1 = document.querySelector(`.head3`); // 功能按钮组。
-    const f2 = document.querySelector(`.head4`); // 功能按钮组。
-    const f3 = document.querySelector(`.head5`); // 功能按钮组。
+    const f3 = document.querySelector(`.head4`); // 功能按钮组。
 
+    h1.style.display = "block";
     h1.style.animation = `-head1 1.4s forwards ${easing}`;
     h1.addEventListener(`animationend`, (e) => {
         if (e.animationName === `-head1`) {
@@ -31,8 +36,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
     div.addEventListener(`animationend`, (e) => {
         if (e.animationName === `-top`) {
             f1.style.animation = `_head3 0.7s forwards ${easing}`;
-            f2.style.animation = `_head4 0.7s forwards ${easing}`;
-            f3.style.animation = `_head5 0.7s forwards ${easing}`;
+            f3.style.animation = `_head4 0.7s forwards ${easing}`;
         }
     });
     const ctrl = document.querySelector(".control-pad");
@@ -61,54 +65,54 @@ function fn1() {
     infoBtn.innerHTML = `info`;
     infoBtn.className = `btn1`;
     infoBtn.onclick = async () => {
-        let res = await inp(`输入你想显示在 info 窗口上的信息。`, `在此输入。`);
+        let res = await inp(`输入你想显示在 info() 上的信息。`, `在此输入。`);
         info(res);
     };
     const cgBtn = document.createElement(`button`);
     cgBtn.innerHTML = `cg`;
     cgBtn.className = `btn2`;
     cgBtn.onclick = async () => {
-        let res = await inp(`输入你想显示在 cg 窗口上的信息。`, `在此输入。`);
+        let res = await inp(`输入你想显示在 cg() 上的信息。`, `在此输入。`);
         cg(res);
     };
     const failBtn = document.createElement(`button`);
     failBtn.innerHTML = `fail`;
     failBtn.className = `btn3`;
     failBtn.onclick = async () => {
-        let res = await inp(`输入你想显示在 fail 窗口上的信息。`, `在此输入。`);
+        let res = await inp(`输入你想显示在 fail() 上的信息。`, `在此输入。`);
         fail(res);
     };
     const warnBtn = document.createElement(`button`);
     warnBtn.innerHTML = `warn`;
     warnBtn.className = `btn4`;
     warnBtn.onclick = async () => {
-        let res = inp(`输入你想显示在 warn 窗口上的信息。`, `在此输入。`);
+        let res = inp(`输入你想显示在 warn() 上的信息。`, `在此输入。`);
         warn(res);
     };
     const inpBtn = document.createElement(`button`);
     inpBtn.innerHTML = `inp`;
     inpBtn.className = `btn5`;
     inpBtn.onclick = async () => {
-        let res = await inp(`这就是 inp 窗口。`, `可以在这里输入一些文字。`);
+        let res = await inp(`这就是 inp() 。`, `可以在这里输入一些文字。`);
         info(`你输入了：“${res}”。`);
     };
     const tranBtn = document.createElement(`button`);
     tranBtn.innerHTML = `tran`;
     tranBtn.className = `btn6`;
     tranBtn.onclick = async () => {
-        let res = inp(`输入你想显示在 tran 窗口上的信息。`, `在此输入。`);
+        let res = inp(`输入你想显示在 tran() 上的信息。`, `在此输入。`);
         tran(res);
     };
     const xzBtn = document.createElement(`button`);
     xzBtn.innerHTML = `xz`;
     xzBtn.className = `btn7`;
     xzBtn.onclick = async () => {
-        let res = await inp(`输入你想显示在 xz 窗口上的信息。`, `在此输入。`);
-        let n = await inp(`请输入 xz 窗口上选项的数量。`, `在此输入。`);
+        let res = await inp(`输入你想显示在 xz() 上的信息。`, `在此输入。`);
+        let n = await inp(`请输入 xz() 上选项的数量。`, `在此输入。`);
         n = Number(n);
         let array = new Array(n);
         for (let i = 0; i <= n - 1; i++) {
-            array[i] = await inp(`请输入 xz 窗口上第 ${i + 1} 个选项。`, `在此输入。`);
+            array[i] = await inp(`请输入 xz() 上第 ${i + 1} 个选项。`, `在此输入。`);
         }
         xz(res, n, array);
     };
@@ -116,7 +120,7 @@ function fn1() {
     ljBtn.innerHTML = `lj`;
     ljBtn.className = `btn8`;
     ljBtn.onclick = async () => {
-        let res = await inp(`输入你想显示在 lj 窗口上的信息。`, `在此输入。`);
+        let res = await inp(`输入你想显示在 lj() 上的信息。`, `在此输入。`);
         let url = await inp(`请输入你要链接的地址。`);
         lj(res, url, false);
     };
@@ -124,43 +128,11 @@ function fn1() {
     wzBtn.innerHTML = `wz`;
     wzBtn.className = `btn22`;
     wzBtn.onclick = async () => {
-        let res = await inp(`输入你想显示在 wz 窗口上的信息。`, `在此输入。`);
+        let res = await inp(`输入你想显示在 wz() 上的信息。`, `在此输入。`);
         wz(res);
-    };
-    const rzBtn = document.createElement(`button`);
-    rzBtn.innerHTML = `日志`;
-    rzBtn.className = `btn25`;
-    rzBtn.onclick = async () => {
-        let date = new Date();
-        const day = String(date.getDate()).padStart(2, `0`);
-        const month = String(date.getMonth() + 1).padStart(2, `0`);
-        const year = date.getFullYear();
-        date = `${year} 年 ${month} 月 ${day} 日`;
-        await wz(`
-        我在这里写一下我开发该网页的日志吧。
-        <br /> （按 [确定] 继续。）`);
-        await wz(`
-        创建日期：2024 年（几月我忘了）；
-        <br /> 版本号：0.9 。
-        <br /> 你正在查看的是 ${date} 的版本。
-        <br /> （按 [确定] 继续。）`);
-        await wz(`
-        在开发过程中我遇到了很多困难，开发速度也非常缓慢。
-        <br /> 一周更新 1 次，只有周五（也许）、周六、周日有时间更新。（甚至微机课上都在检查网页）
-        <br /> 这些函数也可能会存在较多的 bug，但我会努力修复它们。`);
-        await wz(`
-        也不知道为什么，但我还是很开心。我的编程水平也得到了进步。
-        <br /> （按 [确定] 继续。）`);
-        await wz(`
-        我将会继续维护 The Play Games 的网页。但与此同时，主程序的下一次更新可能需要等到 2025 年。
-        <br /> （按 [确定] 继续。）`);
-        await wz(`
-        最后，感谢你使用 The Play Games！
-        <br /> （按 [确定] 继续。）`);
     };
 
     const all = [
-        rzBtn,
         infoBtn,
         cgBtn,
         failBtn,
@@ -205,7 +177,7 @@ function fn1() {
 }
 
 function fn2() {
-    const div = document.querySelector(`.head4`);
+    const div = document.querySelector(".head3");
     const div1 = document.createElement(`div`);
     div1.className = `div1`;
     div1.textContent = `主函数区`;
@@ -215,9 +187,7 @@ function fn2() {
     const div3 = document.createElement(`div`);
     div3.className = `div3`;
     div3.textContent = `调试区`;
-    const dakai = document.getElementById(`2`);
-    dakai.textContent = `查看。`;
-    dakai.style.width = `140px`;
+    const dakai = document.getElementById("1");
     const infoBtn = document.createElement(`button`);
     infoBtn.innerHTML = `info`;
     infoBtn.className = `btn1`;
@@ -261,13 +231,13 @@ function fn2() {
         var res = await xz("你对以上的函数有什么看法？", 4, ["很不错。", "还可以。", "一般。", "有待改进的空间。"]);
         switch (res) {
             case "很不错。":
-                await info("非常感谢！你还可以尝试其他的函数。", deftime);
+                info("非常感谢！你还可以尝试其他的函数。", deftime);
                 break;
             case "还可以。":
-                await info("谢谢你的评价！", deftime);
+                info("谢谢你的评价！", deftime);
                 break;
             case "一般。":
-                await info("我们可以做得更好。", deftime);
+                info("我们可以做得更好。", deftime);
                 break;
             case "有待改进的空间。":
                 var r = await xz("你是否想向我反馈你的建议？", 2, ["是。", "否。"]);
@@ -275,7 +245,7 @@ function fn2() {
                     await lj("点击以下链接反馈。", "mailto://Feng_14@outlook.com", true);
                     break;
                 } else {
-                    await info("好的，我们再见。", deftime);
+                    info("好的，我们再见。", deftime);
                 }
         }
     };
@@ -283,25 +253,13 @@ function fn2() {
     ljBtn.innerHTML = `lj`;
     ljBtn.className = `btn8`;
     ljBtn.onclick = () => {
-        lj("点击此处浏览 The Play Games 的信息界面！", `https://modificationer-mdf.github.io/tpg_info/`);
+        lj("点击此处浏览 The Play Games 的信息界面！", "https://modificationer-mdf.github.io/tpg_info/", true);
     };
     const zdBtn = document.createElement(`button`);
     zdBtn.innerHTML = `zd`;
     zdBtn.className = `btn9`;
     zdBtn.onclick = () => {
         zd("在此处输入代码。");
-    };
-    const Fn_1 = document.createElement(`button`);
-    Fn_1.innerHTML = `fn_1`;
-    Fn_1.className = `fn-1`;
-    Fn_1.onclick = () => {
-        fn_1();
-    };
-    const Fn_2 = document.createElement(`button`);
-    Fn_2.innerHTML = `fn_2`;
-    Fn_2.className = `fn-2`;
-    Fn_2.onclick = () => {
-        fn_2();
     };
     const nullBtn = document.createElement(`button`);
     nullBtn.innerHTML = `在函数的值中输入 null 值`;
@@ -333,8 +291,6 @@ function fn2() {
         ljBtn,
         zdBtn,
         imp,
-        Fn_1,
-        Fn_2,
         nullBtn,
         undefinedBtn,
     ];
@@ -354,22 +310,20 @@ function fn2() {
         all.forEach((btn, index) => {
             if (index >= 0 && index < 10) {
                 div1.appendChild(btn);
-            } else if (index >= 10 && index < 12) {
-                div2.appendChild(btn);
             } else {
                 div3.appendChild(btn);
             }
         });
     }
 
-    div.style.animation = `head4- 0.7s forwards ${easing}`;
+    div.style.animation = `head3- 0.7s forwards ${easing}`;
     dakai.textContent = `我们在以下的函数中增加了预设内容。`;
     dakai.style.transition = `all 0.7s ${easing}`;
     dakai.style.backgroundColor = `#001dff99`;
     dakai.style.width = `580px`;
 
     div.addEventListener(`animationend`, (e) => {
-        if (e.animationName === `head4-`) {
+        if (e.animationName === `head3-`) {
             all.forEach(btn => {
                 btn.style.display = `block`;
                 btn.style.color = "#ffffff";
@@ -400,18 +354,18 @@ function fn2() {
 let flag = false;
 async function fn3() {
     if (!flag) {
-        await warn(`从 0.7 版本开始，如果电脑装有 360 杀毒软件，可能会提示你下载的文件可能有病毒。但是，这是误判。`, 7000);
+        warn(`从 0.7 版本开始，如果电脑装有 360 杀毒软件，可能会提示你下载的文件可能有病毒。但是，这是误判。`, 7000);
         let a = await xz(`你确定要下载吗？`, 2, [`是。`, `否。`]);
         if (a == "是。") {
-            await cg(`已打开。`, deftime);
+            cg(`已打开。`, deftime);
             flag = true;
         } else {
-            await fail(`你终止了下载操作。`, deftime);
+            fail(`你终止了下载操作。`, deftime);
             return -39;
         }
     }
-    const div = document.querySelector(`.head5`);
-    div.style.animation = `head5- 0.7s forwards ${easing}`;
+    const div = document.querySelector(`.head4`);
+    div.style.animation = `head4- 0.7s forwards ${easing}`;
     const dakai = document.getElementById(`3`);
     dakai.style.transition = `all 0.7s ${easing}`;
     dakai.style.backgroundColor = `#001dff99`;
@@ -429,7 +383,7 @@ async function fn3() {
         rz(`2024 年 5 月 1 日发布。`);
     };
     a1.onclick = async () => {
-        await tran(`下载 Version_Collecting_1.zip。`);
+        await tran("下载 Version_Collecting_1.zip。<br />（391 KiB）");
     };
     const btn2 = document.createElement(`button`);
     btn2.className = `btn12`;
@@ -441,6 +395,9 @@ async function fn3() {
     a2.onmouseover = () => {
         rz(`2024 年 8 月 22 日发布。`);
     };
+    a2.onclick = async () => {
+        await tran("下载 Version_0.7.zip。<br />（26653 KiB）");
+    };
     const btn3 = document.createElement(`button`);
     btn3.className = `btn13`;
     btn3.type = `button`;
@@ -450,6 +407,9 @@ async function fn3() {
     a3.textContent = `下载 The Play Games 0.8`;
     a3.onmouseover = () => {
         rz(`2024 年 8 月 27 日发布。`);
+    };
+    a3.onclick = async () => {
+        await tran("下载 Version_0.8.zip。<br />（27496 KiB）");
     };
     const all = [
         btn1,
@@ -471,7 +431,7 @@ async function fn3() {
         });
     }
     div.addEventListener(`animationend`, (e) => {
-        if (e.animationName === `head5-`) {
+        if (e.animationName === `head4-`) {
             all.forEach(btn => {
                 btn.style.display = `block`;
                 btn.color = "#ffffff";
@@ -490,7 +450,7 @@ async function fn3() {
 function totop() {
     window.scrollTo({
         top: 0,
-        behavior: "smooth"
+        behavior: "smooth",
     });
 }
 
@@ -503,16 +463,45 @@ function zhan(s) {
 function fn4() {
     const ctrl = document.querySelector(".control-pad");
     const title = document.createElement("p");
-    title.innerHTML = "设置和控制台";
+    title.innerHTML = "控制台";
     title.className = "title";
+
+    const ms = document.createElement("p");
+    ms.innerHTML = "模式";
+    ms.className = "cont";
+    const ys = document.createElement("button");
+    ys.type = "button";
+    ys.innerHTML = "Demo";
+    ys.className = "zd1";
+    ys.onclick = () => {
+        if (mode === "Demo") {
+            warn("当前模式已为 Demo。", deftime);
+        } else {
+            mode = "Demo";
+            info("已切换到 Demo 模式。", deftime);
+        }
+    };
+    const js = document.createElement("button");
+    js.type = "button";
+    js.innerHTML = "Play";
+    js.className = "zd2";
+    js.onclick = () => {
+        if (mode === "Play") {
+            warn("当前模式已为 Play。", deftime);
+        } else {
+            mode = "Play";
+            info("已切换到 Play 模式。", deftime);
+        }
+    };
 
     const zt = document.createElement("p");
     zt.innerHTML = `主题`;
     zt.className = "cont";
+    zt.style.top = "20vh";
     const a = document.createElement("button");
     a.type = "button";
     a.innerHTML = "Aero";
-    a.className = "zd1";
+    a.className = "zd3";
     a.onclick = () => {
         if (theme === "Aero") {
             warn("你已经在使用 Aero 主题。", deftime);
@@ -524,7 +513,7 @@ function fn4() {
     const n = document.createElement("button");
     n.type = "button";
     n.innerHTML = "Neon";
-    n.className = "zd2";
+    n.className = "zd4";
     n.onclick = () => {
         if (theme === "Neon") {
             warn("你已经在使用 Neon 主题。", deftime);
@@ -537,7 +526,7 @@ function fn4() {
     const nullc = document.createElement("p");
     nullc.innerHTML = `nullcount`;
     nullc.className = "cont";
-    nullc.style.top = "20vh";
+    nullc.style.top = "30vh";
     const inp1 = document.createElement("input");
     let f1 = false;
     inp1.type = "number";
@@ -563,7 +552,7 @@ function fn4() {
     const eas = document.createElement("p");
     eas.innerHTML = "easing";
     eas.className = "cont";
-    eas.style.top = "30vh";
+    eas.style.top = "40vh";
     const inp2 = document.createElement("input");
     let f2 = false;
     inp2.type = "text";
@@ -589,7 +578,7 @@ function fn4() {
     const mrms = document.createElement("p");
     mrms.innerHTML = "deftime";
     mrms.className = "cont";
-    mrms.style.top = "40vh";
+    mrms.style.top = "50vh";
     const inp3 = document.createElement("input");
     let f3 = false;
     inp3.type = "number";
@@ -614,7 +603,7 @@ function fn4() {
     const defw = document.createElement("p");
     defw.innerHTML = "defwid";
     defw.className = "cont";
-    defw.style.top = "50vh";
+    defw.style.top = "60vh";
     const inp4 = document.createElement("input");
     let f4 = false;
     inp4.type = "number";
@@ -640,7 +629,7 @@ function fn4() {
     const defh = document.createElement("p");
     defh.innerHTML = "defhei";
     defh.className = "cont";
-    defh.style.top = "60vh";
+    defh.style.top = "70vh";
     const inp5 = document.createElement("input");
     let f5 = false;
     inp5.type = "number";
@@ -671,12 +660,15 @@ function fn4() {
 
     ctrl.appendChild(title);
     title.appendChild(jdt);
+    ctrl.appendChild(ms);
     ctrl.appendChild(zt);
     ctrl.appendChild(eas);
     ctrl.appendChild(nullc);
     ctrl.appendChild(mrms);
     ctrl.appendChild(defw);
     ctrl.appendChild(defh);
+    ms.appendChild(ys);
+    ms.appendChild(js);
     zt.appendChild(a);
     zt.appendChild(n);
     nullc.appendChild(inp1);
@@ -712,57 +704,57 @@ function fn5() {
     }
 
     const infoc = document.createElement("div");
-    infoc.innerHTML = `Info 窗口数量： ${v1}。`;
+    infoc.innerHTML = `Info() 数量： ${v1}。`;
     infoc.className = "cont";
-    infoc.style.top = "75vh";
+    infoc.style.top = "85vh";
     infoc.style.color = "#18a689";
 
     const cgc = document.createElement("div");
-    cgc.innerHTML = `Cg 窗口数量： ${v2}。`;
+    cgc.innerHTML = `Cg() 数量： ${v2}。`;
     cgc.className = "cont";
-    cgc.style.top = "80vh";
+    cgc.style.top = "90vh";
     cgc.style.color = "#1d5837";
 
     const failc = document.createElement("div");
-    failc.innerHTML = `Fail 窗口数量： ${v3}。`;
+    failc.innerHTML = `Fail() 数量： ${v3}。`;
     failc.className = "cont";
-    failc.style.top = "85vh";
+    failc.style.top = "95vh";
     failc.style.color = "#791e1d";
 
     const warnc = document.createElement("div");
-    warnc.innerHTML = `Warn 窗口数量： ${v4}。`;
+    warnc.innerHTML = `Warn() 数量： ${v4}。`;
     warnc.className = "cont";
-    warnc.style.top = "90vh";
+    warnc.style.top = "100vh";
     warnc.style.color = "#847829";
 
     const inpc = document.createElement("div");
-    inpc.innerHTML = `Inp 窗口数量： ${v5}。`;
+    inpc.innerHTML = `Inp() 数量： ${v5}。`;
     inpc.className = "cont";
-    inpc.style.top = "95vh";
+    inpc.style.top = "105vh";
     inpc.style.color = "#235087";
 
     const tranc = document.createElement("div");
-    tranc.innerHTML = `Tran 窗口数量： ${v6}。`;
+    tranc.innerHTML = `Tran() 数量： ${v6}。`;
     tranc.className = "cont";
-    tranc.style.top = "100vh";
+    tranc.style.top = "110vh";
     tranc.style.color = "#9e3389";
 
     const xzc = document.createElement("div");
-    xzc.innerHTML = `Xz 窗口数量： ${v7}。`;
+    xzc.innerHTML = `Xz() 数量： ${v7}。`;
     xzc.className = "cont";
-    xzc.style.top = "105vh";
+    xzc.style.top = "115vh";
     xzc.style.color = "#7527a4";
 
     const ljc = document.createElement("div");
-    ljc.innerHTML = `Lj 窗口数量： ${v8}。`;
+    ljc.innerHTML = `Lj() 数量： ${v8}。`;
     ljc.className = "cont";
-    ljc.style.top = "110vh";
+    ljc.style.top = "120vh";
     ljc.style.color = "#a6580d";
 
     const zdc = document.createElement("div");
-    zdc.innerHTML = `Zd 窗口数量： ${v9}。`;
+    zdc.innerHTML = `Zd() 数量： ${v9}。`;
     zdc.className = "cont";
-    zdc.style.top = "115vh";
+    zdc.style.top = "125vh";
     zdc.style.padding = "7px 15px";
     zdc.style.borderRadius = "5px";
     zdc.style.backgroundColor = "#19191879";
