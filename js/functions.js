@@ -885,9 +885,9 @@ async function wz(string) {
         const txt = document.createElement(`pre`);
         txt.className = `wz-content`;
         txt.innerHTML = string;
-        const btn = document.createElement("div");
-        btn.className = `wz-confirm`;
-        btn.textContent = "确定";
+        const btn = document.createElement("img");
+        btn.className = "wz-icon";
+        btn.src = "images/Next.png";
         const left = document.createElement(`div`);
         left.className = `wz-left`;
         const right = document.createElement(`div`);

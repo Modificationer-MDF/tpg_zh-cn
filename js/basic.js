@@ -60,82 +60,71 @@ function fn1() {
     infoBtn.style.marginTop = `15px`;
     infoBtn.innerHTML = `info`;
     infoBtn.className = `btn1`;
-    infoBtn.onclick = () => {
-        let res = inp(`输入你想显示在 info 窗口上的信息。`, `在此输入。`);
-        let time = inp(`输入你想显示 info 窗口的持续时间。（单位：毫秒。输入的值必须大于等于 700。）`, `在此输入。`);
-        let sty = xz("选择你想使用的主题。", 2, ["Aero", "Neon"]);
-        info(res, Number(time), sty);
+    infoBtn.onclick = async () => {
+        let res = await inp(`输入你想显示在 info 窗口上的信息。`, `在此输入。`);
+        info(res);
     };
     const cgBtn = document.createElement(`button`);
     cgBtn.innerHTML = `cg`;
     cgBtn.className = `btn2`;
-    cgBtn.onclick = () => {
-        let res = inp(`输入你想显示在 cg 窗口上的信息。`, `在此输入。`);
-        let time = inp(`输入你想显示 cg 窗口的持续时间。（单位：毫秒。输入的值必须大于等于 700。）`, `在此输入。`);
-        let sty = xz("选择你想使用的主题。", 2, ["Aero", "Neon"]);
-        cg(res, Number(time), sty);
+    cgBtn.onclick = async () => {
+        let res = await inp(`输入你想显示在 cg 窗口上的信息。`, `在此输入。`);
+        cg(res);
     };
     const failBtn = document.createElement(`button`);
     failBtn.innerHTML = `fail`;
     failBtn.className = `btn3`;
-    failBtn.onclick = () => {
-        let res = inp(`输入你想显示在 fail 窗口上的信息。`, `在此输入。`);
-        let time = inp(`输入你想显示 fail 窗口的持续时间。（单位：毫秒。输入的值必须大于等于 700。）`, `在此输入。`);
-        let sty = xz("选择你想使用的主题。", 2, ["Aero", "Neon"]);
-        fail(res, Number(time), sty);
+    failBtn.onclick = async () => {
+        let res = await inp(`输入你想显示在 fail 窗口上的信息。`, `在此输入。`);
+        fail(res);
     };
     const warnBtn = document.createElement(`button`);
     warnBtn.innerHTML = `warn`;
     warnBtn.className = `btn4`;
-    warnBtn.onclick = () => {
+    warnBtn.onclick = async () => {
         let res = inp(`输入你想显示在 warn 窗口上的信息。`, `在此输入。`);
-        let time = inp(`输入你想显示 warn 窗口的持续时间。（单位：毫秒。输入的值必须大于等于 700。）`, `在此输入。`);
-        let sty = xz("选择你想使用的主题。", 2, ["Aero", "Neon"]);
-        warn(res, Number(time), sty);
+        warn(res);
     };
     const inpBtn = document.createElement(`button`);
     inpBtn.innerHTML = `inp`;
     inpBtn.className = `btn5`;
     inpBtn.onclick = async () => {
-        let res = inp(`这就是 inp 窗口。`, `可以在这里输入一些文字。`);
-        info(`你输入了：“${res}”。`, deftime);
+        let res = await inp(`这就是 inp 窗口。`, `可以在这里输入一些文字。`);
+        info(`你输入了：“${res}”。`);
     };
     const tranBtn = document.createElement(`button`);
     tranBtn.innerHTML = `tran`;
     tranBtn.className = `btn6`;
-    tranBtn.onclick = () => {
+    tranBtn.onclick = async () => {
         let res = inp(`输入你想显示在 tran 窗口上的信息。`, `在此输入。`);
-        let sty = xz("选择你想使用的主题。", 2, ["Aero", "Neon"]);
-        tran(res, sty);
+        tran(res);
     };
     const xzBtn = document.createElement(`button`);
     xzBtn.innerHTML = `xz`;
     xzBtn.className = `btn7`;
-    xzBtn.onclick = () => {
-        let res = inp(`输入你想显示在 xz 窗口上的信息。`, `在此输入。`);
-        let n = inp(`请输入 xz 窗口上选项的数量。`, `在此输入。`);
+    xzBtn.onclick = async () => {
+        let res = await inp(`输入你想显示在 xz 窗口上的信息。`, `在此输入。`);
+        let n = await inp(`请输入 xz 窗口上选项的数量。`, `在此输入。`);
         n = Number(n);
         let array = new Array(n);
         for (let i = 0; i <= n - 1; i++) {
-            array[i] = inp(`请输入 xz 窗口上第 ${i + 1} 个选项。`, `在此输入。`);
+            array[i] = await inp(`请输入 xz 窗口上第 ${i + 1} 个选项。`, `在此输入。`);
         }
-        let sty = xz("选择你想使用的主题。", 2, ["Aero", "Neon"]);
-        xz(res, n, array, sty);
+        xz(res, n, array);
     };
     const ljBtn = document.createElement(`button`);
     ljBtn.innerHTML = `lj`;
     ljBtn.className = `btn8`;
-    ljBtn.onclick = () => {
-        let res = inp(`输入你想显示在 lj 窗口上的信息。`, `在此输入。`);
-        let url = inp(`请输入你要链接的地址。`);
-        let sty = xz("选择你想使用的主题。", 2, ["Aero", "Neon"]);
-        lj(res, url, false, sty);
+    ljBtn.onclick = async () => {
+        let res = await inp(`输入你想显示在 lj 窗口上的信息。`, `在此输入。`);
+        let url = await inp(`请输入你要链接的地址。`);
+        lj(res, url, false);
     };
     const wzBtn = document.createElement(`button`);
     wzBtn.innerHTML = `wz`;
     wzBtn.className = `btn22`;
-    wzBtn.onclick = () => {
-        let res = inp(`输入你想显示在 wz 窗口上的信息。`, `在此输入。`);
+    wzBtn.onclick = async () => {
+        let res = await inp(`输入你想显示在 wz 窗口上的信息。`, `在此输入。`);
         wz(res);
     };
     const rzBtn = document.createElement(`button`);
