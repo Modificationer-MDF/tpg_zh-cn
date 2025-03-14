@@ -39,20 +39,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
             f3.style.animation = `_head4 0.7s forwards ${easing}`;
         }
     });
-    const ctrl = document.querySelector(".control-pad");
-    let moved = false;
     fn4();
-
-    document.addEventListener("mousemove", function (event) {
-        let width = ctrl.getBoundingClientRect().width;
-        if (event.clientX <= 25 && event.clientY <= 25 && moved === false) {
-            ctrl.style.animation = `ctrl- 0.7s forwards ${easing}`;
-            moved = true;
-        } else if (event.clientX >= width && moved === true) {
-            ctrl.style.animation = `-ctrl 0.7s forwards ${easing}`;
-            moved = false;
-        }
-    });
 });
 
 /* 第二部分。 */
@@ -86,7 +73,7 @@ function fn1() {
     warnBtn.innerHTML = `warn`;
     warnBtn.className = `btn4`;
     warnBtn.onclick = async () => {
-        let res = inp(`输入你想显示在 warn() 上的信息。`, `在此输入。`);
+        let res = await inp(`输入你想显示在 warn() 上的信息。`, `在此输入。`);
         warn(res);
     };
     const inpBtn = document.createElement(`button`);
@@ -100,7 +87,7 @@ function fn1() {
     tranBtn.innerHTML = `tran`;
     tranBtn.className = `btn6`;
     tranBtn.onclick = async () => {
-        let res = inp(`输入你想显示在 tran() 上的信息。`, `在此输入。`);
+        let res = await inp(`输入你想显示在 tran() 上的信息。`, `在此输入。`);
         tran(res);
     };
     const xzBtn = document.createElement(`button`);
@@ -121,7 +108,7 @@ function fn1() {
     ljBtn.className = `btn8`;
     ljBtn.onclick = async () => {
         let res = await inp(`输入你想显示在 lj() 上的信息。`, `在此输入。`);
-        let url = await inp(`请输入你要链接的地址。`);
+        let url = await inp(`请输入你要链接的地址。`, "在此输入。");
         lj(res, url, false);
     };
     const wzBtn = document.createElement(`button`);

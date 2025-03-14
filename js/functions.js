@@ -55,8 +55,6 @@ function rz(string, time) {
 
     if (time == null || time == undefined) {
         time = deftime;
-    } else if (string.includes("\n")) {
-        string = string.replace(/\n/g, "<br />");
     }
 
     const window = document.createElement(`div`);
@@ -99,8 +97,6 @@ function info(string, ms) {
         fail("所输入内容不能为 null 或 undefined。", deftime);
         monitor();
         return 39;
-    } else if (string.includes("\n")) {
-        string = string.replace(/\n/g, "<br />");
     } else {
         string = string.toString();
     }
@@ -185,8 +181,6 @@ function cg(string, ms) {
         fail("所输入内容不能为 null 或 undefined。", deftime);
         monitor();
         return 39;
-    } else if (string.includes("\n")) {
-        string = string.replace(/\n/g, "<br />");
     } else {
         string = string.toString();
     }
@@ -270,8 +264,6 @@ function fail(string, ms) {
         fail("所输入内容不能为 null 或 undefined。", deftime);
         monitor();
         return 39;
-    } else if (string.includes("\n")) {
-        string = string.replace(/\n/g, "<br />");
     } else {
         string = string.toString();
     }
@@ -356,8 +348,6 @@ function warn(string, ms) {
         fail("所输入内容不能为 null 或 undefined。", deftime);
         monitor();
         return 39;
-    } else if (string.includes("\n")) {
-        string = string.replace(/\n/g, "<br />");
     } else {
         string = string.toString();
     }
@@ -443,8 +433,6 @@ async function inp(string, holder) {
             fail("所输入内容不能为 null 或 undefined。", deftime);
             monitor();
             return 39;
-        } else if (string.includes("\n")) {
-            string = string.replace(/\n/g, "<br />");
         } else {
             string = string.toString();
             holder = holder.toString();
@@ -534,8 +522,6 @@ async function xz(string, n, names) {
             fail("所输入内容不能为 null 或 undefined。", deftime);
             monitor();
             return 39;
-        } else if (string.includes("\n")) {
-            string = string.replace(/\n/g, "<br />");
         } else {
             string = string.toString();
         }
@@ -626,8 +612,6 @@ async function tran(string) {
         fail("所输入内容不能为 null 或 undefined。", deftime);
         monitor();
         return 39;
-    } else if (string.includes("\n")) {
-        string = string.replace(/\n/g, "<br />");
     } else {
         string = string.toString();
     }
@@ -701,8 +685,6 @@ async function lj(string, url, ignore) {
         fail("所输入内容不能为 null 或 undefined。", deftime);
         monitor();
         return 39;
-    } else if (string.includes("\n")) {
-        string = string.replace(/\n/g, "<br />");
     } else {
         string = string.toString();
         url = url.toString();
@@ -773,8 +755,6 @@ async function zd(string) {
             fail("所输入内容不能为 null 或 undefined。", deftime);
             monitor();
             return 39;
-        } else if (string.includes("\n")) {
-            string = string.replace(/\n/g, "<br />");
         } else {
             string = string.toString();
         }
@@ -861,8 +841,6 @@ async function wz(string) {
             monitor();
             resolve(39);
             return;
-        } else if (string.includes("\n")) {
-            string = string.replace(/\n/g, "<br />");
         }
         if (nullcount > 26) {
             rz("你已被禁止调用函数。");
