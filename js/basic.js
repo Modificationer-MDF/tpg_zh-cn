@@ -151,12 +151,12 @@ function fn1() {
             all.forEach(btn => {
                 btn.style.display = `block`;
                 btn.style.color = "#ffffff";
-                btn.style.opacity = `0`; // 初始化为 0 。
+                btn.style.opacity = `0`;
                 btn.style.transition = `opacity 0.7s ${easing}`;
             });
             setTimeout(() => {
                 all.forEach(btn => {
-                    btn.style.opacity = `1`; // 显示。
+                    btn.style.opacity = `1`;
                 });
             }, 0);
         }

@@ -21,12 +21,6 @@
     background-color: #1b7163c9;
 }
 
-.info-icon {
-    text-align: center;
-    font-size: 25px;
-    color: white;
-}
-
 .info-content {
     padding: 14px 25px;
     color: white;
@@ -88,12 +82,6 @@
     align-items: center;
     justify-content: center;
     background-color: #183b25c9;
-}
-
-.cg-icon {
-    text-align: center;
-    font-size: 25px;
-    color: white;
 }
 
 .cg-content {
@@ -159,12 +147,6 @@
     background-color: #4a1514c9;
 }
 
-.fail-icon {
-    text-align: center;
-    font-size: 25px;
-    color: white;
-}
-
 .fail-content {
     padding: 14px 25px;
     color: white;
@@ -226,12 +208,6 @@
     align-items: center;
     justify-content: center;
     background-color: #615518c9;
-}
-
-.warn-icon {
-    text-align: center;
-    font-size: 25px;
-    color: white;
 }
 
 .warn-content {
@@ -296,12 +272,6 @@
     align-items: center;
     justify-content: center;
     background-color: #183450c9;
-}
-
-.inp-icon {
-    text-align: center;
-    font-size: 25px;
-    color: white;
 }
 
 .inp-content {
@@ -376,12 +346,6 @@
     background-color: #461c5fc9;
 }
 
-.xz-icon {
-    text-align: center;
-    font-size: 25px;
-    color: white;
-}
-
 .xz-content {
     margin-bottom: 90px;
     padding: 14px 25px;
@@ -435,12 +399,6 @@
     align-items: center;
     justify-content: center;
     background-color: #c125abc9;
-}
-
-.tran-icon {
-    text-align: center;
-    font-size: 25px;
-    color: white;
 }
 
 .tran-content {
@@ -504,12 +462,6 @@
     align-items: center;
     justify-content: center;
     background-color: #753e14c9;
-}
-
-.lj-icon {
-    text-align: center;
-    font-size: 25px;
-    color: white;
 }
 
 .lj-content {
@@ -578,12 +530,6 @@
     align-items: center;
     justify-content: center;
     background-color: #000000c9;
-}
-
-.zd-icon {
-    text-align: center;
-    font-size: 25px;
-    color: white;
 }
 
 .zd-content {
@@ -825,7 +771,7 @@
 /* rz 函数。 */
 .rz-window {
     z-index: 100;
-    background-color: #b2186d99;
+    background-color: #00000000;
     display: flex;
     position: fixed;
     padding: 14px 25px;
@@ -835,6 +781,7 @@
 }
 
 .rz-content {
+    font-size: 25px;
     padding: 14px 25px;
     color: white;
     flex-grow: 1;

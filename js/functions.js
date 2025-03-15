@@ -156,12 +156,12 @@ function info(string, ms) {
 
     let pro = 0; // 进度条进度。 
     const interval = setInterval(() => {
-        pro += 16 / (ms / 100);
+        pro += 10 / (ms / 100);
         bar.style.width = `${pro}%`;
         if (pro >= 100) {
             clearInterval(interval);
         }
-    }, 16);
+    }, 10);
 
     setTimeout(() => {
         window.style.animation = `info- 0.7s forwards ${easing}`;
@@ -226,12 +226,12 @@ function cg(string, ms) {
 
     let pro = 0;
     const interval = setInterval(() => {
-        pro += 16 / (ms / 100);
+        pro += 10 / (ms / 100);
         bar.style.width = `${pro}%`;
         if (pro >= 100) {
             clearInterval(interval);
         }
-    }, 16);
+    }, 10);
 
     const visible = () => {
         const rect = window.getBoundingClientRect();
@@ -310,12 +310,12 @@ function fail(string, ms) {
 
     let pro = 0;
     const interval = setInterval(() => {
-        pro += 16 / (ms / 100);
+        pro += 10 / (ms / 100);
         bar.style.width = `${pro}%`;
         if (pro >= 100) {
             clearInterval(interval);
         }
-    }, 16);
+    }, 10);
 
     const visible = () => {
         const rect = window.getBoundingClientRect();
@@ -394,12 +394,12 @@ function warn(string, ms) {
 
     let pro = 0;
     const interval = setInterval(() => {
-        pro += 16 / (ms / 100);
+        pro += 10 / (ms / 100);
         bar.style.width = `${pro}%`;
         if (pro >= 100) {
             clearInterval(interval);
         }
-    }, 16);
+    }, 10);
 
     const visible = () => {
         const rect = window.getBoundingClientRect();
@@ -576,6 +576,7 @@ async function xz(string, n, names) {
 
             btn.style.backgroundColor =`${color()}b0`;
             btn.style.border = `none`;
+            btn.style.fontSize = "25px";
             btn.style.padding = `14px 25px`;
             btn.style.textAlign = `center`;
             btn.style.cursor = `pointer`;
