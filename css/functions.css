@@ -771,7 +771,7 @@
 /* rz 函数。 */
 .rz-window {
     z-index: 100;
-    background-color: #00000000;
+    background-color: #0b234599;
     display: flex;
     position: fixed;
     padding: 14px 25px;

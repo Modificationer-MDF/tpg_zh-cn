@@ -791,10 +791,10 @@ async function zd(string) {
                 return;
             }
             try {
-                resolve(rz(eval(value)));
+                resolve(eval(value));
             }
             catch (error) {
-                fail(`来自控制台的错误：${error.message}。`, 4000);
+                fail(error.message);
                 resolve();
             }
             window.style.animation = `zd- 0.7s forwards ${easing}`;
