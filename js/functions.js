@@ -1,4 +1,3 @@
-var rznum = 0; // rz() 目前存在的数量。
 var nullcount = 0; // 连续输入 null 或 undefined 的次数。
 var windows = []; // 信息数组。
 let rzwin = []; // rz() 信息数组。
@@ -23,14 +22,34 @@ function pos() {
     });
 }
 
+function p() {
+    let total = 7 * window.innerHeight / 100;
+    rzwin.forEach((window) => {
+        const wh = window.offsetHeight;
+        window.style.transition = `top 0.7s ${easing}`;
+        window.style.top = `${total}px`;
+        total += wh + 7;
+    });
+}
+
 function create(window) {
     windows.push(window);
-    pos(); // 更新所有窗口位置。
+    pos();
+}
+
+function cr(rz) {
+    rzwin.push(rz);
+    p();
 }
 
 function close(window) {
     windows = windows.filter(win => win !== window);
-    pos(); // 更新所有窗口位置。
+    pos(); 
+}
+
+function cl(rz) {
+    rzwin = rzwin.filter(win => win !== rz);
+    p();
 }
 
 function monitor() {
@@ -48,11 +67,6 @@ function monitor() {
 // rz 函数。
 
 function rz(string, time) {
-    rznum++;
-    function re() {
-        totalHeight = rzwin.reduce((acc, w) => acc + w.offsetHeight, 0);
-    }
-
     if (time == null || time == undefined) {
         time = deftime;
     }
@@ -67,12 +81,9 @@ function rz(string, time) {
     const line = Math.ceil(string.length / 14);
     content.style.height = `calc(${line * 20}px)`;
 
+    cr(window);
     document.body.appendChild(window);
     window.appendChild(content);
-
-    window.style.top = `calc(${totalHeight}px + ${rznum}vh)`;
-    totalHeight += window.offsetHeight;
-    rzwin.push(window);
 
     requestAnimationFrame(() => {
         window.style.animation = `-rz 0.7s forwards ${easing}`;
@@ -82,9 +93,7 @@ function rz(string, time) {
         window.style.animation = `rz- 0.7s forwards ${easing}`;
         setTimeout(() => {
             document.body.removeChild(window);
-            rzwin = rzwin.filter(w => w !== window);
-            re();
-            rznum--;
+            cl(window);
         }, 700);
     }, time);
 }
@@ -154,7 +163,7 @@ function info(string, ms) {
     const lineHeight = parseInt(window.style.lineHeight);
     content.style.height = `${line * lineHeight}px`;
 
-    let pro = 0; // 进度条进度。 
+    let pro = 0;
     const interval = setInterval(() => {
         pro += 10 / (ms / 100);
         bar.style.width = `${pro}%`;
@@ -167,7 +176,7 @@ function info(string, ms) {
         window.style.animation = `info- 0.7s forwards ${easing}`;
         setTimeout(() => {
             document.body.removeChild(window);
-            close(window);
+            close(window, windows);
         }, 700);
     }, ms);
     setTimeout(visible, ms);
@@ -250,7 +259,7 @@ function cg(string, ms) {
         window.style.animation = `cg- 0.7s forwards ${easing}`;
         setTimeout(() => {
             document.body.removeChild(window);
-            close(window)
+            close(window, windows)
         }, 700);
     }, ms);
     setTimeout(visible, ms);
@@ -334,7 +343,7 @@ function fail(string, ms) {
         window.style.animation = `fail- 0.7s forwards ${easing}`;
         setTimeout(() => {
             document.body.removeChild(window);
-            close(window)
+            close(window, windows)
         }, 700);
     }, ms);
     setTimeout(visible, ms);
@@ -418,7 +427,7 @@ function warn(string, ms) {
         window.style.animation = `warn- 0.7s forwards ${easing}`;
         setTimeout(() => {
             document.body.removeChild(window);
-            close(window)
+            close(window, windows)
         }, 700);
     }, ms);
     setTimeout(visible, ms);
@@ -490,7 +499,7 @@ async function inp(string, holder) {
                     if (document.body.contains(window)) {
                         document.body.removeChild(window);
                         resolve(value);
-                        close(window);
+                        close(window, windows);
                     }
                 }, 700);
             }
@@ -502,8 +511,9 @@ async function inp(string, holder) {
 
 async function xz(string, n, names) {
     return new Promise((resolve) => {
-        if (n === null || n === undefined) n = 2;
-        else if (isNaN(n)) fail("所输入的选项数量必须为数字。", deftime);
+        if (n === null || n === undefined) fail("所输入的选项数量必须为数字。");
+        else if (isNaN(n)) fail("所输入的选项数量必须为数字。");
+        else if (n <= 0) fail("请输入一个正整数。")
         n = Math.ceil(Number(n));
         const array = Array.from(names);
         array.reverse();
@@ -599,7 +609,7 @@ async function xz(string, n, names) {
             window.style.animation = `xz- 0.7s forwards ${easing}`;
             setTimeout(() => {
                 document.body.removeChild(window);
-                close(window)
+                close(window, windows)
             }, 700);
         }
     });
@@ -672,7 +682,7 @@ async function tran(string) {
         window.style.animation = `tran- 0.7s forwards ${easing}`;
         setTimeout(() => {
             document.body.removeChild(window);
-            close(window)
+            close(window, windows)
         }, 700);
     }, deftime);
     setTimeout(visible, deftime);
@@ -742,7 +752,7 @@ async function lj(string, url, ignore) {
         window.style.animation = `lj- 0.7s forwards ${easing}`;
         setTimeout(() => {
             document.body.removeChild(window);
-            close(window)
+            close(window, windows)
         }, 700);
     }
 }
@@ -801,7 +811,7 @@ async function zd(string) {
             setTimeout(() => {
                 if (document.body.contains(window)) {
                     document.body.removeChild(window);
-                    close(window);
+                    close(window, windows);
                 }
             }, 700);
         };

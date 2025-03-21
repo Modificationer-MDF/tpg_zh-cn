@@ -10,11 +10,6 @@ document.addEventListener("DOMContentLoaded", function () {
         fn5();
     }, 140);
     document.addEventListener("keydown", (event) => {
-        if (event.ctrlKey) ctrl.style.animation = `ctrl- 0.7s forwards ${easing}`;
-        else if (event.shiftKey) ctrl.style.animation = `-ctrl 0.7s forwards ${easing}`;
-        else if (event.altKey) {
-            if (ctrl.style.animationName === "-ctrl") info("按下 Ctrl 键打开控制台。");
-            else if (ctrl.style.animationName === "ctrl-") info("按下 Shift 键关闭控制台。");
-        }
+        if (event.altKey) info("将鼠标移动至左上角以打开选项。")
     });
 });

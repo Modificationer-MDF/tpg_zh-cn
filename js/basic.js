@@ -39,7 +39,21 @@ document.addEventListener(`DOMContentLoaded`, () => {
             f3.style.animation = `_head4 0.7s forwards ${easing}`;
         }
     });
+
+    const ctrl = document.querySelector(".control-pad");
+    let moved = false;
     fn4();
+
+    document.addEventListener("mousemove", function (event) {
+        let width = ctrl.getBoundingClientRect().width;
+        if (event.clientX <= 50 && event.clientY <= 50 && moved === false) {
+            ctrl.style.animation = `ctrl- 0.7s forwards ${easing}`;
+            moved = true;
+        } else if (event.clientX >= width && moved === true) {
+            ctrl.style.animation = `-ctrl 0.7s forwards ${easing}`;
+            moved = false;
+        }
+    });
 });
 
 /* 第二部分。 */
@@ -450,7 +464,7 @@ function zhan(s) {
 function fn4() {
     const ctrl = document.querySelector(".control-pad");
     const title = document.createElement("p");
-    title.innerHTML = "控制台";
+    title.innerHTML = "选项";
     title.className = "title";
 
     const ms = document.createElement("p");
@@ -640,10 +654,9 @@ function fn4() {
     });
 
     const jdt = document.createElement("div");
-    jdt.style.left = "0px";
-    jdt.style.height = "5px";
+    jdt.style.height = "7px";
     jdt.style.width = "100%";
-    jdt.style.backgroundColor = "#ffffff";
+    jdt.style.backgroundColor = "#ffffff99";
 
     ctrl.appendChild(title);
     title.appendChild(jdt);
