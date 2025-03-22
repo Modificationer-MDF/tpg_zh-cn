@@ -59,17 +59,20 @@ function monitor() {
         warn(`再次警告！你已连续输入 null 或 undefined ${nullcount} 次。请检查你所输入的内容。`)
     } else if (nullcount >= 25 && nullcount < 30) {
         fail(`你已被禁止调用任何函数。`);
-        console.warn(`你已被禁止调用任何函数。`);
-        warn(`请查看控制台。`);
     }
 }
 
 // rz 函数。
 
 function rz(string, time) {
-    if (time == null || time == undefined) {
-        time = deftime;
+    if (string == null) {
+        warn("这个值为 null。");
+        return;
+    } else if (string == undefined) {
+        warn("这个值为 undefined。");
+        return;
     }
+    if (time == null || time == undefined) time = deftime;
 
     const window = document.createElement(`div`);
     window.className = `rz-window`;

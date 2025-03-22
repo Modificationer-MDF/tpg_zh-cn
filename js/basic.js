@@ -49,12 +49,29 @@ document.addEventListener(`DOMContentLoaded`, () => {
         if (event.clientX <= 50 && event.clientY <= 50 && moved === false) {
             ctrl.style.animation = `ctrl- 0.7s forwards ${easing}`;
             moved = true;
-        } else if (event.clientX >= width && moved === true) {
+        } else if (event.clientX > width && moved === true) {
             ctrl.style.animation = `-ctrl 0.7s forwards ${easing}`;
             moved = false;
         }
     });
+
+    const inf = document.querySelector(".information-table");
+    let imoved = false;
+    fn5();
+
+    document.addEventListener("mousemove", function (event) {
+        let rect = inf.getBoundingClientRect().width; // 获取 inf 元素的位置信息
+
+        if (event.clientX >= window.innerWidth - 50 && event.clientY <= 50 && imoved === false) {
+            inf.style.animation = `inf- 0.7s forwards ${easing}`;
+            imoved = true;
+        } else if (event.clientX < window.innerWidth - rect && imoved === true) {
+            inf.style.animation = `-inf 0.7s forwards ${easing}`;
+            imoved = false;
+        }
+    });
 });
+
 
 /* 第二部分。 */
 function fn1() {
@@ -352,19 +369,9 @@ function fn2() {
     });
 }
 
-let flag = false;
-async function fn3() {
-    if (!flag) {
-        warn(`从 0.7 版本开始，如果电脑装有 360 杀毒软件，可能会提示你下载的文件可能有病毒。但是，这是误判。`, 7000);
-        let a = await xz(`你确定要下载吗？`, 2, [`是。`, `否。`]);
-        if (a == "是。") {
-            cg(`已打开。`, deftime);
-            flag = true;
-        } else {
-            fail(`你终止了下载操作。`, deftime);
-            return -39;
-        }
-    }
+function fn3() {
+    warn("该文件可能会被误判为恶意软件，请注意甄别。");
+
     const div = document.querySelector(`.head4`);
     div.style.animation = `head4- 0.7s forwards ${easing}`;
     const dakai = document.getElementById(`3`);
@@ -679,7 +686,23 @@ function fn4() {
 }
 
 function fn5() {
-    const ctrl = document.querySelector(".control-pad");
+    const inf = document.querySelector(".information-table");
+    const title = document.createElement("p");
+    title.innerHTML = "杂项";
+    title.className = "title";
+    title.style.textAlign = "right";
+
+    const jdt = document.createElement("div");
+    jdt.style.height = "7px";
+    jdt.style.width = "100%";
+    jdt.style.backgroundColor = "#ffffff99";
+
+    inf.appendChild(title);
+    title.appendChild(jdt);
+}
+
+function fn6() {
+    const inf = document.querySelector(".information-table");
     var v1 = 0;
     var v2 = 0;
     var v3 = 0;
@@ -689,6 +712,7 @@ function fn5() {
     var v7 = 0;
     var v8 = 0;
     var v9 = 0;
+    var v10 = 0;
 
     // 计算各个窗口的数量
     for (let i = 0; i <= windows.length - 1; i++) {
@@ -701,72 +725,83 @@ function fn5() {
         else if (windows[i].className === "xz-window") v7++;
         else if (windows[i].className === "lj-window") v8++;
         else if (windows[i].className === "zd-window") v9++;
+        else if (rzwin[i].className === "rz-window") v10++;
     }
 
     const infoc = document.createElement("div");
     infoc.innerHTML = `Info() 数量： ${v1}。`;
     infoc.className = "cont";
-    infoc.style.top = "85vh";
+    infoc.style.top = "14vh";
     infoc.style.color = "#18a689";
 
     const cgc = document.createElement("div");
     cgc.innerHTML = `Cg() 数量： ${v2}。`;
     cgc.className = "cont";
-    cgc.style.top = "90vh";
+    cgc.style.top = "21vh";
     cgc.style.color = "#1d5837";
 
     const failc = document.createElement("div");
     failc.innerHTML = `Fail() 数量： ${v3}。`;
     failc.className = "cont";
-    failc.style.top = "95vh";
+    failc.style.top = "28vh";
     failc.style.color = "#791e1d";
 
     const warnc = document.createElement("div");
     warnc.innerHTML = `Warn() 数量： ${v4}。`;
     warnc.className = "cont";
-    warnc.style.top = "100vh";
+    warnc.style.top = "35vh";
     warnc.style.color = "#847829";
 
     const inpc = document.createElement("div");
     inpc.innerHTML = `Inp() 数量： ${v5}。`;
     inpc.className = "cont";
-    inpc.style.top = "105vh";
+    inpc.style.top = "42vh";
     inpc.style.color = "#235087";
 
     const tranc = document.createElement("div");
     tranc.innerHTML = `Tran() 数量： ${v6}。`;
     tranc.className = "cont";
-    tranc.style.top = "110vh";
+    tranc.style.top = "49vh";
     tranc.style.color = "#9e3389";
 
     const xzc = document.createElement("div");
     xzc.innerHTML = `Xz() 数量： ${v7}。`;
     xzc.className = "cont";
-    xzc.style.top = "115vh";
+    xzc.style.top = "56vh";
     xzc.style.color = "#7527a4";
 
     const ljc = document.createElement("div");
     ljc.innerHTML = `Lj() 数量： ${v8}。`;
     ljc.className = "cont";
-    ljc.style.top = "120vh";
+    ljc.style.top = "63vh";
     ljc.style.color = "#a6580d";
 
     const zdc = document.createElement("div");
     zdc.innerHTML = `Zd() 数量： ${v9}。`;
     zdc.className = "cont";
-    zdc.style.top = "125vh";
+    zdc.style.top = "70vh";
     zdc.style.padding = "7px 15px";
     zdc.style.borderRadius = "5px";
     zdc.style.backgroundColor = "#19191879";
     zdc.style.color = "#ffffff";
 
-    urcc(ctrl, infoc);
-    urcc(ctrl, cgc);
-    urcc(ctrl, failc);
-    urcc(ctrl, warnc);
-    urcc(ctrl, inpc);
-    urcc(ctrl, tranc);
-    urcc(ctrl, xzc);
-    urcc(ctrl, ljc);
-    urcc(ctrl, zdc);
+    const rzc = document.createElement("div");
+    rzc.innerHTML = `Rz() 数量： ${v10}。`;
+    rzc.className = "cont";
+    rzc.style.top = "77vh";
+    rzc.style.padding = "7px 15px";
+    rzc.style.borderRadius = "5px";
+    rzc.style.backgroundColor = "#19191879";
+    rzc.style.color = "#ffffff";
+
+    urcc(inf, infoc);
+    urcc(inf, cgc);
+    urcc(inf, failc);
+    urcc(inf, warnc);
+    urcc(inf, inpc);
+    urcc(inf, tranc);
+    urcc(inf, xzc);
+    urcc(inf, ljc);
+    urcc(inf, zdc);
+    urcc(inf, rzc);
 }

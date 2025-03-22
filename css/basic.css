@@ -581,12 +581,11 @@ button {
     color: black;
 }
 
-.control-pad {
+.control-pad, .information-table {
     overflow-x: hidden;
     overflow-y: auto;
     position: fixed;
     top: 0;
-    left: calc(-30vw - 300px);
     width: 400px;
     height: 100%;
     background-color: #00000000;
@@ -596,11 +595,19 @@ button {
     scrollbar-color: #ffffff99 #00000000;
 }
 
-.control-pad::-webkit-scrollbar-thumb {
+.control-pad {
+    left: calc(-30vw - 300px);
+}
+
+.information-table {
+    right: calc(-30vw - 300px);
+}
+
+.control-pad::-webkit-scrollbar-thumb, .information-table::-webkit-scrollbar-thumb {
     border-radius: 4px;
 }
 
-.control-pad::-webkit-scrollbar-thumb:hover {
+.control-pad::-webkit-scrollbar-thumb:hover, .information-table::-webkit-scrollbar-thumb:hover {
     background-color: #828282;
 }
 
@@ -622,6 +629,28 @@ button {
     }
     to {
         left: calc(-30vw - 300px);
+        backdrop-filter: blur(0px) saturate(100%);
+    }
+}
+
+@keyframes inf- {
+    from {
+        right: calc(-30vw - 300px);
+        backdrop-filter: blur(0px) saturate(100%);
+    }
+    to {
+        right: 0;
+        backdrop-filter: blur(14px) saturate(250%);
+    }
+}
+
+@keyframes -inf {
+    from {
+        right: 0;
+        backdrop-filter: blur(14px) saturate(250%);
+    }
+    to {
+        right: calc(-30vw - 300px);
         backdrop-filter: blur(0px) saturate(100%);
     }
 }
