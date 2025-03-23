@@ -468,15 +468,16 @@ function zhan(s) {
     return t;
 }
 
-function fn4() {
+function fn4() { // 选项。
     const ctrl = document.querySelector(".control-pad");
     const title = document.createElement("p");
     title.innerHTML = "选项";
     title.className = "title";
+    title.style.right = "25px";
 
     const ms = document.createElement("p");
     ms.innerHTML = "模式";
-    ms.className = "cont";
+    ms.className = "lcont";
     const ys = document.createElement("button");
     ys.type = "button";
     ys.innerHTML = "Demo";
@@ -504,7 +505,7 @@ function fn4() {
 
     const zt = document.createElement("p");
     zt.innerHTML = `主题`;
-    zt.className = "cont";
+    zt.className = "lcont";
     zt.style.top = "20vh";
     const a = document.createElement("button");
     a.type = "button";
@@ -533,7 +534,7 @@ function fn4() {
 
     const nullc = document.createElement("p");
     nullc.innerHTML = `nullcount`;
-    nullc.className = "cont";
+    nullc.className = "lcont";
     nullc.style.top = "30vh";
     const inp1 = document.createElement("input");
     let f1 = false;
@@ -559,7 +560,7 @@ function fn4() {
 
     const eas = document.createElement("p");
     eas.innerHTML = "easing";
-    eas.className = "cont";
+    eas.className = "lcont";
     eas.style.top = "40vh";
     const inp2 = document.createElement("input");
     let f2 = false;
@@ -585,7 +586,7 @@ function fn4() {
 
     const mrms = document.createElement("p");
     mrms.innerHTML = "deftime";
-    mrms.className = "cont";
+    mrms.className = "lcont";
     mrms.style.top = "50vh";
     const inp3 = document.createElement("input");
     let f3 = false;
@@ -610,7 +611,7 @@ function fn4() {
 
     const defw = document.createElement("p");
     defw.innerHTML = "defwid";
-    defw.className = "cont";
+    defw.className = "lcont";
     defw.style.top = "60vh";
     const inp4 = document.createElement("input");
     let f4 = false;
@@ -636,7 +637,7 @@ function fn4() {
 
     const defh = document.createElement("p");
     defh.innerHTML = "defhei";
-    defh.className = "cont";
+    defh.className = "lcont";
     defh.style.top = "70vh";
     const inp5 = document.createElement("input");
     let f5 = false;
@@ -661,6 +662,7 @@ function fn4() {
     });
 
     const jdt = document.createElement("div");
+    jdt.style.left = "25px";
     jdt.style.height = "7px";
     jdt.style.width = "100%";
     jdt.style.backgroundColor = "#ffffff99";
@@ -690,6 +692,7 @@ function fn5() {
     const title = document.createElement("p");
     title.innerHTML = "杂项";
     title.className = "title";
+    title.style.right = "25px";
     title.style.textAlign = "right";
 
     const jdt = document.createElement("div");
@@ -701,7 +704,7 @@ function fn5() {
     title.appendChild(jdt);
 }
 
-function fn6() {
+function fn6() { // 杂项。
     const inf = document.querySelector(".information-table");
     var v1 = 0;
     var v2 = 0;
@@ -714,7 +717,6 @@ function fn6() {
     var v9 = 0;
     var v10 = 0;
 
-    // 计算各个窗口的数量
     for (let i = 0; i <= windows.length - 1; i++) {
         if (windows[i].className === "info-window") v1++;
         else if (windows[i].className === "cg-window") v2++;
@@ -730,55 +732,55 @@ function fn6() {
 
     const infoc = document.createElement("div");
     infoc.innerHTML = `Info() 数量： ${v1}。`;
-    infoc.className = "cont";
+    infoc.className = "rcont";
     infoc.style.top = "14vh";
     infoc.style.color = "#18a689";
 
     const cgc = document.createElement("div");
     cgc.innerHTML = `Cg() 数量： ${v2}。`;
-    cgc.className = "cont";
+    cgc.className = "rcont";
     cgc.style.top = "21vh";
     cgc.style.color = "#1d5837";
 
     const failc = document.createElement("div");
     failc.innerHTML = `Fail() 数量： ${v3}。`;
-    failc.className = "cont";
+    failc.className = "rcont";
     failc.style.top = "28vh";
     failc.style.color = "#791e1d";
 
     const warnc = document.createElement("div");
     warnc.innerHTML = `Warn() 数量： ${v4}。`;
-    warnc.className = "cont";
+    warnc.className = "rcont";
     warnc.style.top = "35vh";
     warnc.style.color = "#847829";
 
     const inpc = document.createElement("div");
     inpc.innerHTML = `Inp() 数量： ${v5}。`;
-    inpc.className = "cont";
+    inpc.className = "rcont";
     inpc.style.top = "42vh";
     inpc.style.color = "#235087";
 
     const tranc = document.createElement("div");
     tranc.innerHTML = `Tran() 数量： ${v6}。`;
-    tranc.className = "cont";
+    tranc.className = "rcont";
     tranc.style.top = "49vh";
     tranc.style.color = "#9e3389";
 
     const xzc = document.createElement("div");
     xzc.innerHTML = `Xz() 数量： ${v7}。`;
-    xzc.className = "cont";
+    xzc.className = "rcont";
     xzc.style.top = "56vh";
     xzc.style.color = "#7527a4";
 
     const ljc = document.createElement("div");
     ljc.innerHTML = `Lj() 数量： ${v8}。`;
-    ljc.className = "cont";
+    ljc.className = "rcont";
     ljc.style.top = "63vh";
     ljc.style.color = "#a6580d";
 
     const zdc = document.createElement("div");
     zdc.innerHTML = `Zd() 数量： ${v9}。`;
-    zdc.className = "cont";
+    zdc.className = "rcont";
     zdc.style.top = "70vh";
     zdc.style.padding = "7px 15px";
     zdc.style.borderRadius = "5px";
@@ -787,7 +789,7 @@ function fn6() {
 
     const rzc = document.createElement("div");
     rzc.innerHTML = `Rz() 数量： ${v10}。`;
-    rzc.className = "cont";
+    rzc.className = "rcont";
     rzc.style.top = "77vh";
     rzc.style.padding = "7px 15px";
     rzc.style.borderRadius = "5px";

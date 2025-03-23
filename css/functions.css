@@ -1,45 +1,53 @@
-/* info() 函数。 */
-.info-window {
+.info-window, .cg-window, .fail-window, .warn-window, .inp-window, .tran-window, .xz-window, .lj-window, .zd-window {
     z-index: 1000;
     display: flex;
     position: absolute;
     right: 0px;
     top: 7vh;
-    background-color: #18a68999;
     font-size: 25px;
     flex-wrap: wrap;
     width: auto;
     margin: 10px;
+}
+
+.info-window {
+    background-color: #18a68999;
+}
+
+.info-square, .cg-square, .fail-square, .warn-square, .inp-square, .tran-square, .xz-square, .lj-square, .zd-square {
+    z-index: 1001;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .info-square {
-    z-index: 1001;
-    width: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     background-color: #1b7163c9;
 }
 
-.info-content {
+.fn-content {
     padding: 14px 25px;
     color: white;
     flex-grow: 1;
     max-width: calc(14ch);
     word-break: break-word;
     min-width: 28ch;
+}
+
+.info-progressbar, .cg-progressbar, .fail-progressbar, .warn-progressbar {
+    width: 0;
+    height: 5px;
+    overflow: hidden;
+    transition: width 16ms ease;
+    position: relative;
 }
 
 .info-progressbar {
-    width: 0;
-    height: 5px;
     background-color: #06b48499;
-    overflow: hidden;
-    transition: width 16ms ease;
-    position: relative;
 }
 
-@keyframes -info {
+@keyframes zyfn- {
     from {
         transform: translateX(800px);
         opacity: 0;
@@ -50,7 +58,7 @@
     }
 }
 
-@keyframes info- {
+@keyframes -zyfn {
     from {
         transform: translateX(0%);
         opacity: 1;
@@ -61,238 +69,63 @@
     }
 }
 
-/* cg() 函数。 */
 .cg-window {
-    z-index: 1000;
-    display: flex;
-    position: absolute;
-    right: 0px;
-    top: 7vh;
     background-color: #1d583799;
-    font-size: 25px;
-    flex-wrap: wrap;
-    width: auto;
-    margin: 10px;
 }
 
 .cg-square {
-    z-index: 1001;
-    width: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     background-color: #183b25c9;
 }
 
-.cg-content {
-    padding: 14px 25px;
-    color: white;
-    flex-grow: 1;
-    max-width: calc(14ch);
-    word-break: break-word;
-    min-width: 28ch;
-}
-
 .cg-progressbar {
-    width: 0;
-    height: 5px;
     background-color: #14be6b99;
-    overflow: hidden;
-    transition: width 16ms ease;
-    position: relative;
 }
 
-@keyframes -cg {
-    from {
-        transform: translateX(800px);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(0%);
-        opacity: 1;
-    }
-}
-
-@keyframes cg- {
-    from {
-        transform: translateX(0%);
-        opacity: 1;
-    }
-    to {
-        transform: translateX(800px);
-        opacity: 0;
-    }
-}
-
-/* fail() 函数。 */
 .fail-window {
-    z-index: 1000;
-    display: flex;
-    position: absolute;
-    right: 0px;
-    top: 7vh;
     background-color: #791e1d99;
-    font-size: 25px;
-    flex-wrap: wrap;
-    width: auto;
-    margin: 10px;
 }
 
 .fail-square {
-    z-index: 1001;
-    width: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     background-color: #4a1514c9;
 }
 
-.fail-content {
-    padding: 14px 25px;
-    color: white;
-    flex-grow: 1;
-    max-width: calc(14ch);
-    word-break: break-word;
-    min-width: 28ch;
-}
-
 .fail-progressbar {
-    width: 0;
-    height: 5px;
     background-color: #e0111199;
-    overflow: hidden;
-    transition: width 16ms ease;
-    position: relative;
 }
 
-@keyframes -fail {
-    from {
-        transform: translateX(800px);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(0%);
-        opacity: 1;
-    }
-}
-
-@keyframes fail- {
-    from {
-        transform: translateX(0%);
-        opacity: 1;
-    }
-    to {
-        transform: translateX(800px);
-        opacity: 0;
-    }
-}
-
-/* warn() 函数。 */
 .warn-window {
-    z-index: 1000;
-    display: flex;
-    position: absolute;
-    right: 0px;
-    top: 7vh;
     background-color: #84782999;
-    font-size: 25px;
-    flex-wrap: wrap;
-    width: auto;
-    margin: 10px;
 }
 
 .warn-square {
-    z-index: 1001;
-    width: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     background-color: #615518c9;
 }
 
-.warn-content {
-    padding: 14px 25px;
-    color: white;
-    flex-grow: 1;
-    max-width: calc(14ch);
-    word-break: break-word;
-    min-width: 28ch;
-}
-
 .warn-progressbar {
-    width: 0;
-    height: 5px;
     background-color: #ffad0099;
-    overflow: hidden;
-    transition: width 16ms ease;
-    position: relative;
 }
 
-@keyframes -warn {
-    from {
-        transform: translateX(800px);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(0%);
-        opacity: 1;
-    }
-}
-
-@keyframes warn- {
-    from {
-        transform: translateX(0%);
-        opacity: 1;
-    }
-    to {
-        transform: translateX(800px);
-        opacity: 0;
-    }
-}
-
-/* inp() 函数。 */
 .inp-window {
-    transform: translateX(50%);
-    z-index: 1000;
-    display: flex;
-    position: absolute;
-    right: 0px;
-    top: 7vh;
     background-color: #23508799;
-    font-size: 25px;
-    flex-wrap: wrap;
-    width: auto;
-    margin: 10px;
 }
 
 .inp-square {
-    z-index: 1001;
-    width: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     background-color: #183450c9;
 }
 
-.inp-content {
-    padding: 14px 25px;
-    color: white;
-    flex-grow: 1;
-    max-width: calc(14ch);
-    word-break: break-word;
-    min-width: 28ch;
-}
-
-.inp-box {
+.inp-box, .zd-box {
     z-index: 999;
     font-size: 25px;
     color: white;
     flex-grow: 1;
     word-break: break-word;
-    background-color: #9cdcfe99;
     font-family: "basic";
     border: none;
     border-radius: 0px;
+}
+
+.inp-box {
+    background-color: #9cdcfe99;
 }
 
 .inp-box::placeholder {
@@ -300,7 +133,7 @@
     text-align: center;
 }
 
-@keyframes -inp {
+@keyframes sxfn- {
     from {
         transform: translateY(-600px);
         opacity: 0;
@@ -312,245 +145,56 @@
     }
 }
 
-@keyframes inp- {
+@keyframes -sxfn {
     from {
         transform: translateY(0%);
         opacity: 1;
     }
+
     to {
         transform: translateY(-600px);
         opacity: 0;
     }
 }
 
-/* xz() 函数。 */
 .xz-window {
-    z-index: 1000;
-    display: flex;
-    position: absolute;
-    right: 0px;
-    top: 7vh;
     background-color: #7527a499;
-    font-size: 25px;
-    flex-wrap: wrap;
-    width: auto;
-    margin: 10px;
 }
 
 .xz-square {
-    z-index: 1001;
-    width: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     background-color: #461c5fc9;
 }
 
-.xz-content {
-    margin-bottom: 90px;
-    padding: 14px 25px;
-    color: white;
-    flex-grow: 1;
-    max-width: calc(14ch);
-    word-break: break-word;
-    min-width: 28ch;
-}
-
-@keyframes -xz {
-    from {
-        transform: translateX(800px);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(0%);
-        opacity: 1;
-    }
-}
-
-@keyframes xz- {
-    from {
-        transform: translateX(0%);
-        opacity: 1;
-    }
-    to {
-        transform: translateX(800px);
-        opacity: 0;
-    }
-}
-
-/* tran() 函数。 */
 .tran-window {
-    z-index: 1000;
-    display: flex;
-    position: absolute;
-    right: 0px;
-    top: 7vh;
     background-color: #9e338999;
-    font-size: 25px;
-    flex-wrap: wrap;
-    width: auto;
-    margin: 10px;
 }
 
 .tran-square {
-    z-index: 1001;
-    width: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     background-color: #c125abc9;
 }
 
-.tran-content {
-    padding: 14px 25px;
-    color: white;
-    flex-grow: 1;
-    max-width: calc(14ch);
-    word-break: break-word;
-    min-width: 28ch;
-}
-
 .tran-progressbar {
-    width: 0;
-    height: 5px;
     background-color: #ff39ac99;
-    overflow: hidden;
-    transition: width 16ms ease;
-    position: relative;
 }
 
-@keyframes -tran {
-    from {
-        transform: translateX(800px);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(0%);
-        opacity: 1;
-    }
-}
-
-@keyframes tran- {
-    from {
-        transform: translateX(0%);
-        opacity: 1;
-    }
-    to {
-        transform: translateX(800px);
-        opacity: 0;
-    }
-}
-
-/* lj() 函数。 */
 .lj-window {
-    z-index: 1000;
-    display: flex;
-    position: absolute;
-    right: 0px;
-    top: 7vh;
     background-color: #a6580d99;
-    font-size: 25px;
-    flex-wrap: wrap;
-    width: auto;
-    margin: 10px;
 }
 
 .lj-square {
-    z-index: 1001;
-    width: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     background-color: #753e14c9;
 }
 
-.lj-content {
-    padding: 14px 25px;
-    color: white;
-    flex-grow: 1;
-    margin-bottom: 70px;
-    max-width: calc(14ch);
-    word-break: break-word;
-    min-width: 28ch;
-}
-
-.lj-btn {
-    background-color: #715213b0;
-    border: none;
-    padding: 14px 25px;
-    text-align: center;
-    cursor: pointer;
-    color: white;
-    position: absolute;
-    flex: 1;
-    bottom: 20px;
-    left: 120px;
-}
-
-@keyframes -lj {
-    from {
-        transform: translateX(800px);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(0%);
-        opacity: 1;
-    }
-}
-
-@keyframes lj- {
-    from {
-        transform: translateX(0%);
-        opacity: 1;
-    }
-    to {
-        transform: translateX(800px);
-        opacity: 0;
-    }
-}
-
-/* zd() 函数。 */
 .zd-window {
-    z-index: 1000;
-    display: flex;
-    position: absolute;
-    right: 0px;
-    top: 7vh;
     background-color: #19181899;
-    font-size: 25px;
-    flex-wrap: wrap;
-    width: auto;
-    margin: 10px;
 }
 
 .zd-square {
-    z-index: 1001;
-    width: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     background-color: #000000c9;
 }
 
-.zd-content {
-    padding: 14px 25px;
-    color: white;
-    flex-grow: 1;
-    max-width: calc(14ch);
-    word-break: break-word;
-    min-width: 28ch;
-}
-
 .zd-box {
-    z-index: 999;
-    font-size: 25px;
-    color: white;
-    flex-grow: 1;
-    word-break: break-word;
     background-color: #22222299;
-    font-family: "basic";
-    border: none;
-    border-radius: 0px;
 }
 
 .zd-box::placeholder {
@@ -558,29 +202,7 @@
     text-align: center;
 }
 
-@keyframes -zd {
-    from {
-        transform: translateY(-600px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0%);
-        opacity: 1;
-    }
-}
-
-@keyframes zd- {
-    from {
-        transform: translateY(0%);
-        opacity: 1;
-    }
-    to {
-        transform: translateY(-600px);
-        opacity: 0;
-    }
-}
-
-/* wz() 函数。（优化后） */
+/* wz() 函数。 */
 .wz-window {
     width: 0;
     height: 50vh;

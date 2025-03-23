@@ -8,48 +8,43 @@ let urlEndings = [
     `.museum`, `.jobs`, `.travel`, `.xxx`, `.top`, `.site`,
     `.wiki`, `.cc`, `.tv`, `.mobi`, `.me`, `.bid`, `.club`,
     `.online`, `.store`, `.work`, `.tech`
-]; // 常见的 URL 后缀。
+];
 
-// 更新窗口位置的函数。
-
-function pos() {
+function pos(p) {
     let total = 7 * window.innerHeight / 100;
-    windows.forEach((window) => {
-        const wh = window.offsetHeight;
-        window.style.transition = `top 0.7s ${easing}`;
-        window.style.top = `${total}px`;
-        total += wh + 7;
-    });
-}
-
-function p() {
-    let total = 7 * window.innerHeight / 100;
-    rzwin.forEach((window) => {
-        const wh = window.offsetHeight;
-        window.style.transition = `top 0.7s ${easing}`;
-        window.style.top = `${total}px`;
-        total += wh + 7;
-    });
+    function fn(w) {
+        w.forEach((window) => {
+            const wh = window.offsetHeight;
+            window.style.transition = `top 0.7s ${easing}`;
+            window.style.top = `${total}px`;
+            total += wh + 7;
+        });
+    }
+    if (p) {
+        fn(windows);
+    } else {
+        fn(rzwin);
+    }
 }
 
 function create(window) {
-    windows.push(window);
-    pos();
-}
-
-function cr(rz) {
-    rzwin.push(rz);
-    p();
+    if (window.className !== "rz-window") {
+        windows.push(window);
+        pos(true);
+    } else {
+        rzwin.push(window);
+        pos(false);
+    }
 }
 
 function close(window) {
-    windows = windows.filter(win => win !== window);
-    pos(); 
-}
-
-function cl(rz) {
-    rzwin = rzwin.filter(win => win !== rz);
-    p();
+    if (window.className !== "rz-window") {
+        windows = windows.filter(win => win !== window);
+        pos(true);
+    } else {
+        rzwin = rzwin.filter(win => win !== window);
+        pos(false);
+    }
 }
 
 function monitor() {
@@ -84,7 +79,7 @@ function rz(string, time) {
     const line = Math.ceil(string.length / 14);
     content.style.height = `calc(${line * 20}px)`;
 
-    cr(window);
+    create(window);
     document.body.appendChild(window);
     window.appendChild(content);
 
@@ -96,7 +91,7 @@ function rz(string, time) {
         window.style.animation = `rz- 0.7s forwards ${easing}`;
         setTimeout(() => {
             document.body.removeChild(window);
-            cl(window);
+            close(window);
         }, 700);
     }, time);
 }
@@ -130,7 +125,7 @@ function info(string, ms) {
     const icon = document.createElement(`img`);
     icon.src = `images/Inf.png`;
     const content = document.createElement(`div`);
-    content.className = `info-content`;
+    content.className = `fn-content`;
     const bar = document.createElement(`div`);
     bar.className = `info-progressbar`;
 
@@ -146,7 +141,7 @@ function info(string, ms) {
     window.appendChild(bar);
     square.appendChild(icon);
 
-    window.style.animation = `-info 0.7s forwards ${easing}`;
+    window.style.animation = `zyfn- 0.7s forwards ${easing}`;
     content.innerHTML = string;
 
     const visible = () => {
@@ -176,7 +171,7 @@ function info(string, ms) {
     }, 10);
 
     setTimeout(() => {
-        window.style.animation = `info- 0.7s forwards ${easing}`;
+        window.style.animation = `-zyfn 0.7s forwards ${easing}`;
         setTimeout(() => {
             document.body.removeChild(window);
             close(window, windows);
@@ -214,7 +209,7 @@ function cg(string, ms) {
     const icon = document.createElement(`img`);
     icon.src = `images/Suc.png`;
     const content = document.createElement(`div`);
-    content.className = `cg-content`;
+    content.className = `fn-content`;
     const bar = document.createElement(`div`);
     bar.className = `cg-progressbar`;
     if (theme === "Neon") {
@@ -229,7 +224,7 @@ function cg(string, ms) {
     window.appendChild(bar);
     square.appendChild(icon);
 
-    window.style.animation = `-cg 0.7s forwards ${easing}`;
+    window.style.animation = `zyfn- 0.7s forwards ${easing}`;
     content.innerHTML = string;
 
     const line = Math.ceil(string.length / 14);
@@ -259,7 +254,7 @@ function cg(string, ms) {
     };
 
     setTimeout(() => {
-        window.style.animation = `cg- 0.7s forwards ${easing}`;
+        window.style.animation = `-zyfn 0.7s forwards ${easing}`;
         setTimeout(() => {
             document.body.removeChild(window);
             close(window, windows)
@@ -297,7 +292,7 @@ function fail(string, ms) {
     const icon = document.createElement(`img`);
     icon.className = `fail-icon`;
     const content = document.createElement(`div`);
-    content.className = `fail-content`;
+    content.className = `fn-content`;
     const bar = document.createElement(`div`);
     bar.className = `fail-progressbar`;
     if (theme === "Neon") {
@@ -313,7 +308,7 @@ function fail(string, ms) {
     square.appendChild(icon);
 
     icon.src = `images/Err.png`;
-    window.style.animation = `-fail 0.7s forwards ${easing}`;
+    window.style.animation = `zyfn- 0.7s forwards ${easing}`;
     content.innerHTML = string;
 
     const line = Math.ceil(string.length / 14);
@@ -343,7 +338,7 @@ function fail(string, ms) {
     };
 
     setTimeout(() => {
-        window.style.animation = `fail- 0.7s forwards ${easing}`;
+        window.style.animation = `-zyfn 0.7s forwards ${easing}`;
         setTimeout(() => {
             document.body.removeChild(window);
             close(window, windows)
@@ -381,7 +376,7 @@ function warn(string, ms) {
     const icon = document.createElement(`img`);
     icon.className = `warn-icon`;
     const content = document.createElement(`div`);
-    content.className = `warn-content`;
+    content.className = `fn-content`;
     const bar = document.createElement(`div`);
     bar.className = `warn-progressbar`;
     if (theme === "Neon") {
@@ -397,7 +392,7 @@ function warn(string, ms) {
     square.appendChild(icon);
 
     icon.src = `images/Exc.png`;
-    window.style.animation = `-warn 0.7s forwards ${easing}`;
+    window.style.animation = `zyfn- 0.7s forwards ${easing}`;
     content.innerHTML = string;
 
     const line = Math.ceil(string.length / 14);
@@ -427,7 +422,7 @@ function warn(string, ms) {
     };
 
     setTimeout(() => {
-        window.style.animation = `warn- 0.7s forwards ${easing}`;
+        window.style.animation = `-zyfn 0.7s forwards ${easing}`;
         setTimeout(() => {
             document.body.removeChild(window);
             close(window, windows)
@@ -466,7 +461,7 @@ async function inp(string, holder) {
         const icon = document.createElement(`img`);
         icon.className = `inp-icon`;
         const content = document.createElement(`div`);
-        content.className = `inp-content`;
+        content.className = `fn-content`;
 
         const box = document.createElement(`input`);
         box.type = `text`;
@@ -486,7 +481,7 @@ async function inp(string, holder) {
         square.appendChild(icon);
         
         icon.src = `images/Inp.png`;
-        window.style.animation = `-inp 0.7s forwards ${easing}`;
+        window.style.animation = `sxfn- 0.7s forwards ${easing}`;
         content.innerHTML = string;
 
         const line = Math.ceil(string.length / 14);
@@ -497,7 +492,7 @@ async function inp(string, holder) {
         box.addEventListener(`keypress`, (event) => {
             if (event.key === `Enter`) {
                 const value = box.value;
-                window.style.animation = `inp- 0.7s forwards ${easing}`;
+                window.style.animation = `-sxfn 0.7s forwards ${easing}`;
                 setTimeout(() => {
                     if (document.body.contains(window)) {
                         document.body.removeChild(window);
@@ -528,7 +523,7 @@ async function xz(string, n, names) {
         const icon = document.createElement(`img`);
         icon.className = `xz-icon`;
         const content = document.createElement(`div`);
-        content.className = `xz-content`;
+        content.className = `fn-content`;
 
         if (string == null || string == undefined) {
             nullcount++;
@@ -558,7 +553,7 @@ async function xz(string, n, names) {
         square.appendChild(icon);
 
         icon.src = `images/Sel.png`;
-        window.style.animation = `-xz 0.7s forwards ${easing}`;
+        window.style.animation = `zyfn- 0.7s forwards ${easing}`;
         content.innerHTML = string;
 
         const line = Math.ceil(string.length / 14);
@@ -609,7 +604,7 @@ async function xz(string, n, names) {
         }
 
         function rm() {
-            window.style.animation = `xz- 0.7s forwards ${easing}`;
+            window.style.animation = `-zyfn 0.7s forwards ${easing}`;
             setTimeout(() => {
                 document.body.removeChild(window);
                 close(window, windows)
@@ -645,7 +640,7 @@ async function tran(string) {
     const icon = document.createElement(`img`);
     icon.className = `tran-icon`;
     const content = document.createElement(`div`);
-    content.className = `tran-content`;
+    content.className = `fn-content`;
     const bar = document.createElement(`div`);
     bar.className = `tran-progressbar`;
     if (theme === "Neon") {
@@ -661,7 +656,7 @@ async function tran(string) {
     square.appendChild(icon);
 
     icon.src = `images/Tran.png`;
-    window.style.animation = `-tran 0.7s forwards ${easing}`;
+    window.style.animation = `zyfn- 0.7s forwards ${easing}`;
     content.innerHTML = string;
 
     const line = Math.ceil(string.length / 14);
@@ -682,7 +677,7 @@ async function tran(string) {
     };
     
     setTimeout(() => {
-        window.style.animation = `tran- 0.7s forwards ${easing}`;
+        window.style.animation = `-zyfn 0.7s forwards ${easing}`;
         setTimeout(() => {
             document.body.removeChild(window);
             close(window, windows)
@@ -725,11 +720,19 @@ async function lj(string, url, ignore) {
     const icon = document.createElement(`img`);
     icon.className = `lj-icon`;
     const content = document.createElement(`div`);
-    content.className = `lj-content`;
+    content.className = `fn-content`;
     const btn = document.createElement(`button`);
-    btn.className = `lj-btn`;
-    var line_ = Math.ceil(url.size / 14);
-    content.style.marginBottom = `calc(80px + ${line_ * lineHeight}vh)`;
+
+    btn.style.backgroundColor = "#715213b0";
+    btn.style.border = `none`;
+    btn.style.fontSize = "25px";
+    btn.style.padding = `14px 25px`;
+    btn.style.textAlign = `center`;
+    btn.style.cursor = `pointer`;
+    btn.style.color = `white`;
+    btn.style.position = "relative";
+    btn.style.flex = `1`;
+
     if (theme === "Neon") {
         window.style.backdropFilter = `blur(14px) saturate(250%)`;
         square.style.backdropFilter = `blur(14px) saturate(250%)`;
@@ -742,6 +745,7 @@ async function lj(string, url, ignore) {
     square.appendChild(icon);
 
     icon.src = `images/Link.png`;
+    window.style.animation = `zyfn- 0.7s forwards ${easing}`;
     content.innerHTML = string;
     btn.innerHTML = url;
     content.appendChild(btn);
@@ -752,7 +756,7 @@ async function lj(string, url, ignore) {
 
     btn.onclick = () => {
         if (!open(url, `_blank`, `width=${defwid}, height=${defhei}`)) warn("弹出的窗口被阻止。", deftime);
-        window.style.animation = `lj- 0.7s forwards ${easing}`;
+        window.style.animation = `-zyfn 0.7s forwards ${easing}`;
         setTimeout(() => {
             document.body.removeChild(window);
             close(window, windows)
@@ -789,7 +793,7 @@ async function zd(string) {
         const icon = document.createElement(`img`);
         icon.className = `zd-icon`;
         const content = document.createElement(`div`);
-        content.className = `zd-content`;
+        content.className = `fn-content`;
         const box = document.createElement(`textarea`);
         box.className = `zd-box`;
         box.placeholder = `请输入命令。`;
@@ -810,7 +814,7 @@ async function zd(string) {
                 fail(error.message);
                 resolve();
             }
-            window.style.animation = `zd- 0.7s forwards ${easing}`;
+            window.style.animation = `-sxfn 0.7s forwards ${easing}`;
             setTimeout(() => {
                 if (document.body.contains(window)) {
                     document.body.removeChild(window);
@@ -833,7 +837,7 @@ async function zd(string) {
         square.appendChild(icon);
 
         icon.src = `images/Com.png`;
-        window.style.animation = `-zd 0.7s forwards ${easing}`;
+        window.style.animation = `sxfn- 0.7s forwards ${easing}`;
         content.innerHTML = string;
 
         const line = Math.ceil(string.length / 14);
