@@ -137,16 +137,19 @@
 
 .inp-box, .zd-box {
     z-index: 999;
-    font-size: 25px;
+    height: 3ch;
+    font-size: 20px;
     color: white;
     flex-grow: 1;
     word-break: break-word;
     font-family: "basic";
+    font-weight: 100;
     border: none;
     border-radius: 0px;
 }
 
 .inp-box {
+    text-align: center;
     background-color: #9cdcfe99;
 }
 
@@ -195,6 +198,7 @@
 }
 
 .zd-box {
+    text-align: left;
     background-color: #22222299;
 }
 

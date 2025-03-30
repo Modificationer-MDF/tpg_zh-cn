@@ -29,14 +29,14 @@ document.addEventListener(`DOMContentLoaded`, () => {
     });
     h2.addEventListener("animationend", (e) => {
         if (e.animationName === `-head2`) {
-            div.style.animation = `-top 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1)`;
-            head.style.animation = `-head 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1)`;
+            div.style.animation = `-top 550ms forwards cubic-bezier(0.33, 1, 0.68, 1)`;
+            head.style.animation = `-head 550ms forwards cubic-bezier(0.33, 1, 0.68, 1)`;
         }
     });
     div.addEventListener("animationend", (e) => {
         if (e.animationName === `-top`) {
-            f1.style.animation = `_head3 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1)`;
-            f3.style.animation = `_head4 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1)`;
+            f1.style.animation = `_head3 550ms forwards cubic-bezier(0.33, 1, 0.68, 1)`;
+            f3.style.animation = `_head4 550ms forwards cubic-bezier(0.33, 1, 0.68, 1)`;
         }
     });
 
@@ -47,10 +47,10 @@ document.addEventListener(`DOMContentLoaded`, () => {
     document.addEventListener("mousemove", function (event) {
         let width = ctrl.getBoundingClientRect().width;
         if (event.clientX <= 50 && event.clientY <= 50 && moved === false) {
-            ctrl.style.animation = `ctrl- 0.7s forwards ${easing}`;
+            ctrl.style.animation = `ctrl- 550ms forwards ${easing}`;
             moved = true;
         } else if (event.clientX > width && moved === true) {
-            ctrl.style.animation = `-ctrl 0.7s forwards ${easing}`;
+            ctrl.style.animation = `-ctrl 550ms forwards ${easing}`;
             moved = false;
         }
     });
@@ -63,10 +63,10 @@ document.addEventListener(`DOMContentLoaded`, () => {
         let rect = inf.getBoundingClientRect().width; // 获取 inf 元素的位置信息
 
         if (event.clientX >= window.innerWidth - 50 && event.clientY <= 50 && imoved === false) {
-            inf.style.animation = `inf- 0.7s forwards ${easing}`;
+            inf.style.animation = `inf- 550ms forwards ${easing}`;
             imoved = true;
         } else if (event.clientX < window.innerWidth - rect && imoved === true) {
-            inf.style.animation = `-inf 0.7s forwards ${easing}`;
+            inf.style.animation = `-inf 550ms forwards ${easing}`;
             imoved = false;
         }
     });
@@ -77,7 +77,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
 function fn1() {
     const div = document.querySelector(`.head3`);
     const dakai = document.getElementById(`1`);
-    dakai.style.transition = `all 0.7s ${easing}`;
+    dakai.style.transition = `all 550ms ${easing}`;
     const infobtn = document.createElement(`button`);
     infobtn.style.marginTop = `15px`;
     infobtn.innerHTML = `info`;
@@ -163,7 +163,7 @@ function fn1() {
     ];
 
     all.forEach(btn => {
-        btn.style.display = `none`;
+        btn.style.display = "none";
     });
 
     if (div.children.length <= 1) { // 若 div 标签下没有子元素，则创建子元素。
@@ -172,7 +172,7 @@ function fn1() {
         });
     }
 
-    div.style.animation = `head3- 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1)`;
+    div.style.animation = `head3- 550ms forwards cubic-bezier(0.33, 1, 0.68, 1)`;
     dakai.style.backgroundColor = `#001dff99`;
     dakai.style.width = "230px";
     dakai.textContent = "在此处演示函数";
@@ -183,7 +183,7 @@ function fn1() {
                 btn.style.display = "block";
                 btn.style.color = "#ffffff";
                 btn.style.opacity = "0";
-                btn.style.transition = "opacity 0.7s cubic-bezier(0.33, 1, 0.68, 1)";
+                btn.style.transition = "opacity 550ms cubic-bezier(0.33, 1, 0.68, 1)";
             });
             setTimeout(() => {
                 all.forEach(btn => {
@@ -196,13 +196,13 @@ function fn1() {
 
 function fn2() {
     const div = document.querySelector(".head3");
-    const div1 = document.createElement(`div`);
+    const div1 = document.createElement("div");
     div1.className = `div1`;
     div1.textContent = `主函数区`;
-    const div2 = document.createElement(`div`);
+    const div2 = document.createElement("div");
     div2.className = `div2`;
     div2.textContent = `副函数区`;
-    const div3 = document.createElement(`div`);
+    const div3 = document.createElement("div");
     div3.className = `div3`;
     div3.textContent = `调试区`;
     const dakai = document.getElementById("1");
@@ -234,14 +234,15 @@ function fn2() {
     const inpbtn = document.createElement(`button`);
     inpbtn.innerHTML = `inp`;
     inpbtn.className = `btn5`;
-    inpbtn.onclick = () => {
-        inp("我很想听到你的想法。", "在此输入……");
+    inpbtn.onclick = async () => {
+        let a = await inp("你可以在此输入！", "在此输入……");
+        info(`你输入了：“${a}”。`);
     };
     const synchrbtn = document.createElement(`button`);
     synchrbtn.innerHTML = "synchr";
     synchrbtn.className = `btn6`;
     synchrbtn.onclick = () => {
-        synchr("目前，还没有开发传输文件的功能。");
+        synchr("该函数旨在同步文件、数据，但现在还未开发完成。");
     };
     const xzbtn = document.createElement(`button`);
     xzbtn.innerHTML = `xz`;
@@ -314,9 +315,9 @@ function fn2() {
         undefinedbtn,
     ];
 
-    div1.style.display = `none`;
-    div2.style.display = `none`;
-    div3.style.display = `none`;
+    div1.style.display = "none";
+    div2.style.display = "none";
+    div3.style.display = "none";
     all.forEach(btn => {
         btn.type = "button";
         btn.style.display = "none";
@@ -335,9 +336,9 @@ function fn2() {
         });
     }
 
-    div.style.animation = "head3- 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1)";
+    div.style.animation = "head3- 550ms forwards cubic-bezier(0.33, 1, 0.68, 1)";
     dakai.textContent = "以下是预设内容";
-    dakai.style.transition = "all 0.7s cubic-bezier(0.33, 1, 0.68, 1)";
+    dakai.style.transition = "all 550ms cubic-bezier(0.33, 1, 0.68, 1)";
     dakai.style.backgroundColor = `#001dff99`;
     dakai.style.width = "230px";
 
@@ -347,17 +348,17 @@ function fn2() {
                 btn.style.display = "block";
                 btn.style.color = "#ffffff";
                 btn.style.opacity = "0";
-                btn.style.transition = "opacity 0.7s cubic-bezier(0.33, 1, 0.68, 1)";
+                btn.style.transition = "opacity 550ms cubic-bezier(0.33, 1, 0.68, 1)";
             });
             div1.style.display = "block";
             div1.style.opacity = "0";
-            div1.style.transition = "opacity 0.7s cubic-bezier(0.33, 1, 0.68, 1)";
+            div1.style.transition = "opacity 550ms cubic-bezier(0.33, 1, 0.68, 1)";
             div2.style.display = "block";
             div2.style.opacity = "0";
-            div2.style.transition = "opacity 0.7s cubic-bezier(0.33, 1, 0.68, 1)";
+            div2.style.transition = "opacity 550ms cubic-bezier(0.33, 1, 0.68, 1)";
             div3.style.display = "block";
             div3.style.opacity = "0";
-            div3.style.transition = "opacity 0.7s cubic-bezier(0.33, 1, 0.68, 1)";
+            div3.style.transition = "opacity 550ms cubic-bezier(0.33, 1, 0.68, 1)";
             setTimeout(() => {
                 all.forEach(btn => {
                     btn.style.opacity = `1`;
@@ -374,9 +375,9 @@ function fn3() {
     warn("该文件可能会被误判为恶意软件，请注意甄别。");
 
     const div = document.querySelector(`.head4`);
-    div.style.animation = `head4- 0.7s forwards ${easing}`;
+    div.style.animation = `head4- 550ms forwards ${easing}`;
     const dakai = document.getElementById(`3`);
-    dakai.style.transition = `all 0.7s ${easing}`;
+    dakai.style.transition = `all 550ms ${easing}`;
     dakai.style.backgroundColor = `#001dff99`;
     dakai.style.width = `500px`;
     dakai.textContent = "在此处下载 The Play Games 所有版本。";
@@ -434,7 +435,7 @@ function fn3() {
     ];
 
     all.forEach(btn => {
-        btn.style.display = `none`;
+        btn.style.display = "none";
     });
     if (div.children.length <= 1) {
         all.forEach((btn, index) => {
@@ -451,7 +452,7 @@ function fn3() {
                 btn.style.display = "block";
                 btn.color = "#ffffff";
                 btn.style.opacity = "0";
-                btn.style.transition = `opacity 0.7s cubic-bezier(0.33, 1, 0.68, 1)`;
+                btn.style.transition = `opacity 550ms cubic-bezier(0.33, 1, 0.68, 1)`;
             });
             setTimeout(() => {
                 all.forEach(btn => {
@@ -608,7 +609,8 @@ function fn4() { // 选项。
     };
     inp3.addEventListener("keypress", (event) => {
         if (event.key === "Enter") {
-            if (Number(inp3.value) < 900) fail("请输入一个大于等于 900 的数字。");
+            if (Number(inp3.value) < 750) fail("请输入一个大于等于 750 的数字。");
+            else if (Number(inp3.value) >= 750 && Number(inp3.value) < 1000) warn("设置过小的数字不方便于阅读。");
             else {
                 deftime = Number(inp3.value);
                 info(`deftime 已被设置为 ${deftime} 毫秒。`);

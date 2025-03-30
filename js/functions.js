@@ -15,7 +15,7 @@ function pos(p) {
     function fn(w) {
         w.forEach((window) => {
             const wh = window.offsetHeight;
-            window.style.transition = `top 0.7s ${easing}`;
+            window.style.transition = `top 550ms ${easing}`;
             window.style.top = `${total}px`;
             total += wh + 7;
         });
@@ -69,10 +69,10 @@ function rz(string, time) {
     }
     if (time == null || time == undefined) time = deftime;
 
-    const window = document.createElement(`div`);
+    const window = document.createElement("div");
     window.className = `rz-window`;
     window.style.opacity = 0;
-    const content = document.createElement(`div`);
+    const content = document.createElement("div");
     content.className = `rz-content`;
     content.innerHTML = string;
 
@@ -84,15 +84,15 @@ function rz(string, time) {
     window.appendChild(content);
 
     requestAnimationFrame(() => {
-        window.style.animation = `-rz 0.7s forwards ${easing}`;
+        window.style.animation = `-rz 550ms forwards ${easing}`;
     });
 
     setTimeout(() => {
-        window.style.animation = `rz- 0.7s forwards ${easing}`;
+        window.style.animation = `rz- 550ms forwards ${easing}`;
         setTimeout(() => {
             document.body.removeChild(window);
             close(window);
-        }, 700);
+        }, 550);
     }, time);
 }
 
@@ -111,24 +111,24 @@ function info(string, ms) {
     if (replaced === "") {
         warn("所输入内容不能为空字符串。");
         return -39;
-    } else if (ms === undefined || ms === null || Number.isNaN(ms) || Number(ms) < 700) {
+    } else if (ms === undefined || ms === null || Number.isNaN(ms) || Number(ms) < 550) {
         ms = deftime;
     }
     if (nullcount > 26) {
         rz("你已被禁止调用函数。");
     }
 
-    const window = document.createElement(`div`);
+    const window = document.createElement("div");
     window.className = `info-window`;
-    const square = document.createElement(`div`);
+    const square = document.createElement("div");
     square.className = `info-square`;
-    const icon = document.createElement(`img`);
+    const icon = document.createElement("img");
     icon.src = `images/Inf.png`;
-    const content = document.createElement(`div`);
+    const content = document.createElement("div");
     content.className = "fn-content";
     content.style.opacity = 0;
     content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
-    const bar = document.createElement(`div`);
+    const bar = document.createElement("div");
     bar.className = `info-progressbar`;
 
     if (theme === "Present") {
@@ -141,7 +141,7 @@ function info(string, ms) {
     window.appendChild(content);
     window.appendChild(bar);
 
-    window.style.animation = `fn- 0.7s forwards ${easing}`;
+    window.style.animation = `fn- 550ms forwards ${easing}`;
     content.innerHTML = string;
 
     window.addEventListener("animationend", () => {
@@ -179,11 +179,11 @@ function info(string, ms) {
         content.style.opacity = 0;
         content.style.transform = "translateY(-10%)";
         content.addEventListener("transitionend", () => {
-            window.style.animation = `-fn 0.7s forwards ${easing}`;
+            window.style.animation = `-fn 550ms forwards ${easing}`;
             setTimeout(() => {
                 document.body.removeChild(window);
                 close(window, windows);
-            }, 700);
+            }, 550);
         });
     }, ms);
     setTimeout(visible, ms);
@@ -211,17 +211,17 @@ function cg(string, ms) {
         rz("你已被禁止调用函数。");
     }
 
-    const window = document.createElement(`div`);
+    const window = document.createElement("div");
     window.className = `cg-window`;
-    const square = document.createElement(`div`);
+    const square = document.createElement("div");
     square.className = `cg-square`;
-    const icon = document.createElement(`img`);
+    const icon = document.createElement("img");
     icon.src = `images/Suc.png`;
-    const content = document.createElement(`div`);
+    const content = document.createElement("div");
     content.className = "fn-content";
     content.style.opacity = 0;
     content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
-    const bar = document.createElement(`div`);
+    const bar = document.createElement("div");
     bar.className = `cg-progressbar`;
     if (theme === "Present") {
         window.style.backdropFilter = `blur(14px) saturate(250%)`;
@@ -233,7 +233,7 @@ function cg(string, ms) {
     window.appendChild(content);
     window.appendChild(bar);
 
-    window.style.animation = `fn- 0.7s forwards ${easing}`;
+    window.style.animation = `fn- 550ms forwards ${easing}`;
     content.innerHTML = string;
 
     window.addEventListener("animationend", () => {
@@ -271,11 +271,11 @@ function cg(string, ms) {
         content.style.opacity = 0;
         content.style.transform = "translateY(-10%)";
         content.addEventListener("transitionend", () => {
-            window.style.animation = `-fn 0.7s forwards ${easing}`;
+            window.style.animation = `-fn 550ms forwards ${easing}`;
             setTimeout(() => {
                 if (document.body.contains(window)) document.body.removeChild(window);
                 close(window, windows)
-            }, 700);
+            }, 550);
         });
     }, ms);
     setTimeout(visible, ms);
@@ -303,17 +303,17 @@ function fail(string, ms) {
         rz("你已被禁止调用函数。");
     }
 
-    const window = document.createElement(`div`);
+    const window = document.createElement("div");
     window.className = `fail-window`;
-    const square = document.createElement(`div`);
+    const square = document.createElement("div");
     square.className = `fail-square`;
-    const icon = document.createElement(`img`);
+    const icon = document.createElement("img");
     icon.className = `fail-icon`;
-    const content = document.createElement(`div`);
+    const content = document.createElement("div");
     content.className = "fn-content";
     content.style.opacity = 0;
     content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
-    const bar = document.createElement(`div`);
+    const bar = document.createElement("div");
     bar.className = `fail-progressbar`;
 
     if (theme === "Present") {
@@ -327,7 +327,7 @@ function fail(string, ms) {
     window.appendChild(bar);
 
     icon.src = `images/Err.png`;
-    window.style.animation = `fn- 0.7s forwards ${easing}`;
+    window.style.animation = `fn- 550ms forwards ${easing}`;
     content.innerHTML = string;
 
     window.addEventListener("animationend", () => {
@@ -365,11 +365,11 @@ function fail(string, ms) {
         content.style.opacity = 0;
         content.style.transform = "translateY(-10%)";
         content.addEventListener("transitionend", () => {
-            window.style.animation = `-fn 0.7s forwards ${easing}`;
+            window.style.animation = `-fn 550ms forwards ${easing}`;
             setTimeout(() => {
                 document.body.removeChild(window);
                 close(window, windows)
-            }, 700);
+            }, 550);
         });
     }, ms);
     setTimeout(visible, ms);
@@ -397,17 +397,17 @@ function warn(string, ms) {
         rz("你已被禁止调用函数。");
     }
 
-    const window = document.createElement(`div`);
+    const window = document.createElement("div");
     window.className = `warn-window`;
-    const square = document.createElement(`div`);
+    const square = document.createElement("div");
     square.className = `warn-square`;
-    const icon = document.createElement(`img`);
+    const icon = document.createElement("img");
     icon.className = `warn-icon`;
-    const content = document.createElement(`div`);
+    const content = document.createElement("div");
     content.className = "fn-content";
     content.style.opacity = 0;
     content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
-    const bar = document.createElement(`div`);
+    const bar = document.createElement("div");
     bar.className = `warn-progressbar`;
     if (theme === "Present") {
         window.style.backdropFilter = `blur(14px) saturate(250%)`;
@@ -420,7 +420,7 @@ function warn(string, ms) {
     window.appendChild(bar);
 
     icon.src = `images/Exc.png`;
-    window.style.animation = `fn- 0.7s forwards ${easing}`;
+    window.style.animation = `fn- 550ms forwards ${easing}`;
     content.innerHTML = string;
 
     window.addEventListener("animationend", () => {
@@ -458,11 +458,11 @@ function warn(string, ms) {
         content.style.opacity = 0;
         content.style.transform = "translateY(-10%)";
         content.addEventListener("transitionend", () => {
-            window.style.animation = `-fn 0.7s forwards ${easing}`;
+            window.style.animation = `-fn 550ms forwards ${easing}`;
             setTimeout(() => {
                 document.body.removeChild(window);
                 close(window, windows)
-            }, 700);
+            }, 550);
         });
     }, ms);
     setTimeout(visible, ms);
@@ -489,21 +489,22 @@ async function inp(string) {
             rz("你已被禁止调用函数。");
         }
 
-        const window = document.createElement(`div`);
+        const window = document.createElement("div");
         window.className = `inp-window`;
-        const square = document.createElement(`div`);
+        const square = document.createElement("div");
         square.className = `inp-square`;
-        const icon = document.createElement(`img`);
+        const icon = document.createElement("img");
         icon.className = `inp-icon`;
-        const content = document.createElement(`div`);
+        const content = document.createElement("div");
         content.className = "fn-content";
         content.style.opacity = 0;
         content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
-        const box = document.createElement(`input`);
+        const box = document.createElement("textarea");
         box.type = "text";
         box.className = "inp-box";
         box.style.opacity = 0;
         box.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+        box.style.resize = "none";
 
         if (theme === "Present") {
             window.style.backdropFilter = `blur(14px) saturate(250%)`;
@@ -517,7 +518,7 @@ async function inp(string) {
         window.appendChild(box);
         
         icon.src = `images/Inp.png`;
-        window.style.animation = `fn- 0.7s forwards ${easing}`;
+        window.style.animation = `fn- 550ms forwards ${easing}`;
         content.innerHTML = string;
 
         window.addEventListener("animationend", () => {
@@ -537,12 +538,12 @@ async function inp(string) {
                 content.style.opacity = 0;
                 box.style.opacity = 0;
                 content.addEventListener("transitionend", () => {
-                    window.style.animation = `-fn 0.7s forwards ${easing}`;
+                    window.style.animation = `-fn 550ms forwards ${easing}`;
                     setTimeout(() => {
                         resolve(value);
                         document.body.removeChild(window);
                         close(window, windows);
-                    }, 700);
+                    }, 550);
                 });
             }
         });
@@ -560,13 +561,13 @@ async function xz(string, n, names) {
         const array = Array.from(names);
         array.reverse();
 
-        const window = document.createElement(`div`);
+        const window = document.createElement("div");
         window.className = `xz-window`;
-        const square = document.createElement(`div`);
+        const square = document.createElement("div");
         square.className = `xz-square`;
-        const icon = document.createElement(`img`);
+        const icon = document.createElement("img");
         icon.className = `xz-icon`;
-        const content = document.createElement(`div`);
+        const content = document.createElement("div");
         content.className = "fn-content";
         content.style.opacity = 0;
         content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
@@ -597,7 +598,7 @@ async function xz(string, n, names) {
         window.appendChild(content);
 
         icon.src = `images/Sel.png`;
-        window.style.animation = `fn- 0.7s forwards ${easing}`;
+        window.style.animation = `fn- 550ms forwards ${easing}`;
         content.innerHTML = string;
 
         const line = Math.ceil(string.length / 14);
@@ -630,7 +631,7 @@ async function xz(string, n, names) {
             btn.style.opacity = 0;
             btn.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
             btn.style.fontSize = "20px";
-            btn.style.border = `none`;
+            btn.style.border = "none";
             btn.style.padding = `14px 25px`;
             btn.style.textAlign = `center`;
             btn.style.cursor = `pointer`;
@@ -653,11 +654,11 @@ async function xz(string, n, names) {
                 content.style.transform = "translateY(-10%)";
                 btn.style.opacity = 0;
                 content.addEventListener("transitionend", () => {
-                    window.style.animation = `-fn 0.7s forwards ${easing}`;
+                    window.style.animation = `-fn 550ms forwards ${easing}`;
                     setTimeout(() => {
                         document.body.removeChild(window);
                         close(window, windows)
-                    }, 700);
+                    }, 550);
                 });
             };
             content.appendChild(btn);
@@ -685,17 +686,17 @@ async function synchr(string) {
         rz("你已被禁止调用函数。");
     }
 
-    const window = document.createElement(`div`);
+    const window = document.createElement("div");
     window.className = `synchr-window`;
-    const square = document.createElement(`div`);
+    const square = document.createElement("div");
     square.className = `synchr-square`;
-    const icon = document.createElement(`img`);
+    const icon = document.createElement("img");
     icon.className = `synchr-icon`;
-    const content = document.createElement(`div`);
+    const content = document.createElement("div");
     content.className = "fn-content";
     content.style.opacity = 0;
     content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
-    const bar = document.createElement(`div`);
+    const bar = document.createElement("div");
     bar.className = `synchr-progressbar`;
     if (theme === "Present") {
         window.style.backdropFilter = `blur(14px) saturate(250%)`;
@@ -708,7 +709,7 @@ async function synchr(string) {
     window.appendChild(bar);
 
     icon.src = `images/Synchronization.png`;
-    window.style.animation = `fn- 0.7s forwards ${easing}`;
+    window.style.animation = `fn- 550ms forwards ${easing}`;
     content.innerHTML = string;
 
     window.addEventListener("animationend", () => {
@@ -737,11 +738,11 @@ async function synchr(string) {
         content.style.opacity = 0;
         content.style.transform = "translateY(-10%)";
         content.addEventListener("transitionend", () => {
-            window.style.animation = `-fn 0.7s forwards ${easing}`;
+            window.style.animation = `-fn 550ms forwards ${easing}`;
             setTimeout(() => {
                 document.body.removeChild(window);
                 close(window, windows)
-            }, 700);
+            }, 550);
         });
     }, deftime);
     setTimeout(visible);
@@ -774,13 +775,13 @@ async function lj(string, url, ignore) {
         rz("你已被禁止调用函数。");
     }
 
-    const window = document.createElement(`div`);
+    const window = document.createElement("div");
     window.className = `lj-window`;
-    const square = document.createElement(`div`);
+    const square = document.createElement("div");
     square.className = `lj-square`;
-    const icon = document.createElement(`img`);
+    const icon = document.createElement("img");
     icon.className = `lj-icon`;
-    const content = document.createElement(`div`);
+    const content = document.createElement("div");
     content.className = "fn-content";
     content.style.opacity = 0;
     content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
@@ -788,7 +789,7 @@ async function lj(string, url, ignore) {
     btn.style.opacity = 0;
     btn.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     btn.style.backgroundColor = "#715213b0";
-    btn.style.border = `none`;
+    btn.style.border = "none";
     btn.style.fontSize = "20px";
     btn.style.padding = `14px 25px`;
     btn.style.textAlign = `center`;
@@ -807,7 +808,7 @@ async function lj(string, url, ignore) {
     window.appendChild(content);
 
     icon.src = `images/Link.png`;
-    window.style.animation = `fn- 0.7s forwards ${easing}`;
+    window.style.animation = `fn- 550ms forwards ${easing}`;
     content.innerHTML = string;
     btn.innerHTML = url;
     content.appendChild(btn);
@@ -828,11 +829,11 @@ async function lj(string, url, ignore) {
         content.style.transform = "translateY(-10%)";
         btn.style.opacity = 0;
         content.addEventListener("transitionend", () => {
-            window.style.animation = `-fn 0.7s forwards ${easing}`;
+            window.style.animation = `-fn 550ms forwards ${easing}`;
             setTimeout(() => {
                 document.body.removeChild(window);
                 close(window, windows)
-            }, 700);
+            }, 550);
         });
     }
 }
@@ -859,13 +860,13 @@ async function zd(string) {
             return 0;
         }
 
-        const window = document.createElement(`div`);
+        const window = document.createElement("div");
         window.className = `zd-window`;
-        const square = document.createElement(`div`);
+        const square = document.createElement("div");
         square.className = `zd-square`;
-        const icon = document.createElement(`img`);
+        const icon = document.createElement("img");
         icon.className = `zd-icon`;
-        const content = document.createElement(`div`);
+        const content = document.createElement("div");
         content.className = "fn-content";
         content.style.opacity = 0;
         content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
@@ -873,7 +874,7 @@ async function zd(string) {
         box.className = `zd-box`;
         box.style.opacity = 0;
         box.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
-        box.style.resize = `none`;
+        box.style.resize = "none";
 
         box.addEventListener("keypress", async (event) => {
             if (event.key === "Enter") {
@@ -892,11 +893,11 @@ async function zd(string) {
                 content.style.transform = "translateY(-10%)";
                 box.style.opacity = 0;
                 content.addEventListener("transitionend", () => {
-                    window.style.animation = `-fn 0.7s forwards ${easing}`;
+                    window.style.animation = `-fn 550ms forwards ${easing}`;
                     setTimeout(() => {
                         if (document.body.contains(window)) document.body.removeChild(window);
                         close(window, windows);
-                    }, 700);
+                    }, 550);
                 });
             }
         });
@@ -912,7 +913,7 @@ async function zd(string) {
         window.appendChild(box);
 
         icon.src = `images/Com.png`;
-        window.style.animation = `fn- 0.7s forwards ${easing}`;
+        window.style.animation = `fn- 550ms forwards ${easing}`;
         content.innerHTML = string;
 
         window.addEventListener("animationend", () => {
@@ -945,7 +946,7 @@ async function wz(string) {
             return 0;
         }
 
-        const window = document.createElement(`div`);
+        const window = document.createElement("div");
         window.className = `wz-window`;
         const txt = document.createElement(`pre`);
         txt.className = `wz-content`;
@@ -953,9 +954,9 @@ async function wz(string) {
         const btn = document.createElement("img");
         btn.className = "wz-icon";
         btn.src = "images/Next.png";
-        const left = document.createElement(`div`);
+        const left = document.createElement("div");
         left.className = `wz-left`;
-        const right = document.createElement(`div`);
+        const right = document.createElement("div");
         right.className = `wz-right`;
 
         document.body.appendChild(window);
@@ -964,13 +965,13 @@ async function wz(string) {
         window.appendChild(txt);
         window.appendChild(btn);
 
-        window.style.animation = `--wz 0.7s forwards ${easing}`;
-        left.style.animation = `__solid 0.7s forwards ${easing}`;
-        right.style.animation = `__solid 0.7s forwards ${easing}`;
+        window.style.animation = `--wz 550ms forwards ${easing}`;
+        left.style.animation = `__solid 550ms forwards ${easing}`;
+        right.style.animation = `__solid 550ms forwards ${easing}`;
         window.addEventListener("animationend", (e) => {
             if (e.animationName === "--wz") {
-                window.style.animation = `-wz 0.7s forwards ${easing}`;
-                right.style.animation = `_right forwards 0.7s ${easing}`;
+                window.style.animation = `-wz 550ms forwards ${easing}`;
+                right.style.animation = `_right forwards 550ms ${easing}`;
                 window.addEventListener("animationend", (f) => {
                     if (f.animationName === "-wz") {
                         txt.style.animation = `_txt forwards 0.3s ${easing}`;
@@ -988,13 +989,13 @@ async function wz(string) {
                 btn.style.animation = `btn_ 0.3s forwards ${easing}`;
                 txt.addEventListener("animationend", (g) => {
                     if (g.animationName === "txt_") {
-                        window.style.animation = `wz- 0.7s forwards ${easing}`;
-                        left.style.animation = `left_ 0.7s forwards ${easing}`;
+                        window.style.animation = `wz- 550ms forwards ${easing}`;
+                        left.style.animation = `left_ 550ms forwards ${easing}`;
                         window.addEventListener("animationend", (h) => {
                             if (h.animationName === "wz-") {
-                                window.style.animation = `wz-- 0.7s forwards ${easing}`;
-                                left.style.animation = `solid__ 0.7s forwards ${easing}`;
-                                right.style.animation = `solid__ 0.7s forwards ${easing}`;
+                                window.style.animation = `wz-- 550ms forwards ${easing}`;
+                                left.style.animation = `solid__ 550ms forwards ${easing}`;
+                                right.style.animation = `solid__ 550ms forwards ${easing}`;
                             }
                         });
                     }
