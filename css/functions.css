@@ -16,17 +16,17 @@
     border-right: 5px solid #1b7163c9;
 }
 
-.info-square, .cg-square, .fail-square, .warn-square, .inp-square, .synchr-square, .xz-square, .lj-square, .zd-square {
-    position: absolute;
+.info-window .info-square, .cg-window .cg-square, .fail-window .fail-square, .warn-window .warn-square, .inp-window .inp-square, .synchr-window .synchr-square, .xz-window .xz-square, .lj-window .lj-square, .zd-window .zd-square {
+    width: 100%;
+    position: fixed;
     z-index: 1000;
     display: flex;
     align-items: center;
-    left: 0px;
     justify-content: center;
 }
 
 .info-square {
-    background-color: #1b7163c9;
+    background-color: #26c9a929;
 }
 
 .fn-content {
@@ -41,11 +41,22 @@
     min-width: 30ch;
 }
 
+.fn-title {
+    text-align: right;
+    font-size: 20px;
+    padding: 5px;
+    color: white;
+    flex-grow: 1;
+    max-width: 14ch;
+    word-break: break-word;
+    min-width: 30ch;
+}
+
 .info-progressbar, .cg-progressbar, .fail-progressbar, .warn-progressbar {
     width: 0;
     height: 5px;
     overflow: hidden;
-    transition: width 16ms ease;
+    transition: width 10ms ease;
     position: relative;
 }
 
@@ -55,8 +66,8 @@
 
 @keyframes fn- {
     from {
-        opacity: 0;
         width: 0;
+        opacity: 0;
         left: 50%;
         right: 50%;
     }
@@ -76,8 +87,38 @@
         right: calc(50% + 15ch);
     }
     to {
-        opacity: 0;
         width: 0;
+        opacity: 0;
+        left: 50%;
+        right: 50%;
+    }
+}
+
+@keyframes title- {
+    from {
+        width: 0%;
+        opacity: 0;
+        left: 50%;
+        right: 50%;
+    }
+    to {
+        width: 100%;
+        opacity: 1;
+        left: calc(0% - 5px);
+        right: calc(0% + 5px);
+    }
+}
+
+@keyframes -title {
+    from {
+        width: 100%;
+        opacity: 1;
+        left: calc(0% - 5px);
+        right: calc(0% + 5px);
+    }
+    to {
+        width: 0%;
+        opacity: 0;
         left: 50%;
         right: 50%;
     }
@@ -90,7 +131,7 @@
 }
 
 .cg-square {
-    background-color: #183b25c9;
+    background-color: #204e3049;
 }
 
 .cg-progressbar {
@@ -104,7 +145,7 @@
 }
 
 .fail-square {
-    background-color: #4a1514c9;
+    background-color: #4a151449;
 }
 
 .fail-progressbar {
@@ -118,7 +159,7 @@
 }
 
 .warn-square {
-    background-color: #615518c9;
+    background-color: #9c8d2c49;
 }
 
 .warn-progressbar {
@@ -132,7 +173,7 @@
 }
 
 .inp-square {
-    background-color: #183450c9;
+    background-color: #4a556849;
 }
 
 .inp-box, .zd-box {
@@ -160,7 +201,7 @@
 }
 
 .xz-square {
-    background-color: #461c5fc9;
+    background-color: #6a339949;
 }
 
 .synchr-window {
@@ -174,7 +215,7 @@
 }
 
 .synchr-progressbar {
-    background-color: #ff39ac99;
+    background-color: #b7359949;
 }
 
 .lj-window {
@@ -184,7 +225,21 @@
 }
 
 .lj-square {
-    background-color: #753e14c9;
+    background-color: #9c501d49;
+}
+
+.lj-link {
+    background-color: #715213b0;
+    width: 95%;
+    border: none;
+    font-size: 20px;
+    padding: 14px 25px;
+    text-align: center;
+    cursor: pointer;
+    color: white;
+    position: relative;
+    margin-bottom: 20px;
+    left: 0%;
 }
 
 .zd-window {
@@ -194,7 +249,7 @@
 }
 
 .zd-square {
-    background-color: #000000c9;
+    background-color: #09060649;
 }
 
 .zd-box {

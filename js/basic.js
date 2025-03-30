@@ -235,7 +235,7 @@ function fn2() {
     inpbtn.innerHTML = `inp`;
     inpbtn.className = `btn5`;
     inpbtn.onclick = async () => {
-        let a = await inp("你可以在此输入！", "在此输入……");
+        let a = await inp("你可以在此输入！");
         info(`你输入了：“${a}”。`);
     };
     const synchrbtn = document.createElement(`button`);
@@ -262,7 +262,7 @@ function fn2() {
             case "有待改进的空间。":
                 var r = await xz("你是否想向我反馈你的建议？", 2, ["是。", "否。"]);
                 if (r === "是。") {
-                    await lj("点击以下链接反馈。", "mailto://Feng_14@outlook.com", true);
+                    await lj("点击以下链接反馈。", "mailto://Feng_14@outlook.com");
                     break;
                 } else {
                     info("好的，我们再见。");
@@ -273,7 +273,7 @@ function fn2() {
     ljbtn.innerHTML = `lj`;
     ljbtn.className = `btn8`;
     ljbtn.onclick = () => {
-        lj("点击此处浏览 The Play Games 的信息界面！", "https://modificationer-mdf.github.io/tpg_info/", true);
+        lj("点击此处浏览 The Play Games 的信息界面！", "https://modificationer-mdf.github.io/tpg_info/");
     };
     const zdbtn = document.createElement(`button`);
     zdbtn.innerHTML = `zd`;

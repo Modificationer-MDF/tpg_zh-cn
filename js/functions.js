@@ -4,7 +4,7 @@ let rzwin = []; // rz() 信息数组。
 let totalHeight = 0; // rz() 的总高度。
 let urlEndings = [
     `.com`, `.net`, `.cn`, `.org`, `.edu`, `.gov`, `.mil`,
-    `.biz`, `.info`, `.name`, `.pro`, `.Opacitied`, `.coop`,
+    `.biz`, `.info`, `.name`, `.pro`, ".aero", `.coop`,
     `.museum`, `.jobs`, `.travel`, `.xxx`, `.top`, `.site`,
     `.wiki`, `.cc`, `.tv`, `.mobi`, `.me`, `.bid`, `.club`,
     `.online`, `.store`, `.work`, `.tech`
@@ -76,8 +76,8 @@ function rz(string, time) {
     content.className = `rz-content`;
     content.innerHTML = string;
 
-    const line = Math.ceil(string.length / 14);
-    content.style.height = `calc(${line * 20}px)`;
+    const l = Math.ceil(string.length / 14);
+    content.style.height = `calc(${l * 20}px)`;
 
     create(window);
     document.body.appendChild(window);
@@ -90,7 +90,7 @@ function rz(string, time) {
     setTimeout(() => {
         window.style.animation = `rz- 550ms forwards ${easing}`;
         setTimeout(() => {
-            document.body.removeChild(window);
+            if (document.body.contains(window)) document.body.removeChild(window);
             close(window);
         }, 550);
     }, time);
@@ -98,21 +98,18 @@ function rz(string, time) {
 
 // info 函数。
 
-function info(string, ms) {
+function info(string, title) {
     if (string == null || string == undefined) {
         nullcount++;
         fail("所输入内容不能为 null 或 undefined。");
         monitor();
         return 39;
-    } else {
-        string = string.toString();
-    }
+    } else if (title == null || title == undefined || title === "") title = "通知";
+    else string = string.toString();
     let replaced = string.replace(/\s+/g, "");
     if (replaced === "") {
         warn("所输入内容不能为空字符串。");
         return -39;
-    } else if (ms === undefined || ms === null || Number.isNaN(ms) || Number(ms) < 550) {
-        ms = deftime;
     }
     if (nullcount > 26) {
         rz("你已被禁止调用函数。");
@@ -124,6 +121,12 @@ function info(string, ms) {
     square.className = `info-square`;
     const icon = document.createElement("img");
     icon.src = `images/Inf.png`;
+    icon.style.opacity = 0;
+    icon.style.transistion = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+    const txt = document.createElement("div");
+    txt.className = "fn-title";
+    txt.style.opacity = 0;
+    txt.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const content = document.createElement("div");
     content.className = "fn-content";
     content.style.opacity = 0;
@@ -138,15 +141,22 @@ function info(string, ms) {
 
     create(window);
     document.body.appendChild(window);
+    window.appendChild(square);
+    square.appendChild(icon);
+    square.appendChild(txt);
     window.appendChild(content);
     window.appendChild(bar);
 
     window.style.animation = `fn- 550ms forwards ${easing}`;
+    square.style.animation = `title- 550ms forwards ${easing}`;
     content.innerHTML = string;
+    txt.innerHTML = title;
 
     window.addEventListener("animationend", () => {
         content.style.transform = "translateY(0%)";
         content.style.opacity = 1;
+        icon.style.opacity = 1;
+        txt.style.opacity = 1;
     });
 
     const visible = () => {
@@ -162,13 +172,16 @@ function info(string, ms) {
         }
     };
 
-    const line = Math.ceil(string.length / 14);
-    const lineHeight = parseInt(window.style.lineHeight);
-    content.style.height = `${line * lineHeight}px`;
+    const l1 = Math.ceil(string.length / 14);
+    const lh1 = parseInt(window.style.lineHeight);
+    content.style.height = `${l1 * lh1}px`;
+
+    const l2 = Math.ceil(title.length / 14);
+    content.style.marginTop = `${20 * (l2 + 1)}px`;
 
     let pro = 0;
     const interval = setInterval(() => {
-        pro += 10 / (ms / 100);
+        pro += 10 / (deftime / 100);
         bar.style.width = `${pro}%`;
         if (pro >= 100) {
             clearInterval(interval);
@@ -178,34 +191,34 @@ function info(string, ms) {
     setTimeout(() => {
         content.style.opacity = 0;
         content.style.transform = "translateY(-10%)";
+        icon.style.opacity = 0;
+        txt.style.opacity = 0;
         content.addEventListener("transitionend", () => {
             window.style.animation = `-fn 550ms forwards ${easing}`;
+            square.style.animation = `-title 550ms forwards ${easing}`;
             setTimeout(() => {
-                document.body.removeChild(window);
+                if (document.body.contains(window)) document.body.removeChild(window);
                 close(window, windows);
             }, 550);
         });
-    }, ms);
-    setTimeout(visible, ms);
+    }, deftime);
+    setTimeout(visible);
 }
 
 // cg 函数。
 
-function cg(string, ms) {
+function cg(string, title) {
     if (string == null || string == undefined) {
         nullcount++;
         fail("所输入内容不能为 null 或 undefined。");
         monitor();
         return 39;
-    } else {
-        string = string.toString();
-    }
+    } else if (title == null || title == undefined || title === "") title = "完成";
+    else string = string.toString();
     let replaced = string.replace(/\s+/g, "");
     if (replaced === "") {
         warn("所输入内容不能为空字符串。");
         return -39;
-    } else if (ms === undefined || ms === null || Number.isNaN(ms) || Number(ms) <= 0) {
-        ms = deftime;
     }
     if (nullcount > 26) {
         rz("你已被禁止调用函数。");
@@ -215,8 +228,14 @@ function cg(string, ms) {
     window.className = `cg-window`;
     const square = document.createElement("div");
     square.className = `cg-square`;
+    const txt = document.createElement("div");
+    txt.className = "fn-title";
+    txt.style.opacity = 0;
+    txt.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const icon = document.createElement("img");
     icon.src = `images/Suc.png`;
+    icon.style.opacity = 0;
+    icon.style.transistion = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const content = document.createElement("div");
     content.className = "fn-content";
     content.style.opacity = 0;
@@ -230,24 +249,33 @@ function cg(string, ms) {
 
     create(window);
     document.body.appendChild(window);
+    window.appendChild(square);
+    square.appendChild(icon);
+    square.appendChild(txt);
     window.appendChild(content);
     window.appendChild(bar);
 
     window.style.animation = `fn- 550ms forwards ${easing}`;
     content.innerHTML = string;
+    txt.innerHTML = title;
 
     window.addEventListener("animationend", () => {
         content.style.transform = "translateY(0%)";
         content.style.opacity = 1;
+        txt.style.opacity = 1;
+        icon.style.opacity = 1;
     });
 
-    const line = Math.ceil(string.length / 14);
-    var lineHeight = parseInt(window.style.lineHeight);
-    content.style.height = `${line * lineHeight}px`;
+    const l1 = Math.ceil(string.length / 14);
+    var lh1 = parseInt(window.style.lineHeight);
+    content.style.height = `${l1 * lh1}px`;
+
+    const l2 = Math.ceil(title.length / 14);
+    content.style.marginTop = `${20 * (l2 + 1)}px`;
 
     let pro = 0;
     const interval = setInterval(() => {
-        pro += 10 / (ms / 100);
+        pro += 10 / (deftime / 100);
         bar.style.width = `${pro}%`;
         if (pro >= 100) {
             clearInterval(interval);
@@ -270,6 +298,8 @@ function cg(string, ms) {
     setTimeout(() => {
         content.style.opacity = 0;
         content.style.transform = "translateY(-10%)";
+        txt.style.opacity = 0;
+        icon.style.opacity = 0;
         content.addEventListener("transitionend", () => {
             window.style.animation = `-fn 550ms forwards ${easing}`;
             setTimeout(() => {
@@ -277,27 +307,24 @@ function cg(string, ms) {
                 close(window, windows)
             }, 550);
         });
-    }, ms);
-    setTimeout(visible, ms);
+    }, deftime);
+    setTimeout(visible);
 }
 
 // fail 函数。
 
-function fail(string, ms) {
+function fail(string, title) {
     if (string == null || string == undefined) {
         nullcount++;
         fail("所输入内容不能为 null 或 undefined。");
         monitor();
         return 39;
-    } else {
-        string = string.toString();
-    }
+    } else if (title == null || title == undefined || title === "") title = "错误";
+    else string = string.toString();
     let replaced = string.replace(/\s+/g, "");
     if (replaced === "") {
         warn("所输入内容不能为空字符串。");
         return -39;
-    } else if (ms === undefined || ms === null || Number.isNaN(ms) || Number(ms) <= 0) {
-        ms = deftime;
     }
     if (nullcount > 26) {
         rz("你已被禁止调用函数。");
@@ -309,6 +336,12 @@ function fail(string, ms) {
     square.className = `fail-square`;
     const icon = document.createElement("img");
     icon.className = `fail-icon`;
+    icon.style.opacity = 0;
+    icon.style.transistion = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+    const txt = document.createElement("div");
+    txt.className = "fn-title";
+    txt.style.opacity = 0;
+    txt.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const content = document.createElement("div");
     content.className = "fn-content";
     content.style.opacity = 0;
@@ -323,25 +356,34 @@ function fail(string, ms) {
 
     create(window);
     document.body.appendChild(window);
+    window.appendChild(square);
+    square.appendChild(icon);
+    square.appendChild(txt);
     window.appendChild(content);
     window.appendChild(bar);
 
     icon.src = `images/Err.png`;
     window.style.animation = `fn- 550ms forwards ${easing}`;
     content.innerHTML = string;
+    txt.innerHTML = title;
 
     window.addEventListener("animationend", () => {
         content.style.transform = "translateY(0%)";
         content.style.opacity = 1;
+        icon.style.opacity = 1;
+        txt.style.opacity = 1;
     });
 
-    const line = Math.ceil(string.length / 14);
-    var lineHeight = parseInt(window.style.lineHeight);
-    content.style.height = `${line * lineHeight}px`;
+    const l1 = Math.ceil(string.length / 14);
+    var lh1 = parseInt(window.style.lineHeight);
+    content.style.height = `${l1 * lh1}px`;
+
+    const l2 = Math.ceil(title.length / 14);
+    content.style.marginTop = `${20 * (l2 + 1)}px`;
 
     let pro = 0;
     const interval = setInterval(() => {
-        pro += 10 / (ms / 100);
+        pro += 10 / (deftime / 100);
         bar.style.width = `${pro}%`;
         if (pro >= 100) {
             clearInterval(interval);
@@ -364,34 +406,33 @@ function fail(string, ms) {
     setTimeout(() => {
         content.style.opacity = 0;
         content.style.transform = "translateY(-10%)";
+        icon.style.opacity = 0;
+        txt.style.opacity = 0;
         content.addEventListener("transitionend", () => {
             window.style.animation = `-fn 550ms forwards ${easing}`;
             setTimeout(() => {
-                document.body.removeChild(window);
+                if (document.body.contains(window)) document.body.removeChild(window);
                 close(window, windows)
             }, 550);
         });
-    }, ms);
-    setTimeout(visible, ms);
+    }, deftime);
+    setTimeout(visible);
 }
 
 // warn 函数。
 
-function warn(string, ms) {
+function warn(string, title) {
     if (string == null || string == undefined) {
         nullcount++;
         fail("所输入内容不能为 null 或 undefined。");
         monitor();
         return 39;
-    } else {
-        string = string.toString();
-    }
+    } else if (title == null || title == undefined || title === "") title = "注意";
+    else string = string.toString();
     let replaced = string.replace(/\s+/g, "");
     if (replaced === "") {
         warn("所输入内容不能为空字符串。");
         return -39;
-    } else if (ms === undefined || ms === null || Number.isNaN(ms) || Number(ms) <= 0) {
-        ms = deftime;
     }
     if (nullcount > 26) {
         rz("你已被禁止调用函数。");
@@ -403,6 +444,12 @@ function warn(string, ms) {
     square.className = `warn-square`;
     const icon = document.createElement("img");
     icon.className = `warn-icon`;
+    icon.style.opacity = 0;
+    icon.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+    const txt = document.createElement("div");
+    txt.className = "fn-title";
+    txt.style.opacity = 0;
+    txt.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const content = document.createElement("div");
     content.className = "fn-content";
     content.style.opacity = 0;
@@ -416,25 +463,34 @@ function warn(string, ms) {
 
     create(window);
     document.body.appendChild(window);
+    window.appendChild(square);
+    square.appendChild(icon);
+    square.appendChild(txt);
     window.appendChild(content);
     window.appendChild(bar);
 
     icon.src = `images/Exc.png`;
     window.style.animation = `fn- 550ms forwards ${easing}`;
     content.innerHTML = string;
+    txt.innerHTML = title;
 
     window.addEventListener("animationend", () => {
         content.style.transform = "translateY(0%)";
         content.style.opacity = 1;
+        icon.style.opacity = 1;
+        txt.style.opacity = 1;
     });
 
-    const line = Math.ceil(string.length / 14);
-    var lineHeight = parseInt(window.style.lineHeight);
-    content.style.height = `${line * lineHeight}px`;
+    const l1 = Math.ceil(string.length / 14);
+    var lh1 = parseInt(window.style.lineHeight);
+    content.style.height = `${l1 * lh1}px`;
+
+    const l2 = Math.ceil(title.length / 14);
+    content.style.marginTop = `${20 * (l2 + 1)}px`;
 
     let pro = 0;
     const interval = setInterval(() => {
-        pro += 10 / (ms / 100);
+        pro += 10 / (deftime / 100);
         bar.style.width = `${pro}%`;
         if (pro >= 100) {
             clearInterval(interval);
@@ -457,29 +513,30 @@ function warn(string, ms) {
     setTimeout(() => {
         content.style.opacity = 0;
         content.style.transform = "translateY(-10%)";
+        icon.style.opacity = 0;
+        txt.style.opacity = 0;
         content.addEventListener("transitionend", () => {
             window.style.animation = `-fn 550ms forwards ${easing}`;
             setTimeout(() => {
-                document.body.removeChild(window);
+                if (document.body.contains(window)) document.body.removeChild(window);
                 close(window, windows)
             }, 550);
         });
-    }, ms);
-    setTimeout(visible, ms);
+    }, deftime);
+    setTimeout(visible);
 }
 
 // inp 函数。
 
-async function inp(string) {
+async function inp(string, title) {
     return new Promise((resolve) => {
         if (string === null || string === undefined) {
             nullcount++;
             fail("所输入内容不能为 null 或 undefined。");
             monitor();
             return 39;
-        } else {
-            string = string.toString();
-        }
+        } else if (title == null || title == undefined || title === "") title = "输入";
+        else string = string.toString();
         let replaced = string.replace(/\s+/g, "");
         if (replaced === "") {
             warn("所输入内容不能为空字符串。");
@@ -495,6 +552,12 @@ async function inp(string) {
         square.className = `inp-square`;
         const icon = document.createElement("img");
         icon.className = `inp-icon`;
+        icon.style.opacity = 0;
+        icon.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+        const txt = document.createElement("div");
+        txt.className = "fn-title";
+        txt.style.opacity = 0;
+        txt.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
         const content = document.createElement("div");
         content.className = "fn-content";
         content.style.opacity = 0;
@@ -514,22 +577,31 @@ async function inp(string) {
 
         create(window);
         document.body.appendChild(window);
+        window.appendChild(square);
+        square.appendChild(icon);
+        square.appendChild(txt);
         window.appendChild(content);
         window.appendChild(box);
         
         icon.src = `images/Inp.png`;
         window.style.animation = `fn- 550ms forwards ${easing}`;
         content.innerHTML = string;
+        txt.innerHTML = title;
 
         window.addEventListener("animationend", () => {
             content.style.transform = "translateY(0%)";
             content.style.opacity = 1;
             box.style.opacity = 1;
+            icon.style.opacity = 1;
+            txt.style.opacity = 1;
         });
 
-        const line = Math.ceil(string.length / 14);
-        var lineHeight = parseInt(window.style.lineHeight);
-        content.style.height = `${line * lineHeight}px`;
+        const l1 = Math.ceil(string.length / 14);
+        var lh1 = parseInt(window.style.lineHeight);
+        content.style.height = `${l1 * lh1}px`;
+
+        const l2 = Math.ceil(title.length / 14);
+        content.style.marginTop = `${20 * (l2 + 1)}px`;
 
         box.addEventListener("keypress", (event) => {
             if (event.key === "Enter") {
@@ -537,11 +609,13 @@ async function inp(string) {
                 content.style.transform = "translateY(-10%)";
                 content.style.opacity = 0;
                 box.style.opacity = 0;
+                icon.style.opacity = 0;
+                txt.style.opacity = 0;
                 content.addEventListener("transitionend", () => {
                     window.style.animation = `-fn 550ms forwards ${easing}`;
                     setTimeout(() => {
                         resolve(value);
-                        document.body.removeChild(window);
+                        if (document.body.contains(window)) document.body.removeChild(window);
                         close(window, windows);
                     }, 550);
                 });
@@ -552,7 +626,7 @@ async function inp(string) {
 
 // xz 函数。
 
-async function xz(string, n, names) {
+async function xz(string, n, names, title) {
     return new Promise((resolve) => {
         if (n === null || n === undefined) fail("所输入的选项数量必须为数字。");
         else if (isNaN(n)) fail("所输入的选项数量必须为数字。");
@@ -567,6 +641,12 @@ async function xz(string, n, names) {
         square.className = `xz-square`;
         const icon = document.createElement("img");
         icon.className = `xz-icon`;
+        icon.style.opacity = 0;
+        icon.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+        const txt = document.createElement("div");
+        txt.className = "fn-title";
+        txt.style.opacity = 0;
+        txt.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
         const content = document.createElement("div");
         content.className = "fn-content";
         content.style.opacity = 0;
@@ -577,9 +657,8 @@ async function xz(string, n, names) {
             fail("所输入内容不能为 null 或 undefined。");
             monitor();
             return 39;
-        } else {
-            string = string.toString();
-        }
+        } else if (title == null || title == undefined || title === "") title = "选择";
+        else string = string.toString();
         let replaced1 = string.replace(/\s+/g, "");
         if (replaced1 === "") {
             warn("所输入内容不能为空字符串。");
@@ -595,15 +674,22 @@ async function xz(string, n, names) {
 
         create(window);
         document.body.appendChild(window);
+        window.appendChild(square);
+        square.appendChild(icon);
+        square.appendChild(txt);
         window.appendChild(content);
 
         icon.src = `images/Sel.png`;
         window.style.animation = `fn- 550ms forwards ${easing}`;
         content.innerHTML = string;
+        txt.innerHTML = title;
 
-        const line = Math.ceil(string.length / 14);
-        var lineHeight = parseInt(window.style.lineHeight);
-        content.style.height = `${line * lineHeight}px`;
+        const l1 = Math.ceil(string.length / 14);
+        var lh1 = parseInt(window.style.lineHeight);
+        content.style.height = `${l1 * lh1}px`;
+
+        const l2 = Math.ceil(title.length / 14);
+        content.style.marginTop = `${20 * (l2 + 1)}px`;
 
         const tohex = (r, g, b) => {
             const tohex_ = (value) => {
@@ -646,6 +732,8 @@ async function xz(string, n, names) {
                 content.style.transform = "translateY(0%)";
                 content.style.opacity = 1;
                 btn.style.opacity = 1;
+                icon.style.opacity = 1;
+                txt.style.opacity = 1;
             });
 
             btn.onclick = () => {
@@ -653,10 +741,12 @@ async function xz(string, n, names) {
                 content.style.opacity = 0;
                 content.style.transform = "translateY(-10%)";
                 btn.style.opacity = 0;
+                icon.style.opacity = 0;
+                txt.style.opacity = 0;
                 content.addEventListener("transitionend", () => {
                     window.style.animation = `-fn 550ms forwards ${easing}`;
                     setTimeout(() => {
-                        document.body.removeChild(window);
+                        if (document.body.contains(window)) document.body.removeChild(window);
                         close(window, windows)
                     }, 550);
                 });
@@ -668,15 +758,14 @@ async function xz(string, n, names) {
 
 // synchr 函数。
 
-async function synchr(string) {
+async function synchr(string, title) {
     if (string == null || string == undefined) {
         nullcount++;
         fail("所输入内容不能为 null 或 undefined。");
         monitor();
         return 39;
-    } else {
-        string = string.toString();
-    }
+    } else if (title == null || title == undefined || title === "") title = "同步";
+    else string = string.toString();
     let replaced = string.replace(/\s+/g, "");
     if (replaced === "") {
         warn("所输入内容不能为空字符串。");
@@ -692,6 +781,12 @@ async function synchr(string) {
     square.className = `synchr-square`;
     const icon = document.createElement("img");
     icon.className = `synchr-icon`;
+    icon.style.opacity = 0;
+    icon.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+    const txt = document.createElement("div");
+    txt.className = "fn-title";
+    txt.style.opacity = 0;
+    txt.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const content = document.createElement("div");
     content.className = "fn-content";
     content.style.opacity = 0;
@@ -705,21 +800,30 @@ async function synchr(string) {
 
     create(window);
     document.body.appendChild(window);
+    window.appendChild(square);
+    square.appendChild(icon);
+    square.appendChild(txt);
     window.appendChild(content);
     window.appendChild(bar);
 
     icon.src = `images/Synchronization.png`;
     window.style.animation = `fn- 550ms forwards ${easing}`;
     content.innerHTML = string;
+    txt.innerHTML = title;
 
     window.addEventListener("animationend", () => {
         content.style.transform = "translateY(0%)";
         content.style.opacity = 1;
+        icon.style.opacity = 1;
+        txt.style.opacity = 1;
     });
 
-    const line = Math.ceil(string.length / 14);
-    var lineHeight = parseInt(window.style.lineHeight);
-    content.style.height = `${line * lineHeight}px`;
+    const l1 = Math.ceil(string.length / 14);
+    var lh1 = parseInt(window.style.lineHeight);
+    content.style.height = `${l1 * lh1}px`;
+
+    const l2 = Math.ceil(title.length / 14);
+    content.style.marginTop = `${20 * (l2 + 1)}px`;
 
     const visible = () => {
         const rect = window.getBoundingClientRect();
@@ -737,10 +841,12 @@ async function synchr(string) {
     setTimeout(() => {
         content.style.opacity = 0;
         content.style.transform = "translateY(-10%)";
+        icon.style.opacity = 0;
+        txt.style.opacity = 0;
         content.addEventListener("transitionend", () => {
             window.style.animation = `-fn 550ms forwards ${easing}`;
             setTimeout(() => {
-                document.body.removeChild(window);
+                if (document.body.contains(window)) document.body.removeChild(window);
                 close(window, windows)
             }, 550);
         });
@@ -750,23 +856,19 @@ async function synchr(string) {
 
 // lj 函数。
 
-async function lj(string, url, ignore) {
+async function lj(string, url, title) {
     if (string == null || string == undefined || url == null || url == undefined) {
         nullcount++;
         fail("所输入内容不能为 null 或 undefined。");
         monitor();
         return 39;
-    } else {
+    } else if (title == null || title == undefined || title === "") title = "链接";
+    else {
         string = string.toString();
         url = url.toString();
     }
     let replaced1 = string.replace(/\s+/g, "");
     let replaced2 = url.replace(/\s+/g, "");
-    if (replaced2.startsWith(`https`) !== true && ignore !== true) {
-        url = `https://` + replaced2;
-    } else if (urlEndings.some(ending => url.endsWith(ending)) === false && ignore !== true) {
-        warn(`请检查你所输入的网址是否正确！`);
-    }
     if (replaced1 === "" || replaced2 === "") {
         warn("所输入内容不能为空字符串。");
         return -39;
@@ -781,23 +883,21 @@ async function lj(string, url, ignore) {
     square.className = `lj-square`;
     const icon = document.createElement("img");
     icon.className = `lj-icon`;
+    icon.style.opacity = 0;
+    icon.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+    const txt = document.createElement("div");
+    txt.className = "fn-title";
+    txt.style.opacity = 0;
+    txt.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const content = document.createElement("div");
     content.className = "fn-content";
     content.style.opacity = 0;
     content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const btn = document.createElement(`button`);
+    btn.className = "lj-link";
     btn.style.opacity = 0;
     btn.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
-    btn.style.backgroundColor = "#715213b0";
-    btn.style.border = "none";
-    btn.style.fontSize = "20px";
-    btn.style.padding = `14px 25px`;
-    btn.style.textAlign = `center`;
-    btn.style.cursor = `pointer`;
-    btn.style.color = `white`;
-    btn.style.position = "relative";
-    btn.style.flex = `1`;
-
+        
     if (theme === "Present") {
         window.style.backdropFilter = `blur(14px) saturate(250%)`;
         square.style.backdropFilter = `blur(14px) saturate(250%)`;
@@ -805,33 +905,44 @@ async function lj(string, url, ignore) {
 
     create(window);
     document.body.appendChild(window);
+    window.appendChild(square);
+    square.appendChild(icon);
+    square.appendChild(txt);
     window.appendChild(content);
+    window.appendChild(btn);
 
     icon.src = `images/Link.png`;
     window.style.animation = `fn- 550ms forwards ${easing}`;
     content.innerHTML = string;
     btn.innerHTML = url;
-    content.appendChild(btn);
+    txt.innerHTML = title;
 
     window.addEventListener("animationend", () => {
         content.style.transform = "translateY(0%)";
         content.style.opacity = 1;
         btn.style.opacity = 1;
+        icon.style.opacity = 1;
+        txt.style.opacity = 1;
     });
 
-    const line = Math.ceil(string.length / 14);
-    var lineHeight = parseInt(window.style.lineHeight);
-    content.style.height = `${line * lineHeight}px`;
+    const l1 = Math.ceil(string.length / 14);
+    var lh1 = parseInt(window.style.lineHeight);
+    content.style.height = `${l1 * lh1}px`;
+
+    const l2 = Math.ceil(title.length / 14);
+    content.style.marginTop = `${20 * (l2 + 1)}px`;
 
     btn.onclick = () => {
         if (!open(url, `_blank`, `width=${defwid}, height=${defhei}`)) warn("弹出的窗口被阻止。");
         content.style.opacity = 0;
         content.style.transform = "translateY(-10%)";
         btn.style.opacity = 0;
+        icon.style.opacity = 0;
+        txt.style.opacity = 0;
         content.addEventListener("transitionend", () => {
             window.style.animation = `-fn 550ms forwards ${easing}`;
             setTimeout(() => {
-                document.body.removeChild(window);
+                if (document.body.contains(window)) document.body.removeChild(window);
                 close(window, windows)
             }, 550);
         });
@@ -840,16 +951,15 @@ async function lj(string, url, ignore) {
 
 // zd 函数。
 
-async function zd(string) {
+async function zd(string, title) {
     return new Promise((resolve) => {
         if (string == null || string == undefined) {
             nullcount++;
             fail("所输入内容不能为 null 或 undefined。");
             monitor();
             return 39;
-        } else {
-            string = string.toString();
-        }
+        } else if (title == null || title == undefined || title === "") title = "终端";
+        else string = string.toString();
         let replaced = string.replace(/\s+/g, "");
         if (replaced === "") {
             warn("所输入内容不能为空字符串。");
@@ -866,6 +976,12 @@ async function zd(string) {
         square.className = `zd-square`;
         const icon = document.createElement("img");
         icon.className = `zd-icon`;
+        icon.style.opacity = 0;
+        icon.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+        const txt = document.createElement("div");
+        txt.className = "fn-title";
+        txt.style.opacity = 0;
+        txt.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
         const content = document.createElement("div");
         content.className = "fn-content";
         content.style.opacity = 0;
@@ -892,6 +1008,8 @@ async function zd(string) {
                 content.style.opacity = 0;
                 content.style.transform = "translateY(-10%)";
                 box.style.opacity = 0;
+                icon.style.opacity = 0;
+                txt.style.opacity = 0;
                 content.addEventListener("transitionend", () => {
                     window.style.animation = `-fn 550ms forwards ${easing}`;
                     setTimeout(() => {
@@ -909,22 +1027,31 @@ async function zd(string) {
 
         create(window);
         document.body.appendChild(window);
+        window.appendChild(square);
+        square.appendChild(icon);
+        square.appendChild(txt);
         window.appendChild(content);
         window.appendChild(box);
 
         icon.src = `images/Com.png`;
         window.style.animation = `fn- 550ms forwards ${easing}`;
         content.innerHTML = string;
+        txt.innerHTML = title;
 
         window.addEventListener("animationend", () => {
             content.style.transform = "translateY(0%)";
             content.style.opacity = 1;
             box.style.opacity = 1;
+            icon.style.opacity = 1;
+            txt.style.opacity = 1;
         });
 
-        const line = Math.ceil(string.length / 14);
-        var lineHeight = parseInt(window.style.lineHeight);
-        content.style.height = `${line * lineHeight}px`;
+        const l1 = Math.ceil(string.length / 14);
+        var lh1 = parseInt(window.style.lineHeight);
+        content.style.height = `${l1 * lh1}px`;
+
+        const l2 = Math.ceil(title.length / 14);
+        content.style.marginTop = `${20 * (l2 + 1)}px`;
     });
 }
 
@@ -1007,7 +1134,7 @@ async function wz(string) {
                 window.addEventListener("animationend", ani_end);
                 resolve();
                 setTimeout(() => {
-                    document.body.removeChild(window);
+                    if (document.body.contains(window)) document.body.removeChild(window);
                 }, 2100);
             };
         });
