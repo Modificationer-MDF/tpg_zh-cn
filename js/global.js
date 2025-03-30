@@ -15,7 +15,17 @@ document.addEventListener("DOMContentLoaded", function () {
         document.fonts.add(f);
         cg(`成功加载字体：Basic Modification Regular。用时 ${((end - start) / 1000).toFixed(3)} 秒。`);
     }).catch(function (error) {
-        fail(`字体加载失败。（${error}）`);
+        switch (error.name) {
+            case "NetworkError":
+                fail("网络错误。");
+                break;
+            case "FontLoadError":
+                fail("字体加载失败。");
+                break;
+            default:
+                fail(`未知错误。（${error}）`);
+                break;
+        }
     });
     font2.load().then(function (f) {
         var end = performance.now();
