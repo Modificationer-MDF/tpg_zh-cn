@@ -22,14 +22,14 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 p {
-    font-size: 30px;
+    font-size: 20px;
     color: white;
 }
 
 pre {
     font-family: "lan";
     font-weight: 400;
-    font-size: 25px;
+    font-size: 20px;
 }
 
 /* µÚ 1 ²¿·Ö¡£ */
@@ -45,7 +45,7 @@ pre {
 
 .head {
     opacity: 0;
-    font-size: 25px;
+    font-size: 20px;
     text-align: center;
     padding: 5px 5px;
 }
@@ -83,7 +83,7 @@ pre {
 
 .head1 {
     display: none;
-    font-size: 60px;
+    font-size: 50px;
 }
 
 @keyframes -head2 {
@@ -99,7 +99,7 @@ pre {
 
 .head2 {
     display: none;
-    font-size: 40px;
+    font-size: 35px;
 }
 
 .head3, .head4, .head5 {
@@ -108,7 +108,7 @@ pre {
     padding: 14px 25px;
     margin-bottom: 15px;
     border-radius: 5px;
-    font-size: 30px;
+    font-size: 25px;
     border: none;
 }
 
@@ -192,7 +192,7 @@ pre {
     padding: 14px 25px;
     margin-bottom: 15px;
     border-radius: 5px;
-    font-size: 30px;
+    font-size: 20px;
     border: none;
 }
 
@@ -202,7 +202,7 @@ pre {
     padding: 14px 25px;
     margin-bottom: 15px;
     border-radius: 5px;
-    font-size: 30px;
+    font-size: 20px;
     border: none;
 }
 
@@ -212,7 +212,7 @@ pre {
     padding: 14px 25px;
     margin-bottom: 15px;
     border-radius: 5px;
-    font-size: 30px;
+    font-size: 20px;
     border: none;
 }
 
@@ -222,7 +222,7 @@ pre {
     padding: 14px 25px;
     margin-bottom: 15px;
     border-radius: 5px;
-    font-size: 30px;
+    font-size: 20px;
     border: none;
 }
 
@@ -232,7 +232,7 @@ pre {
     padding: 14px 25px;
     margin-bottom: 15px;
     border-radius: 5px;
-    font-size: 30px;
+    font-size: 20px;
     border: none;
 }
 
@@ -242,7 +242,7 @@ pre {
     padding: 14px 25px;
     margin-bottom: 15px;
     border-radius: 5px;
-    font-size: 30px;
+    font-size: 20px;
     border: none;
 }
 
@@ -252,7 +252,7 @@ pre {
     padding: 14px 25px;
     margin-bottom: 15px;
     border-radius: 5px;
-    font-size: 30px;
+    font-size: 20px;
     border: none;
 }
 
@@ -262,7 +262,7 @@ pre {
     padding: 14px 25px;
     margin-bottom: 15px;
     border-radius: 5px;
-    font-size: 30px;
+    font-size: 20px;
     border: none;
 }
 
@@ -272,7 +272,7 @@ pre {
     padding: 14px 25px;
     margin-bottom: 15px;
     border-radius: 5px;
-    font-size: 30px;
+    font-size: 20px;
     border: none;
 }
 
@@ -288,14 +288,14 @@ pre {
 }
 
 .para {
-    font-size: 30px;
+    font-size: 20px;
     position: absolute;
     left: 50px;
     margin-bottom: 10px;
 }
 
 a {
-    font-size: 30px;
+    font-size: 20px;
 }
 
 a:link {
@@ -330,7 +330,7 @@ button {
     background-color: #ffe20099;
     padding: 14px 25px;
     border-radius: 5px;
-    font-size: 30px;
+    font-size: 25px;
     border: none;
 }
 
@@ -340,7 +340,7 @@ button {
     padding: 14px 25px;
     margin-bottom: 15px;
     border-radius: 5px;
-    font-size: 30px;
+    font-size: 20px;
     border: none;
 }
 
@@ -350,7 +350,7 @@ button {
     padding: 14px 25px;
     margin-bottom: 15px;
     border-radius: 5px;
-    font-size: 30px;
+    font-size: 20px;
     border: none;
 }
 
@@ -361,7 +361,7 @@ button {
     padding: 14px 25px;
     margin-bottom: 15px;
     border-radius: 5px;
-    font-size: 30px;
+    font-size: 20px;
     border: none;
 }
 
@@ -371,7 +371,7 @@ button {
     padding: 14px 25px;
     margin-bottom: 15px;
     border-radius: 5px;
-    font-size: 30px;
+    font-size: 20px;
     border: none;
 }
 
@@ -381,7 +381,7 @@ button {
     padding: 14px 25px;
     margin-bottom: 15px;
     border-radius: 5px;
-    font-size: 30px;
+    font-size: 20px;
     border: none;
 }
 
@@ -391,7 +391,7 @@ button {
     padding: 14px 25px;
     margin-bottom: 15px;
     border-radius: 5px;
-    font-size: 30px;
+    font-size: 20px;
     border: none;
 }
 
@@ -401,7 +401,7 @@ button {
     padding: 14px 25px;
     margin-bottom: 15px;
     border-radius: 5px;
-    font-size: 30px;
+    font-size: 20px;
     border: none;
 }
 
@@ -411,7 +411,7 @@ button {
     padding: 14px 25px;
     margin-bottom: 15px;
     border-radius: 5px;
-    font-size: 30px;
+    font-size: 20px;
     border: none;
 }
 
@@ -421,7 +421,7 @@ button {
     padding: 14px 25px;
     margin-bottom: 15px;
     border-radius: 5px;
-    font-size: 30px;
+    font-size: 20px;
     border: none;
 }
 
@@ -431,7 +431,7 @@ button {
     padding: 14px 25px;
     margin-bottom: 15px;
     border-radius: 5px;
-    font-size: 30px;
+    font-size: 20px;
     border: none;
 }
 
@@ -441,7 +441,7 @@ button {
     padding: 14px 25px;
     margin-bottom: 15px;
     border-radius: 5px;
-    font-size: 30px;
+    font-size: 20px;
     border: none;
 }
 
@@ -451,7 +451,7 @@ button {
     padding: 14px 25px;
     margin-bottom: 15px;
     border-radius: 5px;
-    font-size: 30px;
+    font-size: 20px;
     border: none;
 }
 
@@ -461,7 +461,7 @@ button {
     padding: 14px 25px;
     margin-bottom: 15px;
     border-radius: 5px;
-    font-size: 30px;
+    font-size: 20px;
     border: none;
 }
 
@@ -471,7 +471,7 @@ button {
     padding: 14px 25px;
     margin-bottom: 15px;
     border-radius: 5px;
-    font-size: 30px;
+    font-size: 20px;
     border: none;
 }
 
@@ -481,7 +481,7 @@ button {
     padding: 14px 25px;
     margin-bottom: 15px;
     border-radius: 5px;
-    font-size: 30px;
+    font-size: 20px;
     border: none;
 }
 
@@ -491,7 +491,7 @@ button {
     width: auto;
     background-color: #F39C1249;
     border-radius: 5px; 
-    font-size: 33px;
+    font-size: 25px;
     text-align: center;
     padding: 15px 15px;
 }
@@ -502,7 +502,7 @@ button {
     width: auto;
     background-color: #1ABC9C49;
     border-radius: 5px;
-    font-size: 33px;
+    font-size: 25px;
     text-align: center;
     padding: 15px 15px;
 }
@@ -513,7 +513,7 @@ button {
     width: auto;
     background-color: #8E44AD49;
     border-radius: 5px;
-    font-size: 33px;
+    font-size: 25px;
     text-align: center;
     padding: 15px 15px;
 }
@@ -524,7 +524,7 @@ button {
     padding: 14px 25px;
     margin-bottom: 15px;
     border-radius: 5px;
-    font-size: 30px;
+    font-size: 20px;
     border: none;
 }
 
@@ -534,7 +534,7 @@ button {
     padding: 14px 25px;
     margin-bottom: 15px;
     border-radius: 5px;
-    font-size: 30px;
+    font-size: 20px;
     border: none;
 }
 
@@ -544,7 +544,7 @@ button {
     padding: 14px 25px;
     margin-bottom: 15px;
     border-radius: 5px;
-    font-size: 30px;
+    font-size: 20px;
     border: none;
 }
 
@@ -555,7 +555,7 @@ button {
     margin-bottom: 15px;
     color: black;
     border-radius: 5px;
-    font-size: 30px;
+    font-size: 20px;
     border: none;
 }
 
@@ -565,7 +565,7 @@ button {
     padding: 14px 25px;
     margin-bottom: 15px;
     border-radius: 5px;
-    font-size: 30px;
+    font-size: 20px;
     border: none;
     color: black;
 }
@@ -576,7 +576,7 @@ button {
     padding: 14px 25px;
     margin-bottom: 15px;
     border-radius: 5px;
-    font-size: 30px;
+    font-size: 20px;
     border: none;
     color: black;
 }
@@ -660,14 +660,14 @@ button {
     position: absolute;
     left: 25px;
     text-align: left;
-    font-size: 35px;
+    font-size: 30px;
 }
 
 .lcont, .rcont {
     position: absolute;
     color: #ffffff;
     top: 10vh;
-    font-size: 25px;
+    font-size: 20px;
 }
 
 .lcont {
@@ -687,7 +687,7 @@ button {
     background-color: #4ebebe99;
     padding: 7px 15px;
     border-radius: 5px;
-    font-size: 25px;
+    font-size: 20px;
     border: none;
 }
 
@@ -698,7 +698,7 @@ button {
     background-color: #42789b99;
     padding: 7px 15px;
     border-radius: 5px;
-    font-size: 25px;
+    font-size: 20px;
     border: none;
 }
 
@@ -709,7 +709,7 @@ button {
     background-color: #31509099;
     padding: 7px 15px;
     border-radius: 5px;
-    font-size: 25px;
+    font-size: 20px;
     border: none;
 }
 
@@ -720,7 +720,7 @@ button {
     background-color: #66d12599;
     padding: 7px 15px;
     border-radius: 5px;
-    font-size: 25px;
+    font-size: 20px;
     border: none;
 }
 
@@ -733,7 +733,7 @@ button {
     z-index: 999;
     height: 4vh;
     width: 285px;
-    font-size: 25px;
+    font-size: 20px;
     color: white;
     flex-grow: 1;
     word-break: break-word;

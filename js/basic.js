@@ -20,23 +20,23 @@ document.addEventListener(`DOMContentLoaded`, () => {
     const f3 = document.querySelector(`.head4`); // 功能按钮组。
 
     h1.style.display = "block";
-    h1.style.animation = `-head1 1.4s forwards ${easing}`;
-    h1.addEventListener(`animationend`, (e) => {
+    h1.style.animation = `-head1 1.4s forwards cubic-bezier(0.33, 1, 0.68, 1)`;
+    h1.addEventListener("animationend", (e) => {
         if (e.animationName === `-head1`) {
-            h2.style.display = `block`;
-            h2.style.animation = `-head2 1.4s forwards ${easing}`;
+            h2.style.display = "block";
+            h2.style.animation = `-head2 1.4s forwards cubic-bezier(0.33, 1, 0.68, 1)`;
         }
     });
-    h2.addEventListener(`animationend`, (e) => {
+    h2.addEventListener("animationend", (e) => {
         if (e.animationName === `-head2`) {
-            div.style.animation = `-top 0.7s forwards ${easing}`;
-            head.style.animation = `-head 0.7s forwards ${easing}`;
+            div.style.animation = `-top 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1)`;
+            head.style.animation = `-head 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1)`;
         }
     });
-    div.addEventListener(`animationend`, (e) => {
+    div.addEventListener("animationend", (e) => {
         if (e.animationName === `-top`) {
-            f1.style.animation = `_head3 0.7s forwards ${easing}`;
-            f3.style.animation = `_head4 0.7s forwards ${easing}`;
+            f1.style.animation = `_head3 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1)`;
+            f3.style.animation = `_head4 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1)`;
         }
     });
 
@@ -78,53 +78,53 @@ function fn1() {
     const div = document.querySelector(`.head3`);
     const dakai = document.getElementById(`1`);
     dakai.style.transition = `all 0.7s ${easing}`;
-    const infoBtn = document.createElement(`button`);
-    infoBtn.style.marginTop = `15px`;
-    infoBtn.innerHTML = `info`;
-    infoBtn.className = `btn1`;
-    infoBtn.onclick = async () => {
+    const infobtn = document.createElement(`button`);
+    infobtn.style.marginTop = `15px`;
+    infobtn.innerHTML = `info`;
+    infobtn.className = `btn1`;
+    infobtn.onclick = async () => {
         let res = await inp(`输入你想显示在 info() 上的信息。`, `在此输入。`);
         info(res);
     };
-    const cgBtn = document.createElement(`button`);
-    cgBtn.innerHTML = `cg`;
-    cgBtn.className = `btn2`;
-    cgBtn.onclick = async () => {
+    const cgbtn = document.createElement(`button`);
+    cgbtn.innerHTML = `cg`;
+    cgbtn.className = `btn2`;
+    cgbtn.onclick = async () => {
         let res = await inp(`输入你想显示在 cg() 上的信息。`, `在此输入。`);
         cg(res);
     };
-    const failBtn = document.createElement(`button`);
-    failBtn.innerHTML = `fail`;
-    failBtn.className = `btn3`;
-    failBtn.onclick = async () => {
+    const failbtn = document.createElement(`button`);
+    failbtn.innerHTML = `fail`;
+    failbtn.className = `btn3`;
+    failbtn.onclick = async () => {
         let res = await inp(`输入你想显示在 fail() 上的信息。`, `在此输入。`);
         fail(res);
     };
-    const warnBtn = document.createElement(`button`);
-    warnBtn.innerHTML = `warn`;
-    warnBtn.className = `btn4`;
-    warnBtn.onclick = async () => {
+    const warnbtn = document.createElement(`button`);
+    warnbtn.innerHTML = `warn`;
+    warnbtn.className = `btn4`;
+    warnbtn.onclick = async () => {
         let res = await inp(`输入你想显示在 warn() 上的信息。`, `在此输入。`);
         warn(res);
     };
-    const inpBtn = document.createElement(`button`);
-    inpBtn.innerHTML = `inp`;
-    inpBtn.className = `btn5`;
-    inpBtn.onclick = async () => {
+    const inpbtn = document.createElement(`button`);
+    inpbtn.innerHTML = `inp`;
+    inpbtn.className = `btn5`;
+    inpbtn.onclick = async () => {
         let res = await inp(`这就是 inp() 。`, `可以在这里输入一些文字。`);
         info(`你输入了：“${res}”。`);
     };
-    const tranBtn = document.createElement(`button`);
-    tranBtn.innerHTML = `tran`;
-    tranBtn.className = `btn6`;
-    tranBtn.onclick = async () => {
-        let res = await inp(`输入你想显示在 tran() 上的信息。`, `在此输入。`);
-        tran(res);
+    const synchrbtn = document.createElement(`button`);
+    synchrbtn.innerHTML = "synchr";
+    synchrbtn.className = `btn6`;
+    synchrbtn.onclick = async () => {
+        let res = await inp(`输入你想显示在 synchr() 上的信息。`, `在此输入。`);
+        synchr(res);
     };
-    const xzBtn = document.createElement(`button`);
-    xzBtn.innerHTML = `xz`;
-    xzBtn.className = `btn7`;
-    xzBtn.onclick = async () => {
+    const xzbtn = document.createElement(`button`);
+    xzbtn.innerHTML = `xz`;
+    xzbtn.className = `btn7`;
+    xzbtn.onclick = async () => {
         let res = await inp(`输入你想显示在 xz() 上的信息。`, `在此输入。`);
         let n = await inp(`请输入 xz() 上选项的数量。`, `在此输入。`);
         n = Number(n);
@@ -134,32 +134,32 @@ function fn1() {
         }
         xz(res, n, array);
     };
-    const ljBtn = document.createElement(`button`);
-    ljBtn.innerHTML = `lj`;
-    ljBtn.className = `btn8`;
-    ljBtn.onclick = async () => {
+    const ljbtn = document.createElement(`button`);
+    ljbtn.innerHTML = `lj`;
+    ljbtn.className = `btn8`;
+    ljbtn.onclick = async () => {
         let res = await inp(`输入你想显示在 lj() 上的信息。`, `在此输入。`);
         let url = await inp(`请输入你要链接的地址。`, "在此输入。");
         lj(res, url, false);
     };
-    const wzBtn = document.createElement(`button`);
-    wzBtn.innerHTML = `wz`;
-    wzBtn.className = `btn22`;
-    wzBtn.onclick = async () => {
+    const wzbtn = document.createElement(`button`);
+    wzbtn.innerHTML = `wz`;
+    wzbtn.className = `btn22`;
+    wzbtn.onclick = async () => {
         let res = await inp(`输入你想显示在 wz() 上的信息。`, `在此输入。`);
         wz(res);
     };
 
     const all = [
-        infoBtn,
-        cgBtn,
-        failBtn,
-        warnBtn,
-        inpBtn,
-        tranBtn,
-        xzBtn,
-        ljBtn,
-        wzBtn
+        infobtn,
+        cgbtn,
+        failbtn,
+        warnbtn,
+        inpbtn,
+        synchrbtn,
+        xzbtn,
+        ljbtn,
+        wzbtn
     ];
 
     all.forEach(btn => {
@@ -172,18 +172,18 @@ function fn1() {
         });
     }
 
-    div.style.animation = `head3- 0.7s forwards ${easing}`;
+    div.style.animation = `head3- 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1)`;
     dakai.style.backgroundColor = `#001dff99`;
-    dakai.style.width = `540px`;
-    dakai.textContent = `你可以在此设置和演示这些新函数。`;
+    dakai.style.width = "230px";
+    dakai.textContent = "在此处演示函数";
 
-    div.addEventListener(`animationend`, (e) => {
-        if (e.animationName === `head3-`) {
+    div.addEventListener("animationend", (e) => {
+        if (e.animationName === "head3-") {
             all.forEach(btn => {
-                btn.style.display = `block`;
+                btn.style.display = "block";
                 btn.style.color = "#ffffff";
-                btn.style.opacity = `0`;
-                btn.style.transition = `opacity 0.7s ${easing}`;
+                btn.style.opacity = "0";
+                btn.style.transition = "opacity 0.7s cubic-bezier(0.33, 1, 0.68, 1)";
             });
             setTimeout(() => {
                 all.forEach(btn => {
@@ -206,89 +206,90 @@ function fn2() {
     div3.className = `div3`;
     div3.textContent = `调试区`;
     const dakai = document.getElementById("1");
-    const infoBtn = document.createElement(`button`);
-    infoBtn.innerHTML = `info`;
-    infoBtn.className = `btn1`;
-    infoBtn.onclick = () => {
-        info("你好，欢迎使用 The Play Games！", deftime);
+
+    const infobtn = document.createElement(`button`);
+    infobtn.innerHTML = `info`;
+    infobtn.className = `btn1`;
+    infobtn.onclick = () => {
+        info("你好，欢迎使用 The Play Games！");
     };
-    const cgBtn = document.createElement(`button`);
-    cgBtn.innerHTML = `cg`;
-    cgBtn.className = `btn2`;
-    cgBtn.onclick = () => {
-        cg("当你看到这条信息时，说明你已经成功运行了主函数区的这个函数。", deftime);
+    const cgbtn = document.createElement(`button`);
+    cgbtn.innerHTML = `cg`;
+    cgbtn.className = `btn2`;
+    cgbtn.onclick = () => {
+        cg("当你看到这条信息时，说明你已经成功运行了主函数区的这个函数。");
     };
-    const failBtn = document.createElement(`button`);
-    failBtn.innerHTML = `fail`;
-    failBtn.className = `btn3`;
-    failBtn.onclick = () => {
-        fail("但有时候可能会报错，比如 NotAllowedError。", deftime);
+    const failbtn = document.createElement(`button`);
+    failbtn.innerHTML = `fail`;
+    failbtn.className = `btn3`;
+    failbtn.onclick = () => {
+        fail("但有时候可能会报错，比如 NotAllowedError。");
     };
-    const warnBtn = document.createElement(`button`);
-    warnBtn.innerHTML = `warn`;
-    warnBtn.className = `btn4`;
-    warnBtn.onclick = () => {
-        warn("看到这种信息时，要格外注意了。", deftime);
+    const warnbtn = document.createElement(`button`);
+    warnbtn.innerHTML = `warn`;
+    warnbtn.className = `btn4`;
+    warnbtn.onclick = () => {
+        warn("看到这种信息时，要格外注意了。");
     };
-    const inpBtn = document.createElement(`button`);
-    inpBtn.innerHTML = `inp`;
-    inpBtn.className = `btn5`;
-    inpBtn.onclick = () => {
+    const inpbtn = document.createElement(`button`);
+    inpbtn.innerHTML = `inp`;
+    inpbtn.className = `btn5`;
+    inpbtn.onclick = () => {
         inp("我很想听到你的想法。", "在此输入……");
     };
-    const tranBtn = document.createElement(`button`);
-    tranBtn.innerHTML = `tran`;
-    tranBtn.className = `btn6`;
-    tranBtn.onclick = () => {
-        tran("目前，还没有开发传输文件的功能。");
+    const synchrbtn = document.createElement(`button`);
+    synchrbtn.innerHTML = "synchr";
+    synchrbtn.className = `btn6`;
+    synchrbtn.onclick = () => {
+        synchr("目前，还没有开发传输文件的功能。");
     };
-    const xzBtn = document.createElement(`button`);
-    xzBtn.innerHTML = `xz`;
-    xzBtn.className = `btn7`;
-    xzBtn.onclick = async () => {
+    const xzbtn = document.createElement(`button`);
+    xzbtn.innerHTML = `xz`;
+    xzbtn.className = `btn7`;
+    xzbtn.onclick = async () => {
         var res = await xz("你对以上的函数有什么看法？", 4, ["很不错。", "还可以。", "一般。", "有待改进的空间。"]);
         switch (res) {
             case "很不错。":
-                info("非常感谢！你还可以尝试其他的函数。", deftime);
+                info("非常感谢！你还可以尝试其他的函数。");
                 break;
             case "还可以。":
-                info("谢谢你的评价！", deftime);
+                info("谢谢你的评价！");
                 break;
             case "一般。":
-                info("我们可以做得更好。", deftime);
+                info("我们可以做得更好。");
                 break;
             case "有待改进的空间。":
                 var r = await xz("你是否想向我反馈你的建议？", 2, ["是。", "否。"]);
-                if (r) {
+                if (r === "是。") {
                     await lj("点击以下链接反馈。", "mailto://Feng_14@outlook.com", true);
                     break;
                 } else {
-                    info("好的，我们再见。", deftime);
+                    info("好的，我们再见。");
                 }
         }
     };
-    const ljBtn = document.createElement(`button`);
-    ljBtn.innerHTML = `lj`;
-    ljBtn.className = `btn8`;
-    ljBtn.onclick = () => {
+    const ljbtn = document.createElement(`button`);
+    ljbtn.innerHTML = `lj`;
+    ljbtn.className = `btn8`;
+    ljbtn.onclick = () => {
         lj("点击此处浏览 The Play Games 的信息界面！", "https://modificationer-mdf.github.io/tpg_info/", true);
     };
-    const zdBtn = document.createElement(`button`);
-    zdBtn.innerHTML = `zd`;
-    zdBtn.className = `btn9`;
-    zdBtn.onclick = () => {
+    const zdbtn = document.createElement(`button`);
+    zdbtn.innerHTML = `zd`;
+    zdbtn.className = `btn9`;
+    zdbtn.onclick = () => {
         zd("在此处输入代码。");
     };
-    const nullBtn = document.createElement(`button`);
-    nullBtn.innerHTML = `在函数的值中输入 null 值`;
-    nullBtn.className = `btn10`;
-    nullBtn.onclick = () => {
+    const nullbtn = document.createElement(`button`);
+    nullbtn.innerHTML = `在函数的值中输入 null 值`;
+    nullbtn.className = `btn10`;
+    nullbtn.onclick = () => {
         wz(null);
     };
-    const undefinedBtn = document.createElement(`button`);
-    undefinedBtn.innerHTML = `在函数的值中输入 undefined 值`;
-    undefinedBtn.className = `btn11`;
-    undefinedBtn.onclick = () => {
+    const undefinedbtn = document.createElement(`button`);
+    undefinedbtn.innerHTML = `在函数的值中输入 undefined 值`;
+    undefinedbtn.className = `btn11`;
+    undefinedbtn.onclick = () => {
         wz(undefined);
     };
     const imp = document.createElement(`button`);
@@ -299,18 +300,18 @@ function fn2() {
     };
 
     const all = [
-        infoBtn,
-        cgBtn,
-        failBtn,
-        warnBtn,
-        inpBtn,
-        tranBtn,
-        xzBtn,
-        ljBtn,
-        zdBtn,
+        infobtn,
+        cgbtn,
+        failbtn,
+        warnbtn,
+        inpbtn,
+        synchrbtn,
+        xzbtn,
+        ljbtn,
+        zdbtn,
         imp,
-        nullBtn,
-        undefinedBtn,
+        nullbtn,
+        undefinedbtn,
     ];
 
     div1.style.display = `none`;
@@ -334,29 +335,29 @@ function fn2() {
         });
     }
 
-    div.style.animation = `head3- 0.7s forwards ${easing}`;
-    dakai.textContent = `我们在以下的函数中增加了预设内容。`;
-    dakai.style.transition = `all 0.7s ${easing}`;
+    div.style.animation = "head3- 0.7s forwards cubic-bezier(0.33, 1, 0.68, 1)";
+    dakai.textContent = "以下是预设内容";
+    dakai.style.transition = "all 0.7s cubic-bezier(0.33, 1, 0.68, 1)";
     dakai.style.backgroundColor = `#001dff99`;
-    dakai.style.width = `580px`;
+    dakai.style.width = "230px";
 
-    div.addEventListener(`animationend`, (e) => {
-        if (e.animationName === `head3-`) {
+    div.addEventListener("animationend", (e) => {
+        if (e.animationName === "head3-") {
             all.forEach(btn => {
-                btn.style.display = `block`;
+                btn.style.display = "block";
                 btn.style.color = "#ffffff";
                 btn.style.opacity = "0";
-                btn.style.transition = `opacity 0.7s ${easing}`;
+                btn.style.transition = "opacity 0.7s cubic-bezier(0.33, 1, 0.68, 1)";
             });
-            div1.style.display = `block`;
-            div1.style.opacity = `0`;
-            div1.style.transition = `opacity 0.7s ${easing}`;
-            div2.style.display = `block`;
-            div2.style.opacity = `0`;
-            div2.style.transition = `opacity 0.7s ${easing}`;
-            div3.style.display = `block`;
-            div3.style.opacity = `0`;
-            div3.style.transition = `opacity 0.7s ${easing}`;
+            div1.style.display = "block";
+            div1.style.opacity = "0";
+            div1.style.transition = "opacity 0.7s cubic-bezier(0.33, 1, 0.68, 1)";
+            div2.style.display = "block";
+            div2.style.opacity = "0";
+            div2.style.transition = "opacity 0.7s cubic-bezier(0.33, 1, 0.68, 1)";
+            div3.style.display = "block";
+            div3.style.opacity = "0";
+            div3.style.transition = "opacity 0.7s cubic-bezier(0.33, 1, 0.68, 1)";
             setTimeout(() => {
                 all.forEach(btn => {
                     btn.style.opacity = `1`;
@@ -377,8 +378,9 @@ function fn3() {
     const dakai = document.getElementById(`3`);
     dakai.style.transition = `all 0.7s ${easing}`;
     dakai.style.backgroundColor = `#001dff99`;
-    dakai.style.width = `700px`;
-    dakai.textContent = `你可以在此处下载 The Play Games 所有版本。`;
+    dakai.style.width = `500px`;
+    dakai.textContent = "在此处下载 The Play Games 所有版本。";
+
     const btn1 = document.createElement(`button`);
     btn1.className = `btn11`;
     btn1.style.marginTop = `20px`;
@@ -391,8 +393,9 @@ function fn3() {
         rz(`2024 年 5 月 1 日发布。`);
     };
     a1.onclick = async () => {
-        await tran("下载 Version_Collecting_1.zip。<br />（391 KiB）");
+        await synchr("下载 Version_Collecting_1.zip。<br />（391 KiB）");
     };
+
     const btn2 = document.createElement(`button`);
     btn2.className = `btn12`;
     btn2.type = `button`;
@@ -404,8 +407,9 @@ function fn3() {
         rz(`2024 年 8 月 22 日发布。`);
     };
     a2.onclick = async () => {
-        await tran("下载 Version_0.7.zip。<br />（26653 KiB）");
+        await synchr("下载 Version_0.7.zip。<br />（26653 KiB）");
     };
+
     const btn3 = document.createElement(`button`);
     btn3.className = `btn13`;
     btn3.type = `button`;
@@ -417,8 +421,9 @@ function fn3() {
         rz(`2024 年 8 月 27 日发布。`);
     };
     a3.onclick = async () => {
-        await tran("下载 Version_0.8.zip。<br />（27496 KiB）");
+        await synchr("下载 Version_0.8.zip。<br />（27496 KiB）");
     };
+
     const all = [
         btn1,
         btn2,
@@ -427,6 +432,7 @@ function fn3() {
         a2,
         a3
     ];
+
     all.forEach(btn => {
         btn.style.display = `none`;
     });
@@ -438,17 +444,18 @@ function fn3() {
             else if (index === 5) btn3.appendChild(btn);
         });
     }
-    div.addEventListener(`animationend`, (e) => {
+
+    div.addEventListener("animationend", (e) => {
         if (e.animationName === `head4-`) {
             all.forEach(btn => {
-                btn.style.display = `block`;
+                btn.style.display = "block";
                 btn.color = "#ffffff";
-                btn.style.opacity = `0`; // 初始化为 0 。
-                btn.style.transition = `opacity 0.7s ${easing}`;
+                btn.style.opacity = "0";
+                btn.style.transition = `opacity 0.7s cubic-bezier(0.33, 1, 0.68, 1)`;
             });
             setTimeout(() => {
                 all.forEach(btn => {
-                    btn.style.opacity = `1`; // 显示。
+                    btn.style.opacity = `1`;
                 });
             }, 0);
         }
@@ -480,14 +487,14 @@ function fn4() { // 选项。
     ms.className = "lcont";
     const ys = document.createElement("button");
     ys.type = "button";
-    ys.innerHTML = "Demo";
+    ys.innerHTML = "Preset";
     ys.className = "zd1";
     ys.onclick = () => {
-        if (mode === "Demo") {
-            warn("当前模式已为 Demo。", deftime);
+        if (mode === "Preset") {
+            warn("当前模式已为 Preset。");
         } else {
-            mode = "Demo";
-            info("已切换到 Demo 模式。", deftime);
+            mode = "Preset";
+            info("已切换到 Preset 模式。");
         }
     };
     const js = document.createElement("button");
@@ -496,10 +503,10 @@ function fn4() { // 选项。
     js.className = "zd2";
     js.onclick = () => {
         if (mode === "Play") {
-            warn("当前模式已为 Play。", deftime);
+            warn("当前模式已为 Play。");
         } else {
             mode = "Play";
-            info("已切换到 Play 模式。", deftime);
+            info("已切换到 Play 模式。");
         }
     };
 
@@ -509,26 +516,26 @@ function fn4() { // 选项。
     zt.style.top = "20vh";
     const a = document.createElement("button");
     a.type = "button";
-    a.innerHTML = "Aero";
+    a.innerHTML = "Opacitied";
     a.className = "zd3";
     a.onclick = () => {
-        if (theme === "Aero") {
-            warn("你已经在使用 Aero 主题。", deftime);
+        if (theme === "Opacitied") {
+            warn("你已经在使用 Opacitied 主题。");
         } else {
-            theme = "Aero";
-            info("已切换到 Aero 主题。", deftime);
+            theme = "Opacitied";
+            info("已切换到 Opacitied 主题。");
         }
     };
     const n = document.createElement("button");
     n.type = "button";
-    n.innerHTML = "Neon";
+    n.innerHTML = "Present";
     n.className = "zd4";
     n.onclick = () => {
-        if (theme === "Neon") {
-            warn("你已经在使用 Neon 主题。", deftime);
+        if (theme === "Present") {
+            warn("你已经在使用 Present 主题。");
         } else {
-            theme = "Neon";
-            info("已切换到 Neon 主题。", deftime);
+            theme = "Present";
+            info("已切换到 Present 主题。");
         }
     };
 
@@ -543,17 +550,17 @@ function fn4() { // 选项。
     inp1.className = "inpbox";
     inp1.onclick = () => {
         if (f1 === false) {
-            warn("nullcount 只能为正整数。", deftime);
+            warn("nullcount 只能为正整数。");
             f1 = true;
         }
     };
     inp1.addEventListener("keypress", (event) => {
         if (event.key === "Enter") {
-            if (Number(inp1.value) < 0) fail("请输入一个大于等于 0 的数字。", deftime);
-            else if (Number(inp1.value) % 1 !== 0) fail("请输入一个整数。", deftime);
+            if (Number(inp1.value) < 0) fail("请输入一个大于等于 0 的数字。");
+            else if (Number(inp1.value) % 1 !== 0) fail("请输入一个整数。");
             else {
                 nullcount = Number(inp1.value);
-                info(`nullcount 已被设置为 ${nullcount}。`, deftime);
+                info(`nullcount 已被设置为 ${nullcount}。`);
             }
         }
     });
@@ -569,17 +576,17 @@ function fn4() { // 选项。
     inp2.value = easing;
     inp2.onclick = () => {
         if (f2 === false) {
-            warn("cubic-bezier 函数的格式是 cubic-bezier(x1, y1, x2, y2)。", 6000);
+            warn("cubic-bezier 函数的格式是 cubic-bezier(x1, y1, x2, y2)；其他 easing 还有 ease、linear、ease-in、ease-out、ease-in-out。");
             f2 = true;
         }
     };
     inp2.addEventListener("keypress", (event) => {
         if (event.key === "Enter") {
-            if (!(inp2.value.startsWith("cubic-bezier(") && inp2.value.endsWith(")"))) {
-                fail("请输入一个合法的 cubic-bezier 函数。", deftime);
+            if (!(inp2.value.startsWith("cubic-bezier(") && inp2.value.endsWith(")")) && inp2.value != "ease" && inp2.value != "linear" && inp2.value != "ease-in" && inp2.value != "ease-out" && inp2.value != "ease-in-out") {
+                fail("请输入一个合法的 easing 。");
             } else {
                 easing = inp2.value;
-                info(`easing 已被设置为 ${easing}。`, deftime);
+                info(`easing 已被设置为 ${easing}。`);
             }
         }
     });
@@ -595,16 +602,16 @@ function fn4() { // 选项。
     inp3.className = "inpbox";
     inp3.onclick = () => {
         if (f3 === false) {
-            warn("deftime 只能为正数，且单位为毫秒。", deftime);
+            warn("deftime 只能为正数，且单位为毫秒。");
             f3 = true;
         }
     };
     inp3.addEventListener("keypress", (event) => {
         if (event.key === "Enter") {
-            if (Number(inp3.value) < 700) fail("请输入一个大于等于 700 的数字。", deftime);
+            if (Number(inp3.value) < 900) fail("请输入一个大于等于 900 的数字。");
             else {
                 deftime = Number(inp3.value);
-                info(`deftime 已被设置为 ${deftime} 毫秒。`, deftime);
+                info(`deftime 已被设置为 ${deftime} 毫秒。`);
             }
         }
     });
@@ -620,17 +627,17 @@ function fn4() { // 选项。
     inp4.className = "inpbox";
     inp4.onclick = () => {
         if (f4 === false) {
-            warn("该数值只能为正整数。", deftime);
+            warn("该数值只能为正整数。");
             f4 = true;
         }
     };
     inp4.addEventListener("keypress", (event) => {
         if (event.key === "Enter") {
-            if (Number(inp4.value) < 0) fail("请输入一个大于等于 0 的数字。", deftime);
-            else if (Number(inp4.value) % 1 !== 0) fail("请输入一个整数。", deftime);
+            if (Number(inp4.value) < 0) fail("请输入一个大于等于 0 的数字。");
+            else if (Number(inp4.value) % 1 !== 0) fail("请输入一个整数。");
             else {
                 defwid = Number(inp4.value);
-                info(`defwid 已被设置为 ${defwid}。`, deftime);
+                info(`defwid 已被设置为 ${defwid}。`);
             }
         }
     });
@@ -646,17 +653,17 @@ function fn4() { // 选项。
     inp5.className = "inpbox";
     inp5.onclick = () => {
         if (f5 === false) {
-            warn("该数值只能为正整数。", deftime);
+            warn("该数值只能为正整数。");
             f5 = true;
         }
     };
     inp5.addEventListener("keypress", (event) => {
         if (event.key === "Enter") {
-            if (Number(inp5.value) < 0) fail("请输入一个大于等于 0 的数字。", deftime);
-            else if (Number(inp5.value) % 1 !== 0) fail("请输入一个整数。", deftime);
+            if (Number(inp5.value) < 0) fail("请输入一个大于等于 0 的数字。");
+            else if (Number(inp5.value) % 1 !== 0) fail("请输入一个整数。");
             else {
                 defhei = Number(inp5.value);
-                info(`defhei 已被设置为 ${defhei}。`, deftime);
+                info(`defhei 已被设置为 ${defhei}。`);
             }
         }
     });
@@ -678,8 +685,8 @@ function fn4() { // 选项。
     ctrl.appendChild(defh);
     ms.appendChild(ys);
     ms.appendChild(js);
-    zt.appendChild(a);
     zt.appendChild(n);
+    zt.appendChild(a);
     nullc.appendChild(inp1);
     eas.appendChild(inp2);
     mrms.appendChild(inp3);
@@ -723,7 +730,7 @@ function fn6() { // 杂项。
         else if (windows[i].className === "fail-window") v3++;
         else if (windows[i].className === "warn-window") v4++;
         else if (windows[i].className === "inp-window") v5++;
-        else if (windows[i].className === "tran-window") v6++;
+        else if (windows[i].className === "synchr-window") v6++;
         else if (windows[i].className === "xz-window") v7++;
         else if (windows[i].className === "lj-window") v8++;
         else if (windows[i].className === "zd-window") v9++;
@@ -761,7 +768,7 @@ function fn6() { // 杂项。
     inpc.style.color = "#235087";
 
     const tranc = document.createElement("div");
-    tranc.innerHTML = `Tran() 数量： ${v6}。`;
+    tranc.innerHTML = `Synchr() 数量： ${v6}。`;
     tranc.className = "rcont";
     tranc.style.top = "49vh";
     tranc.style.color = "#9e3389";

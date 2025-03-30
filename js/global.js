@@ -1,6 +1,6 @@
-let mode = "Demo";
-let theme = "Aero";
-let easing = "cubic-bezier(0.16, 1, 0.3, 1)";
+let mode = "Preset";
+let theme = "Present";
+let easing = "cubic-bezier(0.83, 0, 0.17, 1)";
 let deftime = 3000;
 let defwid = 1024;
 let defhei = 768;
@@ -13,23 +13,23 @@ document.addEventListener("DOMContentLoaded", function () {
     font1.load().then(function (f) {
         var end = performance.now();
         document.fonts.add(f);
-        cg(`成功加载字体：Basic Modification Regular。用时 ${((end - start) / 1000).toFixed(3)} 秒。`, deftime);
+        cg(`成功加载字体：Basic Modification Regular。用时 ${((end - start) / 1000).toFixed(3)} 秒。`);
     }).catch(function (error) {
-        fail(`字体加载失败。（${error}）`, deftime);
+        fail(`字体加载失败。（${error}）`);
     });
     font2.load().then(function (f) {
         var end = performance.now();
         document.fonts.add(f);
-        cg(`成功加载字体：Lanubu Light。用时 ${((end - start) / 1000).toFixed(3)} 秒。`, deftime);
+        cg(`成功加载字体：Lanubu Light。用时 ${((end - start) / 1000).toFixed(3)} 秒。`);
     }).catch(function (error) {
-        fail(`字体加载失败。（${error}）`, deftime);
+        fail(`字体加载失败。（${error}）`);
     });
     font3.load().then(function (f) {
         var end = performance.now();
         document.fonts.add(f);
-        cg(`成功加载字体：Arno Pro Regular。用时 ${((end - start) / 1000).toFixed(3)} 秒。`, deftime);
+        cg(`成功加载字体：Arno Pro Regular。用时 ${((end - start) / 1000).toFixed(3)} 秒。`);
     }).catch(function (error) {
-        fail(`字体加载失败。（${error}）`, deftime);
+        fail(`字体加载失败。（${error}）`);
     });
 
     const ctrl = document.querySelector(".control-pad");

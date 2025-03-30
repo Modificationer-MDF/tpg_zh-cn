@@ -1,8 +1,8 @@
-.info-window, .cg-window, .fail-window, .warn-window, .inp-window, .tran-window, .xz-window, .lj-window, .zd-window {
+.info-window, .cg-window, .fail-window, .warn-window, .inp-window, .synchr-window, .xz-window, .lj-window, .zd-window {
     z-index: 1000;
     display: flex;
-    position: absolute;
     right: 0px;
+    position: absolute;
     top: 7vh;
     font-size: 25px;
     flex-wrap: wrap;
@@ -12,13 +12,16 @@
 
 .info-window {
     background-color: #18a68999;
+    border-left: 5px solid #1b7163c9;
+    border-right: 5px solid #1b7163c9;
 }
 
-.info-square, .cg-square, .fail-square, .warn-square, .inp-square, .tran-square, .xz-square, .lj-square, .zd-square {
-    z-index: 1001;
-    width: 100px;
+.info-square, .cg-square, .fail-square, .warn-square, .inp-square, .synchr-square, .xz-square, .lj-square, .zd-square {
+    position: absolute;
+    z-index: 1000;
     display: flex;
     align-items: center;
+    left: 0px;
     justify-content: center;
 }
 
@@ -27,12 +30,15 @@
 }
 
 .fn-content {
+    text-align: center;
+    transform: translateY(-10%);
+    font-size: 20px;
     padding: 14px 25px;
     color: white;
     flex-grow: 1;
-    max-width: calc(14ch);
+    max-width: 14ch;
     word-break: break-word;
-    min-width: 28ch;
+    min-width: 30ch;
 }
 
 .info-progressbar, .cg-progressbar, .fail-progressbar, .warn-progressbar {
@@ -47,30 +53,40 @@
     background-color: #06b48499;
 }
 
-@keyframes zyfn- {
+@keyframes fn- {
     from {
-        transform: translateX(800px);
         opacity: 0;
+        width: 0;
+        left: 50%;
+        right: 50%;
     }
     to {
-        transform: translateX(0%);
+        width: 30ch;
         opacity: 1;
+        left: calc(50% - 15ch);
+        right: calc(50% + 15ch);
     }
 }
 
-@keyframes -zyfn {
+@keyframes -fn {
     from {
-        transform: translateX(0%);
+        width: 30ch;
         opacity: 1;
+        left: calc(50% - 15ch);
+        right: calc(50% + 15ch);
     }
     to {
-        transform: translateX(800px);
         opacity: 0;
+        width: 0;
+        left: 50%;
+        right: 50%;
     }
 }
 
 .cg-window {
     background-color: #1d583799;
+    border-left: 5px solid #183b25c9;
+    border-right: 5px solid #183b25c9;
 }
 
 .cg-square {
@@ -83,6 +99,8 @@
 
 .fail-window {
     background-color: #791e1d99;
+    border-left: 5px solid #4a1514c9;
+    border-right: 5px solid #4a1514c9;
 }
 
 .fail-square {
@@ -95,6 +113,8 @@
 
 .warn-window {
     background-color: #84782999;
+    border-left: 5px solid #615518c9;
+    border-right: 5px solid #615518c9;
 }
 
 .warn-square {
@@ -107,6 +127,8 @@
 
 .inp-window {
     background-color: #23508799;
+    border-left: 5px solid #183450c9;
+    border-right: 5px solid #183450c9;
 }
 
 .inp-square {
@@ -128,57 +150,34 @@
     background-color: #9cdcfe99;
 }
 
-.inp-box::placeholder {
-    color: #ffffff99;
-    text-align: center;
-}
-
-@keyframes sxfn- {
-    from {
-        transform: translateY(-600px);
-        opacity: 0;
-    }
-
-    to {
-        transform: translateY(0%);
-        opacity: 1;
-    }
-}
-
-@keyframes -sxfn {
-    from {
-        transform: translateY(0%);
-        opacity: 1;
-    }
-
-    to {
-        transform: translateY(-600px);
-        opacity: 0;
-    }
-}
-
 .xz-window {
     background-color: #7527a499;
+    border-left: 5px solid #461c5fc9;
+    border-right: 5px solid #461c5fc9;
 }
 
 .xz-square {
     background-color: #461c5fc9;
 }
 
-.tran-window {
+.synchr-window {
     background-color: #9e338999;
+    border-left: 5px solid #c125abc9;
+    border-right: 5px solid #c125abc9;
 }
 
-.tran-square {
+.synchr-square {
     background-color: #c125abc9;
 }
 
-.tran-progressbar {
+.synchr-progressbar {
     background-color: #ff39ac99;
 }
 
 .lj-window {
     background-color: #a6580d99;
+    border-left: 5px solid #753e14c9;
+    border-right: 5px solid #753e14c9;
 }
 
 .lj-square {
@@ -187,6 +186,8 @@
 
 .zd-window {
     background-color: #19181899;
+    border-left: 5px solid #000000c9;
+    border-right: 5px solid #000000c9;
 }
 
 .zd-square {
@@ -195,11 +196,6 @@
 
 .zd-box {
     background-color: #22222299;
-}
-
-.zd-box::placeholder {
-    color: #ffffff99;
-    text-align: center;
 }
 
 /* wz() 函数。 */
@@ -351,18 +347,19 @@
 }
 
 .wz-content {
+    font-size: 20px;
     color: white;
     padding: 14px 25px;
     text-align: left;
     position: absolute;
     left: 4%;
-    max-width: 39ch;
+    max-width: 40ch;
     max-height: calc(50vh - 210px);
     overflow-y: auto;
     white-space: pre-wrap;
     word-break: break-word;
     opacity: 0;
-    transition: opacity 0.7s;
+    transition: opacity 0.3s;
     scrollbar-width: thin;
     scrollbar-color: #ffffff99 #00000000;
 }
@@ -403,13 +400,13 @@
 }
 
 .rz-content {
-    font-size: 25px;
+    font-size: 20px;
     padding: 14px 25px;
     color: white;
     flex-grow: 1;
     max-width: calc(14ch);
     word-break: break-word;
-    min-width: 28ch;
+    min-width: 20ch;
 }
 
 @keyframes -rz {

@@ -4,7 +4,7 @@ let rzwin = []; // rz() 信息数组。
 let totalHeight = 0; // rz() 的总高度。
 let urlEndings = [
     `.com`, `.net`, `.cn`, `.org`, `.edu`, `.gov`, `.mil`,
-    `.biz`, `.info`, `.name`, `.pro`, `.aero`, `.coop`,
+    `.biz`, `.info`, `.name`, `.pro`, `.Opacitied`, `.coop`,
     `.museum`, `.jobs`, `.travel`, `.xxx`, `.top`, `.site`,
     `.wiki`, `.cc`, `.tv`, `.mobi`, `.me`, `.bid`, `.club`,
     `.online`, `.store`, `.work`, `.tech`
@@ -101,7 +101,7 @@ function rz(string, time) {
 function info(string, ms) {
     if (string == null || string == undefined) {
         nullcount++;
-        fail("所输入内容不能为 null 或 undefined。", deftime);
+        fail("所输入内容不能为 null 或 undefined。");
         monitor();
         return 39;
     } else {
@@ -109,7 +109,7 @@ function info(string, ms) {
     }
     let replaced = string.replace(/\s+/g, "");
     if (replaced === "") {
-        fail("所输入内容不能为空字符串。", deftime);
+        warn("所输入内容不能为空字符串。");
         return -39;
     } else if (ms === undefined || ms === null || Number.isNaN(ms) || Number(ms) < 700) {
         ms = deftime;
@@ -125,24 +125,29 @@ function info(string, ms) {
     const icon = document.createElement(`img`);
     icon.src = `images/Inf.png`;
     const content = document.createElement(`div`);
-    content.className = `fn-content`;
+    content.className = "fn-content";
+    content.style.opacity = 0;
+    content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const bar = document.createElement(`div`);
     bar.className = `info-progressbar`;
 
-    if (theme === "Neon") {
+    if (theme === "Present") {
         window.style.backdropFilter = `blur(14px) saturate(250%)`;
         square.style.backdropFilter = `blur(14px) saturate(250%)`;
     }
 
     create(window);
     document.body.appendChild(window);
-    window.appendChild(square);
     window.appendChild(content);
     window.appendChild(bar);
-    square.appendChild(icon);
 
-    window.style.animation = `zyfn- 0.7s forwards ${easing}`;
+    window.style.animation = `fn- 0.7s forwards ${easing}`;
     content.innerHTML = string;
+
+    window.addEventListener("animationend", () => {
+        content.style.transform = "translateY(0%)";
+        content.style.opacity = 1;
+    });
 
     const visible = () => {
         const rect = window.getBoundingClientRect();
@@ -171,11 +176,15 @@ function info(string, ms) {
     }, 10);
 
     setTimeout(() => {
-        window.style.animation = `-zyfn 0.7s forwards ${easing}`;
-        setTimeout(() => {
-            document.body.removeChild(window);
-            close(window, windows);
-        }, 700);
+        content.style.opacity = 0;
+        content.style.transform = "translateY(-10%)";
+        content.addEventListener("transitionend", () => {
+            window.style.animation = `-fn 0.7s forwards ${easing}`;
+            setTimeout(() => {
+                document.body.removeChild(window);
+                close(window, windows);
+            }, 700);
+        });
     }, ms);
     setTimeout(visible, ms);
 }
@@ -185,7 +194,7 @@ function info(string, ms) {
 function cg(string, ms) {
     if (string == null || string == undefined) {
         nullcount++;
-        fail("所输入内容不能为 null 或 undefined。", deftime);
+        fail("所输入内容不能为 null 或 undefined。");
         monitor();
         return 39;
     } else {
@@ -193,7 +202,7 @@ function cg(string, ms) {
     }
     let replaced = string.replace(/\s+/g, "");
     if (replaced === "") {
-        fail("所输入内容不能为空字符串。", deftime);
+        warn("所输入内容不能为空字符串。");
         return -39;
     } else if (ms === undefined || ms === null || Number.isNaN(ms) || Number(ms) <= 0) {
         ms = deftime;
@@ -209,23 +218,28 @@ function cg(string, ms) {
     const icon = document.createElement(`img`);
     icon.src = `images/Suc.png`;
     const content = document.createElement(`div`);
-    content.className = `fn-content`;
+    content.className = "fn-content";
+    content.style.opacity = 0;
+    content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const bar = document.createElement(`div`);
     bar.className = `cg-progressbar`;
-    if (theme === "Neon") {
+    if (theme === "Present") {
         window.style.backdropFilter = `blur(14px) saturate(250%)`;
         square.style.backdropFilter = `blur(14px) saturate(250%)`;
     }
 
     create(window);
     document.body.appendChild(window);
-    window.appendChild(square);
     window.appendChild(content);
     window.appendChild(bar);
-    square.appendChild(icon);
 
-    window.style.animation = `zyfn- 0.7s forwards ${easing}`;
+    window.style.animation = `fn- 0.7s forwards ${easing}`;
     content.innerHTML = string;
+
+    window.addEventListener("animationend", () => {
+        content.style.transform = "translateY(0%)";
+        content.style.opacity = 1;
+    });
 
     const line = Math.ceil(string.length / 14);
     var lineHeight = parseInt(window.style.lineHeight);
@@ -254,11 +268,15 @@ function cg(string, ms) {
     };
 
     setTimeout(() => {
-        window.style.animation = `-zyfn 0.7s forwards ${easing}`;
-        setTimeout(() => {
-            document.body.removeChild(window);
-            close(window, windows)
-        }, 700);
+        content.style.opacity = 0;
+        content.style.transform = "translateY(-10%)";
+        content.addEventListener("transitionend", () => {
+            window.style.animation = `-fn 0.7s forwards ${easing}`;
+            setTimeout(() => {
+                if (document.body.contains(window)) document.body.removeChild(window);
+                close(window, windows)
+            }, 700);
+        });
     }, ms);
     setTimeout(visible, ms);
 }
@@ -268,7 +286,7 @@ function cg(string, ms) {
 function fail(string, ms) {
     if (string == null || string == undefined) {
         nullcount++;
-        fail("所输入内容不能为 null 或 undefined。", deftime);
+        fail("所输入内容不能为 null 或 undefined。");
         monitor();
         return 39;
     } else {
@@ -276,7 +294,7 @@ function fail(string, ms) {
     }
     let replaced = string.replace(/\s+/g, "");
     if (replaced === "") {
-        fail("所输入内容不能为空字符串。", deftime);
+        warn("所输入内容不能为空字符串。");
         return -39;
     } else if (ms === undefined || ms === null || Number.isNaN(ms) || Number(ms) <= 0) {
         ms = deftime;
@@ -292,24 +310,30 @@ function fail(string, ms) {
     const icon = document.createElement(`img`);
     icon.className = `fail-icon`;
     const content = document.createElement(`div`);
-    content.className = `fn-content`;
+    content.className = "fn-content";
+    content.style.opacity = 0;
+    content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const bar = document.createElement(`div`);
     bar.className = `fail-progressbar`;
-    if (theme === "Neon") {
+
+    if (theme === "Present") {
         window.style.backdropFilter = `blur(14px) saturate(250%)`;
         square.style.backdropFilter = `blur(14px) saturate(250%)`;
     }
 
     create(window);
     document.body.appendChild(window);
-    window.appendChild(square);
     window.appendChild(content);
     window.appendChild(bar);
-    square.appendChild(icon);
 
     icon.src = `images/Err.png`;
-    window.style.animation = `zyfn- 0.7s forwards ${easing}`;
+    window.style.animation = `fn- 0.7s forwards ${easing}`;
     content.innerHTML = string;
+
+    window.addEventListener("animationend", () => {
+        content.style.transform = "translateY(0%)";
+        content.style.opacity = 1;
+    });
 
     const line = Math.ceil(string.length / 14);
     var lineHeight = parseInt(window.style.lineHeight);
@@ -338,11 +362,15 @@ function fail(string, ms) {
     };
 
     setTimeout(() => {
-        window.style.animation = `-zyfn 0.7s forwards ${easing}`;
-        setTimeout(() => {
-            document.body.removeChild(window);
-            close(window, windows)
-        }, 700);
+        content.style.opacity = 0;
+        content.style.transform = "translateY(-10%)";
+        content.addEventListener("transitionend", () => {
+            window.style.animation = `-fn 0.7s forwards ${easing}`;
+            setTimeout(() => {
+                document.body.removeChild(window);
+                close(window, windows)
+            }, 700);
+        });
     }, ms);
     setTimeout(visible, ms);
 }
@@ -352,7 +380,7 @@ function fail(string, ms) {
 function warn(string, ms) {
     if (string == null || string == undefined) {
         nullcount++;
-        fail("所输入内容不能为 null 或 undefined。", deftime);
+        fail("所输入内容不能为 null 或 undefined。");
         monitor();
         return 39;
     } else {
@@ -360,7 +388,7 @@ function warn(string, ms) {
     }
     let replaced = string.replace(/\s+/g, "");
     if (replaced === "") {
-        fail("所输入内容不能为空字符串。", deftime);
+        warn("所输入内容不能为空字符串。");
         return -39;
     } else if (ms === undefined || ms === null || Number.isNaN(ms) || Number(ms) <= 0) {
         ms = deftime;
@@ -376,24 +404,29 @@ function warn(string, ms) {
     const icon = document.createElement(`img`);
     icon.className = `warn-icon`;
     const content = document.createElement(`div`);
-    content.className = `fn-content`;
+    content.className = "fn-content";
+    content.style.opacity = 0;
+    content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const bar = document.createElement(`div`);
     bar.className = `warn-progressbar`;
-    if (theme === "Neon") {
+    if (theme === "Present") {
         window.style.backdropFilter = `blur(14px) saturate(250%)`;
         square.style.backdropFilter = `blur(14px) saturate(250%)`;
     }
 
     create(window);
     document.body.appendChild(window);
-    window.appendChild(square);
     window.appendChild(content);
     window.appendChild(bar);
-    square.appendChild(icon);
 
     icon.src = `images/Exc.png`;
-    window.style.animation = `zyfn- 0.7s forwards ${easing}`;
+    window.style.animation = `fn- 0.7s forwards ${easing}`;
     content.innerHTML = string;
+
+    window.addEventListener("animationend", () => {
+        content.style.transform = "translateY(0%)";
+        content.style.opacity = 1;
+    });
 
     const line = Math.ceil(string.length / 14);
     var lineHeight = parseInt(window.style.lineHeight);
@@ -422,32 +455,34 @@ function warn(string, ms) {
     };
 
     setTimeout(() => {
-        window.style.animation = `-zyfn 0.7s forwards ${easing}`;
-        setTimeout(() => {
-            document.body.removeChild(window);
-            close(window, windows)
-        }, 700);
+        content.style.opacity = 0;
+        content.style.transform = "translateY(-10%)";
+        content.addEventListener("transitionend", () => {
+            window.style.animation = `-fn 0.7s forwards ${easing}`;
+            setTimeout(() => {
+                document.body.removeChild(window);
+                close(window, windows)
+            }, 700);
+        });
     }, ms);
     setTimeout(visible, ms);
 }
 
 // inp 函数。
 
-async function inp(string, holder) {
+async function inp(string) {
     return new Promise((resolve) => {
-        if (string === null || string === undefined || holder === undefined || holder === null) {
+        if (string === null || string === undefined) {
             nullcount++;
-            fail("所输入内容不能为 null 或 undefined。", deftime);
+            fail("所输入内容不能为 null 或 undefined。");
             monitor();
             return 39;
         } else {
             string = string.toString();
-            holder = holder.toString();
         }
-        let replaced1 = string.replace(/\s+/g, "");
-        let replaced2 = holder.replace(/\s+/g, "");
-        if (replaced1 === "" || replaced2 === "") {
-            fail("所输入内容不能为空字符串。", deftime);
+        let replaced = string.replace(/\s+/g, "");
+        if (replaced === "") {
+            warn("所输入内容不能为空字符串。");
             return -39;
         }
         if (nullcount > 26) {
@@ -461,13 +496,16 @@ async function inp(string, holder) {
         const icon = document.createElement(`img`);
         icon.className = `inp-icon`;
         const content = document.createElement(`div`);
-        content.className = `fn-content`;
-
+        content.className = "fn-content";
+        content.style.opacity = 0;
+        content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
         const box = document.createElement(`input`);
-        box.type = `text`;
-        box.className = `inp-box`;
-        box.placeholder = holder;
-        if (theme === "Neon") {
+        box.type = "text";
+        box.className = "inp-box";
+        box.style.opacity = 0;
+        box.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+
+        if (theme === "Present") {
             window.style.backdropFilter = `blur(14px) saturate(250%)`;
             square.style.backdropFilter = `blur(14px) saturate(250%)`;
             box.style.backgroundFilter = `blur(14px) saturate(250%)`;
@@ -475,31 +513,37 @@ async function inp(string, holder) {
 
         create(window);
         document.body.appendChild(window);
-        window.appendChild(square);
         window.appendChild(content);
         window.appendChild(box);
-        square.appendChild(icon);
         
         icon.src = `images/Inp.png`;
-        window.style.animation = `sxfn- 0.7s forwards ${easing}`;
+        window.style.animation = `fn- 0.7s forwards ${easing}`;
         content.innerHTML = string;
+
+        window.addEventListener("animationend", () => {
+            content.style.transform = "translateY(0%)";
+            content.style.opacity = 1;
+            box.style.opacity = 1;
+        });
 
         const line = Math.ceil(string.length / 14);
         var lineHeight = parseInt(window.style.lineHeight);
         content.style.height = `${line * lineHeight}px`;
 
-        box.focus();
-        box.addEventListener(`keypress`, (event) => {
-            if (event.key === `Enter`) {
+        box.addEventListener("keypress", (event) => {
+            if (event.key === "Enter") {
                 const value = box.value;
-                window.style.animation = `-sxfn 0.7s forwards ${easing}`;
-                setTimeout(() => {
-                    if (document.body.contains(window)) {
-                        document.body.removeChild(window);
+                content.style.transform = "translateY(-10%)";
+                content.style.opacity = 0;
+                box.style.opacity = 0;
+                content.addEventListener("transitionend", () => {
+                    window.style.animation = `-fn 0.7s forwards ${easing}`;
+                    setTimeout(() => {
                         resolve(value);
+                        document.body.removeChild(window);
                         close(window, windows);
-                    }
-                }, 700);
+                    }, 700);
+                });
             }
         });
     });
@@ -523,11 +567,13 @@ async function xz(string, n, names) {
         const icon = document.createElement(`img`);
         icon.className = `xz-icon`;
         const content = document.createElement(`div`);
-        content.className = `fn-content`;
+        content.className = "fn-content";
+        content.style.opacity = 0;
+        content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
 
         if (string == null || string == undefined) {
             nullcount++;
-            fail("所输入内容不能为 null 或 undefined。", deftime);
+            fail("所输入内容不能为 null 或 undefined。");
             monitor();
             return 39;
         } else {
@@ -535,25 +581,23 @@ async function xz(string, n, names) {
         }
         let replaced1 = string.replace(/\s+/g, "");
         if (replaced1 === "") {
-            fail("所输入内容不能为空字符串。", deftime);
+            warn("所输入内容不能为空字符串。");
             return -39;
         }
         if (nullcount > 26) {
             rz("你已被禁止调用函数。");
         }
-        if (theme === "Neon") {
+        if (theme === "Present") {
             window.style.backdropFilter = `blur(14px) saturate(250%)`;
             square.style.backdropFilter = `blur(14px) saturate(250%)`;
         }
 
         create(window);
         document.body.appendChild(window);
-        window.appendChild(square);
         window.appendChild(content);
-        square.appendChild(icon);
 
         icon.src = `images/Sel.png`;
-        window.style.animation = `zyfn- 0.7s forwards ${easing}`;
+        window.style.animation = `fn- 0.7s forwards ${easing}`;
         content.innerHTML = string;
 
         const line = Math.ceil(string.length / 14);
@@ -582,43 +626,51 @@ async function xz(string, n, names) {
             btn.innerHTML = array[i - 1];
             btn.focus();
 
-            btn.style.backgroundColor =`${color()}b0`;
+            btn.style.backgroundColor = `${color()}b0`;
+            btn.style.opacity = 0;
+            btn.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+            btn.style.fontSize = "20px";
             btn.style.border = `none`;
-            btn.style.fontSize = "25px";
             btn.style.padding = `14px 25px`;
             btn.style.textAlign = `center`;
             btn.style.cursor = `pointer`;
             btn.style.color = `white`;
-            btn.style.position = `absolute`;
+            btn.style.position = "absolute";
+            btn.style.top = `${i * 60}px`;
             btn.style.flex = `1`;
-            btn.style.bottom = `${20 + (i - 1) * 70}px`;
-            content.style.marginBottom = `calc(${20 + i * 70}px)`;
-            btn.style.left = `120px`;
+            content.style.marginBottom = `${20 + i * 60}px`;
+            btn.style.left = "20px";
+
+            window.addEventListener("animationend", () => {
+                content.style.transform = "translateY(0%)";
+                content.style.opacity = 1;
+                btn.style.opacity = 1;
+            });
 
             btn.onclick = () => {
                 resolve(array[i - 1]);
-                rm();
+                content.style.opacity = 0;
+                content.style.transform = "translateY(-10%)";
+                btn.style.opacity = 0;
+                content.addEventListener("transitionend", () => {
+                    window.style.animation = `-fn 0.7s forwards ${easing}`;
+                    setTimeout(() => {
+                        document.body.removeChild(window);
+                        close(window, windows)
+                    }, 700);
+                });
             };
-    
-            content.appendChild(btn); 
-        }
-
-        function rm() {
-            window.style.animation = `-zyfn 0.7s forwards ${easing}`;
-            setTimeout(() => {
-                document.body.removeChild(window);
-                close(window, windows)
-            }, 700);
+            content.appendChild(btn);
         }
     });
 }
 
-// tran 函数。
+// synchr 函数。
 
-async function tran(string) {
+async function synchr(string) {
     if (string == null || string == undefined) {
         nullcount++;
-        fail("所输入内容不能为 null 或 undefined。", deftime);
+        fail("所输入内容不能为 null 或 undefined。");
         monitor();
         return 39;
     } else {
@@ -626,7 +678,7 @@ async function tran(string) {
     }
     let replaced = string.replace(/\s+/g, "");
     if (replaced === "") {
-        fail("所输入内容不能为空字符串。", deftime);
+        warn("所输入内容不能为空字符串。");
         return -39;
     }
     if (nullcount > 26) {
@@ -634,30 +686,35 @@ async function tran(string) {
     }
 
     const window = document.createElement(`div`);
-    window.className = `tran-window`;
+    window.className = `synchr-window`;
     const square = document.createElement(`div`);
-    square.className = `tran-square`;
+    square.className = `synchr-square`;
     const icon = document.createElement(`img`);
-    icon.className = `tran-icon`;
+    icon.className = `synchr-icon`;
     const content = document.createElement(`div`);
-    content.className = `fn-content`;
+    content.className = "fn-content";
+    content.style.opacity = 0;
+    content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const bar = document.createElement(`div`);
-    bar.className = `tran-progressbar`;
-    if (theme === "Neon") {
+    bar.className = `synchr-progressbar`;
+    if (theme === "Present") {
         window.style.backdropFilter = `blur(14px) saturate(250%)`;
         square.style.backdropFilter = `blur(14px) saturate(250%)`;
     }
 
     create(window);
     document.body.appendChild(window);
-    window.appendChild(square);
     window.appendChild(content);
     window.appendChild(bar);
-    square.appendChild(icon);
 
-    icon.src = `images/Tran.png`;
-    window.style.animation = `zyfn- 0.7s forwards ${easing}`;
+    icon.src = `images/Synchronization.png`;
+    window.style.animation = `fn- 0.7s forwards ${easing}`;
     content.innerHTML = string;
+
+    window.addEventListener("animationend", () => {
+        content.style.transform = "translateY(0%)";
+        content.style.opacity = 1;
+    });
 
     const line = Math.ceil(string.length / 14);
     var lineHeight = parseInt(window.style.lineHeight);
@@ -672,18 +729,22 @@ async function tran(string) {
             rect.right <= (window.innerWidth || document.documentElement.clientWidth)
         );
         if (viewport === false) {
-            rz("有 1 条未读完的 tran() 信息。");
+            rz("有 1 条未读完的 synchr() 信息。");
         }
     };
     
     setTimeout(() => {
-        window.style.animation = `-zyfn 0.7s forwards ${easing}`;
-        setTimeout(() => {
-            document.body.removeChild(window);
-            close(window, windows)
-        }, 700);
+        content.style.opacity = 0;
+        content.style.transform = "translateY(-10%)";
+        content.addEventListener("transitionend", () => {
+            window.style.animation = `-fn 0.7s forwards ${easing}`;
+            setTimeout(() => {
+                document.body.removeChild(window);
+                close(window, windows)
+            }, 700);
+        });
     }, deftime);
-    setTimeout(visible, deftime);
+    setTimeout(visible);
 }
 
 // lj 函数。
@@ -691,7 +752,7 @@ async function tran(string) {
 async function lj(string, url, ignore) {
     if (string == null || string == undefined || url == null || url == undefined) {
         nullcount++;
-        fail("所输入内容不能为 null 或 undefined。", deftime);
+        fail("所输入内容不能为 null 或 undefined。");
         monitor();
         return 39;
     } else {
@@ -703,10 +764,10 @@ async function lj(string, url, ignore) {
     if (replaced2.startsWith(`https`) !== true && ignore !== true) {
         url = `https://` + replaced2;
     } else if (urlEndings.some(ending => url.endsWith(ending)) === false && ignore !== true) {
-        warn(`请检查你所输入的网址是否正确！`, deftime);
+        warn(`请检查你所输入的网址是否正确！`);
     }
     if (replaced1 === "" || replaced2 === "") {
-        fail("所输入内容不能为空字符串。", deftime);
+        warn("所输入内容不能为空字符串。");
         return -39;
     }
     if (nullcount > 26) {
@@ -720,12 +781,15 @@ async function lj(string, url, ignore) {
     const icon = document.createElement(`img`);
     icon.className = `lj-icon`;
     const content = document.createElement(`div`);
-    content.className = `fn-content`;
+    content.className = "fn-content";
+    content.style.opacity = 0;
+    content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const btn = document.createElement(`button`);
-
+    btn.style.opacity = 0;
+    btn.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     btn.style.backgroundColor = "#715213b0";
     btn.style.border = `none`;
-    btn.style.fontSize = "25px";
+    btn.style.fontSize = "20px";
     btn.style.padding = `14px 25px`;
     btn.style.textAlign = `center`;
     btn.style.cursor = `pointer`;
@@ -733,34 +797,43 @@ async function lj(string, url, ignore) {
     btn.style.position = "relative";
     btn.style.flex = `1`;
 
-    if (theme === "Neon") {
+    if (theme === "Present") {
         window.style.backdropFilter = `blur(14px) saturate(250%)`;
         square.style.backdropFilter = `blur(14px) saturate(250%)`;
     }
 
     create(window);
     document.body.appendChild(window);
-    window.appendChild(square);
     window.appendChild(content);
-    square.appendChild(icon);
 
     icon.src = `images/Link.png`;
-    window.style.animation = `zyfn- 0.7s forwards ${easing}`;
+    window.style.animation = `fn- 0.7s forwards ${easing}`;
     content.innerHTML = string;
     btn.innerHTML = url;
     content.appendChild(btn);
+
+    window.addEventListener("animationend", () => {
+        content.style.transform = "translateY(0%)";
+        content.style.opacity = 1;
+        btn.style.opacity = 1;
+    });
 
     const line = Math.ceil(string.length / 14);
     var lineHeight = parseInt(window.style.lineHeight);
     content.style.height = `${line * lineHeight}px`;
 
     btn.onclick = () => {
-        if (!open(url, `_blank`, `width=${defwid}, height=${defhei}`)) warn("弹出的窗口被阻止。", deftime);
-        window.style.animation = `-zyfn 0.7s forwards ${easing}`;
-        setTimeout(() => {
-            document.body.removeChild(window);
-            close(window, windows)
-        }, 700);
+        if (!open(url, `_blank`, `width=${defwid}, height=${defhei}`)) warn("弹出的窗口被阻止。");
+        content.style.opacity = 0;
+        content.style.transform = "translateY(-10%)";
+        btn.style.opacity = 0;
+        content.addEventListener("transitionend", () => {
+            window.style.animation = `-fn 0.7s forwards ${easing}`;
+            setTimeout(() => {
+                document.body.removeChild(window);
+                close(window, windows)
+            }, 700);
+        });
     }
 }
 
@@ -770,7 +843,7 @@ async function zd(string) {
     return new Promise((resolve) => {
         if (string == null || string == undefined) {
             nullcount++;
-            fail("所输入内容不能为 null 或 undefined。", deftime);
+            fail("所输入内容不能为 null 或 undefined。");
             monitor();
             return 39;
         } else {
@@ -778,7 +851,7 @@ async function zd(string) {
         }
         let replaced = string.replace(/\s+/g, "");
         if (replaced === "") {
-            fail("所输入内容不能为空字符串。", deftime);
+            warn("所输入内容不能为空字符串。");
             return -39;
         }
         if (nullcount > 26) {
@@ -793,60 +866,67 @@ async function zd(string) {
         const icon = document.createElement(`img`);
         icon.className = `zd-icon`;
         const content = document.createElement(`div`);
-        content.className = `fn-content`;
+        content.className = "fn-content";
+        content.style.opacity = 0;
+        content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
         const box = document.createElement(`textarea`);
         box.className = `zd-box`;
-        box.placeholder = `请输入命令。`;
+        box.style.opacity = 0;
+        box.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
         box.style.resize = `none`;
-        const btn = document.createElement(`button`);
-        btn.className = `btn26`;
-        btn.textContent = "确定";
-        btn.onclick = async () => {
-            const value = box.value.trim();
-            if (value === "") {
-                fail("所输入内容不能为空字符串。", deftime);
-                return;
-            }
-            try {
-                resolve(eval(value));
-            }
-            catch (error) {
-                fail(error.message);
-                resolve();
-            }
-            window.style.animation = `-sxfn 0.7s forwards ${easing}`;
-            setTimeout(() => {
-                if (document.body.contains(window)) {
-                    document.body.removeChild(window);
-                    close(window, windows);
-                }
-            }, 700);
-        };
 
-        if (theme === "Neon") {
+        box.addEventListener("keypress", async (event) => {
+            if (event.key === "Enter") {
+                const value = box.value.trim();
+                if (value === "") {
+                    warn("所输入内容不能为空字符串。");
+                    return;
+                }
+                try {
+                    resolve(eval(value));
+                } catch (error) {
+                    fail(error.message);
+                    resolve();
+                }
+                content.style.opacity = 0;
+                content.style.transform = "translateY(-10%)";
+                box.style.opacity = 0;
+                content.addEventListener("transitionend", () => {
+                    window.style.animation = `-fn 0.7s forwards ${easing}`;
+                    setTimeout(() => {
+                        if (document.body.contains(window)) document.body.removeChild(window);
+                        close(window, windows);
+                    }, 700);
+                });
+            }
+        });
+
+        if (theme === "Present") {
             window.style.backdropFilter = `blur(14px) saturate(250%)`;
             square.style.backdropFilter = `blur(14px) saturate(250%)`;
         }
 
         create(window);
         document.body.appendChild(window);
-        window.appendChild(square);
         window.appendChild(content);
-        window.appendChild(btn);
         window.appendChild(box);
-        square.appendChild(icon);
 
         icon.src = `images/Com.png`;
-        window.style.animation = `sxfn- 0.7s forwards ${easing}`;
+        window.style.animation = `fn- 0.7s forwards ${easing}`;
         content.innerHTML = string;
+
+        window.addEventListener("animationend", () => {
+            content.style.transform = "translateY(0%)";
+            content.style.opacity = 1;
+            box.style.opacity = 1;
+        });
 
         const line = Math.ceil(string.length / 14);
         var lineHeight = parseInt(window.style.lineHeight);
         content.style.height = `${line * lineHeight}px`;
-
-        box.focus();
     });
 }
+
 
 // wz 函数。
 
@@ -855,7 +935,7 @@ async function wz(string) {
         let clicked = false;
         if (string == null || string == undefined) {
             nullcount++;
-            fail("所输入内容不能为 null 或 undefined。", deftime);
+            fail("所输入内容不能为 null 或 undefined。");
             monitor();
             resolve(39);
             return;
@@ -893,8 +973,8 @@ async function wz(string) {
                 right.style.animation = `_right forwards 0.7s ${easing}`;
                 window.addEventListener("animationend", (f) => {
                     if (f.animationName === "-wz") {
-                        txt.style.animation = `_txt forwards 0.7s ${easing}`;
-                        btn.style.animation = `_btn forwards 0.7s ${easing}`;
+                        txt.style.animation = `_txt forwards 0.3s ${easing}`;
+                        btn.style.animation = `_btn forwards 0.3s ${easing}`;
                     }
                 });
             }
@@ -904,8 +984,8 @@ async function wz(string) {
                     warn(`请勿多次点击。`, 2000);
                     return;
                 }
-                txt.style.animation = `txt_ 0.7s forwards ${easing}`;
-                btn.style.animation = `btn_ 0.7s forwards ${easing}`;
+                txt.style.animation = `txt_ 0.3s forwards ${easing}`;
+                btn.style.animation = `btn_ 0.3s forwards ${easing}`;
                 txt.addEventListener("animationend", (g) => {
                     if (g.animationName === "txt_") {
                         window.style.animation = `wz- 0.7s forwards ${easing}`;
