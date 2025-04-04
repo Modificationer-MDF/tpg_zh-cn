@@ -1,22 +1,22 @@
-.info-window, .cg-window, .fail-window, .warn-window, .inp-window, .synchr-window, .xz-window, .lj-window, .zd-window {
+.noti-window, .cg-window, .fail-window, .warn-window, .inp-window, .synchr-window, .xz-window, .lj-window, .zd-window {
     z-index: 1000;
     display: flex;
     right: 0px;
-    position: absolute;
-    top: 7vh;
+    position: fixed;
+    top: 3vh;
     font-size: 25px;
     flex-wrap: wrap;
     width: auto;
     margin: 10px;
 }
 
-.info-window {
+.noti-window {
     background-color: #18a68999;
     border-left: 5px solid #1b7163c9;
     border-right: 5px solid #1b7163c9;
 }
 
-.info-window .info-square, .cg-window .cg-square, .fail-window .fail-square, .warn-window .warn-square, .inp-window .inp-square, .synchr-window .synchr-square, .xz-window .xz-square, .lj-window .lj-square, .zd-window .zd-square {
+.noti-window .noti-square, .cg-window .cg-square, .fail-window .fail-square, .warn-window .warn-square, .inp-window .inp-square, .synchr-window .synchr-square, .xz-window .xz-square, .lj-window .lj-square, .zd-window .zd-square {
     width: 100%;
     position: fixed;
     z-index: 1000;
@@ -25,7 +25,7 @@
     justify-content: center;
 }
 
-.info-square {
+.noti-square {
     background-color: #26c9a929;
 }
 
@@ -52,7 +52,7 @@
     min-width: 30ch;
 }
 
-.info-progressbar, .cg-progressbar, .fail-progressbar, .warn-progressbar {
+.noti-progressbar, .cg-progressbar, .fail-progressbar, .warn-progressbar {
     width: 0;
     height: 5px;
     overflow: hidden;
@@ -60,7 +60,7 @@
     position: relative;
 }
 
-.info-progressbar {
+.noti-progressbar {
     background-color: #06b48499;
 }
 
@@ -104,8 +104,8 @@
     to {
         width: 100%;
         opacity: 1;
-        left: calc(0% - 5px);
-        right: calc(0% + 5px);
+        left: 0;
+        right: 5px;
     }
 }
 
@@ -113,8 +113,8 @@
     from {
         width: 100%;
         opacity: 1;
-        left: calc(0% - 5px);
-        right: calc(0% + 5px);
+        left: 0;
+        right: 5px;
     }
     to {
         width: 0%;
@@ -230,7 +230,6 @@
 
 .lj-link {
     background-color: #715213b0;
-    width: 95%;
     border: none;
     font-size: 20px;
     padding: 14px 25px;

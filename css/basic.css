@@ -666,7 +666,6 @@ button {
 .lcont, .rcont {
     position: absolute;
     color: #ffffff;
-    top: 10vh;
     font-size: 20px;
 }
 

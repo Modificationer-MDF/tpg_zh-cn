@@ -4,58 +4,11 @@ let rzwin = []; // rz() 信息数组。
 let totalHeight = 0; // rz() 的总高度。
 let urlEndings = [
     `.com`, `.net`, `.cn`, `.org`, `.edu`, `.gov`, `.mil`,
-    `.biz`, `.info`, `.name`, `.pro`, ".aero", `.coop`,
+    `.biz`, `.noti`, `.name`, `.pro`, ".aero", `.coop`,
     `.museum`, `.jobs`, `.travel`, `.xxx`, `.top`, `.site`,
     `.wiki`, `.cc`, `.tv`, `.mobi`, `.me`, `.bid`, `.club`,
     `.online`, `.store`, `.work`, `.tech`
 ];
-
-function pos(p) {
-    let total = 7 * window.innerHeight / 100;
-    function fn(w) {
-        w.forEach((window) => {
-            const wh = window.offsetHeight;
-            window.style.transition = `top 550ms ${easing}`;
-            window.style.top = `${total}px`;
-            total += wh + 7;
-        });
-    }
-    if (p) {
-        fn(windows);
-    } else {
-        fn(rzwin);
-    }
-}
-
-function create(window) {
-    if (window.className !== "rz-window") {
-        windows.push(window);
-        pos(true);
-    } else {
-        rzwin.push(window);
-        pos(false);
-    }
-}
-
-function close(window) {
-    if (window.className !== "rz-window") {
-        windows = windows.filter(win => win !== window);
-        pos(true);
-    } else {
-        rzwin = rzwin.filter(win => win !== window);
-        pos(false);
-    }
-}
-
-function monitor() {
-    if (nullcount >= 3 && nullcount < 7) {
-        warn(`你已连续 ${nullcount} 次输入 null 或 undefined。请检查你所输入的内容。`)
-    } else if (nullcount >= 7 && nullcount < 25) {
-        warn(`再次警告！你已连续输入 null 或 undefined ${nullcount} 次。请检查你所输入的内容。`)
-    } else if (nullcount >= 25 && nullcount < 30) {
-        fail(`你已被禁止调用任何函数。`);
-    }
-}
 
 // rz 函数。
 
@@ -96,19 +49,19 @@ function rz(string, time) {
     }, time);
 }
 
-// info 函数。
+// noti 函数。
 
-function info(string, title) {
+function noti(string, title) {
     if (string == null || string == undefined) {
         nullcount++;
-        fail("所输入内容不能为 null 或 undefined。");
+        fail("不能输入 null 或 undefined！");
         monitor();
         return 39;
     } else if (title == null || title == undefined || title === "") title = "通知";
     else string = string.toString();
     let replaced = string.replace(/\s+/g, "");
     if (replaced === "") {
-        warn("所输入内容不能为空字符串。");
+        warn("不能输入空字符串。");
         return -39;
     }
     if (nullcount > 26) {
@@ -116,9 +69,9 @@ function info(string, title) {
     }
 
     const window = document.createElement("div");
-    window.className = `info-window`;
+    window.className = `noti-window`;
     const square = document.createElement("div");
-    square.className = `info-square`;
+    square.className = `noti-square`;
     const icon = document.createElement("img");
     icon.src = `images/Inf.png`;
     icon.style.opacity = 0;
@@ -132,7 +85,7 @@ function info(string, title) {
     content.style.opacity = 0;
     content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const bar = document.createElement("div");
-    bar.className = `info-progressbar`;
+    bar.className = `noti-progressbar`;
 
     if (theme === "Present") {
         window.style.backdropFilter = `blur(14px) saturate(250%)`;
@@ -168,7 +121,7 @@ function info(string, title) {
             rect.right <= (window.innerWidth || document.documentElement.clientWidth)
         );
         if (viewport === false) {
-            rz("有 1 条未读完的 info() 信息。");
+            rz("你有 1 个未阅览完的 noti() 窗口。");
         }
     };
 
@@ -210,14 +163,14 @@ function info(string, title) {
 function cg(string, title) {
     if (string == null || string == undefined) {
         nullcount++;
-        fail("所输入内容不能为 null 或 undefined。");
+        fail("不能输入 null 或 undefined！");
         monitor();
         return 39;
     } else if (title == null || title == undefined || title === "") title = "完成";
     else string = string.toString();
     let replaced = string.replace(/\s+/g, "");
     if (replaced === "") {
-        warn("所输入内容不能为空字符串。");
+        warn("不能输入空字符串。");
         return -39;
     }
     if (nullcount > 26) {
@@ -264,7 +217,7 @@ function cg(string, title) {
         content.style.opacity = 1;
         txt.style.opacity = 1;
         icon.style.opacity = 1;
-    });
+    });``
 
     const l1 = Math.ceil(string.length / 14);
     var lh1 = parseInt(window.style.lineHeight);
@@ -291,7 +244,7 @@ function cg(string, title) {
             rect.right <= (window.innerWidth || document.documentElement.clientWidth)
         );
         if (viewport === false) {
-            rz("有 1 条未读完的 cg() 信息。");
+            rz("你有 1 个未阅览完的 cg() 窗口。");
         }
     };
 
@@ -316,14 +269,14 @@ function cg(string, title) {
 function fail(string, title) {
     if (string == null || string == undefined) {
         nullcount++;
-        fail("所输入内容不能为 null 或 undefined。");
+        fail("不能输入 null 或 undefined！");
         monitor();
         return 39;
     } else if (title == null || title == undefined || title === "") title = "错误";
     else string = string.toString();
     let replaced = string.replace(/\s+/g, "");
     if (replaced === "") {
-        warn("所输入内容不能为空字符串。");
+        warn("不能输入空字符串。");
         return -39;
     }
     if (nullcount > 26) {
@@ -399,7 +352,7 @@ function fail(string, title) {
             rect.right <= (window.innerWidth || document.documentElement.clientWidth)
         );
         if (viewport === false) {
-            rz("有 1 条未读完的 fail() 信息。 ");
+            rz("你有 1 个未阅览完的 fail() 窗口。");
         }
     };
 
@@ -424,14 +377,14 @@ function fail(string, title) {
 function warn(string, title) {
     if (string == null || string == undefined) {
         nullcount++;
-        fail("所输入内容不能为 null 或 undefined。");
+        fail("不能输入 null 或 undefined！");
         monitor();
         return 39;
     } else if (title == null || title == undefined || title === "") title = "注意";
     else string = string.toString();
     let replaced = string.replace(/\s+/g, "");
     if (replaced === "") {
-        warn("所输入内容不能为空字符串。");
+        warn("不能输入空字符串。");
         return -39;
     }
     if (nullcount > 26) {
@@ -506,7 +459,7 @@ function warn(string, title) {
             rect.right <= (window.innerWidth || document.documentElement.clientWidth)
         );
         if (viewport === false) {
-            rz("有 1 条未读完的 warn() 信息。 ");
+            rz("你有 1 个未阅览完的 warn() 窗口。");
         }
     };
 
@@ -532,14 +485,14 @@ async function inp(string, title) {
     return new Promise((resolve) => {
         if (string === null || string === undefined) {
             nullcount++;
-            fail("所输入内容不能为 null 或 undefined。");
+            fail("不能输入 null 或 undefined！");
             monitor();
             return 39;
         } else if (title == null || title == undefined || title === "") title = "输入";
         else string = string.toString();
         let replaced = string.replace(/\s+/g, "");
         if (replaced === "") {
-            warn("所输入内容不能为空字符串。");
+            warn("不能输入空字符串。");
             return -39;
         }
         if (nullcount > 26) {
@@ -568,6 +521,20 @@ async function inp(string, title) {
         box.style.opacity = 0;
         box.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
         box.style.resize = "none";
+        box.focus();
+
+        const visible = () => {
+            const rect = window.getBoundingClientRect();
+            const viewport = (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+            if (viewport === false) {
+                rz("你有 1 个未看到的 inp() 窗口。");
+            }
+        };
 
         if (theme === "Present") {
             window.style.backdropFilter = `blur(14px) saturate(250%)`;
@@ -621,6 +588,7 @@ async function inp(string, title) {
                 });
             }
         });
+        setTimeout(visible);
     });
 }
 
@@ -633,7 +601,6 @@ async function xz(string, n, names, title) {
         else if (n <= 0) fail("请输入一个正整数。")
         n = Math.ceil(Number(n));
         const array = Array.from(names);
-        array.reverse();
 
         const window = document.createElement("div");
         window.className = `xz-window`;
@@ -654,14 +621,14 @@ async function xz(string, n, names, title) {
 
         if (string == null || string == undefined) {
             nullcount++;
-            fail("所输入内容不能为 null 或 undefined。");
+            fail("不能输入 null 或 undefined！");
             monitor();
             return 39;
         } else if (title == null || title == undefined || title === "") title = "选择";
         else string = string.toString();
         let replaced1 = string.replace(/\s+/g, "");
         if (replaced1 === "") {
-            warn("所输入内容不能为空字符串。");
+            warn("不能输入空字符串。");
             return -39;
         }
         if (nullcount > 26) {
@@ -683,6 +650,19 @@ async function xz(string, n, names, title) {
         window.style.animation = `fn- 550ms forwards ${easing}`;
         content.innerHTML = string;
         txt.innerHTML = title;
+
+        const visible = () => {
+            const rect = window.getBoundingClientRect();
+            const viewport = (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+            if (viewport === false) {
+                rz("你有 1 个未看到的 xz() 窗口。");
+            }
+        };
 
         const l1 = Math.ceil(string.length / 14);
         var lh1 = parseInt(window.style.lineHeight);
@@ -706,12 +686,11 @@ async function xz(string, n, names, title) {
             return tohex(r, g, b);
         }
 
-        for (let i = 1; i <= n; i++) {
+        for (let i = 0; i < n; i++) {
             const btn = document.createElement(`button`);
-            array[i - 1] = String(array[i - 1]);
+            array[i] = String(array[i]);
             btn.id = `btn${i}`;
-            btn.innerHTML = array[i - 1];
-            btn.focus();
+            btn.innerHTML = array[i];
 
             btn.style.backgroundColor = `${color()}b0`;
             btn.style.opacity = 0;
@@ -723,9 +702,9 @@ async function xz(string, n, names, title) {
             btn.style.cursor = `pointer`;
             btn.style.color = `white`;
             btn.style.position = "absolute";
-            btn.style.top = `${i * 60}px`;
+            btn.style.top = `${i * 60 + 60}px`;
             btn.style.flex = `1`;
-            content.style.marginBottom = `${20 + i * 60}px`;
+            content.style.marginBottom = `${80 + i * 60}px`;
             btn.style.left = "20px";
 
             window.addEventListener("animationend", () => {
@@ -737,7 +716,7 @@ async function xz(string, n, names, title) {
             });
 
             btn.onclick = () => {
-                resolve(array[i - 1]);
+                resolve(array[i]);
                 content.style.opacity = 0;
                 content.style.transform = "translateY(-10%)";
                 btn.style.opacity = 0;
@@ -753,6 +732,7 @@ async function xz(string, n, names, title) {
             };
             content.appendChild(btn);
         }
+        setTimeout(visible);
     });
 }
 
@@ -761,14 +741,14 @@ async function xz(string, n, names, title) {
 async function synchr(string, title) {
     if (string == null || string == undefined) {
         nullcount++;
-        fail("所输入内容不能为 null 或 undefined。");
+        fail("不能输入 null 或 undefined！");
         monitor();
         return 39;
     } else if (title == null || title == undefined || title === "") title = "同步";
     else string = string.toString();
     let replaced = string.replace(/\s+/g, "");
     if (replaced === "") {
-        warn("所输入内容不能为空字符串。");
+        warn("不能输入空字符串。");
         return -39;
     }
     if (nullcount > 26) {
@@ -834,7 +814,7 @@ async function synchr(string, title) {
             rect.right <= (window.innerWidth || document.documentElement.clientWidth)
         );
         if (viewport === false) {
-            rz("有 1 条未读完的 synchr() 信息。");
+            rz("你有 1 个未阅览完的 synchr() 窗口。");
         }
     };
     
@@ -859,7 +839,7 @@ async function synchr(string, title) {
 async function lj(string, url, title) {
     if (string == null || string == undefined || url == null || url == undefined) {
         nullcount++;
-        fail("所输入内容不能为 null 或 undefined。");
+        fail("不能输入 null 或 undefined！");
         monitor();
         return 39;
     } else if (title == null || title == undefined || title === "") title = "链接";
@@ -870,7 +850,7 @@ async function lj(string, url, title) {
     let replaced1 = string.replace(/\s+/g, "");
     let replaced2 = url.replace(/\s+/g, "");
     if (replaced1 === "" || replaced2 === "") {
-        warn("所输入内容不能为空字符串。");
+        warn("不能输入空字符串。");
         return -39;
     }
     if (nullcount > 26) {
@@ -911,6 +891,19 @@ async function lj(string, url, title) {
     window.appendChild(content);
     window.appendChild(btn);
 
+    const visible = () => {
+        const rect = window.getBoundingClientRect();
+        const viewport = (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+        if (viewport === false) {
+            rz("你有 1 个未看到的 lj() 窗口。");
+        }
+    };
+
     icon.src = `images/Link.png`;
     window.style.animation = `fn- 550ms forwards ${easing}`;
     content.innerHTML = string;
@@ -947,6 +940,7 @@ async function lj(string, url, title) {
             }, 550);
         });
     }
+    setTimeout(visible);
 }
 
 // zd 函数。
@@ -955,14 +949,14 @@ async function zd(string, title) {
     return new Promise((resolve) => {
         if (string == null || string == undefined) {
             nullcount++;
-            fail("所输入内容不能为 null 或 undefined。");
+            fail("不能输入 null 或 undefined！");
             monitor();
             return 39;
         } else if (title == null || title == undefined || title === "") title = "终端";
         else string = string.toString();
         let replaced = string.replace(/\s+/g, "");
         if (replaced === "") {
-            warn("所输入内容不能为空字符串。");
+            warn("不能输入空字符串。");
             return -39;
         }
         if (nullcount > 26) {
@@ -991,12 +985,26 @@ async function zd(string, title) {
         box.style.opacity = 0;
         box.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
         box.style.resize = "none";
+        box.focus();
+
+        const visible = () => {
+            const rect = window.getBoundingClientRect();
+            const viewport = (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+            if (viewport === false) {
+                rz("你有 1 个未看到的 zd() 窗口。");
+            }
+        };
 
         box.addEventListener("keypress", async (event) => {
             if (event.key === "Enter") {
                 const value = box.value.trim();
                 if (value === "") {
-                    warn("所输入内容不能为空字符串。");
+                    warn("不能输入空字符串。");
                     return;
                 }
                 try {
@@ -1052,6 +1060,8 @@ async function zd(string, title) {
 
         const l2 = Math.ceil(title.length / 14);
         content.style.marginTop = `${20 * (l2 + 1)}px`;
+
+        setTimeout(visible);
     });
 }
 
@@ -1063,7 +1073,7 @@ async function wz(string) {
         let clicked = false;
         if (string == null || string == undefined) {
             nullcount++;
-            fail("所输入内容不能为 null 或 undefined。");
+            fail("不能输入 null 或 undefined！");
             monitor();
             resolve(39);
             return;

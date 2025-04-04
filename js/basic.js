@@ -78,13 +78,13 @@ function fn1() {
     const div = document.querySelector(`.head3`);
     const dakai = document.getElementById(`1`);
     dakai.style.transition = `all 550ms ${easing}`;
-    const infobtn = document.createElement(`button`);
-    infobtn.style.marginTop = `15px`;
-    infobtn.innerHTML = `info`;
-    infobtn.className = `btn1`;
-    infobtn.onclick = async () => {
-        let res = await inp(`输入你想显示在 info() 上的信息。`, `在此输入。`);
-        info(res);
+    const notibtn = document.createElement(`button`);
+    notibtn.style.marginTop = `15px`;
+    notibtn.innerHTML = `noti`;
+    notibtn.className = `btn1`;
+    notibtn.onclick = async () => {
+        let res = await inp(`输入你想显示在 noti() 上的信息。`, `在此输入。`);
+        noti(res);
     };
     const cgbtn = document.createElement(`button`);
     cgbtn.innerHTML = `cg`;
@@ -112,7 +112,7 @@ function fn1() {
     inpbtn.className = `btn5`;
     inpbtn.onclick = async () => {
         let res = await inp(`这就是 inp() 。`, `可以在这里输入一些文字。`);
-        info(`你输入了：“${res}”。`);
+        noti(`你输入了：“${res}”。`);
     };
     const synchrbtn = document.createElement(`button`);
     synchrbtn.innerHTML = "synchr";
@@ -151,7 +151,7 @@ function fn1() {
     };
 
     const all = [
-        infobtn,
+        notibtn,
         cgbtn,
         failbtn,
         warnbtn,
@@ -207,11 +207,11 @@ function fn2() {
     div3.textContent = `调试区`;
     const dakai = document.getElementById("1");
 
-    const infobtn = document.createElement(`button`);
-    infobtn.innerHTML = `info`;
-    infobtn.className = `btn1`;
-    infobtn.onclick = () => {
-        info("你好，欢迎使用 The Play Games！");
+    const notibtn = document.createElement(`button`);
+    notibtn.innerHTML = `noti`;
+    notibtn.className = `btn1`;
+    notibtn.onclick = () => {
+        noti("你好，欢迎使用 The Play Games！");
     };
     const cgbtn = document.createElement(`button`);
     cgbtn.innerHTML = `cg`;
@@ -236,7 +236,7 @@ function fn2() {
     inpbtn.className = `btn5`;
     inpbtn.onclick = async () => {
         let a = await inp("你可以在此输入！");
-        info(`你输入了：“${a}”。`);
+        noti(`你输入了：“${a}”。`);
     };
     const synchrbtn = document.createElement(`button`);
     synchrbtn.innerHTML = "synchr";
@@ -251,13 +251,13 @@ function fn2() {
         var res = await xz("你对以上的函数有什么看法？", 4, ["很不错。", "还可以。", "一般。", "有待改进的空间。"]);
         switch (res) {
             case "很不错。":
-                info("非常感谢！你还可以尝试其他的函数。");
+                noti("非常感谢！你还可以尝试其他的函数。");
                 break;
             case "还可以。":
-                info("谢谢你的评价！");
+                noti("谢谢你的评价！");
                 break;
             case "一般。":
-                info("我们可以做得更好。");
+                noti("我们可以做得更好。");
                 break;
             case "有待改进的空间。":
                 var r = await xz("你是否想向我反馈你的建议？", 2, ["是。", "否。"]);
@@ -265,7 +265,7 @@ function fn2() {
                     await lj("点击以下链接反馈。", "mailto://Feng_14@outlook.com");
                     break;
                 } else {
-                    info("好的，我们再见。");
+                    noti("好的，我们再见。");
                 }
         }
     };
@@ -301,7 +301,7 @@ function fn2() {
     };
 
     const all = [
-        infobtn,
+        notibtn,
         cgbtn,
         failbtn,
         warnbtn,
@@ -495,7 +495,7 @@ function fn4() { // 选项。
             warn("当前模式已为 Preset。");
         } else {
             mode = "Preset";
-            info("已切换到 Preset 模式。");
+            noti("已切换到 Preset 模式。");
         }
     };
     const js = document.createElement("button");
@@ -507,24 +507,24 @@ function fn4() { // 选项。
             warn("当前模式已为 Play。");
         } else {
             mode = "Play";
-            info("已切换到 Play 模式。");
+            noti("已切换到 Play 模式。");
         }
     };
 
     const zt = document.createElement("p");
     zt.innerHTML = `主题`;
     zt.className = "lcont";
-    zt.style.top = "20vh";
     const a = document.createElement("button");
     a.type = "button";
     a.innerHTML = "Opacitied";
     a.className = "zd3";
-    a.onclick = () => {
-        if (theme === "Opacitied") {
-            warn("你已经在使用 Opacitied 主题。");
-        } else {
-            theme = "Opacitied";
-            info("已切换到 Opacitied 主题。");
+    a.onclick = async () => {
+        if (theme === "Opacitied") warn("你已经在使用 Opacitied 主题。");
+        else {
+            warn("该主题将在将来的更新中移除。");
+            let r = await xz("切换至 Opacitied 主题？", 2, ["是。", "否。"]);
+            if (r === "是。") cg("已切换至 Opacitied 主题。");
+            else noti("已取消切换。");
         }
     };
     const n = document.createElement("button");
@@ -532,18 +532,16 @@ function fn4() { // 选项。
     n.innerHTML = "Present";
     n.className = "zd4";
     n.onclick = () => {
-        if (theme === "Present") {
-            warn("你已经在使用 Present 主题。");
-        } else {
+        if (theme === "Present") warn("你已经在使用 Present 主题。");
+        else {
             theme = "Present";
-            info("已切换到 Present 主题。");
+            cg("已切换到 Present 主题。");
         }
     };
 
     const nullc = document.createElement("p");
     nullc.innerHTML = `nullcount`;
     nullc.className = "lcont";
-    nullc.style.top = "30vh";
     const inp1 = document.createElement("input");
     let f1 = false;
     inp1.type = "number";
@@ -561,7 +559,7 @@ function fn4() { // 选项。
             else if (Number(inp1.value) % 1 !== 0) fail("请输入一个整数。");
             else {
                 nullcount = Number(inp1.value);
-                info(`nullcount 已被设置为 ${nullcount}。`);
+                cg(`nullcount 已被设置为 ${nullcount}。`);
             }
         }
     });
@@ -569,7 +567,6 @@ function fn4() { // 选项。
     const eas = document.createElement("p");
     eas.innerHTML = "easing";
     eas.className = "lcont";
-    eas.style.top = "40vh";
     const inp2 = document.createElement("input");
     let f2 = false;
     inp2.type = "text";
@@ -577,7 +574,7 @@ function fn4() { // 选项。
     inp2.value = easing;
     inp2.onclick = () => {
         if (f2 === false) {
-            warn("cubic-bezier 函数的格式是 cubic-bezier(x1, y1, x2, y2)；其他 easing 还有 ease、linear、ease-in、ease-out、ease-in-out。");
+            wz("cubic-bezier 函数的格式是 cubic-bezier(x1, y1, x2, y2)；其他 easing 还有 ease、linear、ease-in、ease-out、ease-in-out。");
             f2 = true;
         }
     };
@@ -587,7 +584,7 @@ function fn4() { // 选项。
                 fail("请输入一个合法的 easing 。");
             } else {
                 easing = inp2.value;
-                info(`easing 已被设置为 ${easing}。`);
+                cg(`easing 已被设置为 ${easing}。`);
             }
         }
     });
@@ -595,7 +592,6 @@ function fn4() { // 选项。
     const mrms = document.createElement("p");
     mrms.innerHTML = "deftime";
     mrms.className = "lcont";
-    mrms.style.top = "50vh";
     const inp3 = document.createElement("input");
     let f3 = false;
     inp3.type = "number";
@@ -611,9 +607,10 @@ function fn4() { // 选项。
         if (event.key === "Enter") {
             if (Number(inp3.value) < 750) fail("请输入一个大于等于 750 的数字。");
             else if (Number(inp3.value) >= 750 && Number(inp3.value) < 1000) warn("设置过小的数字不方便于阅读。");
+            else if (windows.length > 1) warn("现在不能更改 deftime 的值。");
             else {
                 deftime = Number(inp3.value);
-                info(`deftime 已被设置为 ${deftime} 毫秒。`);
+                cg(`deftime 已被设置为 ${deftime} 毫秒。`);
             }
         }
     });
@@ -621,7 +618,6 @@ function fn4() { // 选项。
     const defw = document.createElement("p");
     defw.innerHTML = "defwid";
     defw.className = "lcont";
-    defw.style.top = "60vh";
     const inp4 = document.createElement("input");
     let f4 = false;
     inp4.type = "number";
@@ -639,7 +635,7 @@ function fn4() { // 选项。
             else if (Number(inp4.value) % 1 !== 0) fail("请输入一个整数。");
             else {
                 defwid = Number(inp4.value);
-                info(`defwid 已被设置为 ${defwid}。`);
+                cg(`defwid 已被设置为 ${defwid}。`);
             }
         }
     });
@@ -647,7 +643,6 @@ function fn4() { // 选项。
     const defh = document.createElement("p");
     defh.innerHTML = "defhei";
     defh.className = "lcont";
-    defh.style.top = "70vh";
     const inp5 = document.createElement("input");
     let f5 = false;
     inp5.type = "number";
@@ -665,7 +660,7 @@ function fn4() { // 选项。
             else if (Number(inp5.value) % 1 !== 0) fail("请输入一个整数。");
             else {
                 defhei = Number(inp5.value);
-                info(`defhei 已被设置为 ${defhei}。`);
+                cg(`defhei 已被设置为 ${defhei}。`);
             }
         }
     });
@@ -675,6 +670,20 @@ function fn4() { // 选项。
     jdt.style.height = "7px";
     jdt.style.width = "100%";
     jdt.style.backgroundColor = "#ffffff99";
+
+    const all = [
+        ms,
+        zt,
+        nullc,
+        eas,
+        mrms,
+        defw,
+        defh,
+    ];
+
+    for (var i = 0; i < all.length; i++) {
+        all[i].style.top = `${(i + 1) * 10}vh`;
+    }
 
     ctrl.appendChild(title);
     title.appendChild(jdt);
@@ -727,7 +736,7 @@ function fn6() { // 杂项。
     var v10 = 0;
 
     for (let i = 0; i <= windows.length - 1; i++) {
-        if (windows[i].className === "info-window") v1++;
+        if (windows[i].className === "noti-window") v1++;
         else if (windows[i].className === "cg-window") v2++;
         else if (windows[i].className === "fail-window") v3++;
         else if (windows[i].className === "warn-window") v4++;
@@ -739,58 +748,49 @@ function fn6() { // 杂项。
         else if (rzwin[i].className === "rz-window") v10++;
     }
 
-    const infoc = document.createElement("div");
-    infoc.innerHTML = `Info() 数量： ${v1}。`;
-    infoc.className = "rcont";
-    infoc.style.top = "14vh";
-    infoc.style.color = "#18a689";
+    const notic = document.createElement("div");
+    notic.innerHTML = `Noti() 数量： ${v1}。`;
+    notic.className = "rcont";
+    notic.style.color = "#18a689";
 
     const cgc = document.createElement("div");
     cgc.innerHTML = `Cg() 数量： ${v2}。`;
     cgc.className = "rcont";
-    cgc.style.top = "21vh";
     cgc.style.color = "#1d5837";
 
     const failc = document.createElement("div");
     failc.innerHTML = `Fail() 数量： ${v3}。`;
     failc.className = "rcont";
-    failc.style.top = "28vh";
     failc.style.color = "#791e1d";
 
     const warnc = document.createElement("div");
     warnc.innerHTML = `Warn() 数量： ${v4}。`;
     warnc.className = "rcont";
-    warnc.style.top = "35vh";
     warnc.style.color = "#847829";
 
     const inpc = document.createElement("div");
     inpc.innerHTML = `Inp() 数量： ${v5}。`;
     inpc.className = "rcont";
-    inpc.style.top = "42vh";
     inpc.style.color = "#235087";
 
     const tranc = document.createElement("div");
     tranc.innerHTML = `Synchr() 数量： ${v6}。`;
     tranc.className = "rcont";
-    tranc.style.top = "49vh";
     tranc.style.color = "#9e3389";
 
     const xzc = document.createElement("div");
     xzc.innerHTML = `Xz() 数量： ${v7}。`;
     xzc.className = "rcont";
-    xzc.style.top = "56vh";
     xzc.style.color = "#7527a4";
 
     const ljc = document.createElement("div");
     ljc.innerHTML = `Lj() 数量： ${v8}。`;
     ljc.className = "rcont";
-    ljc.style.top = "63vh";
     ljc.style.color = "#a6580d";
 
     const zdc = document.createElement("div");
     zdc.innerHTML = `Zd() 数量： ${v9}。`;
     zdc.className = "rcont";
-    zdc.style.top = "70vh";
     zdc.style.padding = "7px 15px";
     zdc.style.borderRadius = "5px";
     zdc.style.backgroundColor = "#19191879";
@@ -799,13 +799,29 @@ function fn6() { // 杂项。
     const rzc = document.createElement("div");
     rzc.innerHTML = `Rz() 数量： ${v10}。`;
     rzc.className = "rcont";
-    rzc.style.top = "77vh";
     rzc.style.padding = "7px 15px";
     rzc.style.borderRadius = "5px";
     rzc.style.backgroundColor = "#19191879";
     rzc.style.color = "#ffffff";
 
-    urcc(inf, infoc);
+    const all = [
+        notic,
+        cgc,
+        failc,
+        warnc,
+        inpc,
+        tranc,
+        xzc,
+        ljc,
+        zdc,
+        rzc,
+    ];
+
+    for (var i = 0; i < all.length; i++) {
+        all[i].style.top = `${(i + 2) * 7}vh`;
+    }
+
+    urcc(inf, notic);
     urcc(inf, cgc);
     urcc(inf, failc);
     urcc(inf, warnc);
@@ -815,4 +831,80 @@ function fn6() { // 杂项。
     urcc(inf, ljc);
     urcc(inf, zdc);
     urcc(inf, rzc);
+}
+
+function pos(p) {
+    let total = 3 * window.innerHeight / 100;
+    function fn(w) {
+        w.forEach((window) => {
+            const wh = window.offsetHeight;
+            window.style.transition = `top 550ms ${easing}`;
+            window.style.top = `${total}px`;
+            total += wh + 3;
+        });
+    }
+    if (p) {
+        fn(windows);
+    } else {
+        fn(rzwin);
+    }
+}
+
+function create(window) {
+    if (window.className !== "rz-window") {
+        windows.push(window);
+        pos(true);
+    } else {
+        rzwin.push(window);
+        pos(false);
+    }
+}
+
+function close(window) {
+    if (window.className !== "rz-window") {
+        windows = windows.filter(win => win !== window);
+        pos(true);
+    } else {
+        rzwin = rzwin.filter(win => win !== window);
+        pos(false);
+    }
+}
+
+function monitor() {
+    if (nullcount >= 3 && nullcount < 7) {
+        warn(`你已连续 ${nullcount} 次输入 null 或 undefined。请检查你所输入的内容。`)
+    } else if (nullcount >= 7 && nullcount < 25) {
+        warn(`再次警告！你已连续输入 null 或 undefined ${nullcount} 次。请检查你所输入的内容。`)
+    } else if (nullcount >= 25 && nullcount < 30) {
+        fail(`你已被禁止调用任何函数。`);
+    }
+}
+
+function check() {
+    let string = "";
+    for (var i = 0; i <= windows.length - 1; i++) {
+        if (windows[i].className === "noti-window") {
+            string += "Noti()、";
+        } else if (windows[i].className === "cg-window") {
+            string += "Cg()、";
+        } else if (windows[i].className === "fail-window") {
+            string += "Fail()、";
+        } else if (windows[i].className === "warn-window") {
+            string += "Warn()、";
+        } else if (windows[i].className === "inp-window") {
+            string += "Inp()、";
+        } else if (windows[i].className === "synchr-window") {
+            string += "Synchr()、";
+        } else if (windows[i].className === "xz-window") {
+            string += "Xz()、";
+        } else if (windows[i].className === "lj-window") {
+            string += "Lj()、";
+        } else if (windows[i].className === "zd-window") {
+            string += "Zd()、";
+        }
+    }
+    if (string[string.length - 1] === "、") {
+        string[string.length - 1] = "";
+    }
+    return string;
 }
