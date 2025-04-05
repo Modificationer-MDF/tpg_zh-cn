@@ -1,5 +1,5 @@
 let mode = "Preset";
-let theme = "Present";
+let titleset = "Default";
 let easing = "cubic-bezier(0.83, 0, 0.17, 1)";
 let deftime = 3000;
 let defwid = 1024;

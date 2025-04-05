@@ -87,11 +87,6 @@ function noti(string, title) {
     const bar = document.createElement("div");
     bar.className = `noti-progressbar`;
 
-    if (theme === "Present") {
-        window.style.backdropFilter = `blur(14px) saturate(250%)`;
-        square.style.backdropFilter = `blur(14px) saturate(250%)`;
-    }
-
     create(window);
     document.body.appendChild(window);
     window.appendChild(square);
@@ -195,10 +190,6 @@ function cg(string, title) {
     content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const bar = document.createElement("div");
     bar.className = `cg-progressbar`;
-    if (theme === "Present") {
-        window.style.backdropFilter = `blur(14px) saturate(250%)`;
-        square.style.backdropFilter = `blur(14px) saturate(250%)`;
-    }
 
     create(window);
     document.body.appendChild(window);
@@ -302,11 +293,6 @@ function fail(string, title) {
     const bar = document.createElement("div");
     bar.className = `fail-progressbar`;
 
-    if (theme === "Present") {
-        window.style.backdropFilter = `blur(14px) saturate(250%)`;
-        square.style.backdropFilter = `blur(14px) saturate(250%)`;
-    }
-
     create(window);
     document.body.appendChild(window);
     window.appendChild(square);
@@ -409,10 +395,6 @@ function warn(string, title) {
     content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const bar = document.createElement("div");
     bar.className = `warn-progressbar`;
-    if (theme === "Present") {
-        window.style.backdropFilter = `blur(14px) saturate(250%)`;
-        square.style.backdropFilter = `blur(14px) saturate(250%)`;
-    }
 
     create(window);
     document.body.appendChild(window);
@@ -536,12 +518,6 @@ async function inp(string, title) {
             }
         };
 
-        if (theme === "Present") {
-            window.style.backdropFilter = `blur(14px) saturate(250%)`;
-            square.style.backdropFilter = `blur(14px) saturate(250%)`;
-            box.style.backgroundFilter = `blur(14px) saturate(250%)`;
-        }
-
         create(window);
         document.body.appendChild(window);
         window.appendChild(square);
@@ -634,10 +610,6 @@ async function xz(string, n, names, title) {
         if (nullcount > 26) {
             rz("你已被禁止调用函数。");
         }
-        if (theme === "Present") {
-            window.style.backdropFilter = `blur(14px) saturate(250%)`;
-            square.style.backdropFilter = `blur(14px) saturate(250%)`;
-        }
 
         create(window);
         document.body.appendChild(window);
@@ -693,6 +665,7 @@ async function xz(string, n, names, title) {
             btn.innerHTML = array[i];
 
             btn.style.backgroundColor = `${color()}b0`;
+            btn.style.backdropFilter = "blur(14px) saturate(250%)";
             btn.style.opacity = 0;
             btn.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
             btn.style.fontSize = "20px";
@@ -703,7 +676,7 @@ async function xz(string, n, names, title) {
             btn.style.color = `white`;
             btn.style.position = "absolute";
             btn.style.top = `${i * 60 + 60}px`;
-            btn.style.flex = `1`;
+            btn.style.flex = "1";
             content.style.marginBottom = `${80 + i * 60}px`;
             btn.style.left = "20px";
 
@@ -773,10 +746,6 @@ async function synchr(string, title) {
     content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const bar = document.createElement("div");
     bar.className = `synchr-progressbar`;
-    if (theme === "Present") {
-        window.style.backdropFilter = `blur(14px) saturate(250%)`;
-        square.style.backdropFilter = `blur(14px) saturate(250%)`;
-    }
 
     create(window);
     document.body.appendChild(window);
@@ -877,11 +846,6 @@ async function lj(string, url, title) {
     btn.className = "lj-link";
     btn.style.opacity = 0;
     btn.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
-        
-    if (theme === "Present") {
-        window.style.backdropFilter = `blur(14px) saturate(250%)`;
-        square.style.backdropFilter = `blur(14px) saturate(250%)`;
-    }
 
     create(window);
     document.body.appendChild(window);
@@ -1027,11 +991,6 @@ async function zd(string, title) {
                 });
             }
         });
-
-        if (theme === "Present") {
-            window.style.backdropFilter = `blur(14px) saturate(250%)`;
-            square.style.backdropFilter = `blur(14px) saturate(250%)`;
-        }
 
         create(window);
         document.body.appendChild(window);

@@ -46,7 +46,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
 
     document.addEventListener("mousemove", function (event) {
         let width = ctrl.getBoundingClientRect().width;
-        if (event.clientX <= 50 && event.clientY <= 50 && moved === false) {
+        if (event.clientX <= 50 && event.clientY <= 50 && moved === false) { // 移动到左上角。
             ctrl.style.animation = `ctrl- 550ms forwards ${easing}`;
             moved = true;
         } else if (event.clientX > width && moved === true) {
@@ -60,9 +60,9 @@ document.addEventListener(`DOMContentLoaded`, () => {
     fn5();
 
     document.addEventListener("mousemove", function (event) {
-        let rect = inf.getBoundingClientRect().width; // 获取 inf 元素的位置信息
+        let rect = inf.getBoundingClientRect().width; // 获取 inf 元素的宽度。
 
-        if (event.clientX >= window.innerWidth - 50 && event.clientY <= 50 && imoved === false) {
+        if (event.clientX >= window.innerWidth - 50 && event.clientY <= 50 && imoved === false) { // 移动到右上角。
             inf.style.animation = `inf- 550ms forwards ${easing}`;
             imoved = true;
         } else if (event.clientX < window.innerWidth - rect && imoved === true) {
@@ -76,71 +76,111 @@ document.addEventListener(`DOMContentLoaded`, () => {
 /* 第二部分。 */
 function fn1() {
     const div = document.querySelector(`.head3`);
-    const dakai = document.getElementById(`1`);
+    const dakai = document.getElementById("1");
     dakai.style.transition = `all 550ms ${easing}`;
     const notibtn = document.createElement(`button`);
     notibtn.style.marginTop = `15px`;
     notibtn.innerHTML = `noti`;
     notibtn.className = `btn1`;
     notibtn.onclick = async () => {
-        let res = await inp(`输入你想显示在 noti() 上的信息。`, `在此输入。`);
-        noti(res);
+        let res = await inp(`输入你想显示在 Noti() 上的信息。`, `在此输入。`);
+        if (titleset === "Custom") {
+            let t = await inp(`请输入 Noti() 上的标题。`, `在此输入。`);
+            noti(res, t);
+        } else {
+            noti(res, "通知");
+        }
     };
     const cgbtn = document.createElement(`button`);
     cgbtn.innerHTML = `cg`;
     cgbtn.className = `btn2`;
     cgbtn.onclick = async () => {
-        let res = await inp(`输入你想显示在 cg() 上的信息。`, `在此输入。`);
-        cg(res);
+        let res = await inp(`输入你想显示在 Cg() 上的信息。`, `在此输入。`);
+        if (titleset === "Custom") {
+            let t = await inp(`请输入 Cg() 上的标题。`, `在此输入。`);
+            cg(res, t);
+        } else {
+            cg(res, "完成");
+        }
     };
     const failbtn = document.createElement(`button`);
     failbtn.innerHTML = `fail`;
     failbtn.className = `btn3`;
     failbtn.onclick = async () => {
-        let res = await inp(`输入你想显示在 fail() 上的信息。`, `在此输入。`);
-        fail(res);
+        let res = await inp(`输入你想显示在 Fail() 上的信息。`, `在此输入。`);
+        if (titleset === "Custom") {
+            let t = await inp(`请输入 Fail() 上的标题。`, `在此输入。`);
+            fail(res, t);
+        }
+        else {
+            fai(res, "错误");
+        }
     };
     const warnbtn = document.createElement(`button`);
     warnbtn.innerHTML = `warn`;
     warnbtn.className = `btn4`;
     warnbtn.onclick = async () => {
-        let res = await inp(`输入你想显示在 warn() 上的信息。`, `在此输入。`);
-        warn(res);
+        let res = await inp(`输入你想显示在 Warn() 上的信息。`, `在此输入。`);
+        if (titleset === "Custom") {
+            let t = await inp(`请输入 Warn() 上的标题。`, `在此输入。`);
+            warn(res, t);
+        }
+        else {
+            warn(res, "注意");
+        }
     };
     const inpbtn = document.createElement(`button`);
     inpbtn.innerHTML = `inp`;
     inpbtn.className = `btn5`;
     inpbtn.onclick = async () => {
-        let res = await inp(`这就是 inp() 。`, `可以在这里输入一些文字。`);
-        noti(`你输入了：“${res}”。`);
+        let res = await inp(`这就是 Inp() 。`, `可以在这里输入一些文字。`);
+        noti(`你输入了：“${res}”。`, "输入内容");
     };
     const synchrbtn = document.createElement(`button`);
     synchrbtn.innerHTML = "synchr";
     synchrbtn.className = `btn6`;
     synchrbtn.onclick = async () => {
-        let res = await inp(`输入你想显示在 synchr() 上的信息。`, `在此输入。`);
-        synchr(res);
+        let res = await inp(`输入你想显示在 Synchr() 上的信息。`, `在此输入。`);
+        if (titleset === "Custom") {
+            let t = await inp(`请输入 Synchr() 上的标题。`, `在此输入。`);
+            synchr(res, t);
+        }
+        else {
+            synchr(res, "同步");
+        }
     };
     const xzbtn = document.createElement(`button`);
     xzbtn.innerHTML = `xz`;
     xzbtn.className = `btn7`;
     xzbtn.onclick = async () => {
-        let res = await inp(`输入你想显示在 xz() 上的信息。`, `在此输入。`);
-        let n = await inp(`请输入 xz() 上选项的数量。`, `在此输入。`);
+        let res = await inp(`输入你想显示在 Xz() 上的信息。`, `在此输入。`);
+        let n = await inp(`请输入 Xz() 上选项的数量。`, `在此输入。`);
         n = Number(n);
         let array = new Array(n);
         for (let i = 0; i <= n - 1; i++) {
-            array[i] = await inp(`请输入 xz() 上第 ${i + 1} 个选项。`, `在此输入。`);
+            array[i] = await inp(`请输入 Xz() 上第 ${i + 1} 个选项。`, `在此输入。`);
         }
-        xz(res, n, array);
+        if (titleset === "Custom") {
+            let t = await inp(`请输入 Xz() 上的标题。`, `在此输入。`);
+            xz(res, n, array, t);
+        }
+        else {
+            xz(res, n, array, "选择");
+        }
     };
     const ljbtn = document.createElement(`button`);
     ljbtn.innerHTML = `lj`;
     ljbtn.className = `btn8`;
     ljbtn.onclick = async () => {
-        let res = await inp(`输入你想显示在 lj() 上的信息。`, `在此输入。`);
+        let res = await inp(`输入你想显示在 Lj() 上的信息。`, `在此输入。`);
         let url = await inp(`请输入你要链接的地址。`, "在此输入。");
-        lj(res, url, false);
+        if (titleset === "Custom") {
+            let t = await inp(`请输入 Lj() 上的标题。`, `在此输入。`);
+            lj(res, url, t);
+        }
+        else {
+            lj(res, url, "链接");
+        }
     };
     const wzbtn = document.createElement(`button`);
     wzbtn.innerHTML = `wz`;
@@ -166,7 +206,7 @@ function fn1() {
         btn.style.display = "none";
     });
 
-    if (div.children.length <= 1) { // 若 div 标签下没有子元素，则创建子元素。
+    if (div.children.length <= 1) {
         all.forEach(btn => {
             div.appendChild(btn);
         });
@@ -187,7 +227,7 @@ function fn1() {
             });
             setTimeout(() => {
                 all.forEach(btn => {
-                    btn.style.opacity = `1`;
+                    btn.style.opacity = "1";
                 });
             }, 0);
         }
@@ -361,11 +401,11 @@ function fn2() {
             div3.style.transition = "opacity 550ms cubic-bezier(0.33, 1, 0.68, 1)";
             setTimeout(() => {
                 all.forEach(btn => {
-                    btn.style.opacity = `1`;
+                    btn.style.opacity = "1";
                 });
-                div1.style.opacity = `1`;
-                div2.style.opacity = `1`;
-                div3.style.opacity = `1`;
+                div1.style.opacity = "1";
+                div2.style.opacity = "1";
+                div3.style.opacity = "1";
             }, 0);
         }
     });
@@ -456,7 +496,7 @@ function fn3() {
             });
             setTimeout(() => {
                 all.forEach(btn => {
-                    btn.style.opacity = `1`;
+                    btn.style.opacity = "1";
                 });
             }, 0);
         }
@@ -511,31 +551,29 @@ function fn4() { // 选项。
         }
     };
 
-    const zt = document.createElement("p");
-    zt.innerHTML = `主题`;
-    zt.className = "lcont";
-    const a = document.createElement("button");
-    a.type = "button";
-    a.innerHTML = "Opacitied";
-    a.className = "zd3";
-    a.onclick = async () => {
-        if (theme === "Opacitied") warn("你已经在使用 Opacitied 主题。");
+    const ts = document.createElement("p");
+    ts.innerHTML = "窗口标题";
+    ts.className = "lcont";
+    const y = document.createElement("button");
+    y.type = "button";
+    y.innerHTML = "Default";
+    y.className = "zd3";
+    y.onclick = () => {
+        if (titleset === "Default") warn("你已经在使用默认标题。");
         else {
-            warn("该主题将在将来的更新中移除。");
-            let r = await xz("切换至 Opacitied 主题？", 2, ["是。", "否。"]);
-            if (r === "是。") cg("已切换至 Opacitied 主题。");
-            else noti("已取消切换。");
+            titleset = "Default";
+            cg("已切换到默认标题。");
         }
     };
-    const n = document.createElement("button");
-    n.type = "button";
-    n.innerHTML = "Present";
-    n.className = "zd4";
-    n.onclick = () => {
-        if (theme === "Present") warn("你已经在使用 Present 主题。");
+    const z = document.createElement("button");
+    z.type = "button";
+    z.innerHTML = "Custom";
+    z.className = "zd4";
+    z.onclick = () => {
+        if (titleset === "Custom") warn("你已经在使用自定义标题。");
         else {
-            theme = "Present";
-            cg("已切换到 Present 主题。");
+            titleset = "Custom";
+            cg("已切换到自定义标题。");
         }
     };
 
@@ -568,21 +606,27 @@ function fn4() { // 选项。
     eas.innerHTML = "easing";
     eas.className = "lcont";
     const inp2 = document.createElement("input");
-    let f2 = false;
     inp2.type = "text";
     inp2.className = "inpbox";
     inp2.value = easing;
+    let f2 = false;
     inp2.onclick = () => {
         if (f2 === false) {
-            wz("cubic-bezier 函数的格式是 cubic-bezier(x1, y1, x2, y2)；其他 easing 还有 ease、linear、ease-in、ease-out、ease-in-out。");
+            wz(`cubic-bezier 函数的格式是 cubic-bezier(x1, y1, x2, y2)，其中 x1 和 x2 必须在 0 到 1 之间，y1 和 y2 则可以是任意值；
+            其他 easing 还有 ease、linear、ease-in、ease-out、ease-in-out。`);
             f2 = true;
         }
     };
     inp2.addEventListener("keypress", (event) => {
         if (event.key === "Enter") {
-            if (!(inp2.value.startsWith("cubic-bezier(") && inp2.value.endsWith(")")) && inp2.value != "ease" && inp2.value != "linear" && inp2.value != "ease-in" && inp2.value != "ease-out" && inp2.value != "ease-in-out") {
-                fail("请输入一个合法的 easing 。");
-            } else {
+            let arr1 = inp2.value.match(/\d+(\.\d+)?/g).map(Number);
+            let iseasing = (inp2.value.startsWith("cubic-bezier(") && inp2.value.endsWith(")")
+                && (inp2.value.match(/,/g) || []).length === 3 && arr1.length === 4
+                && (arr1[0] >= 0 && arr1[0] <= 1 && arr1[1] >= 0 && arr1[2] >= 0 && arr1[2] <= 1 && arr1[3] >= 0))
+                || (inp2.value === "ease" || inp2.value === "linear" || inp2.value === "ease-in"
+                || inp2.value === "ease-out" || inp2.value === "ease-in-out");
+            if (iseasing === false) fail("请输入一个合法的 easing 。");
+            else {
                 easing = inp2.value;
                 cg(`easing 已被设置为 ${easing}。`);
             }
@@ -607,7 +651,7 @@ function fn4() { // 选项。
         if (event.key === "Enter") {
             if (Number(inp3.value) < 750) fail("请输入一个大于等于 750 的数字。");
             else if (Number(inp3.value) >= 750 && Number(inp3.value) < 1000) warn("设置过小的数字不方便于阅读。");
-            else if (windows.length > 1) warn("现在不能更改 deftime 的值。");
+            else if (windows.length > 0) warn(`现在不能更改 deftime 的值。${check()} 正在运行。`);
             else {
                 deftime = Number(inp3.value);
                 cg(`deftime 已被设置为 ${deftime} 毫秒。`);
@@ -673,7 +717,7 @@ function fn4() { // 选项。
 
     const all = [
         ms,
-        zt,
+        ts,
         nullc,
         eas,
         mrms,
@@ -686,18 +730,18 @@ function fn4() { // 选项。
     }
 
     ctrl.appendChild(title);
-    title.appendChild(jdt);
     ctrl.appendChild(ms);
-    ctrl.appendChild(zt);
+    ctrl.appendChild(ts);
     ctrl.appendChild(eas);
     ctrl.appendChild(nullc);
     ctrl.appendChild(mrms);
     ctrl.appendChild(defw);
     ctrl.appendChild(defh);
+    title.appendChild(jdt);
     ms.appendChild(ys);
     ms.appendChild(js);
-    zt.appendChild(n);
-    zt.appendChild(a);
+    ts.appendChild(y);
+    ts.appendChild(z);
     nullc.appendChild(inp1);
     eas.appendChild(inp2);
     mrms.appendChild(inp3);
@@ -884,27 +928,25 @@ function check() {
     let string = "";
     for (var i = 0; i <= windows.length - 1; i++) {
         if (windows[i].className === "noti-window") {
-            string += "Noti()、";
+            if (!string.includes("Noti()、")) string += "Noti()、";
         } else if (windows[i].className === "cg-window") {
-            string += "Cg()、";
+            if (!string.includes("Cg()、")) string += "Cg()、";
         } else if (windows[i].className === "fail-window") {
-            string += "Fail()、";
+            if (!string.includes("Fail()、")) string += "Fail()、";
         } else if (windows[i].className === "warn-window") {
-            string += "Warn()、";
+            if (!string.includes("Warn()、")) string += "Warn()、";
         } else if (windows[i].className === "inp-window") {
-            string += "Inp()、";
+            if (!string.includes("Inp()、")) string += "Inp()、";
         } else if (windows[i].className === "synchr-window") {
-            string += "Synchr()、";
+            if (!string.includes("Synchr()、")) string += "Synchr()、";
         } else if (windows[i].className === "xz-window") {
-            string += "Xz()、";
+            if (!string.includes("Xz()、")) string += "Xz()、";
         } else if (windows[i].className === "lj-window") {
-            string += "Lj()、";
+            if (!string.includes("Lj()、")) string += "Lj()、";
         } else if (windows[i].className === "zd-window") {
-            string += "Zd()、";
+            if (!string.includes("Zd()、")) string += "Zd()、";
         }
     }
-    if (string[string.length - 1] === "、") {
-        string[string.length - 1] = "";
-    }
+    if (string[string.length - 1] === "、") string = string.slice(0, -1);
     return string;
 }

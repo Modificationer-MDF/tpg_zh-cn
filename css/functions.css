@@ -8,6 +8,7 @@
     flex-wrap: wrap;
     width: auto;
     margin: 10px;
+    backdrop-filter: blur(14px) saturate(250%);
 }
 
 .noti-window {
@@ -23,6 +24,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    backdrop-filter: blur(14px) saturate(250%);
 }
 
 .noti-square {
@@ -187,6 +189,7 @@
     font-weight: 100;
     border: none;
     border-radius: 0px;
+    backdrop-filter: blur(14px) saturate(250%);
 }
 
 .inp-box {
@@ -234,11 +237,12 @@
     font-size: 20px;
     padding: 14px 25px;
     text-align: center;
+    left: 0%;
+    backdrop-filter: blur(14px) saturate(250%);
     cursor: pointer;
     color: white;
     position: relative;
     margin-bottom: 20px;
-    left: 0%;
 }
 
 .zd-window {
