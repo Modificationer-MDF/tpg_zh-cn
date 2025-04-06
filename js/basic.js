@@ -256,6 +256,12 @@ function fn2() {
         let a = await inp("你可以在此输入！");
         noti(`你输入了：“${a}”。`);
     };
+    const synchrbtn = document.createElement("button");
+    synchrbtn.innerHTML = `synchr`;
+    synchrbtn.className = `btn6`;
+    synchrbtn.onclick = async () => {
+        await synchr("该函数还在开发中。");
+    };
     const xzbtn = document.createElement(`button`);
     xzbtn.innerHTML = `xz`;
     xzbtn.className = `btn7`;
@@ -318,6 +324,7 @@ function fn2() {
         failbtn,
         warnbtn,
         inpbtn,
+        synchrbtn,
         xzbtn,
         ljbtn,
         zdbtn,

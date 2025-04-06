@@ -678,36 +678,7 @@ async function xz(string, n, names, title) {
 
 // synchr 函数。
 
-async function synchr(string, file, title) {
-    function xzjd(url, p) {
-        return new Promise((resolve) => {
-            const xhr = new XMLHttpRequest();
-            xhr.open("GET", url, true);
-            xhr.responseType = "arraybuffer";
-
-            xhr.onprogress = (e) => {
-                if (e.lengthComputable) {
-                    const pro = e.loaded / e.total;
-                    p(pro);
-                }
-            };
-
-            xhr.onload = () => {
-                if (xhr.status === 200) {
-                    resolve(xhr.response);
-                } else {
-                    fail(`同步失败， HTTP 状态 ${xhr.status}。`);
-                }
-            };
-
-            xhr.onerror = () => {
-                fail(`同步失败，网络错误。`);
-            };
-
-            xhr.send();
-        });
-    }
-
+async function synchr(string, title) {
     if (string == null || string == undefined) {
         nullcount++;
         fail("不能输入 null 或 undefined！");
@@ -750,6 +721,7 @@ async function synchr(string, file, title) {
     icon.src = `images/Synchronization.png`;
     window.style.animation = `fn- 550ms forwards ${easing}`;
     content.innerHTML = string;
+    rz(string);
     txt.innerHTML = title;
 
     window.addEventListener("animationend", () => {
@@ -757,10 +729,6 @@ async function synchr(string, file, title) {
         content.style.opacity = 1;
         icon.style.opacity = 1;
         txt.style.opacity = 1;
-    });
-
-    xzjd(file, (pro) => {
-        bar.style.width = `${pro * 100}%`;
     });
 
     const l1 = Math.ceil(string.length / 14);
