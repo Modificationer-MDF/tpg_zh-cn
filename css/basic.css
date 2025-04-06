@@ -551,7 +551,7 @@ button {
 
 .inpbox {
     position: relative;
-    top: 1vh;
+    top: 0.5vh;
     z-index: 999;
     height: 4vh;
     width: 300px;
