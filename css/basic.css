@@ -550,13 +550,13 @@ button {
 }
 
 .inpbox {
+    position: relative;
+    top: 0.5vh;
     z-index: 999;
     height: 4vh;
-    width: 285px;
+    width: 300px;
     font-size: 20px;
     color: white;
-    flex-grow: 1;
-    word-break: break-word;
     background-color: #00000079;
     font-family: "basic";
     border: none;

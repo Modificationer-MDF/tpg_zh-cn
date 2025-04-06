@@ -41,6 +41,7 @@
     max-width: 14ch;
     word-break: break-word;
     min-width: 30ch;
+    line-height: 1.4;
 }
 
 .fn-title {
@@ -413,9 +414,10 @@
     color: white;
     padding: 14px 25px;
     text-align: left;
-    position: absolute;
+    position: relative;
     left: 4%;
-    max-width: 40ch;
+    top: 20px;
+    max-width: calc(100% - 50px - 4%);
     max-height: calc(50vh - 210px);
     overflow-y: auto;
     white-space: pre-wrap;
@@ -424,6 +426,7 @@
     transition: opacity 0.3s;
     scrollbar-width: thin;
     scrollbar-color: #ffffff99 #00000000;
+    line-height: 1.4;
 }
 
 .wz-content::-webkit-scrollbar-thumb {

@@ -1,14 +1,5 @@
-var nullcount = 0; // 连续输入 null 或 undefined 的次数。
 var windows = []; // 信息数组。
 let rzwin = []; // rz() 信息数组。
-let totalHeight = 0; // rz() 的总高度。
-let urlEndings = [
-    `.com`, `.net`, `.cn`, `.org`, `.edu`, `.gov`, `.mil`,
-    `.biz`, `.noti`, `.name`, `.pro`, ".aero", `.coop`,
-    `.museum`, `.jobs`, `.travel`, `.xxx`, `.top`, `.site`,
-    `.wiki`, `.cc`, `.tv`, `.mobi`, `.me`, `.bid`, `.club`,
-    `.online`, `.store`, `.work`, `.tech`
-];
 
 // rz 函数。
 
@@ -55,7 +46,6 @@ function noti(string, title) {
     if (string == null || string == undefined) {
         nullcount++;
         fail("不能输入 null 或 undefined！");
-        monitor();
         return 39;
     } else if (title == null || title == undefined || title === "") title = "通知";
     else string = string.toString();
@@ -63,9 +53,6 @@ function noti(string, title) {
     if (replaced === "") {
         warn("不能输入空字符串。");
         return -39;
-    }
-    if (nullcount > 26) {
-        rz("你已被禁止调用函数。");
     }
 
     const window = document.createElement("div");
@@ -159,7 +146,6 @@ function cg(string, title) {
     if (string == null || string == undefined) {
         nullcount++;
         fail("不能输入 null 或 undefined！");
-        monitor();
         return 39;
     } else if (title == null || title == undefined || title === "") title = "完成";
     else string = string.toString();
@@ -167,9 +153,6 @@ function cg(string, title) {
     if (replaced === "") {
         warn("不能输入空字符串。");
         return -39;
-    }
-    if (nullcount > 26) {
-        rz("你已被禁止调用函数。");
     }
 
     const window = document.createElement("div");
@@ -261,7 +244,6 @@ function fail(string, title) {
     if (string == null || string == undefined) {
         nullcount++;
         fail("不能输入 null 或 undefined！");
-        monitor();
         return 39;
     } else if (title == null || title == undefined || title === "") title = "错误";
     else string = string.toString();
@@ -269,9 +251,6 @@ function fail(string, title) {
     if (replaced === "") {
         warn("不能输入空字符串。");
         return -39;
-    }
-    if (nullcount > 26) {
-        rz("你已被禁止调用函数。");
     }
 
     const window = document.createElement("div");
@@ -364,7 +343,6 @@ function warn(string, title) {
     if (string == null || string == undefined) {
         nullcount++;
         fail("不能输入 null 或 undefined！");
-        monitor();
         return 39;
     } else if (title == null || title == undefined || title === "") title = "注意";
     else string = string.toString();
@@ -372,9 +350,6 @@ function warn(string, title) {
     if (replaced === "") {
         warn("不能输入空字符串。");
         return -39;
-    }
-    if (nullcount > 26) {
-        rz("你已被禁止调用函数。");
     }
 
     const window = document.createElement("div");
@@ -468,7 +443,6 @@ async function inp(string, title) {
         if (string === null || string === undefined) {
             nullcount++;
             fail("不能输入 null 或 undefined！");
-            monitor();
             return 39;
         } else if (title == null || title == undefined || title === "") title = "输入";
         else string = string.toString();
@@ -476,9 +450,6 @@ async function inp(string, title) {
         if (replaced === "") {
             warn("不能输入空字符串。");
             return -39;
-        }
-        if (nullcount > 26) {
-            rz("你已被禁止调用函数。");
         }
 
         const window = document.createElement("div");
@@ -598,7 +569,6 @@ async function xz(string, n, names, title) {
         if (string == null || string == undefined) {
             nullcount++;
             fail("不能输入 null 或 undefined！");
-            monitor();
             return 39;
         } else if (title == null || title == undefined || title === "") title = "选择";
         else string = string.toString();
@@ -606,9 +576,6 @@ async function xz(string, n, names, title) {
         if (replaced1 === "") {
             warn("不能输入空字符串。");
             return -39;
-        }
-        if (nullcount > 26) {
-            rz("你已被禁止调用函数。");
         }
 
         create(window);
@@ -711,11 +678,39 @@ async function xz(string, n, names, title) {
 
 // synchr 函数。
 
-async function synchr(string, title) {
+async function synchr(string, file, title) {
+    function xzjd(url, p) {
+        return new Promise((resolve) => {
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", url, true);
+            xhr.responseType = "arraybuffer";
+
+            xhr.onprogress = (e) => {
+                if (e.lengthComputable) {
+                    const pro = e.loaded / e.total;
+                    p(pro);
+                }
+            };
+
+            xhr.onload = () => {
+                if (xhr.status === 200) {
+                    resolve(xhr.response);
+                } else {
+                    fail(`同步失败， HTTP 状态 ${xhr.status}。`);
+                }
+            };
+
+            xhr.onerror = () => {
+                fail(`同步失败，网络错误。`);
+            };
+
+            xhr.send();
+        });
+    }
+
     if (string == null || string == undefined) {
         nullcount++;
         fail("不能输入 null 或 undefined！");
-        monitor();
         return 39;
     } else if (title == null || title == undefined || title === "") title = "同步";
     else string = string.toString();
@@ -723,9 +718,6 @@ async function synchr(string, title) {
     if (replaced === "") {
         warn("不能输入空字符串。");
         return -39;
-    }
-    if (nullcount > 26) {
-        rz("你已被禁止调用函数。");
     }
 
     const window = document.createElement("div");
@@ -765,6 +757,10 @@ async function synchr(string, title) {
         content.style.opacity = 1;
         icon.style.opacity = 1;
         txt.style.opacity = 1;
+    });
+
+    xzjd(file, (pro) => {
+        bar.style.width = `${pro * 100}%`;
     });
 
     const l1 = Math.ceil(string.length / 14);
@@ -809,7 +805,6 @@ async function lj(string, url, title) {
     if (string == null || string == undefined || url == null || url == undefined) {
         nullcount++;
         fail("不能输入 null 或 undefined！");
-        monitor();
         return 39;
     } else if (title == null || title == undefined || title === "") title = "链接";
     else {
@@ -821,9 +816,6 @@ async function lj(string, url, title) {
     if (replaced1 === "" || replaced2 === "") {
         warn("不能输入空字符串。");
         return -39;
-    }
-    if (nullcount > 26) {
-        rz("你已被禁止调用函数。");
     }
 
     const window = document.createElement("div");
@@ -914,7 +906,6 @@ async function zd(string, title) {
         if (string == null || string == undefined) {
             nullcount++;
             fail("不能输入 null 或 undefined！");
-            monitor();
             return 39;
         } else if (title == null || title == undefined || title === "") title = "终端";
         else string = string.toString();
@@ -922,10 +913,6 @@ async function zd(string, title) {
         if (replaced === "") {
             warn("不能输入空字符串。");
             return -39;
-        }
-        if (nullcount > 26) {
-            rz("你已被禁止调用函数。");
-            return 0;
         }
 
         const window = document.createElement("div");
@@ -974,7 +961,7 @@ async function zd(string, title) {
                 try {
                     let k = eval(value);
                     rz(k);
-                    resolve(eval(value));
+                    resolve(k);
                 } catch (error) {
                     switch (error.name) {
                         case "ReferenceError":
@@ -982,36 +969,47 @@ async function zd(string, title) {
                             fail(`引用了未定义的变量或函数 “${vof[0]}”。`);
                             break;
                         case "SyntaxError":
-                            if (error.message.includes("Unexpected identifier '")) {
-                                let err = error.message.split("Unexpected identifier '");
-                                err[1] = err[1].replace("'", "’");
-                                fail(`‘${err[1]} 不是有效的标识符（Identifier）。`);
+                            if (error.message.includes("Unexpected identifier")) {
+                                let err = error.message.split("Unexpected identifier ")[1].replace("'", "");
+                                fail(`‘${err}’ 不是有效的标识符（Identifier）。`);
                             } else if (error.message.includes("Unexpected end of input")) {
                                 fail("缺少必要的符号。");
                             } else if (error.message.includes("Unexpected token")) {
-                                let err = error.message.split("Unexpected token '");
-                                err[1] = err[1].replace("'", "’");
-                                fail(`‘${err[1]} 不是有效的标识符（Token）。`);
+                                let token = error.message.split("Unexpected token ")[1].replace("'", "");
+                                fail(`意外的符号 ‘${token}’。`);
                             } else if (error.message.includes("Invalid or unexpected token")) {
-                                if (value.includes("\\")) fail("无效的转义字符 “\\”。");
-                                else fail("无效标识符。");
+                                if (value.includes("\\")) {
+                                    fail("无效的转义字符 “\\”。");
+                                } else {
+                                    fail("无效标识符。");
+                                }
                             } else if (error.message.includes("Missing initializer in const declaration")) {
                                 fail("const 变量没有设置初始化值。");
                             } else if (error.message.includes("Invalid left-hand side in assignment")) {
                                 fail("赋值操作中左侧表达式无效。");
                             } else if (error.message.includes("has already been declared") && error.message.includes("Identifier")) {
-                                err = error.message.replace("Identifier '", "");
-                                err = error.message.replace("' has already been declared", "");
+                                let err = error.message.replace("Identifier '", "").replace("' has already been declared", "").replace("'", "’");
                                 fail(`标识符 ‘${err}’ 已经声明过。`);
                             } else {
                                 fail(`语法错误：${error.message}。`);
                             }
                             break;
                         case "TypeError":
-                            fail(`类型错误：${error.message}`);
+                            if (error.message.includes("is not a function")) {
+                                let err = error.message.replace(" is not a function", "").replace("'", "’");
+                                fail(`‘${err}’ 不是函数。`);
+                            } else if (error.message.includes("Cannot read properties")) {
+                                let err1 = error.message.split("Cannot read properties of ")[1].replace(" (reading '", "").replace("')", "");
+                                let err2 = (err1.includes("null") ? "null" : "undefined");
+                                err1 = err1.split(err2)[1];
+                                fail(`‘${err1}’ 不能用于含 ‘${err2}’ 的对象上。`);
+                            }
+                            else {
+                                fail(`类型错误：${error.message}。`);
+                            }
                             break;
                         case "RangeError":
-                            fail(`数值超出范围：${error.message}`);
+                            fail(`数值超出范围：${error.message}。`);
                             break;
                         default:
                             fail(error.message);
@@ -1077,13 +1075,8 @@ async function wz(string) {
         if (string == null || string == undefined) {
             nullcount++;
             fail("不能输入 null 或 undefined！");
-            monitor();
             resolve(39);
             return;
-        }
-        if (nullcount > 26) {
-            rz("你已被禁止调用函数。");
-            return 0;
         }
 
         const window = document.createElement("div");

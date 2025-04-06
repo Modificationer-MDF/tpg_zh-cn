@@ -129,26 +129,6 @@ function fn1() {
             warn(res, "注意");
         }
     };
-    const inpbtn = document.createElement(`button`);
-    inpbtn.innerHTML = `inp`;
-    inpbtn.className = `btn5`;
-    inpbtn.onclick = async () => {
-        let res = await inp(`这就是 Inp() 。`);
-        noti(`你输入了：“${res}”。`, "输入内容");
-    };
-    const synchrbtn = document.createElement(`button`);
-    synchrbtn.innerHTML = "synchr";
-    synchrbtn.className = `btn6`;
-    synchrbtn.onclick = async () => {
-        let res = await inp(`输入你想显示在 Synchr() 上的信息。`, `在此输入。`);
-        if (titleset === "Custom") {
-            let t = await inp(`请输入 Synchr() 上的标题。`, `在此输入。`);
-            synchr(res, t);
-        }
-        else {
-            synchr(res, "同步");
-        }
-    };
     const xzbtn = document.createElement(`button`);
     xzbtn.innerHTML = `xz`;
     xzbtn.className = `btn7`;
@@ -195,8 +175,6 @@ function fn1() {
         cgbtn,
         failbtn,
         warnbtn,
-        inpbtn,
-        synchrbtn,
         xzbtn,
         ljbtn,
         wzbtn
@@ -278,12 +256,6 @@ function fn2() {
         let a = await inp("你可以在此输入！");
         noti(`你输入了：“${a}”。`);
     };
-    const synchrbtn = document.createElement(`button`);
-    synchrbtn.innerHTML = "synchr";
-    synchrbtn.className = `btn6`;
-    synchrbtn.onclick = () => {
-        synchr("该函数旨在同步文件、数据，但现在还未开发完成。");
-    };
     const xzbtn = document.createElement(`button`);
     xzbtn.innerHTML = `xz`;
     xzbtn.className = `btn7`;
@@ -346,7 +318,6 @@ function fn2() {
         failbtn,
         warnbtn,
         inpbtn,
-        synchrbtn,
         xzbtn,
         ljbtn,
         zdbtn,
@@ -368,7 +339,7 @@ function fn2() {
         div.appendChild(div2);
         div.appendChild(div3);
         all.forEach((btn, index) => {
-            if (index >= 0 && index < 10) {
+            if (index >= 0 && index < 9) {
                 div1.appendChild(btn);
             } else {
                 div3.appendChild(btn);
@@ -433,9 +404,6 @@ function fn3() {
     a1.onmouseover = () => {
         rz(`2024 年 5 月 1 日发布。`);
     };
-    a1.onclick = async () => {
-        await synchr("下载 Version_Collecting_1.zip。<br />（391 KiB）");
-    };
 
     const btn2 = document.createElement(`button`);
     btn2.className = `btn12`;
@@ -447,9 +415,6 @@ function fn3() {
     a2.onmouseover = () => {
         rz(`2024 年 8 月 22 日发布。`);
     };
-    a2.onclick = async () => {
-        await synchr("下载 Version_0.7.zip。<br />（26653 KiB）");
-    };
 
     const btn3 = document.createElement(`button`);
     btn3.className = `btn13`;
@@ -460,9 +425,6 @@ function fn3() {
     a3.textContent = `下载 The Play Games 0.8`;
     a3.onmouseover = () => {
         rz(`2024 年 8 月 27 日发布。`);
-    };
-    a3.onclick = async () => {
-        await synchr("下载 Version_0.8.zip。<br />（27496 KiB）");
     };
 
     const all = [
@@ -576,31 +538,6 @@ function fn4() { // 选项。
             cg("已切换到自定义标题。");
         }
     };
-
-    const nullc = document.createElement("p");
-    nullc.innerHTML = "nullcount";
-    nullc.className = "lcont";
-    const inp1 = document.createElement("input");
-    let f1 = false;
-    inp1.type = "number";
-    inp1.value = nullcount;
-    inp1.className = "inpbox";
-    inp1.onclick = () => {
-        if (f1 === false) {
-            warn("nullcount 只能为正整数。");
-            f1 = true;
-        }
-    };
-    inp1.addEventListener("keypress", (event) => {
-        if (event.key === "Enter") {
-            if (Number(inp1.value) < 0) fail("请输入一个大于等于 0 的数字。");
-            else if (Number(inp1.value) % 1 !== 0) fail("请输入一个整数。");
-            else {
-                nullcount = Number(inp1.value);
-                cg(`nullcount 已被设置为 ${nullcount}。`);
-            }
-        }
-    });
 
     const eas = document.createElement("p");
     eas.innerHTML = "easing";
@@ -718,7 +655,6 @@ function fn4() { // 选项。
     const all = [
         ms,
         ts,
-        nullc,
         eas,
         mrms,
         defw,
@@ -733,7 +669,6 @@ function fn4() { // 选项。
     ctrl.appendChild(ms);
     ctrl.appendChild(ts);
     ctrl.appendChild(eas);
-    ctrl.appendChild(nullc);
     ctrl.appendChild(mrms);
     ctrl.appendChild(defw);
     ctrl.appendChild(defh);
@@ -742,7 +677,6 @@ function fn4() { // 选项。
     ms.appendChild(js);
     ts.appendChild(y);
     ts.appendChild(z);
-    nullc.appendChild(inp1);
     eas.appendChild(inp2);
     mrms.appendChild(inp3);
     defw.appendChild(inp4);
@@ -911,16 +845,6 @@ function close(window) {
     } else {
         rzwin = rzwin.filter(win => win !== window);
         pos(false);
-    }
-}
-
-function monitor() {
-    if (nullcount >= 3 && nullcount < 7) {
-        warn(`你已连续 ${nullcount} 次输入 null 或 undefined。请检查你所输入的内容。`)
-    } else if (nullcount >= 7 && nullcount < 25) {
-        warn(`再次警告！你已连续输入 null 或 undefined ${nullcount} 次。请检查你所输入的内容。`)
-    } else if (nullcount >= 25 && nullcount < 30) {
-        fail(`你已被禁止调用任何函数。`);
     }
 }
 
