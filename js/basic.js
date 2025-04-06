@@ -133,7 +133,7 @@ function fn1() {
     inpbtn.innerHTML = `inp`;
     inpbtn.className = `btn5`;
     inpbtn.onclick = async () => {
-        let res = await inp(`这就是 Inp() 。`, `可以在这里输入一些文字。`);
+        let res = await inp(`这就是 Inp() 。`);
         noti(`你输入了：“${res}”。`, "输入内容");
     };
     const synchrbtn = document.createElement(`button`);
@@ -524,7 +524,7 @@ function fn4() { // 选项。
     title.style.right = "25px";
 
     const ms = document.createElement("p");
-    ms.innerHTML = "模式";
+    ms.innerHTML = "演示模式";
     ms.className = "lcont";
     const ys = document.createElement("button");
     ys.type = "button";
@@ -578,7 +578,7 @@ function fn4() { // 选项。
     };
 
     const nullc = document.createElement("p");
-    nullc.innerHTML = `nullcount`;
+    nullc.innerHTML = "nullcount";
     nullc.className = "lcont";
     const inp1 = document.createElement("input");
     let f1 = false;

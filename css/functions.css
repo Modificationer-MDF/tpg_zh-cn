@@ -1,5 +1,5 @@
 .noti-window, .cg-window, .fail-window, .warn-window, .inp-window, .synchr-window, .xz-window, .lj-window, .zd-window {
-    z-index: 1000;
+    z-index: 102;
     display: flex;
     right: 0px;
     position: fixed;
@@ -180,7 +180,6 @@
 
 .inp-box, .zd-box {
     z-index: 999;
-    height: 3ch;
     font-size: 20px;
     color: white;
     flex-grow: 1;
@@ -194,6 +193,7 @@
 
 .inp-box {
     text-align: center;
+    height: 3ch;
     background-color: #9cdcfe99;
 }
 
@@ -256,11 +256,11 @@
 }
 
 .zd-box {
+    height: 6ch;
     text-align: left;
     background-color: #22222299;
 }
 
-/* wz() 函数。 */
 .wz-window {
     width: 0;
     height: 50vh;
@@ -268,7 +268,7 @@
     display: flex;
     top: 50%;
     position: absolute;
-    z-index: 1000;
+    z-index: 101;
     flex-wrap: wrap;
 }
 
@@ -449,7 +449,6 @@
     cursor: pointer;
 }
 
-/* rz 函数。 */
 .rz-window {
     z-index: 100;
     background-color: #0b234599;

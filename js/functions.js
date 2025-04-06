@@ -965,16 +965,58 @@ async function zd(string, title) {
         };
 
         box.addEventListener("keypress", async (event) => {
-            if (event.key === "Enter") {
+            if (event.key === "Enter" && !event.shiftKey) {
                 const value = box.value.trim();
                 if (value === "") {
                     warn("不能输入空字符串。");
                     return;
                 }
                 try {
+                    let k = eval(value);
+                    rz(k);
                     resolve(eval(value));
                 } catch (error) {
-                    fail(error.message);
+                    switch (error.name) {
+                        case "ReferenceError":
+                            let vof = error.message.split(" is not defined");
+                            fail(`引用了未定义的变量或函数 “${vof[0]}”。`);
+                            break;
+                        case "SyntaxError":
+                            if (error.message.includes("Unexpected identifier '")) {
+                                let err = error.message.split("Unexpected identifier '");
+                                err[1] = err[1].replace("'", "’");
+                                fail(`‘${err[1]} 不是有效的标识符（Identifier）。`);
+                            } else if (error.message.includes("Unexpected end of input")) {
+                                fail("缺少必要的符号。");
+                            } else if (error.message.includes("Unexpected token")) {
+                                let err = error.message.split("Unexpected token '");
+                                err[1] = err[1].replace("'", "’");
+                                fail(`‘${err[1]} 不是有效的标识符（Token）。`);
+                            } else if (error.message.includes("Invalid or unexpected token")) {
+                                if (value.includes("\\")) fail("无效的转义字符 “\\”。");
+                                else fail("无效标识符。");
+                            } else if (error.message.includes("Missing initializer in const declaration")) {
+                                fail("const 变量没有设置初始化值。");
+                            } else if (error.message.includes("Invalid left-hand side in assignment")) {
+                                fail("赋值操作中左侧表达式无效。");
+                            } else if (error.message.includes("has already been declared") && error.message.includes("Identifier")) {
+                                err = error.message.replace("Identifier '", "");
+                                err = error.message.replace("' has already been declared", "");
+                                fail(`标识符 ‘${err}’ 已经声明过。`);
+                            } else {
+                                fail(`语法错误：${error.message}。`);
+                            }
+                            break;
+                        case "TypeError":
+                            fail(`类型错误：${error.message}`);
+                            break;
+                        case "RangeError":
+                            fail(`数值超出范围：${error.message}`);
+                            break;
+                        default:
+                            fail(error.message);
+                            break;
+                    }
                     resolve();
                 }
                 content.style.opacity = 0;
@@ -989,6 +1031,9 @@ async function zd(string, title) {
                         close(window, windows);
                     }, 550);
                 });
+            } else if (event.key === "Enter" && event.shiftKey) {
+                event.preventDefault();
+                box.value += "\n";
             }
         });
 
@@ -1023,7 +1068,6 @@ async function zd(string, title) {
         setTimeout(visible);
     });
 }
-
 
 // wz 函数。
 
@@ -1078,7 +1122,7 @@ async function wz(string) {
 
             btn.onclick = () => {
                 if (clicked) {
-                    warn(`请勿多次点击。`, 2000);
+                    warn("请勿重复点击。");
                     return;
                 }
                 txt.style.animation = `txt_ 0.3s forwards ${easing}`;
