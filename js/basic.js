@@ -7,8 +7,8 @@ function urcc(f, c) {
 }
 
 function fn0() {
-    if (mode === "Play") fn1();
-    else fn2();
+    if (mode === "Play" && f1 === false) fn1();
+    else if (mode === "Preset" && f2 === false) fn2();
 }
 
 document.addEventListener(`DOMContentLoaded`, () => {
@@ -72,9 +72,9 @@ document.addEventListener(`DOMContentLoaded`, () => {
     });
 });
 
-
-/* 第二部分。 */
 function fn1() {
+    f1 = !f1;
+
     const div = document.querySelector(`.head3`);
     const dakai = document.getElementById("1");
     dakai.style.transition = `all 550ms ${easing}`;
@@ -107,13 +107,13 @@ function fn1() {
     failbtn.innerHTML = `fail`;
     failbtn.className = `btn3`;
     failbtn.onclick = async () => {
-        let res = await inp(`输入你想显示在 Fail() 上的信息。`, `在此输入。`);
+        let res = await inp(`输入你想显示在 fail() 上的信息。`, `在此输入。`);
         if (titleset === "Custom") {
-            let t = await inp(`请输入 Fail() 上的标题。`, `在此输入。`);
+            let t = await inp(`请输入 fail() 上的标题。`, `在此输入。`);
             fail(res, t);
         }
         else {
-            fai(res, "错误");
+            fail(res, "错误");
         }
     };
     const warnbtn = document.createElement(`button`);
@@ -213,6 +213,8 @@ function fn1() {
 }
 
 function fn2() {
+    f2 = !f2;
+
     const div = document.querySelector(".head3");
     const div1 = document.createElement("div");
     div1.className = `div1`;
@@ -346,7 +348,7 @@ function fn2() {
         div.appendChild(div2);
         div.appendChild(div3);
         all.forEach((btn, index) => {
-            if (index >= 0 && index < 9) {
+            if (index >= 0 && index < 10) {
                 div1.appendChild(btn);
             } else {
                 div3.appendChild(btn);
@@ -504,7 +506,7 @@ function fn4() { // 选项。
             warn("当前模式已为 Preset。");
         } else {
             mode = "Preset";
-            noti("已切换到 Preset 模式。");
+            cg("已切换到 Preset 模式。");
         }
     };
     const js = document.createElement("button");
@@ -516,7 +518,7 @@ function fn4() { // 选项。
             warn("当前模式已为 Play。");
         } else {
             mode = "Play";
-            noti("已切换到 Play 模式。");
+            cg("已切换到 Play 模式。");
         }
     };
 
@@ -744,7 +746,7 @@ function fn6() { // 杂项。
     cgc.style.color = "#1d5837";
 
     const failc = document.createElement("div");
-    failc.innerHTML = `Fail() 数量： ${v3}。`;
+    failc.innerHTML = `fail() 数量： ${v3}。`;
     failc.className = "rcont";
     failc.style.color = "#791e1d";
 
@@ -863,7 +865,7 @@ function check() {
         } else if (windows[i].className === "cg-window") {
             if (!string.includes("Cg()、")) string += "Cg()、";
         } else if (windows[i].className === "fail-window") {
-            if (!string.includes("Fail()、")) string += "Fail()、";
+            if (!string.includes("fail()、")) string += "fail()、";
         } else if (windows[i].className === "warn-window") {
             if (!string.includes("Warn()、")) string += "Warn()、";
         } else if (windows[i].className === "inp-window") {

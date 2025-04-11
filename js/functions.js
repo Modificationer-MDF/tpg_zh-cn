@@ -21,7 +21,8 @@ function rz(string, time) {
     content.innerHTML = string;
 
     const l = Math.ceil(string.length / 14);
-    content.style.height = `calc(${l * 20}px)`;
+    const lh = parseInt(window.style.lineHeight);
+    content.style.height = `${l * lh}px`;
 
     create(window);
     document.body.appendChild(window);
@@ -44,7 +45,6 @@ function rz(string, time) {
 
 function noti(string, title) {
     if (string == null || string == undefined) {
-        nullcount++;
         fail("不能输入 null 或 undefined！");
         return 39;
     } else if (title == null || title == undefined || title === "") title = "通知";
@@ -144,7 +144,6 @@ function noti(string, title) {
 
 function cg(string, title) {
     if (string == null || string == undefined) {
-        nullcount++;
         fail("不能输入 null 或 undefined！");
         return 39;
     } else if (title == null || title == undefined || title === "") title = "完成";
@@ -242,7 +241,6 @@ function cg(string, title) {
 
 function fail(string, title) {
     if (string == null || string == undefined) {
-        nullcount++;
         fail("不能输入 null 或 undefined！");
         return 39;
     } else if (title == null || title == undefined || title === "") title = "错误";
@@ -341,7 +339,6 @@ function fail(string, title) {
 
 function warn(string, title) {
     if (string == null || string == undefined) {
-        nullcount++;
         fail("不能输入 null 或 undefined！");
         return 39;
     } else if (title == null || title == undefined || title === "") title = "注意";
@@ -441,7 +438,6 @@ function warn(string, title) {
 async function inp(string, title) {
     return new Promise((resolve) => {
         if (string === null || string === undefined) {
-            nullcount++;
             fail("不能输入 null 或 undefined！");
             return 39;
         } else if (title == null || title == undefined || title === "") title = "输入";
@@ -567,7 +563,6 @@ async function xz(string, n, names, title) {
         content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
 
         if (string == null || string == undefined) {
-            nullcount++;
             fail("不能输入 null 或 undefined！");
             return 39;
         } else if (title == null || title == undefined || title === "") title = "选择";
@@ -680,7 +675,6 @@ async function xz(string, n, names, title) {
 
 async function synchr(string, title) {
     if (string == null || string == undefined) {
-        nullcount++;
         fail("不能输入 null 或 undefined！");
         return 39;
     } else if (title == null || title == undefined || title === "") title = "同步";
@@ -771,7 +765,6 @@ async function synchr(string, title) {
 
 async function lj(string, url, title) {
     if (string == null || string == undefined || url == null || url == undefined) {
-        nullcount++;
         fail("不能输入 null 或 undefined！");
         return 39;
     } else if (title == null || title == undefined || title === "") title = "链接";
@@ -872,7 +865,6 @@ async function lj(string, url, title) {
 async function zd(string, title) {
     return new Promise((resolve) => {
         if (string == null || string == undefined) {
-            nullcount++;
             fail("不能输入 null 或 undefined！");
             return 39;
         } else if (title == null || title == undefined || title === "") title = "终端";
@@ -928,8 +920,16 @@ async function zd(string, title) {
                 }
                 try {
                     let k = eval(value);
-                    rz(k);
-                    resolve(k);
+                    if (k !== undefined && k !== null) {
+                        rz(k);
+                        resolve(k);
+                    } else if (k === undefined) {
+                        rz("返回值为 undefined。");
+                        resolve();
+                    } else if (k === null) {
+                        rz("返回值为 null。");
+                        resolve();
+                    }
                 } catch (error) {
                     switch (error.name) {
                         case "ReferenceError":
@@ -1041,7 +1041,6 @@ async function wz(string) {
     return new Promise((resolve) => {
         let clicked = false;
         if (string == null || string == undefined) {
-            nullcount++;
             fail("不能输入 null 或 undefined！");
             resolve(39);
             return;

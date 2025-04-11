@@ -4,6 +4,8 @@ let easing = "cubic-bezier(0.83, 0, 0.17, 1)";
 let deftime = 3000;
 let defwid = 1024;
 let defhei = 768;
+let f1 = false;
+let f2 = false;
 
 document.addEventListener("DOMContentLoaded", function () {
     var start = performance.now();
