@@ -559,23 +559,13 @@ function fn4() { // 选项。
     inp2.onclick = () => {
         if (f2 === false) {
             wz(`cubic-bezier 函数的格式是 cubic-bezier(x1, y1, x2, y2)，其中 x1 和 x2 必须在 0 到 1 之间，y1 和 y2 则可以是任意值；
-            其他 easing 还有 ease、linear、ease-in、ease-out、ease-in-out。`);
+            其他 easing 还有 ease、linear、ease-in、ease-out、ease-in-out、step、step-start、step-end。`);
             f2 = true;
         }
     };
     inp2.addEventListener("keypress", (event) => {
         if (event.key === "Enter") {
-            let arr1 = inp2.value.match(/\d+(\.\d+)?/g).map(Number);
-            let iseasing = (inp2.value.startsWith("cubic-bezier(") && inp2.value.endsWith(")")
-                && (inp2.value.match(/,/g) || []).length === 3 && arr1.length === 4
-                && (arr1[0] >= 0 && arr1[0] <= 1 && arr1[1] >= 0 && arr1[2] >= 0 && arr1[2] <= 1 && arr1[3] >= 0))
-                || (inp2.value === "ease" || inp2.value === "linear" || inp2.value === "ease-in"
-                || inp2.value === "ease-out" || inp2.value === "ease-in-out");
-            if (iseasing === false) fail("请输入一个合法的 easing 。");
-            else {
-                easing = inp2.value;
-                cg(`easing 已被设置为 ${easing}。`);
-            }
+            easing = inp2.value;
         }
     });
 
@@ -595,12 +585,10 @@ function fn4() { // 选项。
     };
     inp3.addEventListener("keypress", (event) => {
         if (event.key === "Enter") {
-            if (Number(inp3.value) < 750) fail("请输入一个大于等于 750 的数字。");
-            else if (Number(inp3.value) >= 750 && Number(inp3.value) < 1000) warn("设置过小的数字不方便于阅读。");
-            else if (windows.length > 0) warn(`现在不能更改 deftime 的值。${check()} 正在运行。`);
-            else {
+            if (windows.length > 0) {
+                warn(`现在不能设置 deftime 的值。${check()} 正在运行。`)
+            } else {
                 deftime = Number(inp3.value);
-                cg(`deftime 已被设置为 ${deftime} 毫秒。`);
             }
         }
     });
@@ -621,12 +609,7 @@ function fn4() { // 选项。
     };
     inp4.addEventListener("keypress", (event) => {
         if (event.key === "Enter") {
-            if (Number(inp4.value) < 0) fail("请输入一个大于等于 0 的数字。");
-            else if (Number(inp4.value) % 1 !== 0) fail("请输入一个整数。");
-            else {
-                defwid = Number(inp4.value);
-                cg(`defwid 已被设置为 ${defwid}。`);
-            }
+            defwid = Number(inp4.value);
         }
     });
 
@@ -646,12 +629,7 @@ function fn4() { // 选项。
     };
     inp5.addEventListener("keypress", (event) => {
         if (event.key === "Enter") {
-            if (Number(inp5.value) < 0) fail("请输入一个大于等于 0 的数字。");
-            else if (Number(inp5.value) % 1 !== 0) fail("请输入一个整数。");
-            else {
-                defhei = Number(inp5.value);
-                cg(`defhei 已被设置为 ${defhei}。`);
-            }
+            defhei = Number(inp5.value);
         }
     });
 

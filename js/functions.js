@@ -48,7 +48,7 @@ function noti(string, title) {
         fail("不能输入 null 或 undefined！");
         return 39;
     } else if (title == null || title == undefined || title === "") title = "通知";
-    else string = string.toString();
+    string = string.toString();
     let replaced = string.replace(/\s+/g, "");
     if (replaced === "") {
         warn("不能输入空字符串。");
@@ -147,7 +147,7 @@ function cg(string, title) {
         fail("不能输入 null 或 undefined！");
         return 39;
     } else if (title == null || title == undefined || title === "") title = "完成";
-    else string = string.toString();
+    string = string.toString();
     let replaced = string.replace(/\s+/g, "");
     if (replaced === "") {
         warn("不能输入空字符串。");
@@ -244,7 +244,7 @@ function fail(string, title) {
         fail("不能输入 null 或 undefined！");
         return 39;
     } else if (title == null || title == undefined || title === "") title = "错误";
-    else string = string.toString();
+    string = string.toString();
     let replaced = string.replace(/\s+/g, "");
     if (replaced === "") {
         warn("不能输入空字符串。");
@@ -342,7 +342,7 @@ function warn(string, title) {
         fail("不能输入 null 或 undefined！");
         return 39;
     } else if (title == null || title == undefined || title === "") title = "注意";
-    else string = string.toString();
+    string = string.toString();
     let replaced = string.replace(/\s+/g, "");
     if (replaced === "") {
         warn("不能输入空字符串。");
@@ -441,7 +441,7 @@ async function inp(string, title) {
             fail("不能输入 null 或 undefined！");
             return 39;
         } else if (title == null || title == undefined || title === "") title = "输入";
-        else string = string.toString();
+        string = string.toString();
         let replaced = string.replace(/\s+/g, "");
         if (replaced === "") {
             warn("不能输入空字符串。");
@@ -566,7 +566,7 @@ async function xz(string, n, names, title) {
             fail("不能输入 null 或 undefined！");
             return 39;
         } else if (title == null || title == undefined || title === "") title = "选择";
-        else string = string.toString();
+        string = string.toString();
         let replaced1 = string.replace(/\s+/g, "");
         if (replaced1 === "") {
             warn("不能输入空字符串。");
@@ -678,7 +678,7 @@ async function synchr(string, title) {
         fail("不能输入 null 或 undefined！");
         return 39;
     } else if (title == null || title == undefined || title === "") title = "同步";
-    else string = string.toString();
+    string = string.toString();
     let replaced = string.replace(/\s+/g, "");
     if (replaced === "") {
         warn("不能输入空字符串。");
@@ -868,7 +868,7 @@ async function zd(string, title) {
             fail("不能输入 null 或 undefined！");
             return 39;
         } else if (title == null || title == undefined || title === "") title = "终端";
-        else string = string.toString();
+        string = string.toString();
         let replaced = string.replace(/\s+/g, "");
         if (replaced === "") {
             warn("不能输入空字符串。");
@@ -934,17 +934,17 @@ async function zd(string, title) {
                     switch (error.name) {
                         case "ReferenceError":
                             let vof = error.message.split(" is not defined");
-                            fail(`引用了未定义的变量或函数 “${vof[0]}”。`);
+                            fail(`引用了未定义的变量或函数 ‘${vof[0]}’。`);
                             break;
                         case "SyntaxError":
                             if (error.message.includes("Unexpected identifier")) {
-                                let err = error.message.split("Unexpected identifier ")[1].replace("'", "");
-                                fail(`‘${err}’ 不是有效的标识符（Identifier）。`);
+                                let err = "‘" + (error.message.split("Unexpected identifier '")[1].replace("'", "’"));
+                                fail(`${err} 不是有效的标识符（Identifier）。`);
                             } else if (error.message.includes("Unexpected end of input")) {
                                 fail("缺少必要的符号。");
                             } else if (error.message.includes("Unexpected token")) {
-                                let token = error.message.split("Unexpected token ")[1].replace("'", "");
-                                fail(`意外的符号 ‘${token}’。`);
+                                let token = "‘" + (error.message.split("Unexpected token '")[1].replace("'", "’"));
+                                fail(`意外的符号 ${token}。`);
                             } else if (error.message.includes("Invalid or unexpected token")) {
                                 if (value.includes("\\")) {
                                     fail("无效的转义字符 “\\”。");

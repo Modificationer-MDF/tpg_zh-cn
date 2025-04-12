@@ -71,9 +71,34 @@ document.addEventListener("DOMContentLoaded", function () {
         el.style.width = window.innerWidth + "px";
     }
     setInterval(() => {
+        let arr1 = easing.match(/\d+(\.\d+)?/g);
+        arr1 = (arr1 === null || arr1 === undefined ? [] : arr1.map(Number));
+        let iseasing = (easing.startsWith("cubic-bezier(") && easing.endsWith(")")
+            && (easing.match(/,/g) || []).length === 3 && arr1.length === 4
+            && (arr1[0] >= 0 && arr1[0] <= 1 && arr1[1] >= 0 && arr1[2] >= 0 && arr1[2] <= 1 && arr1[3] >= 0))
+            || (easing === "ease" || easing === "linear" || easing === "ease-in"
+            || easing === "ease-out" || easing === "ease-in-out" || easing === "step-start" || easing === "step-end"
+            || easing === "step" || easing === "");
+        let isdefhei = (defhei > 300 && defhei % 1 === 0);
+        let isdefwid = (defwid > 300 && defwid % 1 === 0);
+        let isdeftime = (deftime > 1000);
+
+        if (!iseasing) {
+            easing = "cubic-bezier(0.83, 0, 0.17, 1)";
+            fail("easing 的值不合法，已重置为 cubic-bezier(0.83, 0, 0.17, 1)。");
+        } if (!isdefhei) {
+            defhei = 768;
+            fail("defhei 的值不合法，已重置为 768。");
+        } if (!isdefwid) {
+            defwid = 1024;
+            fail("defwid 的值不合法，已重置为 1024。");
+        } if (!isdeftime) {
+            deftime = 3000;
+            fail("deftime 的值不合法，已重置为 3000。");
+        }
         width(".top");
         fn6();
-    }, 120);
+    }, 250);
     document.addEventListener("keydown", (event) => {
         if (event.altKey) noti("将鼠标移动至左上角以打开选项；移动到右上角以查看杂项信息。")
     });
