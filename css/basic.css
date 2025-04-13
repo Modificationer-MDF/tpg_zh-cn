@@ -100,7 +100,8 @@ pre {
     font-size: 35px;
 }
 
-.head3, .head4, .head5 {
+.head3, .head4 {
+    height: 60px;
     opacity: 0;
     background-color: #000000b0;
     padding: 14px 25px;
@@ -124,12 +125,12 @@ pre {
 @keyframes head3- {
     from {
         opacity: 1;
-        height: 140px;
+        height: 60px;
         transform: translateX(5vw);
     }
     to {
         opacity: 1;
-        height: calc(100% - 50px);
+        height: 1170px;
         transform: translateX(5vw);
     }
 }
@@ -148,37 +149,13 @@ pre {
 @keyframes head4- {
     from {
         opacity: 1;
+        height: 60px;
         transform: translateX(20vw);
-        height: 140px;
     }
     to {
         opacity: 1;
         transform: translateX(5vw);
-        height: calc(100% - 50px);
-    }
-}
-
-@keyframes _head5 {
-    from {
-        opacity: 0;
-        transform: translateX(0vw);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(35vw);
-    }
-}
-
-@keyframes head5- {
-    from {
-        opacity: 1;
-        transform: translateX(35vw);
-        height: 140px;
-    }
-    to {
-        opacity: 1;
-        transform: translateX(5vw);
-        height: calc(100% - 50px);
+        height: 310px;
     }
 }
 
