@@ -767,7 +767,7 @@ function fn6() { // 杂项。
     rzc.className = "rcont";
     rzc.style.padding = "7px 15px";
     rzc.style.borderRadius = "5px";
-    rzc.style.backgroundColor = "#19191879";
+    rzc.style.backgroundColor = "#0b234599";
     rzc.style.color = "#ffffff";
 
     const all = [
