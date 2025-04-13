@@ -1,11 +1,13 @@
 let mode = "Preset";
 let titleset = "Default";
 let easing = "cubic-bezier(0.83, 0, 0.17, 1)";
-let deftime = 3000;
+let deftime = "Smart";
 let defwid = 1024;
 let defhei = 768;
 let f1 = false;
 let f2 = false;
+let alphabets = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+let marks = `\n\t\r!@#$%^&*()_+-=[]{}|;':\\"',./<>?1234567890！？。“”《》、；‘’【】·~·。，、：；“”‘’《》（）…￥—` + "`";
 
 document.addEventListener("DOMContentLoaded", function () {
     var start = performance.now();
@@ -59,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 fail("字体加载失败。");
                 break;
             default:
-                fail(`未知错误。（${error}）`);
+                fail(error);
                 break;
         }
     });
@@ -71,17 +73,17 @@ document.addEventListener("DOMContentLoaded", function () {
         el.style.width = window.innerWidth + "px";
     }
     setInterval(() => {
-        let arr1 = easing.match(/\d+(\.\d+)?/g);
-        arr1 = (arr1 === null || arr1 === undefined ? [] : arr1.map(Number));
+        let arr = easing.match(/\d+(\.\d+)?/g);
+        arr = (arr === null || arr === undefined ? [] : arr.map(Number));
         let iseasing = (easing.startsWith("cubic-bezier(") && easing.endsWith(")")
-            && (easing.match(/,/g) || []).length === 3 && arr1.length === 4
-            && (arr1[0] >= 0 && arr1[0] <= 1 && arr1[1] >= 0 && arr1[2] >= 0 && arr1[2] <= 1 && arr1[3] >= 0))
+            && (easing.match(/,/g) || []).length === 3 && arr.length === 4
+            && (arr[0] >= 0 && arr[0] <= 1 && arr[2] >= 0 && arr[2] <= 1))
             || (easing === "ease" || easing === "linear" || easing === "ease-in"
             || easing === "ease-out" || easing === "ease-in-out" || easing === "step-start" || easing === "step-end"
             || easing === "step" || easing === "");
         let isdefhei = (defhei > 300 && defhei % 1 === 0);
         let isdefwid = (defwid > 300 && defwid % 1 === 0);
-        let isdeftime = (deftime > 1000);
+        let isdeftime = (deftime >= 1250 || deftime === "Smart");
 
         if (!iseasing) {
             easing = "cubic-bezier(0.83, 0, 0.17, 1)";
@@ -93,8 +95,8 @@ document.addEventListener("DOMContentLoaded", function () {
             defwid = 1024;
             fail("defwid 的值不合法，已重置为 1024。");
         } if (!isdeftime) {
-            deftime = 3000;
-            fail("deftime 的值不合法，已重置为 3000。");
+            deftime = "Smart";
+            fail("deftime 的值不合法，已重置为 Smart。");
         }
         width(".top");
         fn6();

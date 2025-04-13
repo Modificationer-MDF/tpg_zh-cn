@@ -558,8 +558,8 @@ function fn4() { // 选项。
     let f2 = false;
     inp2.onclick = () => {
         if (f2 === false) {
-            wz(`cubic-bezier 函数的格式是 cubic-bezier(x1, y1, x2, y2)，其中 x1 和 x2 必须在 0 到 1 之间，y1 和 y2 则可以是任意值；
-            其他 easing 还有 ease、linear、ease-in、ease-out、ease-in-out、step、step-start、step-end。`);
+            wz(`\tcubic-bezier 函数的格式是 cubic-bezier(x1, y1, x2, y2)，其中 x1 和 x2 必须在 0 到 1 之间，y1 和 y2 则可以是任意值；
+\t其他 easing 还有 ease、linear、ease-in、ease-out、ease-in-out、step、step-start、step-end。`);
             f2 = true;
         }
     };
@@ -574,12 +574,12 @@ function fn4() { // 选项。
     mrms.className = "lcont";
     const inp3 = document.createElement("input");
     let f3 = false;
-    inp3.type = "number";
+    inp3.type = "text";
     inp3.value = deftime;
     inp3.className = "inpbox";
     inp3.onclick = () => {
         if (f3 === false) {
-            warn("deftime 只能为正数，且单位为毫秒。");
+            wz("deftime 的取值既可以为大于等于 1250 的整数，也可以为 Smart。");
             f3 = true;
         }
     };
@@ -588,7 +588,8 @@ function fn4() { // 选项。
             if (windows.length > 0) {
                 warn(`现在不能设置 deftime 的值。${check()} 正在运行。`)
             } else {
-                deftime = Number(inp3.value);
+                if (!isNaN(Number(inp3.value))) deftime = Number(inp3.value);
+                else deftime = inp3.value;
             }
         }
     });
@@ -860,4 +861,27 @@ function check() {
     }
     if (string[string.length - 1] === "、") string = string.slice(0, -1);
     return string;
+}
+
+function smarttime(str) {
+    str = String(str);
+    str = str.replace(/\s+/g, "");
+    let zh = 0; // 中文字符数。
+    let en = 0; // 英文字符数。
+    let ma = 0; // 标点符号数。（包括全角符号和半角符号）
+    if (deftime === "Smart") {
+        for (var i = 0; i <= str.length - 1; i++) {
+            if (alphabets.includes(str[i])) {
+                en++;
+            } else if (marks.includes(str[i])) {
+                ma++;
+            } else {
+                zh++;
+            }
+        }
+        let time = zh * 155 + en * 100 + ma * 45;
+        return (time > 1250 ? time : 1250);
+    } else {
+        return deftime;
+    }
 }

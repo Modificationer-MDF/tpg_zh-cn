@@ -11,7 +11,7 @@ function rz(string, time) {
         warn("这个值为 undefined。");
         return;
     }
-    if (time == null || time == undefined) time = deftime;
+    if (time == null || time == undefined) time = smarttime(string);
 
     const window = document.createElement("div");
     window.className = `rz-window`;
@@ -116,7 +116,7 @@ function noti(string, title) {
 
     let pro = 0;
     const interval = setInterval(() => {
-        pro += 10 / (deftime / 100);
+        pro += 10 / (smarttime(string) / 100);
         bar.style.width = `${pro}%`;
         if (pro >= 100) {
             clearInterval(interval);
@@ -136,7 +136,7 @@ function noti(string, title) {
                 close(window, windows);
             }, 550);
         });
-    }, deftime);
+    }, smarttime(string));
     setTimeout(visible);
 }
 
@@ -201,7 +201,7 @@ function cg(string, title) {
 
     let pro = 0;
     const interval = setInterval(() => {
-        pro += 10 / (deftime / 100);
+        pro += 10 / (smarttime(string) / 100);
         bar.style.width = `${pro}%`;
         if (pro >= 100) {
             clearInterval(interval);
@@ -233,7 +233,7 @@ function cg(string, title) {
                 close(window, windows)
             }, 550);
         });
-    }, deftime);
+    }, smarttime(string));
     setTimeout(visible);
 }
 
@@ -299,7 +299,7 @@ function fail(string, title) {
 
     let pro = 0;
     const interval = setInterval(() => {
-        pro += 10 / (deftime / 100);
+        pro += 10 / (smarttime(string) / 100);
         bar.style.width = `${pro}%`;
         if (pro >= 100) {
             clearInterval(interval);
@@ -331,7 +331,7 @@ function fail(string, title) {
                 close(window, windows)
             }, 550);
         });
-    }, deftime);
+    }, smarttime(string));
     setTimeout(visible);
 }
 
@@ -397,7 +397,7 @@ function warn(string, title) {
 
     let pro = 0;
     const interval = setInterval(() => {
-        pro += 10 / (deftime / 100);
+        pro += 10 / (smarttime(string) / 100);
         bar.style.width = `${pro}%`;
         if (pro >= 100) {
             clearInterval(interval);
@@ -429,7 +429,7 @@ function warn(string, title) {
                 close(window, windows)
             }, 550);
         });
-    }, deftime);
+    }, smarttime(string));
     setTimeout(visible);
 }
 
@@ -757,7 +757,7 @@ async function synchr(string, title) {
                 close(window, windows)
             }, 550);
         });
-    }, deftime);
+    }, smarttime(string));
     setTimeout(visible);
 }
 
