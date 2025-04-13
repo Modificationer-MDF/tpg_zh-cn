@@ -8,6 +8,12 @@ let f1 = false;
 let f2 = false;
 let alphabets = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 let marks = `\n\t\r!@#$%^&*()_+-=[]{}|;':\\"',./<>?1234567890！？。“”《》、；‘’【】·~·。，、：；“”‘’《》（）…￥—` + "`";
+let block = false; // 锁定 “选项”。
+let iblock = false; // 锁定 “杂项”。
+let moved = false; // “选项”。
+let imoved = false; // “杂项”。
+let windows = []; // 九函数数组。
+let rzwin = []; // rz() 数组。
 
 document.addEventListener("DOMContentLoaded", function () {
     var start = performance.now();

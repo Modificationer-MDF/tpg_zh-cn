@@ -41,14 +41,13 @@ document.addEventListener(`DOMContentLoaded`, () => {
     });
 
     const ctrl = document.querySelector(".control-pad");
-    let moved = false;
     fn4();
 
     document.addEventListener("mousemove", function (event) {
         let width = ctrl.getBoundingClientRect().width;
         if (event.clientX <= 50 && event.clientY <= 50 && moved === false) { // 移动到左上角。
             ctrl.style.animation = `ctrl- 550ms forwards ${easing}`;
-            moved = true;
+            if (block === false) moved = true;
         } else if (event.clientX > width && moved === true) {
             ctrl.style.animation = `-ctrl 550ms forwards ${easing}`;
             moved = false;
@@ -56,7 +55,6 @@ document.addEventListener(`DOMContentLoaded`, () => {
     });
 
     const inf = document.querySelector(".information-table");
-    let imoved = false;
     fn5();
 
     document.addEventListener("mousemove", function (event) {
@@ -64,7 +62,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
 
         if (event.clientX >= window.innerWidth - 50 && event.clientY <= 50 && imoved === false) { // 移动到右上角。
             inf.style.animation = `inf- 550ms forwards ${easing}`;
-            imoved = true;
+            if (iblock === false) imoved = true;
         } else if (event.clientX < window.innerWidth - rect && imoved === true) {
             inf.style.animation = `-inf 550ms forwards ${easing}`;
             imoved = false;
@@ -551,45 +549,47 @@ function fn4() { // 选项。
     const eas = document.createElement("p");
     eas.innerHTML = "easing";
     eas.className = "lcont";
-    const inp2 = document.createElement("input");
-    inp2.type = "text";
-    inp2.className = "inpbox";
-    inp2.value = easing;
-    let f2 = false;
-    inp2.onclick = () => {
-        if (f2 === false) {
+    const inp1 = document.createElement("input");
+    inp1.type = "text";
+    inp1.id = "easing";
+    inp1.className = "inpbox";
+    inp1.value = easing;
+    let t1 = false;
+    inp1.onclick = () => {
+        if (t1 === false) {
             wz(`\tcubic-bezier 函数的格式是 cubic-bezier(x1, y1, x2, y2)，其中 x1 和 x2 必须在 0 到 1 之间，y1 和 y2 则可以是任意值；
 \t其他 easing 还有 ease、linear、ease-in、ease-out、ease-in-out、step、step-start、step-end。`);
-            f2 = true;
+            t1 = true;
         }
     };
-    inp2.addEventListener("keypress", (event) => {
+    inp1.addEventListener("keypress", (event) => {
         if (event.key === "Enter") {
-            easing = inp2.value;
+            easing = inp1.value;
         }
     });
 
     const mrms = document.createElement("p");
     mrms.innerHTML = "deftime";
     mrms.className = "lcont";
-    const inp3 = document.createElement("input");
-    let f3 = false;
-    inp3.type = "text";
-    inp3.value = deftime;
-    inp3.className = "inpbox";
-    inp3.onclick = () => {
-        if (f3 === false) {
+    const inp2 = document.createElement("input");
+    let t2 = false;
+    inp2.type = "text";
+    inp2.id = "deftime";
+    inp2.value = deftime;
+    inp2.className = "inpbox";
+    inp2.onclick = () => {
+        if (t2 === false) {
             wz("deftime 的取值既可以为大于等于 1250 的整数，也可以为 Smart。");
-            f3 = true;
+            t2 = true;
         }
     };
-    inp3.addEventListener("keypress", (event) => {
+    inp2.addEventListener("keypress", (event) => {
         if (event.key === "Enter") {
             if (windows.length > 0) {
                 warn(`现在不能设置 deftime 的值。${check()} 正在运行。`)
             } else {
-                if (!isNaN(Number(inp3.value))) deftime = Number(inp3.value);
-                else deftime = inp3.value;
+                if (!isNaN(Number(inp2.value))) deftime = Number(inp2.value);
+                else deftime = inp2.value;
             }
         }
     });
@@ -597,40 +597,42 @@ function fn4() { // 选项。
     const defw = document.createElement("p");
     defw.innerHTML = "defwid";
     defw.className = "lcont";
-    const inp4 = document.createElement("input");
-    let f4 = false;
-    inp4.type = "number";
-    inp4.value = defwid;
-    inp4.className = "inpbox";
-    inp4.onclick = () => {
-        if (f4 === false) {
+    const inp3 = document.createElement("input");
+    let t3 = false;
+    inp3.type = "number";
+    inp3.id = "defwid";
+    inp3.value = defwid;
+    inp3.className = "inpbox";
+    inp3.onclick = () => {
+        if (t3 === false) {
             warn("该数值只能为正整数。");
-            f4 = true;
+            t3 = true;
         }
     };
-    inp4.addEventListener("keypress", (event) => {
+    inp3.addEventListener("keypress", (event) => {
         if (event.key === "Enter") {
-            defwid = Number(inp4.value);
+            defwid = Number(inp3.value);
         }
     });
 
     const defh = document.createElement("p");
     defh.innerHTML = "defhei";
     defh.className = "lcont";
-    const inp5 = document.createElement("input");
-    let f5 = false;
-    inp5.type = "number";
-    inp5.value = defhei;
-    inp5.className = "inpbox";
-    inp5.onclick = () => {
-        if (f5 === false) {
+    const inp4 = document.createElement("input");
+    let t4 = false;
+    inp4.type = "number";
+    inp4.id = "defhei";
+    inp4.value = defhei;
+    inp4.className = "inpbox";
+    inp4.onclick = () => {
+        if (t4 === false) {
             warn("该数值只能为正整数。");
-            f5 = true;
+            t4 = true;
         }
     };
-    inp5.addEventListener("keypress", (event) => {
+    inp4.addEventListener("keypress", (event) => {
         if (event.key === "Enter") {
-            defhei = Number(inp5.value);
+            defhei = Number(inp4.value);
         }
     });
 
@@ -665,10 +667,10 @@ function fn4() { // 选项。
     ms.appendChild(js);
     ts.appendChild(y);
     ts.appendChild(z);
-    eas.appendChild(inp2);
-    mrms.appendChild(inp3);
-    defw.appendChild(inp4);
-    defh.appendChild(inp5);
+    eas.appendChild(inp1);
+    mrms.appendChild(inp2);
+    defw.appendChild(inp3);
+    defh.appendChild(inp4);
 }
 
 function fn5() {
@@ -879,9 +881,120 @@ function smarttime(str) {
                 zh++;
             }
         }
-        let time = zh * 155 + en * 100 + ma * 45;
+        let time = zh * 165 + en * 95 + ma * 50;
         return (time > 1250 ? time : 1250);
     } else {
         return deftime;
     }
+}
+
+async function fn7() { // 网站介绍。
+    let j1 = false; // 移动至 “选项”。
+    let j2 = false;
+    let j3 = false; // 移动至 “杂项”。
+    let w1 = false; // 完成 “选项” 介绍。
+    let w2 = false; // 完成 “杂项” 介绍。
+    let w3 = false; // 完成所有介绍。
+
+    const ctrl = document.querySelector(".control-pad");
+    const inf = document.querySelector(".information-table");
+    const ebox = document.getElementById("easing");
+    const tbox = document.getElementById("deftime");
+    const wbox = document.getElementById("defwid");
+    const hbox = document.getElementById("defhei");
+
+    await wz("欢迎来到 The Play Games 官方网站！是时候带你熟悉一下了。");
+    noti("请将鼠标移动至左上角。");
+    block = true;
+
+    const i1 = setInterval(async () => {
+        if (getComputedStyle(ctrl).animationName === "ctrl-" && j1 === false) {
+            j1 = true;
+            await wz("正如你所见，这里是该网站的 “选项” 界面！你可以在此处更改网站的各项特殊参数。");
+            let q1 = await xz("是否需要演示如何更改？", 2, ["是。", "否。"]);
+            if (q1 === "是。") {
+                await wz("你可以直接点击相应的按钮便捷更改变量值，也可以通过输入来更改。");
+                let q2 = await xz("选择哪个变量演示呢？", 4, ["easing", "deftime", "defwid", "defhei"]);
+                noti("请修改该值。");
+                switch (q2) {
+                    case "easing":
+                        ebox.focus();
+                        ebox.addEventListener("keypress", (event) => {
+                            if (event.key === "Enter") {
+                                w1 = true;
+                                block = false;
+                                moved = true;
+                            }
+                        });
+                        break;
+                    case "deftime":
+                        tbox.focus();
+                        tbox.addEventListener("keypress", (event) => {
+                            if (event.key === "Enter") {
+                                w1 = true;
+                                block = false;
+                                moved = true;
+                            }
+                        });
+                        break;
+                    case "defwid":
+                        wbox.focus();
+                        wbox.addEventListener("keypress", (event) => {
+                            if (event.key === "Enter") {
+                                w1 = true;
+                                block = false;
+                                moved = true;
+                            }
+                        });
+                        break;
+                    case "defhei":
+                        hbox.focus();
+                        hbox.addEventListener("keypress", (event) => {
+                            if (event.key === "Enter") {
+                                w1 = true;
+                                block = false;
+                                moved = true;
+                            }
+                        });
+                        break;
+                }
+            } else {
+                await wz("好的，那我们继续。");
+                block = false;
+                moved = true;
+                w1 = true;
+            }
+            clearInterval(i1);
+        }
+    }, 250);
+
+    const i2 = setInterval(async () => {
+        if (w1 === true && j2 === false) {
+            j2 = true;
+            await wz("接下来介绍的是 “杂项” 界面。");
+            noti("请将鼠标移动至右上角。");
+            iblock = true;
+            const i3 = setInterval(async () => {
+                if (getComputedStyle(inf).animationName === "inf-" && j3 === false) {
+                    j3 = true;
+                    await wz("在 “杂项” 界面，你可以看到各函数正在运行的个数。这便于你更好地了解网站的运行情况。");
+                    iblock = false;
+                    imoved = true;
+                    w2 = true;
+                    clearInterval(i3);
+                }
+            }, 250);
+            clearInterval(i2);
+        }
+    }, 250);
+
+    const i3 = setInterval(async () => {
+        if (w2 === true && w3 === false) {
+            w3 = true;
+            await wz("恭喜，你已经看完了网站的介绍！感谢你对 The Play Games 的支持。");
+            block = false;
+            moved = true;
+            clearInterval(i3);
+        }
+    }, 250);
 }

@@ -1,6 +1,3 @@
-var windows = []; // 信息数组。
-let rzwin = []; // rz() 信息数组。
-
 // rz 函数。
 
 function rz(string, time) {
