@@ -1142,7 +1142,7 @@ async function wz(string) {
             btn.onclick = () => {
                 if (clicked) {
                     warn("请勿重复点击。");
-                    return;
+                    return "重复点击可能会导致程序运行异常。";
                 }
                 txt.style.animation = `txt_ 0.3s forwards ${easing}`;
                 btn.style.animation = `btn_ 0.3s forwards ${easing}`;
@@ -1196,6 +1196,9 @@ async function timer(string, time, title) {
         } else if (time < 1250) {
             warn("time 的值过小，无法正常计时。");
             return "在 Timer() 函数中，time 的值必须大于等于 1250。";
+        } else if (time > 3.15576e10 * 1.1568) {
+            warn("time 的值过大，无法正常计时。");
+            return "在 Timer() 函数中，time 的值必须小于等于 6.048e10。";
         }
         else {
             title = String(title);
@@ -1243,18 +1246,21 @@ async function timer(string, time, title) {
         if (time < 6e4) {
             unit = "秒";
             transfer = 1000;
-        } else if (time >= 6e4 && time <= 3.6e6) {
+        } else if (time >= 6e4 && time < 3.6e6) {
             unit = "分钟";
             transfer = 6e4;
-        } else if (time > 3.6e6 && time <= 8.64e7) {
+        } else if (time >= 3.6e6 && time < 8.64e7) {
             unit = "小时";
             transfer = 3.6e6;
-        } else if (time > 8.64e7 && time <= 6.048e10) {
+        } else if (time >= 8.64e7 && time < 6.048e8) {
             unit = "天";
             transfer = 8.64e7;
-        } else if (time > 6.048e10) {
+        } else if (time >= 6.048e8 && time < 3.15576e10) {
             unit = "周";
-            transfer = 6.048e10;
+            transfer = 6.048e8;
+        } else if (time >= 3.15576e10) {
+            unit = "年";
+            transfer = 3.15576e10;
         }
 
         let i = setInterval(() => {
