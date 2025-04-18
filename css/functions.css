@@ -1,4 +1,4 @@
-.noti-window, .cg-window, .fail-window, .warn-window, .inp-window, .synchr-window, .xz-window, .lj-window, .zd-window {
+.noti-window, .cg-window, .fail-window, .warn-window, .inp-window, .synchr-window, .xz-window, .lj-window, .zd-window, .timer-window {
     z-index: 102;
     display: flex;
     right: 0px;
@@ -17,7 +17,7 @@
     border-right: 5px solid #1b7163c9;
 }
 
-.noti-window .noti-square, .cg-window .cg-square, .fail-window .fail-square, .warn-window .warn-square, .inp-window .inp-square, .synchr-window .synchr-square, .xz-window .xz-square, .lj-window .lj-square, .zd-window .zd-square {
+.noti-window .noti-square, .cg-window .cg-square, .fail-window .fail-square, .warn-window .warn-square, .inp-window .inp-square, .synchr-window .synchr-square, .xz-window .xz-square, .lj-window .lj-square, .zd-window .zd-square, .timer-window .timer-square {
     width: 100%;
     position: fixed;
     z-index: 1000;
@@ -55,7 +55,7 @@
     min-width: 30ch;
 }
 
-.noti-progressbar, .cg-progressbar, .fail-progressbar, .warn-progressbar {
+.noti-progressbar, .cg-progressbar, .fail-progressbar, .warn-progressbar, .synchr-progressbar, .timer-progressbar {
     width: 0;
     height: 5px;
     overflow: hidden;
@@ -261,6 +261,21 @@
     text-align: left;
     background-color: #22222299;
 }
+
+.timer-window {
+    background-color: #f0f0f099;
+    border-left: 5px solid #989898c9;
+    border-right: 5px solid #989898c9;
+}
+
+.timer-square {
+    background-color: #ffffff49;
+}
+
+.timer-progressbar {
+    background-color: #d0d0d099;
+}
+
 
 .wz-window {
     width: 0;

@@ -12,7 +12,7 @@ let block = false; // 锁定 “选项”。
 let iblock = false; // 锁定 “杂项”。
 let moved = false; // “选项”。
 let imoved = false; // “杂项”。
-let windows = []; // 九函数数组。
+let windows = []; // 十函数数组。
 let rzwin = []; // rz() 数组。
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         width(".top");
         fn6();
-    }, 250);
+    }, 400);
     document.addEventListener("keydown", (event) => {
         if (event.altKey) noti("将鼠标移动至左上角以打开选项；移动到右上角以查看杂项信息。")
     });

@@ -36,7 +36,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
     div.addEventListener("animationend", (e) => {
         if (e.animationName === `-top`) {
             f1.style.animation = `_head3 550ms forwards cubic-bezier(0.33, 1, 0.68, 1)`;
-            f3.style.animation = `_head4 550ms forwards cubic-bezier(0.33, 1, 0.68, 1)`;
+            f3.style.animation = `_head5 550ms forwards cubic-bezier(0.33, 1, 0.68, 1)`;
         }
     });
 
@@ -160,11 +160,26 @@ function fn1() {
             lj(res, url, "链接");
         }
     };
+    const timerbtn = document.createElement("button");
+    timerbtn.innerHTML = "timer";
+    timerbtn.className = "btn29";
+    timerbtn.onclick = async () => {
+        let res = await inp(`输入你想显示在 Timer() 上的信息。`, `在此输入。`);
+        let t = await inp(`请输入 Timer() 上的计时时间。（单位：毫秒）`, `在此输入。`);
+        t = Number(t);
+        if (titleset === "Custom") {
+            let t1 = await inp(`请输入 Timer() 上的标题。`, `在此输入。`);
+            timer(res, t, t1);
+        }
+        else {
+            timer(res, t, "计时");
+        }
+    };
     const wzbtn = document.createElement(`button`);
     wzbtn.innerHTML = `wz`;
     wzbtn.className = `btn22`;
     wzbtn.onclick = async () => {
-        let res = await inp(`输入你想显示在 wz() 上的信息。`, `在此输入。`);
+        let res = await inp(`输入你想显示在 Wz() 上的信息。`, `在此输入。`);
         wz(res);
     };
 
@@ -175,7 +190,8 @@ function fn1() {
         warnbtn,
         xzbtn,
         ljbtn,
-        wzbtn
+        timerbtn,
+        wzbtn,
     ];
 
     all.forEach(btn => {
@@ -188,13 +204,13 @@ function fn1() {
         });
     }
 
-    div.style.animation = `head3- 550ms forwards cubic-bezier(0.33, 1, 0.68, 1)`;
+    div.style.animation = `head4- 550ms forwards cubic-bezier(0.33, 1, 0.68, 1)`;
     dakai.style.backgroundColor = `#001dff99`;
     dakai.style.width = "230px";
     dakai.textContent = "在此处演示函数";
 
     div.addEventListener("animationend", (e) => {
-        if (e.animationName === "head3-") {
+        if (e.animationName === "head4-") {
             all.forEach(btn => {
                 btn.style.display = "block";
                 btn.style.color = "#ffffff";
@@ -290,14 +306,23 @@ function fn2() {
     const ljbtn = document.createElement(`button`);
     ljbtn.innerHTML = `lj`;
     ljbtn.className = `btn8`;
-    ljbtn.onclick = () => {
-        lj("点击此处浏览 The Play Games 的信息界面！", "https://modificationer-mdf.github.io/tpg_info/");
+    ljbtn.onclick = async () => {
+        await lj("点击此处浏览 The Play Games 的信息界面！", "https://modificationer-mdf.github.io/tpg_info/");
     };
     const zdbtn = document.createElement(`button`);
     zdbtn.innerHTML = `zd`;
     zdbtn.className = `btn9`;
-    zdbtn.onclick = () => {
-        zd("在此处输入代码。");
+    zdbtn.onclick = async () => {
+        await zd("在此处输入代码。");
+    };
+    const timerbtn = document.createElement("button");
+    timerbtn.innerHTML = "timer";
+    timerbtn.className = "btn29";
+    timerbtn.onclick = async () => {
+        let b = await timer("计时 5 秒。", 5000);
+        if (b) {
+            noti("计时结束。");
+        }
     };
     const nullbtn = document.createElement(`button`);
     nullbtn.innerHTML = `在函数的值中输入 null 值`;
@@ -328,6 +353,7 @@ function fn2() {
         xzbtn,
         ljbtn,
         zdbtn,
+        timerbtn,
         imp,
         nullbtn,
         undefinedbtn,
@@ -346,7 +372,7 @@ function fn2() {
         div.appendChild(div2);
         div.appendChild(div3);
         all.forEach((btn, index) => {
-            if (index >= 0 && index < 10) {
+            if (index >= 0 && index < 11) {
                 div1.appendChild(btn);
             } else {
                 div3.appendChild(btn);
@@ -393,7 +419,7 @@ function fn3() {
     warn("该文件可能会被误判为恶意软件，请注意甄别。");
 
     const div = document.querySelector(`.head4`);
-    div.style.animation = `head4- 550ms forwards ${easing}`;
+    div.style.animation = `head5- 550ms forwards ${easing}`;
     const dakai = document.getElementById(`3`);
     dakai.style.transition = `all 550ms ${easing}`;
     dakai.style.backgroundColor = `#001dff99`;
@@ -456,7 +482,7 @@ function fn3() {
     }
 
     div.addEventListener("animationend", (e) => {
-        if (e.animationName === `head4-`) {
+        if (e.animationName === "head5-") {
             all.forEach(btn => {
                 btn.style.display = "block";
                 btn.color = "#ffffff";
@@ -702,6 +728,7 @@ function fn6() { // 杂项。
     var v8 = 0;
     var v9 = 0;
     var v10 = 0;
+    var v11 = 0;
 
     for (let i = 0; i <= windows.length - 1; i++) {
         if (windows[i].className === "noti-window") v1++;
@@ -713,7 +740,8 @@ function fn6() { // 杂项。
         else if (windows[i].className === "xz-window") v7++;
         else if (windows[i].className === "lj-window") v8++;
         else if (windows[i].className === "zd-window") v9++;
-        else if (rzwin[i].className === "rz-window") v10++;
+        else if (windows[i].className === "timer-window") v10++;
+        else if (rzwin[i].className === "rz-window") v11++;
     }
 
     const notic = document.createElement("div");
@@ -764,8 +792,13 @@ function fn6() { // 杂项。
     zdc.style.backgroundColor = "#19191879";
     zdc.style.color = "#ffffff";
 
+    const timerc = document.createElement("div");
+    timerc.innerHTML = `Timer() 数量： ${v10}。`;
+    timerc.className = "rcont";
+    timerc.style.color = "#f0f0f0";
+
     const rzc = document.createElement("div");
-    rzc.innerHTML = `Rz() 数量： ${v10}。`;
+    rzc.innerHTML = `Rz() 数量： ${v11}。`;
     rzc.className = "rcont";
     rzc.style.padding = "7px 15px";
     rzc.style.borderRadius = "5px";
@@ -782,6 +815,7 @@ function fn6() { // 杂项。
         xzc,
         ljc,
         zdc,
+        timerc,
         rzc,
     ];
 
@@ -798,6 +832,7 @@ function fn6() { // 杂项。
     urcc(inf, xzc);
     urcc(inf, ljc);
     urcc(inf, zdc);
+    urcc(inf, timerc);
     urcc(inf, rzc);
 }
 

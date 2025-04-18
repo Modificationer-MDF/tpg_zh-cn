@@ -111,7 +111,7 @@ pre {
     border: none;
 }
 
-@keyframes _head3 {
+@keyframes _head3 { /* fn1() */
     from {
         opacity: 0;
         transform: translateX(0);
@@ -130,28 +130,43 @@ pre {
     }
     to {
         opacity: 1;
-        height: 1170px;
+        height: 1240px;
         transform: translateX(5vw);
     }
 }
 
-@keyframes _head4 {
+@keyframes head4- { /* fn2() */
+    from {
+        opacity: 1;
+        height: 60px;
+        transform: translateX(20vw);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(5vw);
+        height: 650px;
+    }
+}
+
+@keyframes _head5 { /* fn3() */
     from {
         opacity: 0;
         transform: translateX(0vw);
     }
+
     to {
         opacity: 1;
         transform: translateX(20vw);
     }
 }
 
-@keyframes head4- {
+@keyframes head5- {
     from {
         opacity: 1;
         height: 60px;
         transform: translateX(20vw);
     }
+
     to {
         opacity: 1;
         transform: translateX(5vw);
@@ -269,14 +284,14 @@ pre {
     background-color: #14253699;
 }
 
-.btn26, .btn27, .btn28 {
+.btn26, .btn27, .btn28, .btn29 {
+    color: black;
     opacity: 1;
     padding: 14px 25px;
     margin-bottom: 15px;
     border-radius: 5px;
     font-size: 20px;
     border: none;
-    color: black;
 }
 
 .btn26 {
@@ -289,6 +304,10 @@ pre {
 
 .btn28 {
     background-color: #9cdcfe99;
+}
+
+.btn29 {
+    background-color: #f0f0f099;
 }
 
 

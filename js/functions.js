@@ -11,10 +11,10 @@ function rz(string, time) {
     if (time == null || time == undefined) time = smarttime(string);
 
     const window = document.createElement("div");
-    window.className = `rz-window`;
+    window.className = "rz-window";
     window.style.opacity = 0;
     const content = document.createElement("div");
-    content.className = `rz-content`;
+    content.className = "rz-content";
     content.innerHTML = string;
 
     const l = Math.ceil(string.length / 14);
@@ -43,21 +43,27 @@ function rz(string, time) {
 function noti(string, title) {
     if (string == null || string == undefined) {
         fail("不能输入 null 或 undefined！");
-        return 39;
-    } else if (title == null || title == undefined || title === "") title = "通知";
-    string = string.toString();
-    let replaced = string.replace(/\s+/g, "");
-    if (replaced === "") {
+        return "在 Noti() 函数中，string 参数不能为 null 或 undefined。";
+    }
+    string = String(string);
+    let s_replaced = string.replace(/\s+/g, "");
+    if (title == null || title == undefined) title = "通知";
+    else {
+        title = String(title);
+        let t_replaced = title.replace(/\s+/g, "");
+        if (t_replaced === "") title = "通知";
+    }
+    if (s_replaced === "") {
         warn("不能输入空字符串。");
-        return -39;
+        return "在 Noti() 函数中，string 参数不能为空。";
     }
 
     const window = document.createElement("div");
-    window.className = `noti-window`;
+    window.className = "noti-window";
     const square = document.createElement("div");
-    square.className = `noti-square`;
+    square.className = "noti-square";
     const icon = document.createElement("img");
-    icon.src = `images/Inf.png`;
+    icon.src = "images/Notification.png";
     icon.style.opacity = 0;
     icon.style.transistion = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const txt = document.createElement("div");
@@ -69,7 +75,7 @@ function noti(string, title) {
     content.style.opacity = 0;
     content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const bar = document.createElement("div");
-    bar.className = `noti-progressbar`;
+    bar.className = "noti-progressbar";
 
     create(window);
     document.body.appendChild(window);
@@ -100,7 +106,7 @@ function noti(string, title) {
             rect.right <= (window.innerWidth || document.documentElement.clientWidth)
         );
         if (viewport === false) {
-            rz("你有 1 个未阅览完的 noti() 窗口。");
+            rz("你有 1 个未阅览完的 Noti() 窗口。");
         }
     };
 
@@ -142,25 +148,31 @@ function noti(string, title) {
 function cg(string, title) {
     if (string == null || string == undefined) {
         fail("不能输入 null 或 undefined！");
-        return 39;
-    } else if (title == null || title == undefined || title === "") title = "完成";
-    string = string.toString();
-    let replaced = string.replace(/\s+/g, "");
-    if (replaced === "") {
+        return "在 Cg() 函数中，string 参数不能为 null 或 undefined。";
+    }
+    string = String(string);
+    let s_replaced = string.replace(/\s+/g, "");
+    if (title == null || title == undefined) title = "完成";
+    else {
+        title = String(title);
+        let t_replaced = title.replace(/\s+/g, "");
+        if (t_replaced === "") title = "完成";
+    }
+    if (s_replaced === "") {
         warn("不能输入空字符串。");
-        return -39;
+        return "在 Cg() 函数中，string 参数不能为空。";
     }
 
     const window = document.createElement("div");
-    window.className = `cg-window`;
+    window.className = "cg-window";
     const square = document.createElement("div");
-    square.className = `cg-square`;
+    square.className = "cg-square";
     const txt = document.createElement("div");
     txt.className = "fn-title";
     txt.style.opacity = 0;
     txt.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const icon = document.createElement("img");
-    icon.src = `images/Suc.png`;
+    icon.src = "images/Suc.png";
     icon.style.opacity = 0;
     icon.style.transistion = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const content = document.createElement("div");
@@ -168,7 +180,7 @@ function cg(string, title) {
     content.style.opacity = 0;
     content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const bar = document.createElement("div");
-    bar.className = `cg-progressbar`;
+    bar.className = "cg-progressbar";
 
     create(window);
     document.body.appendChild(window);
@@ -187,7 +199,7 @@ function cg(string, title) {
         content.style.opacity = 1;
         txt.style.opacity = 1;
         icon.style.opacity = 1;
-    });``
+    });
 
     const l1 = Math.ceil(string.length / 14);
     var lh1 = parseInt(window.style.lineHeight);
@@ -214,7 +226,7 @@ function cg(string, title) {
             rect.right <= (window.innerWidth || document.documentElement.clientWidth)
         );
         if (viewport === false) {
-            rz("你有 1 个未阅览完的 cg() 窗口。");
+            rz("你有 1 个未阅览完的 Cg() 窗口。");
         }
     };
 
@@ -239,21 +251,27 @@ function cg(string, title) {
 function fail(string, title) {
     if (string == null || string == undefined) {
         fail("不能输入 null 或 undefined！");
-        return 39;
-    } else if (title == null || title == undefined || title === "") title = "错误";
-    string = string.toString();
-    let replaced = string.replace(/\s+/g, "");
-    if (replaced === "") {
+        return "在 Fail() 函数中，string 参数不能为 null 或 undefined。";
+    }
+    string = String(string);
+    let s_replaced = string.replace(/\s+/g, "");
+    if (title == null || title == undefined) title = "错误";
+    else {
+        title = String(title);
+        let t_replaced = title.replace(/\s+/g, "");
+        if (t_replaced === "") title = "错误";
+    }
+    if (s_replaced === "") {
         warn("不能输入空字符串。");
-        return -39;
+        return "在 Fail() 函数中，string 参数不能为空。";
     }
 
     const window = document.createElement("div");
-    window.className = `fail-window`;
+    window.className = "fail-window";
     const square = document.createElement("div");
-    square.className = `fail-square`;
+    square.className = "fail-square";
     const icon = document.createElement("img");
-    icon.className = `fail-icon`;
+    icon.className = "fail-icon";
     icon.style.opacity = 0;
     icon.style.transistion = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const txt = document.createElement("div");
@@ -265,7 +283,7 @@ function fail(string, title) {
     content.style.opacity = 0;
     content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const bar = document.createElement("div");
-    bar.className = `fail-progressbar`;
+    bar.className = "fail-progressbar";
 
     create(window);
     document.body.appendChild(window);
@@ -275,7 +293,7 @@ function fail(string, title) {
     window.appendChild(content);
     window.appendChild(bar);
 
-    icon.src = `images/Err.png`;
+    icon.src = "images/Err.png";
     window.style.animation = `fn- 550ms forwards ${easing}`;
     content.innerHTML = string;
     txt.innerHTML = title;
@@ -312,7 +330,7 @@ function fail(string, title) {
             rect.right <= (window.innerWidth || document.documentElement.clientWidth)
         );
         if (viewport === false) {
-            rz("你有 1 个未阅览完的 fail() 窗口。");
+            rz("你有 1 个未阅览完的 Fail() 窗口。");
         }
     };
 
@@ -337,21 +355,27 @@ function fail(string, title) {
 function warn(string, title) {
     if (string == null || string == undefined) {
         fail("不能输入 null 或 undefined！");
-        return 39;
-    } else if (title == null || title == undefined || title === "") title = "注意";
-    string = string.toString();
-    let replaced = string.replace(/\s+/g, "");
-    if (replaced === "") {
+        return "在 Warn() 函数中，string 参数不能为 null 或 undefined。";
+    }
+    string = String(string);
+    let s_replaced = string.replace(/\s+/g, "");
+    if (title == null || title == undefined) title = "注意";
+    else {
+        title = String(title);
+        let t_replaced = title.replace(/\s+/g, "");
+        if (t_replaced === "") title = "注意";
+    }
+    if (s_replaced === "") {
         warn("不能输入空字符串。");
-        return -39;
+        return "在 Warn() 函数中，string 参数不能为空。";
     }
 
     const window = document.createElement("div");
-    window.className = `warn-window`;
+    window.className = "warn-window";
     const square = document.createElement("div");
-    square.className = `warn-square`;
+    square.className = "warn-square";
     const icon = document.createElement("img");
-    icon.className = `warn-icon`;
+    icon.className = "warn-icon";
     icon.style.opacity = 0;
     icon.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const txt = document.createElement("div");
@@ -363,7 +387,7 @@ function warn(string, title) {
     content.style.opacity = 0;
     content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const bar = document.createElement("div");
-    bar.className = `warn-progressbar`;
+    bar.className = "warn-progressbar";
 
     create(window);
     document.body.appendChild(window);
@@ -373,7 +397,7 @@ function warn(string, title) {
     window.appendChild(content);
     window.appendChild(bar);
 
-    icon.src = `images/Exc.png`;
+    icon.src = "images/Exc.png";
     window.style.animation = `fn- 550ms forwards ${easing}`;
     content.innerHTML = string;
     txt.innerHTML = title;
@@ -410,7 +434,7 @@ function warn(string, title) {
             rect.right <= (window.innerWidth || document.documentElement.clientWidth)
         );
         if (viewport === false) {
-            rz("你有 1 个未阅览完的 warn() 窗口。");
+            rz("你有 1 个未阅览完的 Warn() 窗口。");
         }
     };
 
@@ -434,23 +458,29 @@ function warn(string, title) {
 
 async function inp(string, title) {
     return new Promise((resolve) => {
-        if (string === null || string === undefined) {
+        if (string == null || string == undefined) {
             fail("不能输入 null 或 undefined！");
-            return 39;
-        } else if (title == null || title == undefined || title === "") title = "输入";
-        string = string.toString();
-        let replaced = string.replace(/\s+/g, "");
-        if (replaced === "") {
+            return "在 Inp() 函数中，string 参数不能为 null 或 undefined。";
+        }
+        string = String(string);
+        let s_replaced = string.replace(/\s+/g, "");
+        if (title == null || title == undefined) title = "输入";
+        else {
+            title = String(title);
+            let t_replaced = title.replace(/\s+/g, "");
+            if (t_replaced === "") title = "输入";
+        }
+        if (s_replaced === "") {
             warn("不能输入空字符串。");
-            return -39;
+            return "在 Inp() 函数中，string 参数不能为空。";
         }
 
         const window = document.createElement("div");
-        window.className = `inp-window`;
+        window.className = "inp-window";
         const square = document.createElement("div");
-        square.className = `inp-square`;
+        square.className = "inp-square";
         const icon = document.createElement("img");
-        icon.className = `inp-icon`;
+        icon.className = "inp-icon";
         icon.style.opacity = 0;
         icon.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
         const txt = document.createElement("div");
@@ -478,7 +508,7 @@ async function inp(string, title) {
                 rect.right <= (window.innerWidth || document.documentElement.clientWidth)
             );
             if (viewport === false) {
-                rz("你有 1 个未看到的 inp() 窗口。");
+                rz("你有 1 个未看到的 Inp() 窗口。");
             }
         };
 
@@ -490,7 +520,7 @@ async function inp(string, title) {
         window.appendChild(content);
         window.appendChild(box);
         
-        icon.src = `images/Inp.png`;
+        icon.src = "images/Inp.png";
         window.style.animation = `fn- 550ms forwards ${easing}`;
         content.innerHTML = string;
         txt.innerHTML = title;
@@ -543,11 +573,11 @@ async function xz(string, n, names, title) {
         const array = Array.from(names);
 
         const window = document.createElement("div");
-        window.className = `xz-window`;
+        window.className = "xz-window";
         const square = document.createElement("div");
-        square.className = `xz-square`;
+        square.className = "xz-square";
         const icon = document.createElement("img");
-        icon.className = `xz-icon`;
+        icon.className = "xz-icon";
         icon.style.opacity = 0;
         icon.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
         const txt = document.createElement("div");
@@ -561,13 +591,19 @@ async function xz(string, n, names, title) {
 
         if (string == null || string == undefined) {
             fail("不能输入 null 或 undefined！");
-            return 39;
-        } else if (title == null || title == undefined || title === "") title = "选择";
-        string = string.toString();
-        let replaced1 = string.replace(/\s+/g, "");
-        if (replaced1 === "") {
+            return "在 Xz() 函数中，string 参数不能为 null 或 undefined。";
+        }
+        string = String(string);
+        let s_replaced = string.replace(/\s+/g, "");
+        if (title == null || title == undefined) title = "选择";
+        else {
+            title = String(title);
+            let t_replaced = title.replace(/\s+/g, "");
+            if (t_replaced === "") title = "选择";
+        }
+        if (s_replaced === "") {
             warn("不能输入空字符串。");
-            return -39;
+            return "在 Xz() 函数中，string 参数不能为空。";
         }
 
         create(window);
@@ -577,7 +613,7 @@ async function xz(string, n, names, title) {
         square.appendChild(txt);
         window.appendChild(content);
 
-        icon.src = `images/Sel.png`;
+        icon.src = "images/Sel.png";
         window.style.animation = `fn- 550ms forwards ${easing}`;
         content.innerHTML = string;
         txt.innerHTML = title;
@@ -591,7 +627,7 @@ async function xz(string, n, names, title) {
                 rect.right <= (window.innerWidth || document.documentElement.clientWidth)
             );
             if (viewport === false) {
-                rz("你有 1 个未看到的 xz() 窗口。");
+                rz("你有 1 个未看到的 Xz() 窗口。");
             }
         };
 
@@ -618,7 +654,7 @@ async function xz(string, n, names, title) {
         }
 
         for (let i = 0; i < n; i++) {
-            const btn = document.createElement(`button`);
+            const btn = document.createElement("button");
             array[i] = String(array[i]);
             btn.id = `btn${i}`;
             btn.innerHTML = array[i];
@@ -629,10 +665,10 @@ async function xz(string, n, names, title) {
             btn.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
             btn.style.fontSize = "20px";
             btn.style.border = "none";
-            btn.style.padding = `14px 25px`;
-            btn.style.textAlign = `center`;
-            btn.style.cursor = `pointer`;
-            btn.style.color = `white`;
+            btn.style.padding = "14px 25px";
+            btn.style.textAlign = "center";
+            btn.style.cursor = "pointer";
+            btn.style.color = "white";
             btn.style.position = "absolute";
             btn.style.top = `${i * 60 + 60}px`;
             btn.style.flex = "1";
@@ -673,21 +709,27 @@ async function xz(string, n, names, title) {
 async function synchr(string, title) {
     if (string == null || string == undefined) {
         fail("不能输入 null 或 undefined！");
-        return 39;
-    } else if (title == null || title == undefined || title === "") title = "同步";
-    string = string.toString();
-    let replaced = string.replace(/\s+/g, "");
-    if (replaced === "") {
+        return "在 Synchr() 函数中，string 参数不能为 null 或 undefined。";
+    }
+    string = String(string);
+    let s_replaced = string.replace(/\s+/g, "");
+    if (title == null || title == undefined) title = "同步";
+    else {
+        title = String(title);
+        let t_replaced = title.replace(/\s+/g, "");
+        if (t_replaced === "") title = "同步";
+    }
+    if (s_replaced === "") {
         warn("不能输入空字符串。");
-        return -39;
+        return "在 Synchr() 函数中，string 参数不能为空。";
     }
 
     const window = document.createElement("div");
-    window.className = `synchr-window`;
+    window.className = "synchr-window";
     const square = document.createElement("div");
-    square.className = `synchr-square`;
+    square.className = "synchr-square";
     const icon = document.createElement("img");
-    icon.className = `synchr-icon`;
+    icon.className = "synchr-icon";
     icon.style.opacity = 0;
     icon.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const txt = document.createElement("div");
@@ -699,7 +741,7 @@ async function synchr(string, title) {
     content.style.opacity = 0;
     content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const bar = document.createElement("div");
-    bar.className = `synchr-progressbar`;
+    bar.className = "synchr-progressbar";
 
     create(window);
     document.body.appendChild(window);
@@ -709,7 +751,7 @@ async function synchr(string, title) {
     window.appendChild(content);
     window.appendChild(bar);
 
-    icon.src = `images/Synchronization.png`;
+    icon.src = "images/Synchronization.png";
     window.style.animation = `fn- 550ms forwards ${easing}`;
     content.innerHTML = string;
     rz(string);
@@ -738,7 +780,7 @@ async function synchr(string, title) {
             rect.right <= (window.innerWidth || document.documentElement.clientWidth)
         );
         if (viewport === false) {
-            rz("你有 1 个未阅览完的 synchr() 窗口。");
+            rz("你有 1 个未阅览完的 Synchr() 窗口。");
         }
     };
     
@@ -761,27 +803,39 @@ async function synchr(string, title) {
 // lj 函数。
 
 async function lj(string, url, title) {
-    if (string == null || string == undefined || url == null || url == undefined) {
+    if (string == null || string == undefined) {
         fail("不能输入 null 或 undefined！");
-        return 39;
-    } else if (title == null || title == undefined || title === "") title = "链接";
-    else {
-        string = string.toString();
-        url = url.toString();
+        return "在 Lj() 函数中，string 参数不能为 null 或 undefined。";
     }
-    let replaced1 = string.replace(/\s+/g, "");
-    let replaced2 = url.replace(/\s+/g, "");
-    if (replaced1 === "" || replaced2 === "") {
+    if (url == null || url == undefined) {
+        warn("无法跳转至 null 或 undefined。");
+        return "在 Lj() 函数中，url 参数不能为 null 或 undefined。";
+    }
+    string = String(string);
+    url = String(url);
+    let s_replaced = string.replace(/\s+/g, "");
+    let u_replaced = url.replace(/\s+/g, "");
+    if (title == null || title == undefined) title = "链接";
+    else {
+        title = String(title);
+        let t_replaced = title.replace(/\s+/g, "");
+        if (t_replaced === "") title = "链接";
+    }
+    if (s_replaced === "") {
         warn("不能输入空字符串。");
-        return -39;
+        return "在 Noti() 函数中，string 参数不能为空。";
+    }
+    if (u_replaced === "") {
+        warn("无法跳转至空地址。");
+        return "在 Lj() 函数中，url 参数不能为空。";
     }
 
     const window = document.createElement("div");
-    window.className = `lj-window`;
+    window.className = "lj-window";
     const square = document.createElement("div");
-    square.className = `lj-square`;
+    square.className = "lj-square";
     const icon = document.createElement("img");
-    icon.className = `lj-icon`;
+    icon.className = "lj-icon";
     icon.style.opacity = 0;
     icon.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const txt = document.createElement("div");
@@ -792,7 +846,7 @@ async function lj(string, url, title) {
     content.className = "fn-content";
     content.style.opacity = 0;
     content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
-    const btn = document.createElement(`button`);
+    const btn = document.createElement("button");
     btn.className = "lj-link";
     btn.style.opacity = 0;
     btn.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
@@ -814,11 +868,11 @@ async function lj(string, url, title) {
             rect.right <= (window.innerWidth || document.documentElement.clientWidth)
         );
         if (viewport === false) {
-            rz("你有 1 个未看到的 lj() 窗口。");
+            rz("你有 1 个未看到的 Lj() 窗口。");
         }
     };
 
-    icon.src = `images/Link.png`;
+    icon.src = "images/Link.png";
     window.style.animation = `fn- 550ms forwards ${easing}`;
     content.innerHTML = string;
     btn.innerHTML = url;
@@ -840,7 +894,9 @@ async function lj(string, url, title) {
     content.style.marginTop = `${20 * (l2 + 1)}px`;
 
     btn.onclick = () => {
-        if (!open(url, `_blank`, `width=${defwid}, height=${defhei}`)) warn("弹出的窗口被阻止。");
+        if (!open(url, "_blank", `width=${defwid}, height=${defhei}`)) {
+            warn("弹出的窗口被阻止。");
+        }
         content.style.opacity = 0;
         content.style.transform = "translateY(-10%)";
         btn.style.opacity = 0;
@@ -863,21 +919,27 @@ async function zd(string, title) {
     return new Promise((resolve) => {
         if (string == null || string == undefined) {
             fail("不能输入 null 或 undefined！");
-            return 39;
-        } else if (title == null || title == undefined || title === "") title = "终端";
-        string = string.toString();
-        let replaced = string.replace(/\s+/g, "");
-        if (replaced === "") {
+            return "在 Zd() 函数中，string 参数不能为 null 或 undefined。";
+        }
+        string = String(string);
+        let s_replaced = string.replace(/\s+/g, "");
+        if (title == null || title == undefined) title = "终端";
+        else {
+            title = String(title);
+            let t_replaced = title.replace(/\s+/g, "");
+            if (t_replaced === "") title = "终端";
+        }
+        if (s_replaced === "") {
             warn("不能输入空字符串。");
-            return -39;
+            return "在 Zd() 函数中，string 参数不能为空。";
         }
 
         const window = document.createElement("div");
-        window.className = `zd-window`;
+        window.className = "zd-window";
         const square = document.createElement("div");
-        square.className = `zd-square`;
+        square.className = "zd-square";
         const icon = document.createElement("img");
-        icon.className = `zd-icon`;
+        icon.className = "zd-icon";
         icon.style.opacity = 0;
         icon.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
         const txt = document.createElement("div");
@@ -888,8 +950,8 @@ async function zd(string, title) {
         content.className = "fn-content";
         content.style.opacity = 0;
         content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
-        const box = document.createElement(`textarea`);
-        box.className = `zd-box`;
+        const box = document.createElement("textarea");
+        box.className = "zd-box";
         box.style.opacity = 0;
         box.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
         box.style.resize = "none";
@@ -916,7 +978,7 @@ async function zd(string, title) {
                     return;
                 }
                 try {
-                    let k = eval(value);
+                    let k = await eval(value);
                     if (k !== undefined && k !== null) {
                         rz(k);
                         resolve(k);
@@ -1008,7 +1070,7 @@ async function zd(string, title) {
         window.appendChild(content);
         window.appendChild(box);
 
-        icon.src = `images/Com.png`;
+        icon.src = "images/Com.png";
         window.style.animation = `fn- 550ms forwards ${easing}`;
         content.innerHTML = string;
         txt.innerHTML = title;
@@ -1044,17 +1106,17 @@ async function wz(string) {
         }
 
         const window = document.createElement("div");
-        window.className = `wz-window`;
-        const txt = document.createElement(`pre`);
-        txt.className = `wz-content`;
+        window.className = "wz-window";
+        const txt = document.createElement("pre");
+        txt.className = "wz-content";
         txt.innerHTML = string;
         const btn = document.createElement("img");
         btn.className = "wz-icon";
         btn.src = "images/Next.png";
         const left = document.createElement("div");
-        left.className = `wz-left`;
+        left.className = "wz-left";
         const right = document.createElement("div");
-        right.className = `wz-right`;
+        right.className = "wz-right";
 
         document.body.appendChild(window);
         window.appendChild(left);
@@ -1108,5 +1170,152 @@ async function wz(string) {
                 }, 2100);
             };
         });
+    });
+}
+
+async function timer(string, time, title) {
+    return new Promise((resolve) => {
+        let passed_time = 0;
+        let unit;
+        let transfer;
+        if (string == null || string == undefined) {
+            fail("不能输入 null 或 undefined！");
+            return "在 Timer() 函数中，string 参数不能为 null 或 undefined。";
+        }
+        if (time == null || time == undefined) {
+            fail("null 或 undefined 不是有效的数字。");
+            return "在 Timer() 函数中，time 参数不能为 null 或 undefined。";
+        }
+        string = String(string);
+        time = Number(time);
+        let s_replaced = string.replace(/\s+/g, "");
+        if (title == null || title == undefined) title = "计时";
+        if (isNaN(time)) {
+            fail("time 参数必须为可识别的数字或纯数字字符串。");
+            return "在 Timer() 函数中，time 参数必须为可识别的数字或纯数字字符串。";
+        } else if (time < 1250) {
+            warn("time 的值过小，无法正常计时。");
+            return "在 Timer() 函数中，time 的值必须大于等于 1250。";
+        }
+        else {
+            title = String(title);
+            let t_replaced = title.replace(/\s+/g, "");
+            if (t_replaced === "") title = "计时";
+        }
+        if (s_replaced === "") {
+            warn("不能输入空字符串。");
+            return "在 Timer() 函数中，string 参数不能为空。";
+        }
+
+        const window = document.createElement("div");
+        window.className = "timer-window";
+        const square = document.createElement("div");
+        square.className = "timer-square";
+        const icon = document.createElement("img");
+        icon.src = "images/Timer.png";
+        icon.style.opacity = 0;
+        icon.style.transistion = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+        const txt = document.createElement("div");
+        txt.className = "fn-title";
+        txt.style.color = "black";
+        txt.style.opacity = 0;
+        txt.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+        const content = document.createElement("div");
+        content.className = "fn-content";
+        content.style.color = "black";
+        content.style.opacity = 0;
+        content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+        const bar = document.createElement("div");
+        bar.className = "timer-progressbar";
+
+        create(window);
+        document.body.appendChild(window);
+        window.appendChild(square);
+        square.appendChild(icon);
+        square.appendChild(txt);
+        window.appendChild(content);
+        window.appendChild(bar);
+
+        window.style.animation = `fn- 550ms forwards ${easing}`;
+        square.style.animation = `title- 550ms forwards ${easing}`;
+        txt.innerHTML = title;
+
+        if (time < 6e4) {
+            unit = "秒";
+            transfer = 1000;
+        } else if (time >= 6e4 && time <= 3.6e6) {
+            unit = "分钟";
+            transfer = 6e4;
+        } else if (time > 3.6e6 && time <= 8.64e7) {
+            unit = "小时";
+            transfer = 3.6e6;
+        } else if (time > 8.64e7 && time <= 6.048e10) {
+            unit = "天";
+            transfer = 8.64e7;
+        } else if (time > 6.048e10) {
+            unit = "周";
+            transfer = 6.048e10;
+        }
+
+        let i = setInterval(() => {
+            passed_time += 10;
+            content.innerHTML = `${string}<br />（${passed_time / 1000} 秒 / ${(time / transfer).toFixed(2)} ${unit}）`;
+            if (passed_time >= time) {
+                clearInterval(i);
+            }
+        }, 10);
+
+        window.addEventListener("animationend", () => {
+            content.style.transform = "translateY(0%)";
+            content.style.opacity = 1;
+            icon.style.opacity = 1;
+            txt.style.opacity = 1;
+        });
+
+        const visible = () => {
+            const rect = window.getBoundingClientRect();
+            const viewport = (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+            if (viewport === false) {
+                rz("你有 1 个未阅览完的 Timer() 窗口。");
+            }
+        };
+
+        const l1 = Math.ceil(string.length / 14);
+        const lh1 = parseInt(window.style.lineHeight);
+        content.style.height = `${l1 * lh1}px`;
+
+        const l2 = Math.ceil(title.length / 14);
+        content.style.marginTop = `${20 * (l2 + 1)}px`;
+
+        let pro = 0;
+        const interval = setInterval(() => {
+            pro += 10 / (time / 100);
+            bar.style.width = `${pro}%`;
+            if (pro >= 100) {
+                clearInterval(interval);
+            }
+        }, 10);
+
+        setTimeout(() => {
+            content.style.opacity = 0;
+            content.style.transform = "translateY(-10%)";
+            icon.style.opacity = 0;
+            txt.style.opacity = 0;
+            resolve(true);
+            content.addEventListener("transitionend", () => {
+                window.style.animation = `-fn 550ms forwards ${easing}`;
+                square.style.animation = `-title 550ms forwards ${easing}`;
+                setTimeout(() => {
+                    if (document.body.contains(window)) document.body.removeChild(window);
+                    close(window, windows);
+                }, 550);
+            });
+        }, time);
+        setTimeout(visible);
     });
 }
