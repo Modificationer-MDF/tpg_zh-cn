@@ -1205,10 +1205,7 @@ async function timer(string, time, title) {
             let t_replaced = title.replace(/\s+/g, "");
             if (t_replaced === "") title = "计时";
         }
-        if (s_replaced === "") {
-            warn("不能输入空字符串。");
-            return "在 Timer() 函数中，string 参数不能为空。";
-        }
+        if (s_replaced === "") string = "";
 
         const window = document.createElement("div");
         window.className = "timer-window";
