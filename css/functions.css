@@ -15,6 +15,7 @@
     background-color: #18a68999;
     border-left: 5px solid #1b7163c9;
     border-right: 5px solid #1b7163c9;
+    box-shadow: 0px 5px 14px #26c9a9;
 }
 
 .noti-window .noti-square, .cg-window .cg-square, .fail-window .fail-square, .warn-window .warn-square, .inp-window .inp-square, .synchr-window .synchr-square, .xz-window .xz-square, .lj-window .lj-square, .zd-window .zd-square, .timer-window .timer-square {
@@ -132,6 +133,7 @@
     background-color: #1d583799;
     border-left: 5px solid #183b25c9;
     border-right: 5px solid #183b25c9;
+    box-shadow: 0px 5px 14px #204e30;
 }
 
 .cg-square {
@@ -146,6 +148,7 @@
     background-color: #791e1d99;
     border-left: 5px solid #4a1514c9;
     border-right: 5px solid #4a1514c9;
+    box-shadow: 0px 5px 14px #4a1514;
 }
 
 .fail-square {
@@ -160,6 +163,7 @@
     background-color: #84782999;
     border-left: 5px solid #615518c9;
     border-right: 5px solid #615518c9;
+    box-shadow: 0px 5px 14px #9c8d2c;
 }
 
 .warn-square {
@@ -174,6 +178,7 @@
     background-color: #23508799;
     border-left: 5px solid #183450c9;
     border-right: 5px solid #183450c9;
+    box-shadow: 0px 5px 14px #4a5568;
 }
 
 .inp-square {
@@ -203,6 +208,7 @@
     background-color: #7527a499;
     border-left: 5px solid #461c5fc9;
     border-right: 5px solid #461c5fc9;
+    box-shadow: 0px 5px 14px #6a3399;
 }
 
 .xz-square {
@@ -213,10 +219,11 @@
     background-color: #9e338999;
     border-left: 5px solid #c125abc9;
     border-right: 5px solid #c125abc9;
+    box-shadow: 0px 5px 14px #e11af1;
 }
 
 .synchr-square {
-    background-color: #c125abc9;
+    background-color: #e11af149;
 }
 
 .synchr-progressbar {
@@ -227,6 +234,7 @@
     background-color: #a6580d99;
     border-left: 5px solid #753e14c9;
     border-right: 5px solid #753e14c9;
+    box-shadow: 0px 5px 14px #9c501d;
 }
 
 .lj-square {
@@ -251,6 +259,7 @@
     background-color: #19181899;
     border-left: 5px solid #000000c9;
     border-right: 5px solid #000000c9;
+    box-shadow: 0px 5px 14px #090606;
 }
 
 .zd-square {
@@ -267,6 +276,7 @@
     background-color: #f0f0f099;
     border-left: 5px solid #989898c9;
     border-right: 5px solid #989898c9;
+    box-shadow: 0px 5px 14px #ffffff;
 }
 
 .timer-square {
@@ -277,13 +287,13 @@
     background-color: #d0d0d099;
 }
 
-
 .wz-window {
     width: 0;
     height: 50vh;
     background-color: #0000009a;
     display: flex;
     top: 50%;
+    box-shadow: 0px 3px 7px #000000;
     position: absolute;
     z-index: 101;
     flex-wrap: wrap;
@@ -477,6 +487,7 @@
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     top: 50%;
     left: 14px;
+    box-shadow: 0px 3px 7px #0b2345;
 }
 
 .rz-content {
