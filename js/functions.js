@@ -67,11 +67,11 @@ function noti(string, title) {
     icon.style.opacity = 0;
     icon.style.transistion = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const txt = document.createElement("div");
-    txt.className = "fn-title";
+    txt.className = "jr_fntitle";
     txt.style.opacity = 0;
     txt.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const content = document.createElement("div");
-    content.className = "fn-content";
+    content.className = "jr_fncontent";
     content.style.opacity = 0;
     content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const bar = document.createElement("div");
@@ -85,7 +85,7 @@ function noti(string, title) {
     window.appendChild(content);
     window.appendChild(bar);
 
-    window.style.animation = `fn- 550ms forwards ${easing}`;
+    window.style.animation = `jr_fn 550ms forwards ${easing}`;
     square.style.animation = `title- 550ms forwards ${easing}`;
     content.innerHTML = string;
     txt.innerHTML = title;
@@ -97,18 +97,7 @@ function noti(string, title) {
         txt.style.opacity = 1;
     });
 
-    const visible = () => {
-        const rect = window.getBoundingClientRect();
-        const viewport = (
-            rect.top >= 0 &&
-            rect.left >= 0 &&
-            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-        );
-        if (viewport === false) {
-            rz("你有 1 个未阅览完的 Noti() 窗口。");
-        }
-    };
+    visible(content, "Noti");
 
     const l1 = Math.ceil(string.length / 14);
     const lh1 = parseInt(window.style.lineHeight);
@@ -132,15 +121,14 @@ function noti(string, title) {
         icon.style.opacity = 0;
         txt.style.opacity = 0;
         content.addEventListener("transitionend", () => {
-            window.style.animation = `-fn 550ms forwards ${easing}`;
+            window.style.animation = `cc_fn 550ms forwards ${easing}`;
             square.style.animation = `-title 550ms forwards ${easing}`;
             setTimeout(() => {
                 if (document.body.contains(window)) document.body.removeChild(window);
                 close(window, windows);
-            }, 550);
+            }, 550);    
         });
     }, smarttime(string));
-    setTimeout(visible);
 }
 
 // cg 函数。
@@ -168,7 +156,7 @@ function cg(string, title) {
     const square = document.createElement("div");
     square.className = "cg-square";
     const txt = document.createElement("div");
-    txt.className = "fn-title";
+    txt.className = "jr_fntitle";
     txt.style.opacity = 0;
     txt.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const icon = document.createElement("img");
@@ -176,7 +164,7 @@ function cg(string, title) {
     icon.style.opacity = 0;
     icon.style.transistion = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const content = document.createElement("div");
-    content.className = "fn-content";
+    content.className = "jr_fncontent";
     content.style.opacity = 0;
     content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const bar = document.createElement("div");
@@ -190,7 +178,7 @@ function cg(string, title) {
     window.appendChild(content);
     window.appendChild(bar);
 
-    window.style.animation = `fn- 550ms forwards ${easing}`;
+    window.style.animation = `jr_fn 550ms forwards ${easing}`;
     content.innerHTML = string;
     txt.innerHTML = title;
 
@@ -217,18 +205,7 @@ function cg(string, title) {
         }
     }, 10);
 
-    const visible = () => {
-        const rect = window.getBoundingClientRect();
-        const viewport = (
-            rect.top >= 0 &&
-            rect.left >= 0 &&
-            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-        );
-        if (viewport === false) {
-            rz("你有 1 个未阅览完的 Cg() 窗口。");
-        }
-    };
+    visible(content, "Cg");
 
     setTimeout(() => {
         content.style.opacity = 0;
@@ -236,14 +213,13 @@ function cg(string, title) {
         txt.style.opacity = 0;
         icon.style.opacity = 0;
         content.addEventListener("transitionend", () => {
-            window.style.animation = `-fn 550ms forwards ${easing}`;
+            window.style.animation = `cc_fn 550ms forwards ${easing}`;
             setTimeout(() => {
                 if (document.body.contains(window)) document.body.removeChild(window);
                 close(window, windows)
             }, 550);
         });
     }, smarttime(string));
-    setTimeout(visible);
 }
 
 // fail 函数。
@@ -275,11 +251,11 @@ function fail(string, title) {
     icon.style.opacity = 0;
     icon.style.transistion = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const txt = document.createElement("div");
-    txt.className = "fn-title";
+    txt.className = "jr_fntitle";
     txt.style.opacity = 0;
     txt.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const content = document.createElement("div");
-    content.className = "fn-content";
+    content.className = "jr_fncontent";
     content.style.opacity = 0;
     content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const bar = document.createElement("div");
@@ -294,7 +270,7 @@ function fail(string, title) {
     window.appendChild(bar);
 
     icon.src = "images/Err.png";
-    window.style.animation = `fn- 550ms forwards ${easing}`;
+    window.style.animation = `jr_fn 550ms forwards ${easing}`;
     content.innerHTML = string;
     txt.innerHTML = title;
 
@@ -321,18 +297,7 @@ function fail(string, title) {
         }
     }, 10);
 
-    const visible = () => {
-        const rect = window.getBoundingClientRect();
-        const viewport = (
-            rect.top >= 0 &&
-            rect.left >= 0 &&
-            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-        );
-        if (viewport === false) {
-            rz("你有 1 个未阅览完的 Fail() 窗口。");
-        }
-    };
+    visible(content, "Fail")
 
     setTimeout(() => {
         content.style.opacity = 0;
@@ -340,14 +305,13 @@ function fail(string, title) {
         icon.style.opacity = 0;
         txt.style.opacity = 0;
         content.addEventListener("transitionend", () => {
-            window.style.animation = `-fn 550ms forwards ${easing}`;
+            window.style.animation = `cc_fn 550ms forwards ${easing}`;
             setTimeout(() => {
                 if (document.body.contains(window)) document.body.removeChild(window);
                 close(window, windows)
             }, 550);
         });
     }, smarttime(string));
-    setTimeout(visible);
 }
 
 // warn 函数。
@@ -379,11 +343,11 @@ function warn(string, title) {
     icon.style.opacity = 0;
     icon.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const txt = document.createElement("div");
-    txt.className = "fn-title";
+    txt.className = "jr_fntitle";
     txt.style.opacity = 0;
     txt.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const content = document.createElement("div");
-    content.className = "fn-content";
+    content.className = "jr_fncontent";
     content.style.opacity = 0;
     content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const bar = document.createElement("div");
@@ -398,7 +362,7 @@ function warn(string, title) {
     window.appendChild(bar);
 
     icon.src = "images/Exc.png";
-    window.style.animation = `fn- 550ms forwards ${easing}`;
+    window.style.animation = `jr_fn 550ms forwards ${easing}`;
     content.innerHTML = string;
     txt.innerHTML = title;
 
@@ -425,18 +389,7 @@ function warn(string, title) {
         }
     }, 10);
 
-    const visible = () => {
-        const rect = window.getBoundingClientRect();
-        const viewport = (
-            rect.top >= 0 &&
-            rect.left >= 0 &&
-            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-        );
-        if (viewport === false) {
-            rz("你有 1 个未阅览完的 Warn() 窗口。");
-        }
-    };
+    visible(content, "Warn");
 
     setTimeout(() => {
         content.style.opacity = 0;
@@ -444,14 +397,13 @@ function warn(string, title) {
         icon.style.opacity = 0;
         txt.style.opacity = 0;
         content.addEventListener("transitionend", () => {
-            window.style.animation = `-fn 550ms forwards ${easing}`;
+            window.style.animation = `cc_fn 550ms forwards ${easing}`;
             setTimeout(() => {
                 if (document.body.contains(window)) document.body.removeChild(window);
                 close(window, windows)
             }, 550);
         });
     }, smarttime(string));
-    setTimeout(visible);
 }
 
 // inp 函数。
@@ -484,11 +436,11 @@ async function inp(string, title) {
         icon.style.opacity = 0;
         icon.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
         const txt = document.createElement("div");
-        txt.className = "fn-title";
+        txt.className = "jr_fntitle";
         txt.style.opacity = 0;
         txt.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
         const content = document.createElement("div");
-        content.className = "fn-content";
+        content.className = "jr_fncontent";
         content.style.opacity = 0;
         content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
         const box = document.createElement("textarea");
@@ -499,18 +451,7 @@ async function inp(string, title) {
         box.style.resize = "none";
         box.focus();
 
-        const visible = () => {
-            const rect = window.getBoundingClientRect();
-            const viewport = (
-                rect.top >= 0 &&
-                rect.left >= 0 &&
-                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-            );
-            if (viewport === false) {
-                rz("你有 1 个未看到的 Inp() 窗口。");
-            }
-        };
+        visible(content, "Inp");
 
         create(window);
         document.body.appendChild(window);
@@ -521,7 +462,7 @@ async function inp(string, title) {
         window.appendChild(box);
         
         icon.src = "images/Inp.png";
-        window.style.animation = `fn- 550ms forwards ${easing}`;
+        window.style.animation = `jr_fn 550ms forwards ${easing}`;
         content.innerHTML = string;
         txt.innerHTML = title;
 
@@ -549,7 +490,7 @@ async function inp(string, title) {
                 icon.style.opacity = 0;
                 txt.style.opacity = 0;
                 content.addEventListener("transitionend", () => {
-                    window.style.animation = `-fn 550ms forwards ${easing}`;
+                    window.style.animation = `cc_fn 550ms forwards ${easing}`;
                     setTimeout(() => {
                         resolve(value);
                         if (document.body.contains(window)) document.body.removeChild(window);
@@ -558,7 +499,6 @@ async function inp(string, title) {
                 });
             }
         });
-        setTimeout(visible);
     });
 }
 
@@ -581,11 +521,11 @@ async function xz(string, n, names, title) {
         icon.style.opacity = 0;
         icon.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
         const txt = document.createElement("div");
-        txt.className = "fn-title";
+        txt.className = "jr_fntitle";
         txt.style.opacity = 0;
         txt.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
         const content = document.createElement("div");
-        content.className = "fn-content";
+        content.className = "jr_fncontent";
         content.style.opacity = 0;
         content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
 
@@ -614,22 +554,11 @@ async function xz(string, n, names, title) {
         window.appendChild(content);
 
         icon.src = "images/Sel.png";
-        window.style.animation = `fn- 550ms forwards ${easing}`;
+        window.style.animation = `jr_fn 550ms forwards ${easing}`;
         content.innerHTML = string;
         txt.innerHTML = title;
 
-        const visible = () => {
-            const rect = window.getBoundingClientRect();
-            const viewport = (
-                rect.top >= 0 &&
-                rect.left >= 0 &&
-                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-            );
-            if (viewport === false) {
-                rz("你有 1 个未看到的 Xz() 窗口。");
-            }
-        };
+        visible(content, "Xz");
 
         const l1 = Math.ceil(string.length / 14);
         var lh1 = parseInt(window.style.lineHeight);
@@ -691,7 +620,7 @@ async function xz(string, n, names, title) {
                 icon.style.opacity = 0;
                 txt.style.opacity = 0;
                 content.addEventListener("transitionend", () => {
-                    window.style.animation = `-fn 550ms forwards ${easing}`;
+                    window.style.animation = `cc_fn 550ms forwards ${easing}`;
                     setTimeout(() => {
                         if (document.body.contains(window)) document.body.removeChild(window);
                         close(window, windows)
@@ -700,7 +629,6 @@ async function xz(string, n, names, title) {
             };
             content.appendChild(btn);
         }
-        setTimeout(visible);
     });
 }
 
@@ -733,11 +661,11 @@ async function synchr(string, title) {
     icon.style.opacity = 0;
     icon.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const txt = document.createElement("div");
-    txt.className = "fn-title";
+    txt.className = "jr_fntitle";
     txt.style.opacity = 0;
     txt.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const content = document.createElement("div");
-    content.className = "fn-content";
+    content.className = "jr_fncontent";
     content.style.opacity = 0;
     content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const bar = document.createElement("div");
@@ -752,7 +680,7 @@ async function synchr(string, title) {
     window.appendChild(bar);
 
     icon.src = "images/Synchronization.png";
-    window.style.animation = `fn- 550ms forwards ${easing}`;
+    window.style.animation = `jr_fn 550ms forwards ${easing}`;
     content.innerHTML = string;
     rz(string);
     txt.innerHTML = title;
@@ -771,18 +699,7 @@ async function synchr(string, title) {
     const l2 = Math.ceil(title.length / 14);
     content.style.marginTop = `${20 * (l2 + 1)}px`;
 
-    const visible = () => {
-        const rect = window.getBoundingClientRect();
-        const viewport = (
-            rect.top >= 0 &&
-            rect.left >= 0 &&
-            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-        );
-        if (viewport === false) {
-            rz("你有 1 个未阅览完的 Synchr() 窗口。");
-        }
-    };
+    visible(content, "Synchr");
     
     setTimeout(() => {
         content.style.opacity = 0;
@@ -790,14 +707,13 @@ async function synchr(string, title) {
         icon.style.opacity = 0;
         txt.style.opacity = 0;
         content.addEventListener("transitionend", () => {
-            window.style.animation = `-fn 550ms forwards ${easing}`;
+            window.style.animation = `cc_fn 550ms forwards ${easing}`;
             setTimeout(() => {
                 if (document.body.contains(window)) document.body.removeChild(window);
                 close(window, windows)
             }, 550);
         });
     }, smarttime(string));
-    setTimeout(visible);
 }
 
 // lj 函数。
@@ -839,11 +755,11 @@ async function lj(string, url, title) {
     icon.style.opacity = 0;
     icon.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const txt = document.createElement("div");
-    txt.className = "fn-title";
+    txt.className = "jr_fntitle";
     txt.style.opacity = 0;
     txt.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const content = document.createElement("div");
-    content.className = "fn-content";
+    content.className = "jr_fncontent";
     content.style.opacity = 0;
     content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const btn = document.createElement("button");
@@ -859,21 +775,10 @@ async function lj(string, url, title) {
     window.appendChild(content);
     window.appendChild(btn);
 
-    const visible = () => {
-        const rect = window.getBoundingClientRect();
-        const viewport = (
-            rect.top >= 0 &&
-            rect.left >= 0 &&
-            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-        );
-        if (viewport === false) {
-            rz("你有 1 个未看到的 Lj() 窗口。");
-        }
-    };
+    visible(content, "Lj");
 
     icon.src = "images/Link.png";
-    window.style.animation = `fn- 550ms forwards ${easing}`;
+    window.style.animation = `jr_fn 550ms forwards ${easing}`;
     content.innerHTML = string;
     btn.innerHTML = url;
     txt.innerHTML = title;
@@ -903,14 +808,13 @@ async function lj(string, url, title) {
         icon.style.opacity = 0;
         txt.style.opacity = 0;
         content.addEventListener("transitionend", () => {
-            window.style.animation = `-fn 550ms forwards ${easing}`;
+            window.style.animation = `cc_fn 550ms forwards ${easing}`;
             setTimeout(() => {
                 if (document.body.contains(window)) document.body.removeChild(window);
                 close(window, windows)
             }, 550);
         });
     }
-    setTimeout(visible);
 }
 
 // zd 函数。
@@ -943,11 +847,11 @@ async function zd(string, title) {
         icon.style.opacity = 0;
         icon.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
         const txt = document.createElement("div");
-        txt.className = "fn-title";
+        txt.className = "jr_fntitle";
         txt.style.opacity = 0;
         txt.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
         const content = document.createElement("div");
-        content.className = "fn-content";
+        content.className = "jr_fncontent";
         content.style.opacity = 0;
         content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
         const box = document.createElement("textarea");
@@ -957,18 +861,7 @@ async function zd(string, title) {
         box.style.resize = "none";
         box.focus();
 
-        const visible = () => {
-            const rect = window.getBoundingClientRect();
-            const viewport = (
-                rect.top >= 0 &&
-                rect.left >= 0 &&
-                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-            );
-            if (viewport === false) {
-                rz("你有 1 个未看到的 zd() 窗口。");
-            }
-        };
+        visible(content, "Zd");
 
         box.addEventListener("keypress", async (event) => {
             if (event.key === "Enter" && !event.shiftKey) {
@@ -1050,7 +943,7 @@ async function zd(string, title) {
                 icon.style.opacity = 0;
                 txt.style.opacity = 0;
                 content.addEventListener("transitionend", () => {
-                    window.style.animation = `-fn 550ms forwards ${easing}`;
+                    window.style.animation = `cc_fn 550ms forwards ${easing}`;
                     setTimeout(() => {
                         if (document.body.contains(window)) document.body.removeChild(window);
                         close(window, windows);
@@ -1071,7 +964,7 @@ async function zd(string, title) {
         window.appendChild(box);
 
         icon.src = "images/Com.png";
-        window.style.animation = `fn- 550ms forwards ${easing}`;
+        window.style.animation = `jr_fn 550ms forwards ${easing}`;
         content.innerHTML = string;
         txt.innerHTML = title;
 
@@ -1089,12 +982,148 @@ async function zd(string, title) {
 
         const l2 = Math.ceil(title.length / 14);
         content.style.marginTop = `${20 * (l2 + 1)}px`;
-
-        setTimeout(visible);
     });
 }
 
 // wz 函数。
+
+async function timer(string, time, title) {
+    return new Promise((resolve) => {
+        let passed_time = 0;
+        let unit;
+        let transfer;
+        if (string == null || string == undefined) {
+            fail("不能输入 null 或 undefined！");
+            return "在 Timer() 函数中，string 参数不能为 null 或 undefined。";
+        }
+        if (time == null || time == undefined) {
+            fail("null 或 undefined 不是有效的数字。");
+            return "在 Timer() 函数中，time 参数不能为 null 或 undefined。";
+        }
+        string = String(string);
+        time = Number(time);
+        let s_replaced = string.replace(/\s+/g, "");
+        if (title == null || title == undefined) title = "计时";
+        if (isNaN(time)) {
+            fail("time 参数必须为可识别的数字或纯数字字符串。");
+            return "在 Timer() 函数中，time 参数必须为可识别的数字或纯数字字符串。";
+        } else if (time < 1250) {
+            warn("time 的值过小，无法正常计时。");
+            return "在 Timer() 函数中，time 的值必须大于等于 1250。";
+        } else if (time > 3.15576e10 * 1.1568) {
+            warn("time 的值过大，无法正常计时。");
+            return "在 Timer() 函数中，time 的值必须小于等于 6.048e10。";
+        }
+        else {
+            title = String(title);
+            let t_replaced = title.replace(/\s+/g, "");
+            if (t_replaced === "") title = "计时";
+        }
+        if (s_replaced === "") string = "";
+
+        const window = document.createElement("div");
+        window.className = "timer-window";
+        const square = document.createElement("div");
+        square.className = "timer-square";
+        const icon = document.createElement("img");
+        icon.src = "images/Timer.png";
+        icon.style.opacity = 0;
+        icon.style.transistion = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+        const txt = document.createElement("div");
+        txt.className = "jr_fntitle";
+        txt.style.color = "black";
+        txt.style.opacity = 0;
+        txt.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+        const content = document.createElement("div");
+        content.className = "jr_fncontent";
+        content.style.color = "black";
+        content.style.opacity = 0;
+        content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+        const bar = document.createElement("div");
+        bar.className = "timer-progressbar";
+
+        create(window);
+        document.body.appendChild(window);
+        window.appendChild(square);
+        square.appendChild(icon);
+        square.appendChild(txt);
+        window.appendChild(content);
+        window.appendChild(bar);
+
+        window.style.animation = `jr_fn 550ms forwards ${easing}`;
+        square.style.animation = `title- 550ms forwards ${easing}`;
+        txt.innerHTML = title;
+
+        if (time < 6e4) {
+            unit = "秒";
+            transfer = 1000;
+        } else if (time >= 6e4 && time < 3.6e6) {
+            unit = "分钟";
+            transfer = 6e4;
+        } else if (time >= 3.6e6 && time < 8.64e7) {
+            unit = "小时";
+            transfer = 3.6e6;
+        } else if (time >= 8.64e7 && time < 6.048e8) {
+            unit = "天";
+            transfer = 8.64e7;
+        } else if (time >= 6.048e8 && time < 3.15576e10) {
+            unit = "周";
+            transfer = 6.048e8;
+        } else if (time >= 3.15576e10) {
+            unit = "年";
+            transfer = 3.15576e10;
+        }
+
+        let i = setInterval(() => {
+            passed_time += 10;
+            content.innerHTML = `${string}<br />（${passed_time / 1000} 秒 / ${(time / transfer).toFixed(2)} ${unit}）`;
+            if (passed_time >= time) {
+                clearInterval(i);
+            }
+        }, 10);
+
+        window.addEventListener("animationend", () => {
+            content.style.transform = "translateY(0%)";
+            content.style.opacity = 1;
+            icon.style.opacity = 1;
+            txt.style.opacity = 1;
+        });
+
+        visible(content, "Timer");
+
+        const l1 = Math.ceil(string.length / 14);
+        const lh1 = parseInt(window.style.lineHeight);
+        content.style.height = `${l1 * lh1}px`;
+
+        const l2 = Math.ceil(title.length / 14);
+        content.style.marginTop = `${20 * (l2 + 1)}px`;
+
+        let pro = 0;
+        const interval = setInterval(() => {
+            pro += 10 / (time / 100);
+            bar.style.width = `${pro}%`;
+            if (pro >= 100) {
+                clearInterval(interval);
+            }
+        }, 10);
+
+        setTimeout(() => {
+            content.style.opacity = 0;
+            content.style.transform = "translateY(-10%)";
+            icon.style.opacity = 0;
+            txt.style.opacity = 0;
+            resolve(true);
+            content.addEventListener("transitionend", () => {
+                window.style.animation = `cc_fn 550ms forwards ${easing}`;
+                square.style.animation = `-title 550ms forwards ${easing}`;
+                setTimeout(() => {
+                    if (document.body.contains(window)) document.body.removeChild(window);
+                    close(window, windows);
+                }, 550);
+            });
+        }, time);
+    });
+}
 
 async function wz(string) {
     return new Promise((resolve) => {
@@ -1170,155 +1199,5 @@ async function wz(string) {
                 }, 2100);
             };
         });
-    });
-}
-
-async function timer(string, time, title) {
-    return new Promise((resolve) => {
-        let passed_time = 0;
-        let unit;
-        let transfer;
-        if (string == null || string == undefined) {
-            fail("不能输入 null 或 undefined！");
-            return "在 Timer() 函数中，string 参数不能为 null 或 undefined。";
-        }
-        if (time == null || time == undefined) {
-            fail("null 或 undefined 不是有效的数字。");
-            return "在 Timer() 函数中，time 参数不能为 null 或 undefined。";
-        }
-        string = String(string);
-        time = Number(time);
-        let s_replaced = string.replace(/\s+/g, "");
-        if (title == null || title == undefined) title = "计时";
-        if (isNaN(time)) {
-            fail("time 参数必须为可识别的数字或纯数字字符串。");
-            return "在 Timer() 函数中，time 参数必须为可识别的数字或纯数字字符串。";
-        } else if (time < 1250) {
-            warn("time 的值过小，无法正常计时。");
-            return "在 Timer() 函数中，time 的值必须大于等于 1250。";
-        } else if (time > 3.15576e10 * 1.1568) {
-            warn("time 的值过大，无法正常计时。");
-            return "在 Timer() 函数中，time 的值必须小于等于 6.048e10。";
-        }
-        else {
-            title = String(title);
-            let t_replaced = title.replace(/\s+/g, "");
-            if (t_replaced === "") title = "计时";
-        }
-        if (s_replaced === "") string = "";
-
-        const window = document.createElement("div");
-        window.className = "timer-window";
-        const square = document.createElement("div");
-        square.className = "timer-square";
-        const icon = document.createElement("img");
-        icon.src = "images/Timer.png";
-        icon.style.opacity = 0;
-        icon.style.transistion = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
-        const txt = document.createElement("div");
-        txt.className = "fn-title";
-        txt.style.color = "black";
-        txt.style.opacity = 0;
-        txt.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
-        const content = document.createElement("div");
-        content.className = "fn-content";
-        content.style.color = "black";
-        content.style.opacity = 0;
-        content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
-        const bar = document.createElement("div");
-        bar.className = "timer-progressbar";
-
-        create(window);
-        document.body.appendChild(window);
-        window.appendChild(square);
-        square.appendChild(icon);
-        square.appendChild(txt);
-        window.appendChild(content);
-        window.appendChild(bar);
-
-        window.style.animation = `fn- 550ms forwards ${easing}`;
-        square.style.animation = `title- 550ms forwards ${easing}`;
-        txt.innerHTML = title;
-
-        if (time < 6e4) {
-            unit = "秒";
-            transfer = 1000;
-        } else if (time >= 6e4 && time < 3.6e6) {
-            unit = "分钟";
-            transfer = 6e4;
-        } else if (time >= 3.6e6 && time < 8.64e7) {
-            unit = "小时";
-            transfer = 3.6e6;
-        } else if (time >= 8.64e7 && time < 6.048e8) {
-            unit = "天";
-            transfer = 8.64e7;
-        } else if (time >= 6.048e8 && time < 3.15576e10) {
-            unit = "周";
-            transfer = 6.048e8;
-        } else if (time >= 3.15576e10) {
-            unit = "年";
-            transfer = 3.15576e10;
-        }
-
-        let i = setInterval(() => {
-            passed_time += 10;
-            content.innerHTML = `${string}<br />（${passed_time / 1000} 秒 / ${(time / transfer).toFixed(2)} ${unit}）`;
-            if (passed_time >= time) {
-                clearInterval(i);
-            }
-        }, 10);
-
-        window.addEventListener("animationend", () => {
-            content.style.transform = "translateY(0%)";
-            content.style.opacity = 1;
-            icon.style.opacity = 1;
-            txt.style.opacity = 1;
-        });
-
-        const visible = () => {
-            const rect = window.getBoundingClientRect();
-            const viewport = (
-                rect.top >= 0 &&
-                rect.left >= 0 &&
-                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-            );
-            if (viewport === false) {
-                rz("你有 1 个未阅览完的 Timer() 窗口。");
-            }
-        };
-
-        const l1 = Math.ceil(string.length / 14);
-        const lh1 = parseInt(window.style.lineHeight);
-        content.style.height = `${l1 * lh1}px`;
-
-        const l2 = Math.ceil(title.length / 14);
-        content.style.marginTop = `${20 * (l2 + 1)}px`;
-
-        let pro = 0;
-        const interval = setInterval(() => {
-            pro += 10 / (time / 100);
-            bar.style.width = `${pro}%`;
-            if (pro >= 100) {
-                clearInterval(interval);
-            }
-        }, 10);
-
-        setTimeout(() => {
-            content.style.opacity = 0;
-            content.style.transform = "translateY(-10%)";
-            icon.style.opacity = 0;
-            txt.style.opacity = 0;
-            resolve(true);
-            content.addEventListener("transitionend", () => {
-                window.style.animation = `-fn 550ms forwards ${easing}`;
-                square.style.animation = `-title 550ms forwards ${easing}`;
-                setTimeout(() => {
-                    if (document.body.contains(window)) document.body.removeChild(window);
-                    close(window, windows);
-                }, 550);
-            });
-        }, time);
-        setTimeout(visible);
     });
 }

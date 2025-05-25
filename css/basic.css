@@ -511,8 +511,15 @@ button {
 }
 
 .rcont {
+    position: relative;
     right: 15px;
     text-align: right;
+    padding: 14px 25px;
+}
+
+.rtxt {
+    text-align: right;
+    color: white;
 }
 
 .zd1, .zd2, .zd3, .zd4, .zd5, .zd6 {

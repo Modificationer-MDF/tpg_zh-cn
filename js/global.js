@@ -9,9 +9,9 @@ let f2 = false;
 let alphabets = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 let marks = `\n\t\r!@#$%^&*()_+-=[]{}|;':\\"',./<>?1234567890！？。“”《》、；‘’【】·~·。，、：；“”‘’《》（）…￥—` + "`";
 let block = false; // 锁定 “选项”。
-let iblock = false; // 锁定 “杂项”。
+let iblock = false; // 锁定 “未读信息”。
 let moved = false; // “选项”。
-let imoved = false; // “杂项”。
+let imoved = false; // “未读信息”。
 let windows = []; // 十函数数组。
 let rzwin = []; // rz() 数组。
 
@@ -108,6 +108,6 @@ document.addEventListener("DOMContentLoaded", function () {
         fn6();
     }, 400);
     document.addEventListener("keydown", (event) => {
-        if (event.altKey) noti("将鼠标移动至左上角以打开选项；移动到右上角以查看杂项信息。")
+        if (event.altKey) noti("将鼠标移动至左上角以打开选项；移动到右上角以查看未读信息。")
     });
 });

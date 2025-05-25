@@ -1,3 +1,14 @@
+var noti_unv = [];
+var cg_unv = [];
+var fail_unv = [];
+var warn_unv = [];
+var inp_unv = [];
+var synchr_unv = [];
+var xz_unv = [];
+var lj_unv = [];
+var zd_unv = [];
+var timer_unv = [];
+
 function urcc(f, c) {
     const cz = Array.from(f.children).find((child) =>
         child.className === c.className && // 类名相同。
@@ -702,7 +713,7 @@ function fn4() { // 选项。
 function fn5() {
     const inf = document.querySelector(".information-table");
     const title = document.createElement("p");
-    title.innerHTML = "杂项";
+    title.innerHTML = "未读信息";
     title.className = "title";
     title.style.right = "25px";
     title.style.textAlign = "right";
@@ -716,94 +727,137 @@ function fn5() {
     title.appendChild(jdt);
 }
 
-function fn6() { // 杂项。
+function fn6() { // 未读信息。
     const inf = document.querySelector(".information-table");
-    var v1 = 0;
-    var v2 = 0;
-    var v3 = 0;
-    var v4 = 0;
-    var v5 = 0;
-    var v6 = 0;
-    var v7 = 0;
-    var v8 = 0;
-    var v9 = 0;
-    var v10 = 0;
-    var v11 = 0;
-
-    for (let i = 0; i <= windows.length - 1; i++) {
-        if (windows[i].className === "noti-window") v1++;
-        else if (windows[i].className === "cg-window") v2++;
-        else if (windows[i].className === "fail-window") v3++;
-        else if (windows[i].className === "warn-window") v4++;
-        else if (windows[i].className === "inp-window") v5++;
-        else if (windows[i].className === "synchr-window") v6++;
-        else if (windows[i].className === "xz-window") v7++;
-        else if (windows[i].className === "lj-window") v8++;
-        else if (windows[i].className === "zd-window") v9++;
-        else if (windows[i].className === "timer-window") v10++;
-        else if (rzwin[i].className === "rz-window") v11++;
-    }
 
     const notic = document.createElement("div");
-    notic.innerHTML = `Noti() 数量： ${v1}。`;
+    notic.innerHTML = `Noti()`;
     notic.className = "rcont";
-    notic.style.color = "#18a689";
+    notic.style.backgroundColor = "#18a68979";
+    const notitxt = document.createElement("p");
+    notitxt.innerHTML = (noti_unv.length == 0 ? "空。" : noti_unv.join("<br />"));
+    notitxt.className = "rtxt";
 
     const cgc = document.createElement("div");
-    cgc.innerHTML = `Cg() 数量： ${v2}。`;
+    cgc.innerHTML = `Cg()`;
     cgc.className = "rcont";
-    cgc.style.color = "#1d5837";
+    cgc.style.backgroundColor = "#1d583779";
+    const cgtxt = document.createElement("p");
+    cgtxt.innerHTML = (cg_unv.length == 0 ? "空。" : cg_unv.join("<br />"));
+    cgtxt.className = "rtxt";
 
     const failc = document.createElement("div");
-    failc.innerHTML = `fail() 数量： ${v3}。`;
+    failc.innerHTML = `Fail()`;
     failc.className = "rcont";
-    failc.style.color = "#791e1d";
+    failc.style.backgroundColor = "#791e1d79";
+    const failtxt = document.createElement("p");
+    failtxt.innerHTML = (fail_unv.length == 0 ? "空。" : fail_unv.join("<br />"));
+    failtxt.className = "rtxt";
 
     const warnc = document.createElement("div");
-    warnc.innerHTML = `Warn() 数量： ${v4}。`;
+    warnc.innerHTML = `Warn()`;
     warnc.className = "rcont";
-    warnc.style.color = "#847829";
+    warnc.style.backgroundColor = "#84782979";
+    const warntxt = document.createElement("p");
+    warntxt.innerHTML = (warn_unv.length == 0 ? "空。" : warn_unv.join("<br />"));
+    warntxt.className = "rtxt";
 
     const inpc = document.createElement("div");
-    inpc.innerHTML = `Inp() 数量： ${v5}。`;
+    inpc.innerHTML = `Inp()`;
     inpc.className = "rcont";
-    inpc.style.color = "#235087";
+    inpc.style.backgroundColor = "#23508779";
+    const inptxt = document.createElement("p");
+    inptxt.innerHTML = (inp_unv.length == 0 ? "空。" : inp_unv.join("<br />"));
+    inptxt.className = "rtxt";
 
-    const tranc = document.createElement("div");
-    tranc.innerHTML = `Synchr() 数量： ${v6}。`;
-    tranc.className = "rcont";
-    tranc.style.color = "#9e3389";
+    const synchrc = document.createElement("div");
+    synchrc.innerHTML = `Synchr()`;
+    synchrc.className = "rcont";
+    synchrc.style.backgroundColor = "#9e338979";
+    const synchrtxt = document.createElement("p");
+    synchrtxt.innerHTML = (synchr_unv.length == 0 ? "空。" : synchr_unv.join("<br />"));
+    synchrtxt.className = "rtxt";
 
     const xzc = document.createElement("div");
-    xzc.innerHTML = `Xz() 数量： ${v7}。`;
+    xzc.innerHTML = `Xz()`;
     xzc.className = "rcont";
-    xzc.style.color = "#7527a4";
+    xzc.style.backgroundColor = "#7527a479";
+    const xztxt = document.createElement("p");
+    xztxt.innerHTML = (xz_unv.length == 0 ? "空。" : xz_unv.join("<br />"));
+    xztxt.className = "rtxt";
 
     const ljc = document.createElement("div");
-    ljc.innerHTML = `Lj() 数量： ${v8}。`;
+    ljc.innerHTML = `Lj()`;
     ljc.className = "rcont";
-    ljc.style.color = "#a6580d";
+    ljc.style.backgroundColor = "#a6580d79";
+    const ljtxt = document.createElement("p");
+    ljtxt.innerHTML = (lj_unv.length == 0 ? "空。" : lj_unv.join("<br />"));
+    ljtxt.className = "rtxt";
 
     const zdc = document.createElement("div");
-    zdc.innerHTML = `Zd() 数量： ${v9}。`;
+    zdc.innerHTML = `Zd()`;
     zdc.className = "rcont";
-    zdc.style.padding = "7px 15px";
-    zdc.style.borderRadius = "5px";
     zdc.style.backgroundColor = "#19191879";
-    zdc.style.color = "#ffffff";
+    const zdtxt = document.createElement("p");
+    zdtxt.innerHTML = (zd_unv.length == 0 ? "空。" : zd_unv.join("<br />"));
+    zdtxt.className = "rtxt";
 
     const timerc = document.createElement("div");
-    timerc.innerHTML = `Timer() 数量： ${v10}。`;
+    timerc.innerHTML = `Timer()`;
     timerc.className = "rcont";
-    timerc.style.color = "#f0f0f0";
+    timerc.style.backgroundColor = "#f0f0f079";
+    timerc.style.color = "#000000";
+    const timertxt = document.createElement("p");
+    timertxt.innerHTML = (timer_unv.length == 0 ? "空。" : timer_unv.join("<br />"));
+    timertxt.className = "rtxt";
 
-    const rzc = document.createElement("div");
-    rzc.innerHTML = `Rz() 数量： ${v11}。`;
-    rzc.className = "rcont";
-    rzc.style.padding = "7px 15px";
-    rzc.style.borderRadius = "5px";
-    rzc.style.backgroundColor = "#0b234599";
-    rzc.style.color = "#ffffff";
+    const read = document.createElement("button");
+    read.type = "button";
+    read.innerHTML = "已读";
+    read.className = "zd1";
+    read.style.fontSize = "20px";
+    read.style.borderRadius = "0px";
+    read.style.position = "relative";
+    read.style.top = "90px";
+    read.style.left = "255px";
+    read.style.padding = "14px 25px";
+
+    read.onclick = async () => {
+        var ans = await xz("标记哪个函数的信息为 “已读”？", 10, ["Noti()", "Cg()", "Fail()", "Warn()", "Inp()", "Synchr()", "Xz()", "Lj()", "Zd()", "Timer()"]);
+        switch (ans) {
+            case "Noti()":
+                noti_unv = [];
+                break;
+            case "Cg()":
+                cg_unv = [];
+                break;
+            case "Fail()":
+                fail_unv = [];
+                break;
+            case "Warn()":
+                warn_unv = [];
+                break;
+            case "Inp()":
+                inp_unv = [];
+                break;
+            case "Synchr()":
+                synchr_unv = [];
+                break;
+            case "Xz()":
+                xz_unv = [];
+                break;
+            case "Lj()":
+                lj_unv = [];
+                break;
+            case "Zd()":
+                zd_unv = [];
+                break;
+            case "Timer()":
+                timer_unv = [];
+                break;
+        }
+        rz("已标记为已读。");
+    };
 
     const all = [
         notic,
@@ -811,29 +865,38 @@ function fn6() { // 杂项。
         failc,
         warnc,
         inpc,
-        tranc,
+        synchrc,
         xzc,
         ljc,
         zdc,
         timerc,
-        rzc,
     ];
 
     for (var i = 0; i < all.length; i++) {
-        all[i].style.top = `${(i + 2) * 7}vh`;
+        all[i].style.top = `calc(${i * 3 + 3}vh + 90px)`;
     }
 
+    notic.appendChild(notitxt);
+    cgc.appendChild(cgtxt);
+    failc.appendChild(failtxt);
+    warnc.appendChild(warntxt);
+    inpc.appendChild(inptxt);
+    synchrc.appendChild(synchrtxt);
+    xzc.appendChild(xztxt);
+    ljc.appendChild(ljtxt);
+    zdc.appendChild(zdtxt);
+    timerc.appendChild(timertxt);
+    urcc(inf, read);
     urcc(inf, notic);
     urcc(inf, cgc);
     urcc(inf, failc);
     urcc(inf, warnc);
     urcc(inf, inpc);
-    urcc(inf, tranc);
+    urcc(inf, synchrc);
     urcc(inf, xzc);
     urcc(inf, ljc);
     urcc(inf, zdc);
     urcc(inf, timerc);
-    urcc(inf, rzc);
 }
 
 function pos(p) {
@@ -926,9 +989,9 @@ function smarttime(str) {
 async function fn7() { // 网站介绍。
     let j1 = false; // 移动至 “选项”。
     let j2 = false;
-    let j3 = false; // 移动至 “杂项”。
+    let j3 = false; // 移动至 “未读信息”。
     let w1 = false; // 完成 “选项” 介绍。
-    let w2 = false; // 完成 “杂项” 介绍。
+    let w2 = false; // 完成 “未读信息” 介绍。
     let w3 = false; // 完成所有介绍。
 
     const ctrl = document.querySelector(".control-pad");
@@ -1006,13 +1069,13 @@ async function fn7() { // 网站介绍。
     const i2 = setInterval(async () => {
         if (w1 === true && j2 === false) {
             j2 = true;
-            await wz("接下来介绍的是 “杂项” 界面。");
+            await wz("接下来介绍的是 “未读信息” 界面。");
             noti("请将鼠标移动至右上角。");
             iblock = true;
             const i3 = setInterval(async () => {
                 if (getComputedStyle(inf).animationName === "inf-" && j3 === false) {
                     j3 = true;
-                    await wz("在 “杂项” 界面，你可以看到各函数正在运行的个数。这便于你更好地了解网站的运行情况。");
+                    await wz("在 “未读信息” 界面，你可以看到因窗口大小限制而没有看到的内容。");
                     iblock = false;
                     imoved = true;
                     w2 = true;
@@ -1032,4 +1095,49 @@ async function fn7() { // 网站介绍。
             clearInterval(i3);
         }
     }, 250);
+}
+
+function visible(e, fn_name) {
+    const rect = e.getBoundingClientRect();
+    const viewport = (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+    if (viewport === false) {
+        rz(`请注意，你有一条未读完的 ${fn_name}() 信息。`);
+        switch (fn_name) {
+            case "Noti":
+                noti_unv.push(e.innerHTML);
+                break;
+            case "Cg":
+                cg_unv.push(e.innerHTML);
+                break;
+            case "Fail":
+                fail_unv.push(e.innerHTML);
+                break;
+            case "Warn":
+                warn_unv.push(e.innerHTML);
+                break;
+            case "Inp":
+                inp_unv.push(e.innerHTML);
+                break;
+            case "Synchr":
+                synchr_unv.push(e.innerHTML);
+                break;
+            case "Xz":
+                xz_unv.push(e.innerHTML);
+                break;
+            case "Lj":
+                lj_unv.push(e.innerHTML);
+                break;
+            case "Zd":
+                zd_unv.push(e.innerHTML);
+                break;
+            case "Timer":
+                timer_unv.push(e.innerHTML);
+                break;
+        }
+    }
 }
