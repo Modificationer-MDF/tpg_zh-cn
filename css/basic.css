@@ -64,7 +64,6 @@ pre {
     margin-top: 30px;
     margin-left: -14px;
     background-color: #02211d00;
-    border-radius: 5px;
     height: auto;
     padding: 7px 7px;
 }
@@ -115,7 +114,6 @@ pre {
     background-color: #000000b0;
     padding: 14px 25px;
     margin-bottom: 15px;
-    border-radius: 5px;
     font-size: 25px;
     border: none;
 }
@@ -187,7 +185,6 @@ pre {
     opacity: 0;
     padding: 14px 25px;
     margin-bottom: 15px;
-    border-radius: 5px;
     font-size: 20px;
     border: none;
 }
@@ -298,7 +295,6 @@ pre {
     opacity: 1;
     padding: 14px 25px;
     margin-bottom: 15px;
-    border-radius: 5px;
     font-size: 20px;
     border: none;
 }
@@ -373,7 +369,6 @@ button {
     margin-left: 30px;
     background-color: #ffe20099;
     padding: 14px 25px;
-    border-radius: 5px;
     font-size: 25px;
     border: none;
 }
@@ -382,7 +377,6 @@ button {
     opacity: 0;
     padding: 14px 25px;
     margin-bottom: 15px;
-    border-radius: 5px;
     font-size: 20px;
     border: none;
 }
@@ -399,7 +393,6 @@ button {
     font-weight: bold;
     margin-top: 30px;
     width: auto;
-    border-radius: 5px;
     font-size: 25px;
     text-align: center;
     padding: 15px 15px;
@@ -527,7 +520,6 @@ button {
     z-index: 999;
     margin-left: 30px;
     padding: 7px 15px;
-    border-radius: 5px;
     font-size: 20px;
     border: none;
 }
@@ -572,6 +564,5 @@ button {
     background-color: #00000079;
     font-family: "basic";
     border: none;
-    border-radius: 5px;
     padding: 7px 15px;
 }

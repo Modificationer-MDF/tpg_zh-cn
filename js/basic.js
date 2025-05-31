@@ -1,14 +1,3 @@
-var noti_unv = [];
-var cg_unv = [];
-var fail_unv = [];
-var warn_unv = [];
-var inp_unv = [];
-var synchr_unv = [];
-var xz_unv = [];
-var lj_unv = [];
-var zd_unv = [];
-var timer_unv = [];
-
 function urcc(f, c) {
     const cz = Array.from(f.children).find((child) =>
         child.className === c.className && // 类名相同。
@@ -52,7 +41,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
     });
 
     const ctrl = document.querySelector(".control-pad");
-    fn4();
+    control();
 
     document.addEventListener("mousemove", function (event) {
         let width = ctrl.getBoundingClientRect().width;
@@ -66,7 +55,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
     });
 
     const inf = document.querySelector(".information-table");
-    fn5();
+    inf_ui();
 
     document.addEventListener("mousemove", function (event) {
         let rect = inf.getBoundingClientRect().width; // 获取 inf 元素的宽度。
@@ -522,7 +511,7 @@ function zhan(s) {
     return t;
 }
 
-function fn4() { // 选项。
+function control() { // 选项。
     const ctrl = document.querySelector(".control-pad");
     const title = document.createElement("p");
     title.innerHTML = "选项";
@@ -710,7 +699,7 @@ function fn4() { // 选项。
     defh.appendChild(inp4);
 }
 
-function fn5() {
+function inf_ui() {
     const inf = document.querySelector(".information-table");
     const title = document.createElement("p");
     title.innerHTML = "未读信息";
@@ -723,140 +712,101 @@ function fn5() {
     jdt.style.width = "100%";
     jdt.style.backgroundColor = "#ffffff99";
 
-    inf.appendChild(title);
-    title.appendChild(jdt);
-}
-
-function fn6() { // 未读信息。
-    const inf = document.querySelector(".information-table");
-
     const notic = document.createElement("div");
-    notic.innerHTML = `Noti()`;
+    notic.innerHTML = "Noti()";
     notic.className = "rcont";
+    notic.id = "notic"
     notic.style.backgroundColor = "#18a68979";
-    const notitxt = document.createElement("p");
-    notitxt.innerHTML = (noti_unv.length == 0 ? "空。" : noti_unv.join("<br />"));
-    notitxt.className = "rtxt";
+    const noti_text = document.createElement("p");
+    noti_text.className = "rtxt";
+    const noti_read = document.createElement("button");
+    noti_read.type = "button";
+    noti_read.innerHTML = "清空。";
+    noti_read.className = "zd1";
+    noti_read.onclick = () => {
+        noti_unv = [];
+        rz("已清空 Noti() 的未读信息。");
+    };
 
     const cgc = document.createElement("div");
-    cgc.innerHTML = `Cg()`;
+    cgc.innerHTML = "Cg()";
     cgc.className = "rcont";
+    cgc.id = "cgc"
     cgc.style.backgroundColor = "#1d583779";
-    const cgtxt = document.createElement("p");
-    cgtxt.innerHTML = (cg_unv.length == 0 ? "空。" : cg_unv.join("<br />"));
-    cgtxt.className = "rtxt";
+    const cg_text = document.createElement("p");
+    cg_text.className = "rtxt";
+    const cg_read = document.createElement("button");
+    cg_read.type = "button";
+    cg_read.innerHTML = "清空。";
+    cg_read.className = "zd2";
+    cg_read.onclick = () => {
+        cg_unv = [];
+        rz("已清空 Cg() 的未读信息。");
+    };
 
     const failc = document.createElement("div");
-    failc.innerHTML = `Fail()`;
+    failc.innerHTML = "Fail()";
     failc.className = "rcont";
+    failc.id = "failc"
     failc.style.backgroundColor = "#791e1d79";
-    const failtxt = document.createElement("p");
-    failtxt.innerHTML = (fail_unv.length == 0 ? "空。" : fail_unv.join("<br />"));
-    failtxt.className = "rtxt";
+    const fail_text = document.createElement("p");
+    fail_text.className = "rtxt";
+    const fail_read = document.createElement("button");
+    fail_read.type = "button";
+    fail_read.innerHTML = "清空。";
+    fail_read.className = "zd3";
+    fail_read.onclick = () => {
+        fail_unv = [];
+        rz("已清空 Fail() 的未读信息。");
+    };
 
     const warnc = document.createElement("div");
-    warnc.innerHTML = `Warn()`;
+    warnc.innerHTML = "Warn()";
     warnc.className = "rcont";
+    warnc.id = "warnc"
     warnc.style.backgroundColor = "#84782979";
-    const warntxt = document.createElement("p");
-    warntxt.innerHTML = (warn_unv.length == 0 ? "空。" : warn_unv.join("<br />"));
-    warntxt.className = "rtxt";
-
-    const inpc = document.createElement("div");
-    inpc.innerHTML = `Inp()`;
-    inpc.className = "rcont";
-    inpc.style.backgroundColor = "#23508779";
-    const inptxt = document.createElement("p");
-    inptxt.innerHTML = (inp_unv.length == 0 ? "空。" : inp_unv.join("<br />"));
-    inptxt.className = "rtxt";
+    const warn_text = document.createElement("p");
+    warn_text.className = "rtxt";
+    const warn_read = document.createElement("button");
+    warn_read.type = "button";
+    warn_read.innerHTML = "清空。";
+    warn_read.className = "zd4";
+    warn_read.onclick = () => {
+        warn_unv = [];
+        rz("已清空 Warn() 的未读信息。");
+    };
 
     const synchrc = document.createElement("div");
-    synchrc.innerHTML = `Synchr()`;
+    synchrc.innerHTML = "Synchr()";
     synchrc.className = "rcont";
+    synchrc.id = "synchrc"
     synchrc.style.backgroundColor = "#9e338979";
-    const synchrtxt = document.createElement("p");
-    synchrtxt.innerHTML = (synchr_unv.length == 0 ? "空。" : synchr_unv.join("<br />"));
-    synchrtxt.className = "rtxt";
-
-    const xzc = document.createElement("div");
-    xzc.innerHTML = `Xz()`;
-    xzc.className = "rcont";
-    xzc.style.backgroundColor = "#7527a479";
-    const xztxt = document.createElement("p");
-    xztxt.innerHTML = (xz_unv.length == 0 ? "空。" : xz_unv.join("<br />"));
-    xztxt.className = "rtxt";
-
-    const ljc = document.createElement("div");
-    ljc.innerHTML = `Lj()`;
-    ljc.className = "rcont";
-    ljc.style.backgroundColor = "#a6580d79";
-    const ljtxt = document.createElement("p");
-    ljtxt.innerHTML = (lj_unv.length == 0 ? "空。" : lj_unv.join("<br />"));
-    ljtxt.className = "rtxt";
-
-    const zdc = document.createElement("div");
-    zdc.innerHTML = `Zd()`;
-    zdc.className = "rcont";
-    zdc.style.backgroundColor = "#19191879";
-    const zdtxt = document.createElement("p");
-    zdtxt.innerHTML = (zd_unv.length == 0 ? "空。" : zd_unv.join("<br />"));
-    zdtxt.className = "rtxt";
+    const synchr_text = document.createElement("p");
+    synchr_text.className = "rtxt";
+    const synchr_read = document.createElement("button");
+    synchr_read.type = "button";
+    synchr_read.innerHTML = "清空。";
+    synchr_read.className = "zd5";
+    synchr_read.onclick = () => {
+        synchr_unv = [];
+        rz("已清空 Synchr() 的未读信息。");
+    };
 
     const timerc = document.createElement("div");
-    timerc.innerHTML = `Timer()`;
+    timerc.innerHTML = "Timer()";
     timerc.className = "rcont";
+    timerc.id = "timerc"
     timerc.style.backgroundColor = "#f0f0f079";
     timerc.style.color = "#000000";
-    const timertxt = document.createElement("p");
-    timertxt.innerHTML = (timer_unv.length == 0 ? "空。" : timer_unv.join("<br />"));
-    timertxt.className = "rtxt";
-
-    const read = document.createElement("button");
-    read.type = "button";
-    read.innerHTML = "已读";
-    read.className = "zd1";
-    read.style.fontSize = "20px";
-    read.style.borderRadius = "0px";
-    read.style.position = "relative";
-    read.style.top = "90px";
-    read.style.left = "255px";
-    read.style.padding = "14px 25px";
-
-    read.onclick = async () => {
-        var ans = await xz("标记哪个函数的信息为 “已读”？", 10, ["Noti()", "Cg()", "Fail()", "Warn()", "Inp()", "Synchr()", "Xz()", "Lj()", "Zd()", "Timer()"]);
-        switch (ans) {
-            case "Noti()":
-                noti_unv = [];
-                break;
-            case "Cg()":
-                cg_unv = [];
-                break;
-            case "Fail()":
-                fail_unv = [];
-                break;
-            case "Warn()":
-                warn_unv = [];
-                break;
-            case "Inp()":
-                inp_unv = [];
-                break;
-            case "Synchr()":
-                synchr_unv = [];
-                break;
-            case "Xz()":
-                xz_unv = [];
-                break;
-            case "Lj()":
-                lj_unv = [];
-                break;
-            case "Zd()":
-                zd_unv = [];
-                break;
-            case "Timer()":
-                timer_unv = [];
-                break;
-        }
-        rz("已标记为已读。");
+    const timer_text = document.createElement("p");
+    timer_text.className = "rtxt";
+    const timer_read = document.createElement("button");
+    timer_read.type = "button";
+    timer_read.innerHTML = "清空。";
+    timer_read.className = "zd6";
+    timer_read.onclick = () => {
+        timer_unv = [];
+        rz("已清空 Timer() 的未读信息。");
     };
 
     const all = [
@@ -864,39 +814,62 @@ function fn6() { // 未读信息。
         cgc,
         failc,
         warnc,
-        inpc,
         synchrc,
-        xzc,
-        ljc,
-        zdc,
         timerc,
     ];
 
     for (var i = 0; i < all.length; i++) {
-        all[i].style.top = `calc(${i * 3 + 3}vh + 90px)`;
+        all[i].style.top = `calc(${i * 3}vh + 90px)`;
     }
 
-    notic.appendChild(notitxt);
-    cgc.appendChild(cgtxt);
-    failc.appendChild(failtxt);
-    warnc.appendChild(warntxt);
-    inpc.appendChild(inptxt);
-    synchrc.appendChild(synchrtxt);
-    xzc.appendChild(xztxt);
-    ljc.appendChild(ljtxt);
-    zdc.appendChild(zdtxt);
-    timerc.appendChild(timertxt);
-    urcc(inf, read);
-    urcc(inf, notic);
-    urcc(inf, cgc);
-    urcc(inf, failc);
-    urcc(inf, warnc);
-    urcc(inf, inpc);
-    urcc(inf, synchrc);
-    urcc(inf, xzc);
-    urcc(inf, ljc);
-    urcc(inf, zdc);
-    urcc(inf, timerc);
+    notic.appendChild(noti_read);
+    cgc.appendChild(cg_read);
+    failc.appendChild(fail_read);
+    warnc.appendChild(warn_read);
+    synchrc.appendChild(synchr_read);
+    timerc.appendChild(timer_read);
+    notic.appendChild(noti_text);
+    cgc.appendChild(cg_text);
+    failc.appendChild(fail_text);
+    warnc.appendChild(warn_text);
+    synchrc.appendChild(synchr_text);
+    timerc.appendChild(timer_text);
+
+    inf.appendChild(title);
+    title.appendChild(jdt);
+    inf.appendChild(notic);
+    inf.appendChild(cgc);
+    inf.appendChild(failc);
+    inf.appendChild(warnc);
+    inf.appendChild(synchrc);
+    inf.appendChild(timerc);
+}
+
+function inf_cont() { // 未读信息。
+    const notic = document.getElementById("notic");
+    const noti_text = notic.querySelector(".rtxt");
+    noti_text.innerHTML = (noti_unv.length === 0 ? "空。" : noti_unv.join("<br />"));
+
+    const cgc = document.getElementById("cgc");
+    const cg_text = cgc.querySelector(".rtxt");
+    cg_text.innerHTML = (cg_unv.length === 0 ? "空。" : cg_unv.join("<br />"));
+
+    const failc = document.getElementById("failc");
+    const fail_text = failc.querySelector(".rtxt");
+    fail_text.innerHTML = (fail_unv.length === 0 ? "空。" : fail_unv.join("<br />"));
+
+    const warnc = document.getElementById("warnc");
+    const warn_text = warnc.querySelector(".rtxt");
+    warn_text.innerHTML = (warn_unv.length === 0 ? "空。" : warn_unv.join("<br />"));
+
+    const synchrc = document.getElementById("synchrc");
+    const synchr_text = synchrc.querySelector(".rtxt");
+    synchr_text.innerHTML = (synchr_unv.length === 0 ? "空。" : synchr_unv.join("<br />"));
+
+    const timerc = document.getElementById("timerc");
+    const timer_text = timerc.querySelector(".rtxt");
+    timer_text.style.color = "#000000";
+    timer_text.innerHTML = (timer_unv.length === 0 ? "空。" : timer_unv.join("<br />"));
 }
 
 function pos(p) {

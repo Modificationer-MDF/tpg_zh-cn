@@ -14,6 +14,12 @@ let moved = false; // “选项”。
 let imoved = false; // “未读信息”。
 let windows = []; // 十函数数组。
 let rzwin = []; // rz() 数组。
+let noti_unv = [];
+let cg_unv = [];
+let fail_unv = [];
+let warn_unv = [];
+let synchr_unv = [];
+let timer_unv = [];
 
 document.addEventListener("DOMContentLoaded", function () {
     var start = performance.now();
@@ -105,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
             fail("deftime 的值不合法，已重置为 Smart。");
         }
         width(".top");
-        fn6();
+        inf_cont();
     }, 400);
     document.addEventListener("keydown", (event) => {
         if (event.altKey) noti("将鼠标移动至左上角以打开选项；移动到右上角以查看未读信息。")
