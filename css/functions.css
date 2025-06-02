@@ -102,36 +102,6 @@
     }
 }
 
-@keyframes title- {
-    from {
-        width: 0%;
-        opacity: 0;
-        left: 50%;
-        right: 50%;
-    }
-    to {
-        width: 100%;
-        opacity: 1;
-        left: 0;
-        right: 5px;
-    }
-}
-
-@keyframes -title {
-    from {
-        width: 100%;
-        opacity: 1;
-        left: 0;
-        right: 5px;
-    }
-    to {
-        width: 0%;
-        opacity: 0;
-        left: 50%;
-        right: 50%;
-    }
-}
-
 .cg-window {
     background-color: #1d583799;
     border-left: 5px solid #183b25c9;
@@ -289,19 +259,7 @@
     background-color: #d0d0d099;
 }
 
-.wz-window {
-    width: 0;
-    height: 50vh;
-    background-color: #0000009a;
-    display: flex;
-    top: 50%;
-    box-shadow: 0px 3px 7px #000000;
-    position: absolute;
-    z-index: 101;
-    flex-wrap: wrap;
-}
-
-@keyframes --wz {
+@keyframes jr1_wz {
     from {
         transform: translate(0%, -100%);
     }
@@ -310,7 +268,7 @@
     }
 }
 
-@keyframes -wz {
+@keyframes jr2_wz {
     from {
         transform: translate(50%, -50%);
         backdrop-filter: blur(0px) saturate(100%);
@@ -323,7 +281,7 @@
     }
 }
 
-@keyframes wz- {
+@keyframes cc1_wz {
     from {
         transform: translate(50%, -50%);
         width: 50vw;
@@ -336,28 +294,16 @@
     }
 }
 
-@keyframes wz-- {
+@keyframes cc2_wz {
     from {
         transform: translate(50%, -50%);
     }
     to {
-        transform: translate(100%, 100%);
+        transform: translate(0%, 100%);
     }
 }
 
-.wz-left, .wz-right {
-    width: 7px;
-    height: 100%;
-    opacity: 1;
-    background-color: #ffffff;
-    position: absolute;
-}
-
-.wz-left {
-    left: 0;
-}
-
-@keyframes __solid {
+@keyframes jr1_solid {
     from {
         opacity: 0;
     }
@@ -366,7 +312,7 @@
     }
 }
 
-@keyframes solid__ {
+@keyframes cc1_solid {
     from {
         opacity: 1;
     }
@@ -375,7 +321,7 @@
     }
 }
 
-@keyframes left_ {
+@keyframes cc_left {
     from {
         left: 0;
     }
@@ -384,11 +330,7 @@
     }
 }
 
-.wz-right {
-    right: 0;
-}
-
-@keyframes _right {
+@keyframes jr_right {
     from {
         transform: translateX(100%);
     }
@@ -397,7 +339,7 @@
     }
 }
 
-@keyframes _txt {
+@keyframes jr_txt {
     from {
         transform: translateY(-40px);
         opacity: 0;
@@ -408,7 +350,7 @@
     }
 }
 
-@keyframes txt_ {
+@keyframes cc_txt {
     from {
         transform: translateY(0px);
         opacity: 1;
@@ -419,7 +361,7 @@
     }
 }
 
-@keyframes _btn {
+@keyframes jr_btn {
     from {
         opacity: 0;
     }
@@ -428,23 +370,50 @@
     }
 }
 
-@keyframes btn_ {
+@keyframes cc_btn {
     from {
         opacity: 1;
     }
     to {
         opacity: 0;
     }
+}
+
+.wz-window {
+    width: 0;
+    height: 50vh;
+    background-color: #252e3f9a;
+    display: flex;
+    top: 50%;
+    position: fixed;
+    z-index: 101;
+    flex-wrap: wrap;
+    box-shadow: 0px 14px 25px #313131c9;
+}
+
+.wz-left, .wz-right {
+    width: 7px;
+    height: 100%;
+    opacity: 1;
+    background-color: #213a44c9;
+    position: absolute;
+}
+
+.wz-left {
+    left: 0;
+}
+
+.wz-right {
+    right: 0;
 }
 
 .wz-content {
+    left: 20px;
     font-size: 20px;
     color: white;
     padding: 14px 25px;
     text-align: left;
     position: relative;
-    left: 4%;
-    top: 20px;
     max-width: calc(100% - 50px - 4%);
     max-height: calc(50vh - 210px);
     overflow-y: auto;
@@ -466,7 +435,7 @@
 }
 
 .wz-icon {
-    width: 60px;
+    width: 50px;
     height: auto;
     opacity: 0;
     position: absolute;
@@ -474,7 +443,7 @@
     right: 5%;
     transform: translateX(-50%);
     padding: 7px 15px;
-    background-color: #00000099;
+    background-color: #2a33419a;
     color: white;
     border: none;
     cursor: pointer;
@@ -502,7 +471,7 @@
     min-width: 20ch;
 }
 
-@keyframes -rz {
+@keyframes jr_rz {
     from {
         backdrop-filter: blur(0px) saturate(100%);
         opacity: 0;
@@ -513,7 +482,7 @@
     }
 }
 
-@keyframes rz- {
+@keyframes cc_rz {
     from {
         backdrop-filter: blur(14px) saturate(250%);
         opacity: 1;

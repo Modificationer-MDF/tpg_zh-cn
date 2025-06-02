@@ -26,11 +26,11 @@ function rz(string, time) {
     window.appendChild(content);
 
     requestAnimationFrame(() => {
-        window.style.animation = `-rz 550ms forwards ${easing}`;
+        window.style.animation = `jr_rz 550ms forwards ${easing}`;
     });
 
     setTimeout(() => {
-        window.style.animation = `rz- 550ms forwards ${easing}`;
+        window.style.animation = `cc_rz 550ms forwards ${easing}`;
         setTimeout(() => {
             if (document.body.contains(window)) document.body.removeChild(window);
             close(window);
@@ -86,7 +86,6 @@ function noti(string, title) {
     window.appendChild(bar);
 
     window.style.animation = `jr_fn 550ms forwards ${easing}`;
-    square.style.animation = `title- 550ms forwards ${easing}`;
     content.innerHTML = string;
     txt.innerHTML = title;
 
@@ -122,7 +121,6 @@ function noti(string, title) {
         txt.style.opacity = 0;
         content.addEventListener("transitionend", () => {
             window.style.animation = `cc_fn 550ms forwards ${easing}`;
-            square.style.animation = `-title 550ms forwards ${easing}`;
             setTimeout(() => {
                 if (document.body.contains(window)) document.body.removeChild(window);
                 close(window, windows);
@@ -1051,7 +1049,6 @@ async function timer(string, time, title) {
         window.appendChild(bar);
 
         window.style.animation = `jr_fn 550ms forwards ${easing}`;
-        square.style.animation = `title- 550ms forwards ${easing}`;
         txt.innerHTML = title;
 
         if (time < 6e4) {
@@ -1115,7 +1112,6 @@ async function timer(string, time, title) {
             resolve(true);
             content.addEventListener("transitionend", () => {
                 window.style.animation = `cc_fn 550ms forwards ${easing}`;
-                square.style.animation = `-title 550ms forwards ${easing}`;
                 setTimeout(() => {
                     if (document.body.contains(window)) document.body.removeChild(window);
                     close(window, windows);
@@ -1152,18 +1148,19 @@ async function wz(string) {
         window.appendChild(right);
         window.appendChild(txt);
         window.appendChild(btn);
+        wzwin.push(window);
 
-        window.style.animation = `--wz 550ms forwards ${easing}`;
-        left.style.animation = `__solid 550ms forwards ${easing}`;
-        right.style.animation = `__solid 550ms forwards ${easing}`;
+        window.style.animation = `jr1_wz 550ms forwards ${easing}`;
+        left.style.animation = `jr1_solid 550ms forwards ${easing}`;
+        right.style.animation = `jr1_solid 550ms forwards ${easing}`;
         window.addEventListener("animationend", (e) => {
-            if (e.animationName === "--wz") {
-                window.style.animation = `-wz 550ms forwards ${easing}`;
-                right.style.animation = `_right forwards 550ms ${easing}`;
+            if (e.animationName === "jr1_wz") {
+                window.style.animation = `jr2_wz 550ms forwards ${easing}`;
+                right.style.animation = `jr_right forwards 550ms ${easing}`;
                 window.addEventListener("animationend", (f) => {
-                    if (f.animationName === "-wz") {
-                        txt.style.animation = `_txt forwards 0.3s ${easing}`;
-                        btn.style.animation = `_btn forwards 0.3s ${easing}`;
+                    if (f.animationName === "jr2_wz") {
+                        txt.style.animation = `jr_txt forwards 0.3s ${easing}`;
+                        btn.style.animation = `jr_btn forwards 0.3s ${easing}`;
                     }
                 });
             }
@@ -1173,17 +1170,17 @@ async function wz(string) {
                     warn("请勿重复点击。");
                     return "重复点击可能会导致程序运行异常。";
                 }
-                txt.style.animation = `txt_ 0.3s forwards ${easing}`;
-                btn.style.animation = `btn_ 0.3s forwards ${easing}`;
+                txt.style.animation = `cc_txt 0.3s forwards ${easing}`;
+                btn.style.animation = `cc_btn 0.3s forwards ${easing}`;
                 txt.addEventListener("animationend", (g) => {
-                    if (g.animationName === "txt_") {
-                        window.style.animation = `wz- 550ms forwards ${easing}`;
-                        left.style.animation = `left_ 550ms forwards ${easing}`;
+                    if (g.animationName === "cc_txt") {
+                        window.style.animation = `cc1_wz 550ms forwards ${easing}`;
+                        left.style.animation = `cc_left 550ms forwards ${easing}`;
                         window.addEventListener("animationend", (h) => {
-                            if (h.animationName === "wz-") {
-                                window.style.animation = `wz-- 550ms forwards ${easing}`;
-                                left.style.animation = `solid__ 550ms forwards ${easing}`;
-                                right.style.animation = `solid__ 550ms forwards ${easing}`;
+                            if (h.animationName === "cc1_wz") {
+                                window.style.animation = `cc2_wz 550ms forwards ${easing}`;
+                                left.style.animation = `cc1_solid 550ms forwards ${easing}`;
+                                right.style.animation = `cc1_solid 550ms forwards ${easing}`;
                             }
                         });
                     }
@@ -1194,9 +1191,10 @@ async function wz(string) {
                 };
                 window.addEventListener("animationend", ani_end);
                 resolve();
-                setTimeout(() => {
+                right.addEventListener("animationend", () => {
                     if (document.body.contains(window)) document.body.removeChild(window);
-                }, 2100);
+                    wzwin.pop();
+                });
             };
         });
     });

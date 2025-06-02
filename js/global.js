@@ -12,8 +12,10 @@ let control_block = false; // 锁定 “选项”。
 let inf_block = false; // 锁定 “未读信息”。
 let control_moved = false; // “选项”。
 let inf_moved = false; // “未读信息”。
+let isdimmed = false;
 let windows = []; // 十函数数组。
 let rzwin = []; // rz() 数组。
+let wzwin = []; // wz() 数组。
 let noti_unv = [];
 let cg_unv = [];
 let fail_unv = [];
@@ -84,11 +86,16 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     const ctrl = document.querySelector(".control-pad");
-    ctrl.style.animationName = "-ctrl";
+    ctrl.style.animationName = "cc_ctrl";
+    const inf = document.querySelector(".information-table");
+    inf.style.animationName = "cc_inf";
+    const main = document.getElementById("main");
+    main.style.transition = "filter 0.2s ease-in-out";
     function width(name) {
         const el = document.querySelector(name);
         el.style.width = window.innerWidth + "px";
     }
+
     setInterval(() => {
         let arr = easing.match(/\d+(\.\d+)?/g);
         arr = (arr === null || arr === undefined ? [] : arr.map(Number));
@@ -117,6 +124,15 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         width(".top");
         inf_cont();
+
+        if (windows.length > 0 || rzwin.length > 0 || wzwin.length > 0) {
+            if (isdimmed === false) {
+                main.style.filter = "brightness(60%)";
+            }
+        } else {
+            main.style.filter = "brightness(100%)";
+            isdimmed = false;
+        }
     }, 400);
     document.addEventListener("keydown", (event) => {
         if (event.altKey) noti("将鼠标移动至左上角以打开选项；移动到右上角以查看未读信息。")
