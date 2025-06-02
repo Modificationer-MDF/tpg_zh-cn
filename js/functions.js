@@ -18,7 +18,7 @@ function rz(string, time) {
     content.innerHTML = string;
 
     const l = Math.ceil(string.length / 14);
-    const lh = parseInt(window.style.lineHeight);
+    const lh = parseInt(content.style.lineHeight);
     content.style.height = `${l * lh}px`;
 
     create(window);
@@ -67,11 +67,11 @@ function noti(string, title) {
     icon.style.opacity = 0;
     icon.style.transistion = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const txt = document.createElement("div");
-    txt.className = "jr_fntitle";
+    txt.className = "fn-title";
     txt.style.opacity = 0;
     txt.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const content = document.createElement("div");
-    content.className = "jr_fncontent";
+    content.className = "fn-content";
     content.style.opacity = 0;
     content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const bar = document.createElement("div");
@@ -100,7 +100,7 @@ function noti(string, title) {
     visible(content, "Noti");
 
     const l1 = Math.ceil(string.length / 14);
-    const lh1 = parseInt(window.style.lineHeight);
+    const lh1 = parseInt(content.style.lineHeight);
     content.style.height = `${l1 * lh1}px`;
 
     const l2 = Math.ceil(title.length / 14);
@@ -156,7 +156,7 @@ function cg(string, title) {
     const square = document.createElement("div");
     square.className = "cg-square";
     const txt = document.createElement("div");
-    txt.className = "jr_fntitle";
+    txt.className = "fn-title";
     txt.style.opacity = 0;
     txt.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const icon = document.createElement("img");
@@ -164,7 +164,7 @@ function cg(string, title) {
     icon.style.opacity = 0;
     icon.style.transistion = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const content = document.createElement("div");
-    content.className = "jr_fncontent";
+    content.className = "fn-content";
     content.style.opacity = 0;
     content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const bar = document.createElement("div");
@@ -190,7 +190,7 @@ function cg(string, title) {
     });
 
     const l1 = Math.ceil(string.length / 14);
-    var lh1 = parseInt(window.style.lineHeight);
+    var lh1 = parseInt(content.style.lineHeight);
     content.style.height = `${l1 * lh1}px`;
 
     const l2 = Math.ceil(title.length / 14);
@@ -251,11 +251,11 @@ function fail(string, title) {
     icon.style.opacity = 0;
     icon.style.transistion = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const txt = document.createElement("div");
-    txt.className = "jr_fntitle";
+    txt.className = "fn-title";
     txt.style.opacity = 0;
     txt.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const content = document.createElement("div");
-    content.className = "jr_fncontent";
+    content.className = "fn-content";
     content.style.opacity = 0;
     content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const bar = document.createElement("div");
@@ -282,7 +282,7 @@ function fail(string, title) {
     });
 
     const l1 = Math.ceil(string.length / 14);
-    var lh1 = parseInt(window.style.lineHeight);
+    var lh1 = parseInt(content.style.lineHeight);
     content.style.height = `${l1 * lh1}px`;
 
     const l2 = Math.ceil(title.length / 14);
@@ -343,11 +343,11 @@ function warn(string, title) {
     icon.style.opacity = 0;
     icon.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const txt = document.createElement("div");
-    txt.className = "jr_fntitle";
+    txt.className = "fn-title";
     txt.style.opacity = 0;
     txt.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const content = document.createElement("div");
-    content.className = "jr_fncontent";
+    content.className = "fn-content";
     content.style.opacity = 0;
     content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const bar = document.createElement("div");
@@ -374,7 +374,7 @@ function warn(string, title) {
     });
 
     const l1 = Math.ceil(string.length / 14);
-    var lh1 = parseInt(window.style.lineHeight);
+    var lh1 = parseInt(content.style.lineHeight);
     content.style.height = `${l1 * lh1}px`;
 
     const l2 = Math.ceil(title.length / 14);
@@ -436,11 +436,11 @@ async function inp(string, title) {
         icon.style.opacity = 0;
         icon.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
         const txt = document.createElement("div");
-        txt.className = "jr_fntitle";
+        txt.className = "fn-title";
         txt.style.opacity = 0;
         txt.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
         const content = document.createElement("div");
-        content.className = "jr_fncontent";
+        content.className = "fn-content";
         content.style.opacity = 0;
         content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
         const box = document.createElement("textarea");
@@ -475,7 +475,7 @@ async function inp(string, title) {
         });
 
         const l1 = Math.ceil(string.length / 14);
-        var lh1 = parseInt(window.style.lineHeight);
+        var lh1 = parseInt(content.style.lineHeight);
         content.style.height = `${l1 * lh1}px`;
 
         const l2 = Math.ceil(title.length / 14);
@@ -521,11 +521,11 @@ async function xz(string, n, names, title) {
         icon.style.opacity = 0;
         icon.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
         const txt = document.createElement("div");
-        txt.className = "jr_fntitle";
+        txt.className = "fn-title";
         txt.style.opacity = 0;
         txt.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
         const content = document.createElement("div");
-        content.className = "jr_fncontent";
+        content.className = "fn-content";
         content.style.opacity = 0;
         content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
 
@@ -561,7 +561,7 @@ async function xz(string, n, names, title) {
         visible(content, "Xz");
 
         const l1 = Math.ceil(string.length / 14);
-        var lh1 = parseInt(window.style.lineHeight);
+        var lh1 = parseInt(content.style.lineHeight);
         content.style.height = `${l1 * lh1}px`;
 
         const l2 = Math.ceil(title.length / 14);
@@ -661,11 +661,11 @@ async function synchr(string, title) {
     icon.style.opacity = 0;
     icon.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const txt = document.createElement("div");
-    txt.className = "jr_fntitle";
+    txt.className = "fn-title";
     txt.style.opacity = 0;
     txt.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const content = document.createElement("div");
-    content.className = "jr_fncontent";
+    content.className = "fn-content";
     content.style.opacity = 0;
     content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const bar = document.createElement("div");
@@ -693,7 +693,7 @@ async function synchr(string, title) {
     });
 
     const l1 = Math.ceil(string.length / 14);
-    var lh1 = parseInt(window.style.lineHeight);
+    var lh1 = parseInt(content.style.lineHeight);
     content.style.height = `${l1 * lh1}px`;
 
     const l2 = Math.ceil(title.length / 14);
@@ -755,11 +755,11 @@ async function lj(string, url, title) {
     icon.style.opacity = 0;
     icon.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const txt = document.createElement("div");
-    txt.className = "jr_fntitle";
+    txt.className = "fn-title";
     txt.style.opacity = 0;
     txt.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const content = document.createElement("div");
-    content.className = "jr_fncontent";
+    content.className = "fn-content";
     content.style.opacity = 0;
     content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const btn = document.createElement("button");
@@ -792,7 +792,7 @@ async function lj(string, url, title) {
     });
 
     const l1 = Math.ceil(string.length / 14);
-    var lh1 = parseInt(window.style.lineHeight);
+    var lh1 = parseInt(content.style.lineHeight);
     content.style.height = `${l1 * lh1}px`;
 
     const l2 = Math.ceil(title.length / 14);
@@ -847,11 +847,11 @@ async function zd(string, title) {
         icon.style.opacity = 0;
         icon.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
         const txt = document.createElement("div");
-        txt.className = "jr_fntitle";
+        txt.className = "fn-title";
         txt.style.opacity = 0;
         txt.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
         const content = document.createElement("div");
-        content.className = "jr_fncontent";
+        content.className = "fn-content";
         content.style.opacity = 0;
         content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
         const box = document.createElement("textarea");
@@ -977,7 +977,7 @@ async function zd(string, title) {
         });
 
         const l1 = Math.ceil(string.length / 14);
-        var lh1 = parseInt(window.style.lineHeight);
+        var lh1 = parseInt(content.style.lineHeight);
         content.style.height = `${l1 * lh1}px`;
 
         const l2 = Math.ceil(title.length / 14);
@@ -1030,12 +1030,12 @@ async function timer(string, time, title) {
         icon.style.opacity = 0;
         icon.style.transistion = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
         const txt = document.createElement("div");
-        txt.className = "jr_fntitle";
+        txt.className = "fn-title";
         txt.style.color = "black";
         txt.style.opacity = 0;
         txt.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
         const content = document.createElement("div");
-        content.className = "jr_fncontent";
+        content.className = "fn-content";
         content.style.color = "black";
         content.style.opacity = 0;
         content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
@@ -1092,7 +1092,7 @@ async function timer(string, time, title) {
         visible(content, "Timer");
 
         const l1 = Math.ceil(string.length / 14);
-        const lh1 = parseInt(window.style.lineHeight);
+        const lh1 = parseInt(content.style.lineHeight);
         content.style.height = `${l1 * lh1}px`;
 
         const l2 = Math.ceil(title.length / 14);

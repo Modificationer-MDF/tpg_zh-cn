@@ -8,10 +8,10 @@ let f1 = false;
 let f2 = false;
 let alphabets = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 let marks = `\n\t\r!@#$%^&*()_+-=[]{}|;':\\"',./<>?1234567890！？。“”《》、；‘’【】·~·。，、：；“”‘’《》（）…￥—` + "`";
-let block = false; // 锁定 “选项”。
-let iblock = false; // 锁定 “未读信息”。
-let moved = false; // “选项”。
-let imoved = false; // “未读信息”。
+let control_block = false; // 锁定 “选项”。
+let inf_block = false; // 锁定 “未读信息”。
+let control_moved = false; // “选项”。
+let inf_moved = false; // “未读信息”。
 let windows = []; // 十函数数组。
 let rzwin = []; // rz() 数组。
 let noti_unv = [];
@@ -20,6 +20,11 @@ let fail_unv = [];
 let warn_unv = [];
 let synchr_unv = [];
 let timer_unv = [];
+let ls_notiunv = [];
+let ls_cgunv = [];
+let ls_failunv = [];
+let ls_warnunv = [];
+let ls_synchrunv = [];
 
 document.addEventListener("DOMContentLoaded", function () {
     var start = performance.now();

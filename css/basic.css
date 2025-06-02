@@ -33,6 +33,25 @@ pre {
     font-size: 20px;
 }
 
+.img {
+    width: 50px;
+    height: auto;
+}
+
+.inpbox {
+    position: relative;
+    top: 0.5vh;
+    z-index: 999;
+    height: 4vh;
+    width: 300px;
+    font-size: 20px;
+    color: white;
+    background-color: #00000079;
+    font-family: "basic";
+    border: none;
+    padding: 7px 15px;
+}
+
 @keyframes -head {
     from {
         opacity: 0;
@@ -484,6 +503,18 @@ button {
     }
 }
 
+@keyframes opacity_flash {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
 .title {
     color: #ffffff;
     position: absolute;
@@ -511,58 +542,96 @@ button {
 }
 
 .rtxt {
+    position: relative;
+    left: 40px;
     text-align: right;
     color: white;
+    max-width: 300px;
+    word-break: break-word;
+    line-height: 1.4;
+    opacity: 1;
 }
 
-.zd1, .zd2, .zd3, .zd4, .zd5, .zd6 {
+.control1, .control2, .control3, .control4, .control5, .control6, .inf1, .inf2, .inf3, .inf4, .inf5 {
     color: #ffffff;
     z-index: 999;
     margin-left: 30px;
     padding: 7px 15px;
     font-size: 20px;
     border: none;
+    cursor: pointer;
 }
 
-.zd1 {
+.control1 {
     background-color: #4ebebe99;
 }
 
-.zd2 {
+.control2 {
     background-color: #42789b99;
 }
 
-.zd3 {
+.control3 {
     background-color: #31509099;
 }
 
-.zd4 {
+.control4 {
     background-color: #66d12599;
 }
 
-.zd5 {
+.control5 {
     background-color: #55f6a699;
 }
 
-.zd6 {
+.control6 {
     background-color: #48b3a999;
 }
 
-.img {
-    width: 50px;
-    height: auto;
+.inf1 {
+    background-color:#26c9a999;
 }
 
-.inpbox {
+.inf2 {
+    background-color: #204e3099;
+}
+
+.inf3 {
+    background-color: #4a151499;
+}
+
+.inf4 {
+    background-color: #9c8d2c99;
+}
+
+.inf5 {
+    background-color: #e11af199;
+}
+
+#notic, #cgc, #failc, #warnc, #synchrc, #timerc {
     position: relative;
-    top: 0.5vh;
-    z-index: 999;
-    height: 4vh;
-    width: 300px;
-    font-size: 20px;
-    color: white;
-    background-color: #00000079;
-    font-family: "basic";
-    border: none;
-    padding: 7px 15px;
+    transition: height 0.3s ease-in-out;
+    height: 135px;
+}
+
+#notic {
+    background-color: #18a68979;
+}
+
+#cgc {
+    background-color: #1d583779;
+}
+
+#failc {
+    background-color: #791e1d79;
+}
+
+#warnc {
+    background-color: #84782979;
+}
+
+#synchrc {
+    background-color: #9e338979;
+}
+
+#timerc {
+    background-color: #f0f0f079;
 }

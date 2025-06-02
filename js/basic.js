@@ -1,11 +1,3 @@
-function urcc(f, c) {
-    const cz = Array.from(f.children).find((child) =>
-        child.className === c.className && // 类名相同。
-        child.style.top === c.style.top); // top 值相同。
-    if (cz) cz.innerHTML = c.innerHTML;
-    else f.appendChild(c);
-}
-
 function fn0() {
     if (mode === "Play" && f1 === false) fn1();
     else if (mode === "Preset" && f2 === false) fn2();
@@ -45,12 +37,12 @@ document.addEventListener(`DOMContentLoaded`, () => {
 
     document.addEventListener("mousemove", function (event) {
         let width = ctrl.getBoundingClientRect().width;
-        if (event.clientX <= 50 && event.clientY <= 50 && moved === false) { // 移动到左上角。
+        if (event.clientX <= 50 && event.clientY <= 50 && control_moved === false) { // 移动到左上角。
             ctrl.style.animation = `ctrl- 550ms forwards ${easing}`;
-            if (block === false) moved = true;
-        } else if (event.clientX > width && moved === true) {
+            if (control_block === false) control_moved = true;
+        } else if (event.clientX > width && control_moved === true) {
             ctrl.style.animation = `-ctrl 550ms forwards ${easing}`;
-            moved = false;
+            control_moved = false;
         }
     });
 
@@ -60,12 +52,12 @@ document.addEventListener(`DOMContentLoaded`, () => {
     document.addEventListener("mousemove", function (event) {
         let rect = inf.getBoundingClientRect().width; // 获取 inf 元素的宽度。
 
-        if (event.clientX >= window.innerWidth - 50 && event.clientY <= 50 && imoved === false) { // 移动到右上角。
+        if (event.clientX >= window.innerWidth - 50 && event.clientY <= 50 && inf_moved === false) { // 移动到右上角。
             inf.style.animation = `inf- 550ms forwards ${easing}`;
-            if (iblock === false) imoved = true;
-        } else if (event.clientX < window.innerWidth - rect && imoved === true) {
+            if (inf_block === false) inf_moved = true;
+        } else if (event.clientX < window.innerWidth - rect && inf_moved === true) {
             inf.style.animation = `-inf 550ms forwards ${easing}`;
-            imoved = false;
+            inf_moved = false;
         }
     });
 });
@@ -524,7 +516,7 @@ function control() { // 选项。
     const ys = document.createElement("button");
     ys.type = "button";
     ys.innerHTML = "Preset";
-    ys.className = "zd1";
+    ys.className = "control1";
     ys.onclick = () => {
         if (mode === "Preset") {
             warn("当前模式已为 Preset。");
@@ -536,7 +528,7 @@ function control() { // 选项。
     const js = document.createElement("button");
     js.type = "button";
     js.innerHTML = "Play";
-    js.className = "zd2";
+    js.className = "control2";
     js.onclick = () => {
         if (mode === "Play") {
             warn("当前模式已为 Play。");
@@ -552,7 +544,7 @@ function control() { // 选项。
     const y = document.createElement("button");
     y.type = "button";
     y.innerHTML = "Default";
-    y.className = "zd3";
+    y.className = "control3";
     y.onclick = () => {
         if (titleset === "Default") warn("你已经在使用默认标题。");
         else {
@@ -563,7 +555,7 @@ function control() { // 选项。
     const z = document.createElement("button");
     z.type = "button";
     z.innerHTML = "Custom";
-    z.className = "zd4";
+    z.className = "control4";
     z.onclick = () => {
         if (titleset === "Custom") warn("你已经在使用自定义标题。");
         else {
@@ -715,14 +707,14 @@ function inf_ui() {
     const notic = document.createElement("div");
     notic.innerHTML = "Noti()";
     notic.className = "rcont";
-    notic.id = "notic"
-    notic.style.backgroundColor = "#18a68979";
-    const noti_text = document.createElement("p");
-    noti_text.className = "rtxt";
+    notic.id = "notic";
+    const noti_msg = document.createElement("p");
+    noti_msg.className = "rtxt";
+    noti_msg.id = "noti_msg";
     const noti_read = document.createElement("button");
     noti_read.type = "button";
     noti_read.innerHTML = "清空。";
-    noti_read.className = "zd1";
+    noti_read.className = "inf1";
     noti_read.onclick = () => {
         noti_unv = [];
         rz("已清空 Noti() 的未读信息。");
@@ -731,14 +723,14 @@ function inf_ui() {
     const cgc = document.createElement("div");
     cgc.innerHTML = "Cg()";
     cgc.className = "rcont";
-    cgc.id = "cgc"
-    cgc.style.backgroundColor = "#1d583779";
-    const cg_text = document.createElement("p");
-    cg_text.className = "rtxt";
+    cgc.id = "cgc";
+    const cg_msg = document.createElement("p");
+    cg_msg.className = "rtxt";
+    cg_msg.id = "cg_msg";
     const cg_read = document.createElement("button");
     cg_read.type = "button";
     cg_read.innerHTML = "清空。";
-    cg_read.className = "zd2";
+    cg_read.className = "inf2";
     cg_read.onclick = () => {
         cg_unv = [];
         rz("已清空 Cg() 的未读信息。");
@@ -747,14 +739,14 @@ function inf_ui() {
     const failc = document.createElement("div");
     failc.innerHTML = "Fail()";
     failc.className = "rcont";
-    failc.id = "failc"
-    failc.style.backgroundColor = "#791e1d79";
-    const fail_text = document.createElement("p");
-    fail_text.className = "rtxt";
+    failc.id = "failc";
+    const fail_msg = document.createElement("p");
+    fail_msg.className = "rtxt";
+    fail_msg.id = "fail_msg";
     const fail_read = document.createElement("button");
     fail_read.type = "button";
     fail_read.innerHTML = "清空。";
-    fail_read.className = "zd3";
+    fail_read.className = "inf3";
     fail_read.onclick = () => {
         fail_unv = [];
         rz("已清空 Fail() 的未读信息。");
@@ -763,14 +755,14 @@ function inf_ui() {
     const warnc = document.createElement("div");
     warnc.innerHTML = "Warn()";
     warnc.className = "rcont";
-    warnc.id = "warnc"
-    warnc.style.backgroundColor = "#84782979";
-    const warn_text = document.createElement("p");
-    warn_text.className = "rtxt";
+    warnc.id = "warnc";
+    const warn_msg = document.createElement("p");
+    warn_msg.className = "rtxt";
+    warn_msg.id = "warn_msg";
     const warn_read = document.createElement("button");
     warn_read.type = "button";
     warn_read.innerHTML = "清空。";
-    warn_read.className = "zd4";
+    warn_read.className = "inf4";
     warn_read.onclick = () => {
         warn_unv = [];
         rz("已清空 Warn() 的未读信息。");
@@ -779,34 +771,17 @@ function inf_ui() {
     const synchrc = document.createElement("div");
     synchrc.innerHTML = "Synchr()";
     synchrc.className = "rcont";
-    synchrc.id = "synchrc"
-    synchrc.style.backgroundColor = "#9e338979";
-    const synchr_text = document.createElement("p");
-    synchr_text.className = "rtxt";
+    synchrc.id = "synchrc";
+    const synchr_msg = document.createElement("p");
+    synchr_msg.className = "rtxt";
+    synchr_msg.id = "synchr_msg";
     const synchr_read = document.createElement("button");
     synchr_read.type = "button";
     synchr_read.innerHTML = "清空。";
-    synchr_read.className = "zd5";
+    synchr_read.className = "inf5";
     synchr_read.onclick = () => {
         synchr_unv = [];
         rz("已清空 Synchr() 的未读信息。");
-    };
-
-    const timerc = document.createElement("div");
-    timerc.innerHTML = "Timer()";
-    timerc.className = "rcont";
-    timerc.id = "timerc"
-    timerc.style.backgroundColor = "#f0f0f079";
-    timerc.style.color = "#000000";
-    const timer_text = document.createElement("p");
-    timer_text.className = "rtxt";
-    const timer_read = document.createElement("button");
-    timer_read.type = "button";
-    timer_read.innerHTML = "清空。";
-    timer_read.className = "zd6";
-    timer_read.onclick = () => {
-        timer_unv = [];
-        rz("已清空 Timer() 的未读信息。");
     };
 
     const all = [
@@ -815,25 +790,11 @@ function inf_ui() {
         failc,
         warnc,
         synchrc,
-        timerc,
     ];
 
     for (var i = 0; i < all.length; i++) {
         all[i].style.top = `calc(${i * 3}vh + 90px)`;
     }
-
-    notic.appendChild(noti_read);
-    cgc.appendChild(cg_read);
-    failc.appendChild(fail_read);
-    warnc.appendChild(warn_read);
-    synchrc.appendChild(synchr_read);
-    timerc.appendChild(timer_read);
-    notic.appendChild(noti_text);
-    cgc.appendChild(cg_text);
-    failc.appendChild(fail_text);
-    warnc.appendChild(warn_text);
-    synchrc.appendChild(synchr_text);
-    timerc.appendChild(timer_text);
 
     inf.appendChild(title);
     title.appendChild(jdt);
@@ -842,34 +803,65 @@ function inf_ui() {
     inf.appendChild(failc);
     inf.appendChild(warnc);
     inf.appendChild(synchrc);
-    inf.appendChild(timerc);
+    notic.appendChild(noti_msg);
+    notic.appendChild(noti_read);
+    cgc.appendChild(cg_msg);
+    cgc.appendChild(cg_read);
+    failc.appendChild(fail_msg);
+    failc.appendChild(fail_read);
+    warnc.appendChild(warn_msg);
+    warnc.appendChild(warn_read);
+    synchrc.appendChild(synchr_msg);
+    synchrc.appendChild(synchr_read);
 }
 
-function inf_cont() { // 未读信息。
+function inf_cont() { // 更新未读信息。
+    let noti_height = 0;
+    let cg_height = 0;
+    let fail_height = 0;
+    let warn_height = 0;
+    let synchr_height = 0;
+
     const notic = document.getElementById("notic");
-    const noti_text = notic.querySelector(".rtxt");
-    noti_text.innerHTML = (noti_unv.length === 0 ? "空。" : noti_unv.join("<br />"));
+    const noti_msg = notic.querySelector(".rtxt");
+    let h1 = parseInt(getComputedStyle(noti_msg).lineHeight);
+    noti_msg.innerHTML = (noti_unv.length === 0 ? "空。" : noti_unv.join("<br />"));
+    let l1 = Math.ceil((noti_msg.getBoundingClientRect().width * noti_msg.getBoundingClientRect().height) / (parseFloat(getComputedStyle(noti_msg).maxWidth) * h1));
+    noti_height = l1 * h1;
+
+    notic.style.height = `calc(${noti_height > 0 ? noti_height - h1 : 0}px + 135px)`;
 
     const cgc = document.getElementById("cgc");
-    const cg_text = cgc.querySelector(".rtxt");
-    cg_text.innerHTML = (cg_unv.length === 0 ? "空。" : cg_unv.join("<br />"));
+    const cg_msg = cgc.querySelector(".rtxt");
+    cg_msg.innerHTML = (cg_unv.length === 0 ? "空。" : cg_unv.join("<br />"));
+    let h2 = parseInt(getComputedStyle(cg_msg).lineHeight);
+    let l2 = Math.ceil((cg_msg.getBoundingClientRect().width * cg_msg.getBoundingClientRect().height) / (parseFloat(getComputedStyle(noti_msg).maxWidth) * h2));
+    cg_height = l2 * h2;
+    cgc.style.height = `calc(${cg_height > 0 ? cg_height - h2 : 0}px + 135px)`;
 
     const failc = document.getElementById("failc");
-    const fail_text = failc.querySelector(".rtxt");
-    fail_text.innerHTML = (fail_unv.length === 0 ? "空。" : fail_unv.join("<br />"));
+    const fail_msg = failc.querySelector(".rtxt");
+    fail_msg.innerHTML = (fail_unv.length === 0 ? "空。" : fail_unv.join("<br />"));
+    let h3 = parseInt(getComputedStyle(fail_msg).lineHeight);
+    let l3 = Math.ceil((fail_msg.getBoundingClientRect().width * fail_msg.getBoundingClientRect().height) / (parseFloat(getComputedStyle(noti_msg).maxWidth) * h3));
+    fail_height = l3 * h3;
+    failc.style.height = `calc(${fail_height > 0 ? fail_height - h3 : 0}px + 135px)`;
 
     const warnc = document.getElementById("warnc");
-    const warn_text = warnc.querySelector(".rtxt");
-    warn_text.innerHTML = (warn_unv.length === 0 ? "空。" : warn_unv.join("<br />"));
+    const warn_msg = warnc.querySelector(".rtxt");
+    warn_msg.innerHTML = (warn_unv.length === 0 ? "空。" : warn_unv.join("<br />"));
+    let h4 = parseInt(getComputedStyle(warn_msg).lineHeight);
+    let l4 = Math.ceil((warn_msg.getBoundingClientRect().width * warn_msg.getBoundingClientRect().height) / (parseFloat(getComputedStyle(noti_msg).maxWidth) * h4));
+    warn_height = l4 * h4;
+    warnc.style.height = `calc(${warn_height > 0 ? warn_height - h4 : 0}px + 135px)`;
 
     const synchrc = document.getElementById("synchrc");
-    const synchr_text = synchrc.querySelector(".rtxt");
-    synchr_text.innerHTML = (synchr_unv.length === 0 ? "空。" : synchr_unv.join("<br />"));
-
-    const timerc = document.getElementById("timerc");
-    const timer_text = timerc.querySelector(".rtxt");
-    timer_text.style.color = "#000000";
-    timer_text.innerHTML = (timer_unv.length === 0 ? "空。" : timer_unv.join("<br />"));
+    const synchr_msg = synchrc.querySelector(".rtxt");
+    synchr_msg.innerHTML = (synchr_unv.length === 0 ? "空。" : synchr_unv.join("<br />"));
+    let h5 = parseInt(getComputedStyle(synchr_msg).lineHeight);
+    let l5 = Math.ceil((synchr_msg.getBoundingClientRect().width * synchr_msg.getBoundingClientRect().height) / (parseFloat(getComputedStyle(noti_msg).maxWidth) * h5));
+    synchr_height = l5 * h5;
+    synchrc.style.height = `calc(${synchr_height > 0 ? synchr_height - h5 : 0}px + 135px)`;
 }
 
 function pos(p) {
@@ -976,7 +968,7 @@ async function fn7() { // 网站介绍。
 
     await wz("欢迎来到 The Play Games 官方网站！是时候带你熟悉一下了。");
     noti("请将鼠标移动至左上角。");
-    block = true;
+    control_block = true;
 
     const i1 = setInterval(async () => {
         if (getComputedStyle(ctrl).animationName === "ctrl-" && j1 === false) {
@@ -993,8 +985,8 @@ async function fn7() { // 网站介绍。
                         ebox.addEventListener("keypress", (event) => {
                             if (event.key === "Enter") {
                                 w1 = true;
-                                block = false;
-                                moved = true;
+                                control_block = false;
+                                control_moved = true;
                             }
                         });
                         break;
@@ -1003,8 +995,8 @@ async function fn7() { // 网站介绍。
                         tbox.addEventListener("keypress", (event) => {
                             if (event.key === "Enter") {
                                 w1 = true;
-                                block = false;
-                                moved = true;
+                                control_block = false;
+                                control_moved = true;
                             }
                         });
                         break;
@@ -1013,8 +1005,8 @@ async function fn7() { // 网站介绍。
                         wbox.addEventListener("keypress", (event) => {
                             if (event.key === "Enter") {
                                 w1 = true;
-                                block = false;
-                                moved = true;
+                                control_block = false;
+                                control_moved = true;
                             }
                         });
                         break;
@@ -1023,16 +1015,16 @@ async function fn7() { // 网站介绍。
                         hbox.addEventListener("keypress", (event) => {
                             if (event.key === "Enter") {
                                 w1 = true;
-                                block = false;
-                                moved = true;
+                                control_block = false;
+                                control_moved = true;
                             }
                         });
                         break;
                 }
             } else {
                 await wz("好的，那我们继续。");
-                block = false;
-                moved = true;
+                control_block = false;
+                control_moved = true;
                 w1 = true;
             }
             clearInterval(i1);
@@ -1044,13 +1036,13 @@ async function fn7() { // 网站介绍。
             j2 = true;
             await wz("接下来介绍的是 “未读信息” 界面。");
             noti("请将鼠标移动至右上角。");
-            iblock = true;
+            inf_block = true;
             const i3 = setInterval(async () => {
                 if (getComputedStyle(inf).animationName === "inf-" && j3 === false) {
                     j3 = true;
                     await wz("在 “未读信息” 界面，你可以看到因窗口大小限制而没有看到的内容。");
-                    iblock = false;
-                    imoved = true;
+                    inf_block = false;
+                    inf_moved = true;
                     w2 = true;
                     clearInterval(i3);
                 }
@@ -1063,8 +1055,8 @@ async function fn7() { // 网站介绍。
         if (w2 === true && w3 === false) {
             w3 = true;
             await wz("恭喜，你已经看完了网站的介绍！感谢你对 The Play Games 的支持。");
-            block = false;
-            moved = true;
+            control_block = false;
+            control_moved = true;
             clearInterval(i3);
         }
     }, 250);
