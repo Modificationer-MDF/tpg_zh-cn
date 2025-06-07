@@ -737,7 +737,7 @@ async function lj(string, url, title) {
     }
     if (s_replaced === "") {
         warn("不能输入空字符串。");
-        return "在 Noti() 函数中，string 参数不能为空。";
+        return "在 Lj() 函数中，string 参数不能为空。";
     }
     if (u_replaced === "") {
         warn("无法跳转至空地址。");

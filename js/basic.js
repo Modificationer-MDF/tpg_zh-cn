@@ -883,42 +883,42 @@ function inf_cont() { // 更新未读信息。
     const noti_msg = notic.querySelector(".rtxt");
     let h1 = parseInt(getComputedStyle(noti_msg).lineHeight);
     noti_msg.innerHTML = (noti_unv.length === 0 ? "空。" : noti_unv.join("<br />"));
-    let l1 = Math.ceil((noti_msg.getBoundingClientRect().width * noti_msg.getBoundingClientRect().height) / (parseFloat(getComputedStyle(noti_msg).maxWidth) * h1));
+    let l1 = Math.floor((noti_msg.getBoundingClientRect().width * noti_msg.getBoundingClientRect().height) / (parseFloat(getComputedStyle(noti_msg).maxWidth) * h1));
     noti_height = l1 * h1;
 
-    notic.style.height = `calc(${noti_height > 0 ? noti_height - h1 : 0}px + 135px)`;
+    notic.style.height = `calc(${noti_height}px + 135px)`;
 
     const cgc = document.getElementById("cgc");
     const cg_msg = cgc.querySelector(".rtxt");
     cg_msg.innerHTML = (cg_unv.length === 0 ? "空。" : cg_unv.join("<br />"));
     let h2 = parseInt(getComputedStyle(cg_msg).lineHeight);
-    let l2 = Math.ceil((cg_msg.getBoundingClientRect().width * cg_msg.getBoundingClientRect().height) / (parseFloat(getComputedStyle(noti_msg).maxWidth) * h2));
+    let l2 = Math.floor((cg_msg.getBoundingClientRect().width * cg_msg.getBoundingClientRect().height) / (parseFloat(getComputedStyle(noti_msg).maxWidth) * h2));
     cg_height = l2 * h2;
-    cgc.style.height = `calc(${cg_height > 0 ? cg_height - h2 : 0}px + 135px)`;
+    cgc.style.height = `calc(${cg_height}px + 135px)`;
 
     const failc = document.getElementById("failc");
     const fail_msg = failc.querySelector(".rtxt");
     fail_msg.innerHTML = (fail_unv.length === 0 ? "空。" : fail_unv.join("<br />"));
     let h3 = parseInt(getComputedStyle(fail_msg).lineHeight);
-    let l3 = Math.ceil((fail_msg.getBoundingClientRect().width * fail_msg.getBoundingClientRect().height) / (parseFloat(getComputedStyle(noti_msg).maxWidth) * h3));
+    let l3 = Math.floor((fail_msg.getBoundingClientRect().width * fail_msg.getBoundingClientRect().height) / (parseFloat(getComputedStyle(noti_msg).maxWidth) * h3));
     fail_height = l3 * h3;
-    failc.style.height = `calc(${fail_height > 0 ? fail_height - h3 : 0}px + 135px)`;
+    failc.style.height = `calc(${fail_height}px + 135px)`;
 
     const warnc = document.getElementById("warnc");
     const warn_msg = warnc.querySelector(".rtxt");
     warn_msg.innerHTML = (warn_unv.length === 0 ? "空。" : warn_unv.join("<br />"));
     let h4 = parseInt(getComputedStyle(warn_msg).lineHeight);
-    let l4 = Math.ceil((warn_msg.getBoundingClientRect().width * warn_msg.getBoundingClientRect().height) / (parseFloat(getComputedStyle(noti_msg).maxWidth) * h4));
+    let l4 = Math.floor((warn_msg.getBoundingClientRect().width * warn_msg.getBoundingClientRect().height) / (parseFloat(getComputedStyle(noti_msg).maxWidth) * h4));
     warn_height = l4 * h4;
-    warnc.style.height = `calc(${warn_height > 0 ? warn_height - h4 : 0}px + 135px)`;
+    warnc.style.height = `calc(${warn_height}px + 135px)`;
 
     const synchrc = document.getElementById("synchrc");
     const synchr_msg = synchrc.querySelector(".rtxt");
     synchr_msg.innerHTML = (synchr_unv.length === 0 ? "空。" : synchr_unv.join("<br />"));
     let h5 = parseInt(getComputedStyle(synchr_msg).lineHeight);
-    let l5 = Math.ceil((synchr_msg.getBoundingClientRect().width * synchr_msg.getBoundingClientRect().height) / (parseFloat(getComputedStyle(noti_msg).maxWidth) * h5));
+    let l5 = Math.floor((synchr_msg.getBoundingClientRect().width * synchr_msg.getBoundingClientRect().height) / (parseFloat(getComputedStyle(noti_msg).maxWidth) * h5));
     synchr_height = l5 * h5;
-    synchrc.style.height = `calc(${synchr_height > 0 ? synchr_height - h5 : 0}px + 135px)`;
+    synchrc.style.height = `calc(${synchr_height}px + 135px)`;
 }
 
 function pos(p) {

@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 fail("字体加载失败。");
                 break;
             default:
-                fail(error);
+                fail(`未知错误。（${error}）`);
                 break;
         }
     });
