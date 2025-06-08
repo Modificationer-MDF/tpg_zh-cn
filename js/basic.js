@@ -262,7 +262,7 @@ function fn2() {
     inpbtn.className = "btn5";
     inpbtn.onclick = async () => {
         let a = await inp("你可以在此输入！");
-        noti("你输入了：“${a}”。");
+        noti(`你输入了：“${a}”。`);
     };
     const synchrbtn = document.createElement("button");
     synchrbtn.innerHTML = "synchr";
