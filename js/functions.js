@@ -26,11 +26,11 @@ function rz(string, time) {
     window.appendChild(content);
 
     requestAnimationFrame(() => {
-        window.style.animation = `jr_rz 550ms forwards ${easing}`;
+        window.style.animation = `jr_rz 0.55s forwards ${easing}`;
     });
 
     setTimeout(() => {
-        window.style.animation = `cc_rz 550ms forwards ${easing}`;
+        window.style.animation = `cc_rz 0.55s forwards ${easing}`;
         setTimeout(() => {
             if (document.body.contains(window)) document.body.removeChild(window);
             close(window);
@@ -85,7 +85,7 @@ function noti(string, title) {
     window.appendChild(content);
     window.appendChild(bar);
 
-    window.style.animation = `jr_fn 550ms forwards ${easing}`;
+    window.style.animation = `jr_fn 0.55s forwards ${easing}`;
     content.innerHTML = string;
     txt.innerHTML = title;
 
@@ -120,11 +120,11 @@ function noti(string, title) {
         icon.style.opacity = 0;
         txt.style.opacity = 0;
         content.addEventListener("transitionend", () => {
-            window.style.animation = `cc_fn 550ms forwards ${easing}`;
+            window.style.animation = `cc_fn 0.55s forwards ${easing}`;
+            close(window, windows);
             setTimeout(() => {
                 if (document.body.contains(window)) document.body.removeChild(window);
-                close(window, windows);
-            }, 550);    
+            }, 550);
         });
     }, smarttime(string));
 }
@@ -176,7 +176,7 @@ function cg(string, title) {
     window.appendChild(content);
     window.appendChild(bar);
 
-    window.style.animation = `jr_fn 550ms forwards ${easing}`;
+    window.style.animation = `jr_fn 0.55s forwards ${easing}`;
     content.innerHTML = string;
     txt.innerHTML = title;
 
@@ -211,10 +211,10 @@ function cg(string, title) {
         txt.style.opacity = 0;
         icon.style.opacity = 0;
         content.addEventListener("transitionend", () => {
-            window.style.animation = `cc_fn 550ms forwards ${easing}`;
+            window.style.animation = `cc_fn 0.55s forwards ${easing}`;
+            close(window, windows)
             setTimeout(() => {
                 if (document.body.contains(window)) document.body.removeChild(window);
-                close(window, windows)
             }, 550);
         });
     }, smarttime(string));
@@ -268,7 +268,7 @@ function fail(string, title) {
     window.appendChild(bar);
 
     icon.src = "images/Err.png";
-    window.style.animation = `jr_fn 550ms forwards ${easing}`;
+    window.style.animation = `jr_fn 0.55s forwards ${easing}`;
     content.innerHTML = string;
     txt.innerHTML = title;
 
@@ -303,10 +303,10 @@ function fail(string, title) {
         icon.style.opacity = 0;
         txt.style.opacity = 0;
         content.addEventListener("transitionend", () => {
-            window.style.animation = `cc_fn 550ms forwards ${easing}`;
+            window.style.animation = `cc_fn 0.55s forwards ${easing}`;
+            close(window, windows)
             setTimeout(() => {
                 if (document.body.contains(window)) document.body.removeChild(window);
-                close(window, windows)
             }, 550);
         });
     }, smarttime(string));
@@ -360,7 +360,7 @@ function warn(string, title) {
     window.appendChild(bar);
 
     icon.src = "images/Exc.png";
-    window.style.animation = `jr_fn 550ms forwards ${easing}`;
+    window.style.animation = `jr_fn 0.55s forwards ${easing}`;
     content.innerHTML = string;
     txt.innerHTML = title;
 
@@ -395,10 +395,10 @@ function warn(string, title) {
         icon.style.opacity = 0;
         txt.style.opacity = 0;
         content.addEventListener("transitionend", () => {
-            window.style.animation = `cc_fn 550ms forwards ${easing}`;
+            window.style.animation = `cc_fn 0.55s forwards ${easing}`;
+            close(window, windows)
             setTimeout(() => {
                 if (document.body.contains(window)) document.body.removeChild(window);
-                close(window, windows)
             }, 550);
         });
     }, smarttime(string));
@@ -460,7 +460,7 @@ async function inp(string, title) {
         window.appendChild(box);
         
         icon.src = "images/Inp.png";
-        window.style.animation = `jr_fn 550ms forwards ${easing}`;
+        window.style.animation = `jr_fn 0.55s forwards ${easing}`;
         content.innerHTML = string;
         txt.innerHTML = title;
 
@@ -488,11 +488,11 @@ async function inp(string, title) {
                 icon.style.opacity = 0;
                 txt.style.opacity = 0;
                 content.addEventListener("transitionend", () => {
-                    window.style.animation = `cc_fn 550ms forwards ${easing}`;
+                    window.style.animation = `cc_fn 0.55s forwards ${easing}`;
+                    close(window, windows);
+                    resolve(value);
                     setTimeout(() => {
-                        resolve(value);
                         if (document.body.contains(window)) document.body.removeChild(window);
-                        close(window, windows);
                     }, 550);
                 });
             }
@@ -552,7 +552,7 @@ async function xz(string, n, names, title) {
         window.appendChild(content);
 
         icon.src = "images/Sel.png";
-        window.style.animation = `jr_fn 550ms forwards ${easing}`;
+        window.style.animation = `jr_fn 0.55s forwards ${easing}`;
         content.innerHTML = string;
         txt.innerHTML = title;
 
@@ -618,10 +618,10 @@ async function xz(string, n, names, title) {
                 icon.style.opacity = 0;
                 txt.style.opacity = 0;
                 content.addEventListener("transitionend", () => {
-                    window.style.animation = `cc_fn 550ms forwards ${easing}`;
+                    window.style.animation = `cc_fn 0.55s forwards ${easing}`;
+                    close(window, windows)
                     setTimeout(() => {
                         if (document.body.contains(window)) document.body.removeChild(window);
-                        close(window, windows)
                     }, 550);
                 });
             };
@@ -678,7 +678,7 @@ async function synchr(string, title) {
     window.appendChild(bar);
 
     icon.src = "images/Synchronization.png";
-    window.style.animation = `jr_fn 550ms forwards ${easing}`;
+    window.style.animation = `jr_fn 0.55s forwards ${easing}`;
     content.innerHTML = string;
     rz(string);
     txt.innerHTML = title;
@@ -705,10 +705,10 @@ async function synchr(string, title) {
         icon.style.opacity = 0;
         txt.style.opacity = 0;
         content.addEventListener("transitionend", () => {
-            window.style.animation = `cc_fn 550ms forwards ${easing}`;
+            window.style.animation = `cc_fn 0.55s forwards ${easing}`;
+            close(window, windows)
             setTimeout(() => {
                 if (document.body.contains(window)) document.body.removeChild(window);
-                close(window, windows)
             }, 550);
         });
     }, smarttime(string));
@@ -776,7 +776,7 @@ async function lj(string, url, title) {
     visible(content, "Lj");
 
     icon.src = "images/Link.png";
-    window.style.animation = `jr_fn 550ms forwards ${easing}`;
+    window.style.animation = `jr_fn 0.55s forwards ${easing}`;
     content.innerHTML = string;
     btn.innerHTML = url;
     txt.innerHTML = title;
@@ -806,10 +806,10 @@ async function lj(string, url, title) {
         icon.style.opacity = 0;
         txt.style.opacity = 0;
         content.addEventListener("transitionend", () => {
-            window.style.animation = `cc_fn 550ms forwards ${easing}`;
+            window.style.animation = `cc_fn 0.55s forwards ${easing}`;
+            close(window, windows)
             setTimeout(() => {
                 if (document.body.contains(window)) document.body.removeChild(window);
-                close(window, windows)
             }, 550);
         });
     }
@@ -941,10 +941,10 @@ async function zd(string, title) {
                 icon.style.opacity = 0;
                 txt.style.opacity = 0;
                 content.addEventListener("transitionend", () => {
-                    window.style.animation = `cc_fn 550ms forwards ${easing}`;
+                    window.style.animation = `cc_fn 0.55s forwards ${easing}`;
+                    close(window, windows);
                     setTimeout(() => {
                         if (document.body.contains(window)) document.body.removeChild(window);
-                        close(window, windows);
                     }, 550);
                 });
             } else if (event.key === "Enter" && event.shiftKey) {
@@ -962,7 +962,7 @@ async function zd(string, title) {
         window.appendChild(box);
 
         icon.src = "images/Com.png";
-        window.style.animation = `jr_fn 550ms forwards ${easing}`;
+        window.style.animation = `jr_fn 0.55s forwards ${easing}`;
         content.innerHTML = string;
         txt.innerHTML = title;
 
@@ -1048,7 +1048,7 @@ async function timer(string, time, title) {
         window.appendChild(content);
         window.appendChild(bar);
 
-        window.style.animation = `jr_fn 550ms forwards ${easing}`;
+        window.style.animation = `jr_fn 0.55s forwards ${easing}`;
         txt.innerHTML = title;
 
         if (time < 6e4) {
@@ -1111,10 +1111,10 @@ async function timer(string, time, title) {
             txt.style.opacity = 0;
             resolve(true);
             content.addEventListener("transitionend", () => {
-                window.style.animation = `cc_fn 550ms forwards ${easing}`;
+                window.style.animation = `cc_fn 0.55s forwards ${easing}`;
+                close(window, windows);
                 setTimeout(() => {
                     if (document.body.contains(window)) document.body.removeChild(window);
-                    close(window, windows);
                 }, 550);
             });
         }, time);
@@ -1150,13 +1150,13 @@ async function wz(string) {
         window.appendChild(btn);
         wzwin.push(window);
 
-        window.style.animation = `jr1_wz 550ms forwards ${easing}`;
-        left.style.animation = `jr1_solid 550ms forwards ${easing}`;
-        right.style.animation = `jr1_solid 550ms forwards ${easing}`;
+        window.style.animation = `jr1_wz 0.55s forwards ${easing}`;
+        left.style.animation = `jr1_solid 0.55s forwards ${easing}`;
+        right.style.animation = `jr1_solid 0.55s forwards ${easing}`;
         window.addEventListener("animationend", (e) => {
             if (e.animationName === "jr1_wz") {
-                window.style.animation = `jr2_wz 550ms forwards ${easing}`;
-                right.style.animation = `jr_right forwards 550ms ${easing}`;
+                window.style.animation = `jr2_wz 0.55s forwards ${easing}`;
+                right.style.animation = `jr_right forwards 0.55s ${easing}`;
                 window.addEventListener("animationend", (f) => {
                     if (f.animationName === "jr2_wz") {
                         txt.style.animation = `jr_txt forwards 0.3s ${easing}`;
@@ -1174,13 +1174,13 @@ async function wz(string) {
                 btn.style.animation = `cc_btn 0.3s forwards ${easing}`;
                 txt.addEventListener("animationend", (g) => {
                     if (g.animationName === "cc_txt") {
-                        window.style.animation = `cc1_wz 550ms forwards ${easing}`;
-                        left.style.animation = `cc_left 550ms forwards ${easing}`;
+                        window.style.animation = `cc1_wz 0.55s forwards ${easing}`;
+                        left.style.animation = `cc_left 0.55s forwards ${easing}`;
                         window.addEventListener("animationend", (h) => {
                             if (h.animationName === "cc1_wz") {
-                                window.style.animation = `cc2_wz 550ms forwards ${easing}`;
-                                left.style.animation = `cc1_solid 550ms forwards ${easing}`;
-                                right.style.animation = `cc1_solid 550ms forwards ${easing}`;
+                                window.style.animation = `cc2_wz 0.55s forwards ${easing}`;
+                                left.style.animation = `cc1_solid 0.55s forwards ${easing}`;
+                                right.style.animation = `cc1_solid 0.55s forwards ${easing}`;
                             }
                         });
                     }
@@ -1190,10 +1190,10 @@ async function wz(string) {
                     window.removeEventListener("animationend", ani_end);
                 };
                 window.addEventListener("animationend", ani_end);
-                resolve();
+                resolve("已确认。");
+                wzwin.pop();
                 right.addEventListener("animationend", () => {
                     if (document.body.contains(window)) document.body.removeChild(window);
-                    wzwin.pop();
                 });
             };
         });

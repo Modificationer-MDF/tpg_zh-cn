@@ -90,11 +90,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const inf = document.querySelector(".information-table");
     inf.style.animationName = "cc_inf";
     const main = document.getElementById("main");
-    main.style.transition = "filter 0.2s ease-in-out";
-    function width(name) {
-        const el = document.querySelector(name);
-        el.style.width = window.innerWidth + "px";
-    }
 
     setInterval(() => {
         let arr = easing.match(/\d+(\.\d+)?/g);
@@ -126,11 +121,9 @@ document.addEventListener("DOMContentLoaded", function () {
         inf_cont();
 
         if (windows.length > 0 || rzwin.length > 0 || wzwin.length > 0) {
-            if (isdimmed === false) {
-                main.style.filter = "brightness(60%)";
-            }
+            if (isdimmed === false) ld(main, "75%");
         } else {
-            main.style.filter = "brightness(100%)";
+            ld(main, "100%");
             isdimmed = false;
         }
     }, 400);

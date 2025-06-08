@@ -1,3 +1,80 @@
+function ld(el, percent) { // 控制亮度。
+    el.style.transition = "filter 0.2s ease-in-out";
+    el.style.filter = `brightness(${percent})`;
+}
+
+function xzsj() { // 现在时间。
+    const t = new Date();
+    const y = t.getFullYear();
+    const m = t.getMonth() + 1;
+    const d = t.getDate();
+    const h = t.getHours();
+    const mi = t.getMinutes();
+    const s = t.getSeconds();
+    const time = `${y}.${m}/${d} ${h}:${mi}:${s}`;
+    return time;
+}
+
+function width(name) {
+    const el = document.querySelector(name);
+    el.style.width = window.innerWidth + "px";
+}
+
+function hqgd(str, cl, kind) { // 获取元素高度。
+    let el1 = document.createElement(kind);
+    el1.className = cl;
+    el1.innerHTML = str;
+    el1.style.position = "absolute";
+    el1.style.transform = "translate(9999px, 9999px)";
+    el1.style.visibility = "hidden";
+    document.body.appendChild(el1);
+    let ls_gd = el1.offsetHeight;
+    document.body.removeChild(el1);
+    return ls_gd + "px";
+}
+
+function hqkd(str, cl, kind) { // 获取元素宽度。
+    let el2 = document.createElement(kind);
+    el2.className = cl;
+    el2.innerHTML = str;
+    el2.style.position = "absolute";
+    el2.style.transform = "translate(-9999px, -9999px)";
+    el2.style.visibility = "hidden";
+    document.body.appendChild(el2);
+    let ls_kd = el2.offsetWidth;
+    document.body.removeChild(el2);
+    return ls_kd + "px";
+}
+
+function chara_sort(str) {
+    let zh = 0; // 中文字符数。
+    let en = 0; // 英文字符数。
+    let ma = 0; // 标点符号数。（包括全角符号和半角符号）
+    for (var i = 0; i <= str.length - 1; i++) {
+        if (alphabets.includes(str[i])) {
+            en++;
+        } else if (marks.includes(str[i])) {
+            ma++;
+        } else {
+            zh++;
+        }
+    }
+    return [zh, en, ma];
+}
+
+function smarttime(str) {
+    str = String(str);
+    str = str.replace(/\s+/g, "");
+
+    if (deftime === "Smart") {
+        let [zh, en, ma] = chara_sort(str);
+        let time = zh * 165 + en * 95 + ma * 50;
+        return (time > 1250 ? time : 1250);
+    } else {
+        return deftime;
+    }
+}
+
 function fn0() {
     if (mode === "Play" && f1 === false) fn1();
     else if (mode === "Preset" && f2 === false) fn2();
@@ -21,14 +98,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     h2.addEventListener("animationend", (e) => {
         if (e.animationName === "jr_head2") {
-            div.style.animation = "jr_top 550ms forwards cubic-bezier(0.33, 1, 0.68, 1)";
-            head.style.animation = "jr_0head 550ms forwards cubic-bezier(0.33, 1, 0.68, 1)";
+            div.style.animation = "jr_top 0.55s forwards cubic-bezier(0.33, 1, 0.68, 1)";
+            head.style.animation = "jr_0head 0.55s forwards cubic-bezier(0.33, 1, 0.68, 1)";
         }
     });
     div.addEventListener("animationend", (e) => {
         if (e.animationName === "jr_top") {
-            f1.style.animation = "jr1_head3 550ms forwards cubic-bezier(0.33, 1, 0.68, 1)";
-            f3.style.animation = "jr1_head5 550ms forwards cubic-bezier(0.33, 1, 0.68, 1)";
+            f1.style.animation = "jr1_head3 0.55s forwards cubic-bezier(0.33, 1, 0.68, 1)";
+            f3.style.animation = "jr1_head5 0.55s forwards cubic-bezier(0.33, 1, 0.68, 1)";
         }
     });
 
@@ -38,10 +115,10 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener("mousemove", function (event) {
         let width = ctrl.getBoundingClientRect().width;
         if (event.clientX <= 50 && event.clientY <= 50 && control_moved === false) { // 移动到左上角。
-            ctrl.style.animation = `jr_ctrl 550ms forwards ${easing}`;
+            ctrl.style.animation = `jr_ctrl 0.55s forwards ${easing}`;
             if (control_block === false) control_moved = true;
         } else if (event.clientX > width && control_moved === true) {
-            ctrl.style.animation = `cc_ctrl 550ms forwards ${easing}`;
+            ctrl.style.animation = `cc_ctrl 0.55s forwards ${easing}`;
             control_moved = false;
         }
     });
@@ -53,10 +130,10 @@ document.addEventListener("DOMContentLoaded", () => {
         let rect = inf.getBoundingClientRect().width; // 获取 inf 元素的宽度。
 
         if (event.clientX >= window.innerWidth - 50 && event.clientY <= 50 && inf_moved === false) { // 移动到右上角。
-            inf.style.animation = `jr_inf 550ms forwards ${easing}`;
+            inf.style.animation = `jr_inf 0.55s forwards ${easing}`;
             if (inf_block === false) inf_moved = true;
         } else if (event.clientX < window.innerWidth - rect && inf_moved === true) {
-            inf.style.animation = `cc_inf 550ms forwards ${easing}`;
+            inf.style.animation = `cc_inf 0.55s forwards ${easing}`;
             inf_moved = false;
         }
     });
@@ -67,7 +144,7 @@ function fn1() {
 
     const div = document.querySelector(".head3");
     const dakai = document.getElementById("1");
-    dakai.style.transition = `all 550ms ${easing}`;
+    dakai.style.transition = `all 0.55s ${easing}`;
     const notibtn = document.createElement("button");
     notibtn.style.marginTop = "15px";
     notibtn.innerHTML = "noti";
@@ -196,10 +273,10 @@ function fn1() {
         });
     }
 
-    div.style.animation = "cc1_head4 550ms forwards cubic-bezier(0.33, 1, 0.68, 1)";
+    div.style.animation = "cc1_head4 0.55s forwards cubic-bezier(0.33, 1, 0.68, 1)";
     dakai.style.backgroundColor = "#001dff99";
-    dakai.style.width = "230px";
-    dakai.textContent = "在此处演示函数";
+    dakai.style.width = hqkd("在此处演示函数。", "dakai", "button");
+    dakai.textContent = "在此处演示函数。";
 
     div.addEventListener("animationend", (e) => {
         if (e.animationName === "cc1_head4") {
@@ -207,7 +284,7 @@ function fn1() {
                 btn.style.display = "block";
                 btn.style.color = "#ffffff";
                 btn.style.opacity = "0";
-                btn.style.transition = "opacity 550ms cubic-bezier(0.33, 1, 0.68, 1)";
+                btn.style.transition = "opacity 0.55s cubic-bezier(0.33, 1, 0.68, 1)";
             });
             setTimeout(() => {
                 all.forEach(btn => {
@@ -317,13 +394,13 @@ function fn2() {
         }
     };
     const nullbtn = document.createElement("button");
-    nullbtn.innerHTML = "在函数的值中输入 null 值";
+    nullbtn.innerHTML = "在函数的值中输入 null 值。";
     nullbtn.className = "btn10";
     nullbtn.onclick = () => {
         wz(null);
     };
     const undefinedbtn = document.createElement("button");
-    undefinedbtn.innerHTML = "在函数的值中输入 undefined 值";
+    undefinedbtn.innerHTML = "在函数的值中输入 undefined 值。";
     undefinedbtn.className = "btn11";
     undefinedbtn.onclick = () => {
         wz(undefined);
@@ -372,11 +449,11 @@ function fn2() {
         });
     }
 
-    div.style.animation = "cc1_head3 550ms forwards cubic-bezier(0.33, 1, 0.68, 1)";
-    dakai.textContent = "以下是预设内容";
-    dakai.style.transition = "all 550ms cubic-bezier(0.33, 1, 0.68, 1)";
+    div.style.animation = "cc1_head3 0.55s forwards cubic-bezier(0.33, 1, 0.68, 1)";
+    dakai.textContent = "以下是预设内容。";
+    dakai.style.transition = `all 0.55s ${easing}`;
     dakai.style.backgroundColor = "#001dff99";
-    dakai.style.width = "230px";
+    dakai.style.width = hqkd("以下是预设内容。", "dakai", "button");
 
     div.addEventListener("animationend", (e) => {
         if (e.animationName === "cc1_head3") {
@@ -384,17 +461,17 @@ function fn2() {
                 btn.style.display = "block";
                 btn.style.color = "#ffffff";
                 btn.style.opacity = "0";
-                btn.style.transition = "opacity 550ms cubic-bezier(0.33, 1, 0.68, 1)";
+                btn.style.transition = "opacity 0.55s cubic-bezier(0.33, 1, 0.68, 1)";
             });
             div1.style.display = "block";
             div1.style.opacity = "0";
-            div1.style.transition = "opacity 550ms cubic-bezier(0.33, 1, 0.68, 1)";
+            div1.style.transition = "opacity 0.55s cubic-bezier(0.33, 1, 0.68, 1)";
             div2.style.display = "block";
             div2.style.opacity = "0";
-            div2.style.transition = "opacity 550ms cubic-bezier(0.33, 1, 0.68, 1)";
+            div2.style.transition = "opacity 0.55s cubic-bezier(0.33, 1, 0.68, 1)";
             div3.style.display = "block";
             div3.style.opacity = "0";
-            div3.style.transition = "opacity 550ms cubic-bezier(0.33, 1, 0.68, 1)";
+            div3.style.transition = "opacity 0.55s cubic-bezier(0.33, 1, 0.68, 1)";
             setTimeout(() => {
                 all.forEach(btn => {
                     btn.style.opacity = "1";
@@ -411,11 +488,11 @@ function fn3() {
     warn("该文件可能会被误判为恶意软件，请注意甄别。");
 
     const div = document.querySelector(".head4");
-    div.style.animation = `cc1_head5 550ms forwards ${easing}`;
+    div.style.animation = `cc1_head5 0.55s forwards ${easing}`;
     const dakai = document.getElementById("3");
-    dakai.style.transition = `all 550ms ${easing}`;
+    dakai.style.transition = `all 0.55s ${easing}`;
     dakai.style.backgroundColor = "#001dff99";
-    dakai.style.width = "500px";
+    dakai.style.width = hqkd("在此处下载 The Play Games 所有版本。", "dakai", "button");
     dakai.textContent = "在此处下载 The Play Games 所有版本。";
 
     const btn1 = document.createElement("button");
@@ -479,7 +556,7 @@ function fn3() {
                 btn.style.display = "block";
                 btn.color = "#ffffff";
                 btn.style.opacity = "0";
-                btn.style.transition = "opacity 550ms cubic-bezier(0.33, 1, 0.68, 1)";
+                btn.style.transition = "opacity 0.55s cubic-bezier(0.33, 1, 0.68, 1)";
             });
             setTimeout(() => {
                 all.forEach(btn => {
@@ -490,14 +567,14 @@ function fn3() {
     });
 }
 
-function totop() {
+function totop() { // 返回顶部。
     window.scrollTo({
         top: 0,
         behavior: "smooth",
     });
 }
 
-function zhan(s) {
+function hqzd(s) { // 获取栈顶元素。
     const t = s.pop();
     s.push(t);
     return t;
@@ -770,11 +847,12 @@ function inf_ui() {
     noti_msg.id = "noti_msg";
     const noti_read = document.createElement("button");
     noti_read.type = "button";
-    noti_read.innerHTML = "清空。";
     noti_read.className = "inf1";
     noti_read.onclick = () => {
-        noti_unv = [];
-        rz("已清空 Noti() 的未读信息。");
+        if (noti_unv.length > 0) {
+            noti_unv = [];
+            rz("已清空 Noti() 的未读信息。");
+        }
     };
 
     const cgc = document.createElement("div");
@@ -786,11 +864,12 @@ function inf_ui() {
     cg_msg.id = "cg_msg";
     const cg_read = document.createElement("button");
     cg_read.type = "button";
-    cg_read.innerHTML = "清空。";
     cg_read.className = "inf2";
     cg_read.onclick = () => {
-        cg_unv = [];
-        rz("已清空 Cg() 的未读信息。");
+        if (cg_unv.length > 0) {
+            cg_unv = [];
+            rz("已清空 Cg() 的未读信息。");
+        }
     };
 
     const failc = document.createElement("div");
@@ -802,11 +881,12 @@ function inf_ui() {
     fail_msg.id = "fail_msg";
     const fail_read = document.createElement("button");
     fail_read.type = "button";
-    fail_read.innerHTML = "清空。";
     fail_read.className = "inf3";
     fail_read.onclick = () => {
-        fail_unv = [];
-        rz("已清空 Fail() 的未读信息。");
+        if (fail_unv.length > 0) {
+            fail_unv = [];
+            rz("已清空 Fail() 的未读信息。");
+        }
     };
 
     const warnc = document.createElement("div");
@@ -818,11 +898,12 @@ function inf_ui() {
     warn_msg.id = "warn_msg";
     const warn_read = document.createElement("button");
     warn_read.type = "button";
-    warn_read.innerHTML = "清空。";
     warn_read.className = "inf4";
     warn_read.onclick = () => {
-        warn_unv = [];
-        rz("已清空 Warn() 的未读信息。");
+        if (warn_unv.length > 0) {
+            warn_unv = [];
+            rz("已清空 Warn() 的未读信息。");
+        }
     };
 
     const synchrc = document.createElement("div");
@@ -834,11 +915,12 @@ function inf_ui() {
     synchr_msg.id = "synchr_msg";
     const synchr_read = document.createElement("button");
     synchr_read.type = "button";
-    synchr_read.innerHTML = "清空。";
     synchr_read.className = "inf5";
     synchr_read.onclick = () => {
-        synchr_unv = [];
-        rz("已清空 Synchr() 的未读信息。");
+        if (synchr_unv.length > 0) {
+            synchr_unv = [];
+            rz("已清空 Synchr() 的未读信息。");
+        }
     };
 
     const all = [
@@ -873,52 +955,50 @@ function inf_ui() {
 }
 
 function inf_cont() { // 更新未读信息。
-    let noti_height = 0;
-    let cg_height = 0;
-    let fail_height = 0;
-    let warn_height = 0;
-    let synchr_height = 0;
-
     const notic = document.getElementById("notic");
     const noti_msg = notic.querySelector(".rtxt");
-    let h1 = parseInt(getComputedStyle(noti_msg).lineHeight);
     noti_msg.innerHTML = (noti_unv.length === 0 ? "空。" : noti_unv.join("<br />"));
-    let l1 = Math.floor((noti_msg.getBoundingClientRect().width * noti_msg.getBoundingClientRect().height) / (parseFloat(getComputedStyle(noti_msg).maxWidth) * h1));
-    noti_height = l1 * h1;
-
-    notic.style.height = `calc(${noti_height}px + 135px)`;
+    notic.style.height = hqgd(notic.innerHTML, "notic", "div");
+    const noti_btn = notic.querySelector(".inf1");
+    noti_btn.style.width = "170px";
+    noti_btn.innerHTML = (noti_unv.length > 0 ? `清空 ${noti_unv.length} 条信息。` : "没有未读信息。");
+    noti_btn.style.width = hqkd(noti_btn.innerHTML, "inf1", "button");
 
     const cgc = document.getElementById("cgc");
     const cg_msg = cgc.querySelector(".rtxt");
     cg_msg.innerHTML = (cg_unv.length === 0 ? "空。" : cg_unv.join("<br />"));
-    let h2 = parseInt(getComputedStyle(cg_msg).lineHeight);
-    let l2 = Math.floor((cg_msg.getBoundingClientRect().width * cg_msg.getBoundingClientRect().height) / (parseFloat(getComputedStyle(noti_msg).maxWidth) * h2));
-    cg_height = l2 * h2;
-    cgc.style.height = `calc(${cg_height}px + 135px)`;
+    cgc.style.height = hqgd(cgc.innerHTML, "cgc", "div");
+    const cg_btn = cgc.querySelector(".inf2");
+    cg_btn.style.width = "170px";
+    cg_btn.innerHTML = (cg_unv.length > 0 ? `清空 ${cg_unv.length} 条信息。` : "没有未读信息。");
+    cg_btn.style.width = hqkd(cg_btn.innerHTML, "inf2", "button");
 
     const failc = document.getElementById("failc");
     const fail_msg = failc.querySelector(".rtxt");
     fail_msg.innerHTML = (fail_unv.length === 0 ? "空。" : fail_unv.join("<br />"));
-    let h3 = parseInt(getComputedStyle(fail_msg).lineHeight);
-    let l3 = Math.floor((fail_msg.getBoundingClientRect().width * fail_msg.getBoundingClientRect().height) / (parseFloat(getComputedStyle(noti_msg).maxWidth) * h3));
-    fail_height = l3 * h3;
-    failc.style.height = `calc(${fail_height}px + 135px)`;
+    failc.style.height = hqgd(failc.innerHTML, "failc", "div");
+    const fail_btn = failc.querySelector(".inf3");
+    fail_btn.style.width = "170px";
+    fail_btn.innerHTML = (fail_unv.length > 0 ? `清空 ${fail_unv.length} 条信息。` : "没有未读信息。");
+    fail_btn.style.width = hqkd(fail_btn.innerHTML, "inf3", "button");
 
     const warnc = document.getElementById("warnc");
     const warn_msg = warnc.querySelector(".rtxt");
     warn_msg.innerHTML = (warn_unv.length === 0 ? "空。" : warn_unv.join("<br />"));
-    let h4 = parseInt(getComputedStyle(warn_msg).lineHeight);
-    let l4 = Math.floor((warn_msg.getBoundingClientRect().width * warn_msg.getBoundingClientRect().height) / (parseFloat(getComputedStyle(noti_msg).maxWidth) * h4));
-    warn_height = l4 * h4;
-    warnc.style.height = `calc(${warn_height}px + 135px)`;
+    warnc.style.height = hqgd(warnc.innerHTML, "warnc", "div");
+    const warn_btn = warnc.querySelector(".inf4");
+    warn_btn.style.width = "170px";
+    warn_btn.innerHTML = (warn_unv.length > 0 ? `清空 ${warn_unv.length} 条信息。` : "没有未读信息。");
+    warn_btn.style.width = hqkd(warn_btn.innerHTML, "inf4", "button");
 
     const synchrc = document.getElementById("synchrc");
     const synchr_msg = synchrc.querySelector(".rtxt");
     synchr_msg.innerHTML = (synchr_unv.length === 0 ? "空。" : synchr_unv.join("<br />"));
-    let h5 = parseInt(getComputedStyle(synchr_msg).lineHeight);
-    let l5 = Math.floor((synchr_msg.getBoundingClientRect().width * synchr_msg.getBoundingClientRect().height) / (parseFloat(getComputedStyle(noti_msg).maxWidth) * h5));
-    synchr_height = l5 * h5;
-    synchrc.style.height = `calc(${synchr_height}px + 135px)`;
+    synchrc.style.height = hqgd(synchrc.innerHTML, "synchrc", "div");
+    const synchr_btn = synchrc.querySelector(".inf5");
+    synchr_btn.style.width = "170px";
+    synchr_btn.innerHTML = (synchr_unv.length > 0 ? `清空 ${synchr_unv.length} 条信息。` : "没有未读信息。");
+    synchr_btn.style.width = hqkd(synchr_btn.innerHTML, "inf5", "button");
 }
 
 function pos(p) {
@@ -926,7 +1006,7 @@ function pos(p) {
     function fn(w) {
         w.forEach((window) => {
             const wh = window.offsetHeight;
-            window.style.transition = `top 550ms ${easing}`;
+            window.style.transition = `top 0.55s ${easing}`;
             window.style.top = `${total}px`;
             total += wh + 3;
         });
@@ -983,29 +1063,6 @@ function check() {
     }
     if (string[string.length - 1] === "、") string = string.slice(0, -1);
     return string;
-}
-
-function smarttime(str) {
-    str = String(str);
-    str = str.replace(/\s+/g, "");
-    let zh = 0; // 中文字符数。
-    let en = 0; // 英文字符数。
-    let ma = 0; // 标点符号数。（包括全角符号和半角符号）
-    if (deftime === "Smart") {
-        for (var i = 0; i <= str.length - 1; i++) {
-            if (alphabets.includes(str[i])) {
-                en++;
-            } else if (marks.includes(str[i])) {
-                ma++;
-            } else {
-                zh++;
-            }
-        }
-        let time = zh * 165 + en * 95 + ma * 50;
-        return (time > 1250 ? time : 1250);
-    } else {
-        return deftime;
-    }
 }
 
 async function fn7() { // 网站介绍。
@@ -1131,34 +1188,19 @@ function visible(e, fn_name) {
         rz(`请注意，你有一条未读完的 ${fn_name}() 信息。`);
         switch (fn_name) {
             case "Noti":
-                noti_unv.push(e.innerHTML);
+                noti_unv.push(`${xzsj()} - ${e.innerHTML}`);
                 break;
             case "Cg":
-                cg_unv.push(e.innerHTML);
+                cg_unv.push(`${xzsj()} - ${e.innerHTML}`);
                 break;
             case "Fail":
-                fail_unv.push(e.innerHTML);
+                fail_unv.push(`${xzsj()} - ${e.innerHTML}`);
                 break;
             case "Warn":
-                warn_unv.push(e.innerHTML);
-                break;
-            case "Inp":
-                inp_unv.push(e.innerHTML);
+                warn_unv.push(`${xzsj()} - ${e.innerHTML}`);
                 break;
             case "Synchr":
-                synchr_unv.push(e.innerHTML);
-                break;
-            case "Xz":
-                xz_unv.push(e.innerHTML);
-                break;
-            case "Lj":
-                lj_unv.push(e.innerHTML);
-                break;
-            case "Zd":
-                zd_unv.push(e.innerHTML);
-                break;
-            case "Timer":
-                timer_unv.push(e.innerHTML);
+                synchr_unv.push(`${xzsj()} - ${e.innerHTML}`);
                 break;
         }
     }

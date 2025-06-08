@@ -129,6 +129,7 @@ pre {
 }
 
 .head3, .head4 {
+    visibility: hidden;
     height: 60px;
     opacity: 0;
     background-color: #000000b0;
@@ -140,10 +141,12 @@ pre {
 
 @keyframes jr1_head3 { /* fn1() */
     from {
+        visibility: hidden;
         opacity: 0;
         transform: translateX(0);
     }
     to {
+        visibility: visible;
         opacity: 1;
         transform: translateX(5vw);
     }
@@ -151,11 +154,13 @@ pre {
 
 @keyframes cc1_head3 {
     from {
+        visibility: visible;
         opacity: 1;
         height: 60px;
         transform: translateX(5vw);
     }
     to {
+        visibility: visible;
         opacity: 1;
         height: 1240px;
         transform: translateX(5vw);
@@ -164,11 +169,13 @@ pre {
 
 @keyframes cc1_head4 { /* fn2() */
     from {
+        visibility: visible;
         opacity: 1;
         height: 60px;
         transform: translateX(20vw);
     }
     to {
+        visibility: visible;
         opacity: 1;
         transform: translateX(5vw);
         height: 650px;
@@ -177,11 +184,12 @@ pre {
 
 @keyframes jr1_head5 { /* fn3() */
     from {
+        visibility: hidden;
         opacity: 0;
         transform: translateX(0vw);
     }
-
     to {
+        visibility: visible;
         opacity: 1;
         transform: translateX(20vw);
     }
@@ -189,12 +197,13 @@ pre {
 
 @keyframes cc1_head5 {
     from {
+        visibility: visible;
         opacity: 1;
         height: 60px;
         transform: translateX(20vw);
     }
-
     to {
+        visibility: visible;
         opacity: 1;
         transform: translateX(5vw);
         height: 310px;
@@ -544,10 +553,9 @@ button {
 
 .rtxt {
     position: relative;
-    left: 40px;
     text-align: right;
     color: white;
-    max-width: 300px;
+    max-width: 335px;
     word-break: break-word;
     line-height: 1.4;
     opacity: 1;
@@ -561,6 +569,13 @@ button {
     font-size: 20px;
     border: none;
     cursor: pointer;
+    text-align: center;
+}
+
+.inf1, .inf2, .inf3, .inf4, .inf5 {
+    width: auto;
+    transition: width 0.2s ease-in-out;
+    transition: height 0.2s ease-in-out;
 }
 
 .control1 {
