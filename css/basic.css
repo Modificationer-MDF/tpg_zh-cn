@@ -573,7 +573,6 @@ button {
 }
 
 .inf1, .inf2, .inf3, .inf4, .inf5 {
-    width: auto;
     transition: width 0.2s ease-in-out;
     transition: height 0.2s ease-in-out;
 }

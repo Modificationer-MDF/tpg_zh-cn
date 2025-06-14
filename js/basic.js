@@ -75,6 +75,40 @@ function smarttime(str) {
     }
 }
 
+function hszh(curr, id, xz_text) { // 函数转换。
+    const prev = document.getElementById(id);
+    prev.style.transition = `all 0.55s ${easing}`;
+    const cont = prev.querySelector(".fn-content");
+    //switch (prev.className) {
+    //    case "noti":
+    //        const ls_square = prev.querySelector(".noti-square");
+    //    case "cg":
+    //        const ls_square = prev.querySelector(".cg-square");
+    //    case "fail":
+    //        const ls_square = prev.querySelector(".fail-square");
+    //    case "warn":
+    //        const ls_square = prev.querySelector(".warn-square");
+    //    case "inp":
+    //        const ls_square = prev.querySelector(".inp-square");
+    //        const ls_inputbox = prev.querySelector(".inp-box");
+    //        ls_inputbox.style.transition = `all 0.55s ${easing}`;
+    //    case "synchr":
+    //        const ls_square = prev.querySelector(".synchr-square");
+    //    case "xz":
+    //        const ls_square = prev.querySelector(".xz-square");
+    //    case "lj":
+    //        const ls_square = prev.querySelector(".lj-square");
+    //        const ls_link = prev.querySelector(".lj-link");
+    //    case "zd":
+    //        const ls_square = prev.querySelector(".zd-square");
+    //        const ls_inputbox = prev.querySelector(".zd-box");
+    //        ls_inputbox.style.transition = `all 0.55s ${easing}`;
+    //    case "timer":
+    //        const ls_square = prev.querySelector(".timer-square");
+    //}
+    ls_square.style.transition = `all 0.55s ${easing}`;
+}
+
 function fn0() {
     if (mode === "Play" && f1 === false) fn1();
     else if (mode === "Preset" && f2 === false) fn2();
@@ -209,10 +243,10 @@ function fn1() {
         }
         if (titleset === "Custom") {
             let t = await inp("请输入 Xz() 上的标题。", "在此输入。");
-            xz(res, n, array, t);
+            xz(res, array, t);
         }
         else {
-            xz(res, n, array, "选择");
+            xz(res, array, "选择");
         }
     };
     const ljbtn = document.createElement("button");
@@ -351,7 +385,7 @@ function fn2() {
     xzbtn.innerHTML = "xz";
     xzbtn.className = "btn7";
     xzbtn.onclick = async () => {
-        var res = await xz("你对以上的函数有什么看法？", 4, ["很不错。", "还可以。", "一般。", "有待改进的空间。"]);
+        var res = await xz("你对以上的函数有什么看法？", ["很不错。", "还可以。", "一般。", "有待改进的空间。"]);
         switch (res) {
             case "很不错。":
                 noti("非常感谢！你还可以尝试其他的函数。");
@@ -363,7 +397,7 @@ function fn2() {
                 noti("我们可以做得更好。");
                 break;
             case "有待改进的空间。":
-                var r = await xz("你是否想向我反馈你的建议？", 2, ["是。", "否。"]);
+                var r = await xz("你是否想向我反馈你的建议？", ["是。", "否。"]);
                 if (r === "是。") {
                     await lj("点击以下链接反馈。", "mailto://Feng_14@outlook.com");
                     break;
@@ -838,167 +872,111 @@ function inf_ui() {
     jdt.style.width = "100%";
     jdt.style.backgroundColor = "#ffffff99";
 
-    const notic = document.createElement("div");
-    notic.innerHTML = "Noti()";
-    notic.className = "rcont";
-    notic.id = "notic";
-    const noti_msg = document.createElement("p");
-    noti_msg.className = "rtxt";
-    noti_msg.id = "noti_msg";
-    const noti_read = document.createElement("button");
-    noti_read.type = "button";
-    noti_read.className = "inf1";
-    noti_read.onclick = () => {
-        if (noti_unv.length > 0) {
-            noti_unv = [];
-            rz("已清空 Noti() 的未读信息。");
-        }
-    };
+    const counts = document.createElement("div");
+    counts.style.transition = `all 0.3s ${easing}`;
+    counts.style.width = "100%";
+    counts.id = "counts";
+    counts.style.textAlign = "center";
+    counts.style.position = "absolute";
+    counts.style.top = "50%";
+    counts.style.fontSize = "20px";
+    counts.style.color = "#ffffff";
 
-    const cgc = document.createElement("div");
-    cgc.innerHTML = "Cg()";
-    cgc.className = "rcont";
-    cgc.id = "cgc";
-    const cg_msg = document.createElement("p");
-    cg_msg.className = "rtxt";
-    cg_msg.id = "cg_msg";
-    const cg_read = document.createElement("button");
-    cg_read.type = "button";
-    cg_read.className = "inf2";
-    cg_read.onclick = () => {
-        if (cg_unv.length > 0) {
-            cg_unv = [];
-            rz("已清空 Cg() 的未读信息。");
-        }
-    };
-
-    const failc = document.createElement("div");
-    failc.innerHTML = "Fail()";
-    failc.className = "rcont";
-    failc.id = "failc";
-    const fail_msg = document.createElement("p");
-    fail_msg.className = "rtxt";
-    fail_msg.id = "fail_msg";
-    const fail_read = document.createElement("button");
-    fail_read.type = "button";
-    fail_read.className = "inf3";
-    fail_read.onclick = () => {
-        if (fail_unv.length > 0) {
-            fail_unv = [];
-            rz("已清空 Fail() 的未读信息。");
-        }
-    };
-
-    const warnc = document.createElement("div");
-    warnc.innerHTML = "Warn()";
-    warnc.className = "rcont";
-    warnc.id = "warnc";
-    const warn_msg = document.createElement("p");
-    warn_msg.className = "rtxt";
-    warn_msg.id = "warn_msg";
-    const warn_read = document.createElement("button");
-    warn_read.type = "button";
-    warn_read.className = "inf4";
-    warn_read.onclick = () => {
-        if (warn_unv.length > 0) {
-            warn_unv = [];
-            rz("已清空 Warn() 的未读信息。");
-        }
-    };
-
-    const synchrc = document.createElement("div");
-    synchrc.innerHTML = "Synchr()";
-    synchrc.className = "rcont";
-    synchrc.id = "synchrc";
-    const synchr_msg = document.createElement("p");
-    synchr_msg.className = "rtxt";
-    synchr_msg.id = "synchr_msg";
-    const synchr_read = document.createElement("button");
-    synchr_read.type = "button";
-    synchr_read.className = "inf5";
-    synchr_read.onclick = () => {
-        if (synchr_unv.length > 0) {
-            synchr_unv = [];
-            rz("已清空 Synchr() 的未读信息。");
-        }
-    };
-
-    const all = [
-        notic,
-        cgc,
-        failc,
-        warnc,
-        synchrc,
-    ];
-
-    for (var i = 0; i < all.length; i++) {
-        all[i].style.top = `calc(${i * 3}vh + 90px)`;
-    }
+    const clear = document.createElement("button");
+    clear.style.visibility = "hidden";
+    clear.style.opacity = 0;
+    clear.style.transition = `all 0.3s ${easing}`;
+    clear.type = "button";
+    clear.id = "clear-all";
+    clear.innerHTML = "清空全部信息。";
+    clear.style.width = "15ch";
+    clear.className = "inf1";
+    clear.style.position = "absolute";
+    clear.style.top = "90px";
+    clear.style.left = "0%";
+    clear.style.backgroundColor = "#00000099";
+    clear.style.color = "#ffffff";
 
     inf.appendChild(title);
     title.appendChild(jdt);
-    inf.appendChild(notic);
-    inf.appendChild(cgc);
-    inf.appendChild(failc);
-    inf.appendChild(warnc);
-    inf.appendChild(synchrc);
-    notic.appendChild(noti_msg);
-    notic.appendChild(noti_read);
-    cgc.appendChild(cg_msg);
-    cgc.appendChild(cg_read);
-    failc.appendChild(fail_msg);
-    failc.appendChild(fail_read);
-    warnc.appendChild(warn_msg);
-    warnc.appendChild(warn_read);
-    synchrc.appendChild(synchr_msg);
-    synchrc.appendChild(synchr_read);
+    inf.appendChild(counts);
+    inf.appendChild(clear);
 }
 
 function inf_cont() { // 更新未读信息。
-    const notic = document.getElementById("notic");
-    const noti_msg = notic.querySelector(".rtxt");
-    noti_msg.innerHTML = (noti_unv.length === 0 ? "空。" : noti_unv.join("<br />"));
-    notic.style.height = hqgd(notic.innerHTML, "notic", "div");
-    const noti_btn = notic.querySelector(".inf1");
-    noti_btn.style.width = "170px";
-    noti_btn.innerHTML = (noti_unv.length > 0 ? `清空 ${noti_unv.length} 条信息。` : "没有未读信息。");
-    noti_btn.style.width = hqkd(noti_btn.innerHTML, "inf1", "button");
+    const counts = document.getElementById("counts");
+    const clear = document.getElementById("clear-all");
+    clear.onclick = () => {
+        noti_unv = [];
+        cg_unv = [];
+        fail_unv = [];
+        warn_unv = [];
+        synchr_unv = [];
+    };
 
-    const cgc = document.getElementById("cgc");
-    const cg_msg = cgc.querySelector(".rtxt");
-    cg_msg.innerHTML = (cg_unv.length === 0 ? "空。" : cg_unv.join("<br />"));
-    cgc.style.height = hqgd(cgc.innerHTML, "cgc", "div");
-    const cg_btn = cgc.querySelector(".inf2");
-    cg_btn.style.width = "170px";
-    cg_btn.innerHTML = (cg_unv.length > 0 ? `清空 ${cg_unv.length} 条信息。` : "没有未读信息。");
-    cg_btn.style.width = hqkd(cg_btn.innerHTML, "inf2", "button");
+    if (noti_unv.length + cg_unv.length + fail_unv.length + warn_unv.length + synchr_unv.length === 0) {
+        counts.style.top = "50%";
+        counts.innerHTML = "没有未读信息。";
 
-    const failc = document.getElementById("failc");
-    const fail_msg = failc.querySelector(".rtxt");
-    fail_msg.innerHTML = (fail_unv.length === 0 ? "空。" : fail_unv.join("<br />"));
-    failc.style.height = hqgd(failc.innerHTML, "failc", "div");
-    const fail_btn = failc.querySelector(".inf3");
-    fail_btn.style.width = "170px";
-    fail_btn.innerHTML = (fail_unv.length > 0 ? `清空 ${fail_unv.length} 条信息。` : "没有未读信息。");
-    fail_btn.style.width = hqkd(fail_btn.innerHTML, "inf3", "button");
+        clear.style.visibility = "hidden";
+        clear.style.opacity = 0;
+        clear.style.left = "0%";
+    } else {
+        counts.style.top = "140px";
+        counts.innerHTML = `有 ${noti_unv.length + cg_unv.length + fail_unv.length + warn_unv.length + synchr_unv.length} 条未读信息。`;
 
-    const warnc = document.getElementById("warnc");
-    const warn_msg = warnc.querySelector(".rtxt");
-    warn_msg.innerHTML = (warn_unv.length === 0 ? "空。" : warn_unv.join("<br />"));
-    warnc.style.height = hqgd(warnc.innerHTML, "warnc", "div");
-    const warn_btn = warnc.querySelector(".inf4");
-    warn_btn.style.width = "170px";
-    warn_btn.innerHTML = (warn_unv.length > 0 ? `清空 ${warn_unv.length} 条信息。` : "没有未读信息。");
-    warn_btn.style.width = hqkd(warn_btn.innerHTML, "inf4", "button");
+        clear.style.visibility = "visible";
+        clear.style.opacity = 1;
+        clear.style.left = "50%";
+    }
 
-    const synchrc = document.getElementById("synchrc");
-    const synchr_msg = synchrc.querySelector(".rtxt");
-    synchr_msg.innerHTML = (synchr_unv.length === 0 ? "空。" : synchr_unv.join("<br />"));
-    synchrc.style.height = hqgd(synchrc.innerHTML, "synchrc", "div");
-    const synchr_btn = synchrc.querySelector(".inf5");
-    synchr_btn.style.width = "170px";
-    synchr_btn.innerHTML = (synchr_unv.length > 0 ? `清空 ${synchr_unv.length} 条信息。` : "没有未读信息。");
-    synchr_btn.style.width = hqkd(synchr_btn.innerHTML, "inf5", "button");
+    const notic = document.createElement("div");
+    notic.id = "#notic";
+    notic
+
+//    const notic = document.getElementById("notic");
+//    const noti_msg = notic.querySelector(".rtxt");
+//    noti_msg.innerHTML = (noti_unv.length === 0 ? "空。" : noti_unv.join("<br />"));
+//    notic.style.height = hqgd(notic.innerHTML, "notic", "div");
+//    const noti_btn = notic.querySelector(".inf1");
+//    noti_btn.innerHTML = (noti_unv.length > 0 ? `清空 ${noti_unv.length} 条信息。` : "没有未读信息。");
+//    noti_btn.style.width = hqkd(noti_btn.innerHTML, "inf1", "button");
+
+//    const cgc = document.getElementById("cgc");
+//    const cg_msg = cgc.querySelector(".rtxt");
+//    cg_msg.innerHTML = (cg_unv.length === 0 ? "空。" : cg_unv.join("<br />"));
+//    cgc.style.height = hqgd(cgc.innerHTML, "cgc", "div");
+//    const cg_btn = cgc.querySelector(".inf2");
+//    cg_btn.style.width = "170px";
+//    cg_btn.innerHTML = (cg_unv.length > 0 ? `清空 ${cg_unv.length} 条信息。` : "没有未读信息。");
+//    cg_btn.style.width = hqkd(cg_btn.innerHTML, "inf2", "button");
+
+//    const failc = document.getElementById("failc");
+//    const fail_msg = failc.querySelector(".rtxt");
+//    fail_msg.innerHTML = (fail_unv.length === 0 ? "空。" : fail_unv.join("<br />"));
+//    failc.style.height = hqgd(failc.innerHTML, "failc", "div");
+//    const fail_btn = failc.querySelector(".inf3");
+//    fail_btn.style.width = "170px";
+//    fail_btn.innerHTML = (fail_unv.length > 0 ? `清空 ${fail_unv.length} 条信息。` : "没有未读信息。");
+//    fail_btn.style.width = hqkd(fail_btn.innerHTML, "inf3", "button");
+
+//    const warnc = document.getElementById("warnc");
+//    const warn_msg = warnc.querySelector(".rtxt");
+//    warn_msg.innerHTML = (warn_unv.length === 0 ? "空。" : warn_unv.join("<br />"));
+//    warnc.style.height = hqgd(warnc.innerHTML, "warnc", "div");
+//    const warn_btn = warnc.querySelector(".inf4");
+//    warn_btn.style.width = "170px";
+//    warn_btn.innerHTML = (warn_unv.length > 0 ? `清空 ${warn_unv.length} 条信息。` : "没有未读信息。");
+//    warn_btn.style.width = hqkd(warn_btn.innerHTML, "inf4", "button");
+
+//    const synchrc = document.getElementById("synchrc");
+//    const synchr_msg = synchrc.querySelector(".rtxt");
+//    synchr_msg.innerHTML = (synchr_unv.length === 0 ? "空。" : synchr_unv.join("<br />"));
+//    synchrc.style.height = hqgd(synchrc.innerHTML, "synchrc", "div");
+//    const synchr_btn = synchrc.querySelector(".inf5");
+//    synchr_btn.style.width = "170px";
+//    synchr_btn.innerHTML = (synchr_unv.length > 0 ? `清空 ${synchr_unv.length} 条信息。` : "没有未读信息。");
+//    synchr_btn.style.width = hqkd(synchr_btn.innerHTML, "inf5", "button");
 }
 
 function pos(p) {
@@ -1088,10 +1066,10 @@ async function fn7() { // 网站介绍。
         if (getComputedStyle(ctrl).animationName === "jr_ctrl" && j1 === false) {
             j1 = true;
             await wz("正如你所见，这里是该网站的 “选项” 界面！你可以在此处更改网站的各项特殊参数。");
-            let q1 = await xz("是否需要演示如何更改？", 2, ["是。", "否。"]);
+            let q1 = await xz("是否需要演示如何更改？", ["是。", "否。"]);
             if (q1 === "是。") {
                 await wz("你可以直接点击相应的按钮便捷更改变量值，也可以通过输入来更改。");
-                let q2 = await xz("选择哪个变量演示呢？", 4, ["easing", "deftime", "defwid", "defhei"]);
+                let q2 = await xz("选择哪个变量演示呢？", ["easing", "deftime", "defwid", "defhei"]);
                 noti("请修改该值。");
                 switch (q2) {
                     case "easing":

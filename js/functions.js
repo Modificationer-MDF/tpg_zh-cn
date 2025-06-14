@@ -40,7 +40,7 @@ function rz(string, time) {
 
 // noti 函数。
 
-function noti(string, title) {
+function noti(string, title, id) {
     if (string == null || string == undefined) {
         fail("不能输入 null 或 undefined！");
         return "在 Noti() 函数中，string 参数不能为 null 或 undefined。";
@@ -48,6 +48,7 @@ function noti(string, title) {
     string = String(string);
     let s_replaced = string.replace(/\s+/g, "");
     if (title == null || title == undefined) title = "通知";
+    if (id == null || id == undefined) id = "";
     else {
         title = String(title);
         let t_replaced = title.replace(/\s+/g, "");
@@ -60,6 +61,7 @@ function noti(string, title) {
 
     const window = document.createElement("div");
     window.className = "noti-window";
+    window.id = id;
     const square = document.createElement("div");
     square.className = "noti-square";
     const icon = document.createElement("img");
@@ -131,7 +133,7 @@ function noti(string, title) {
 
 // cg 函数。
 
-function cg(string, title) {
+function cg(string, title, id) {
     if (string == null || string == undefined) {
         fail("不能输入 null 或 undefined！");
         return "在 Cg() 函数中，string 参数不能为 null 或 undefined。";
@@ -139,6 +141,7 @@ function cg(string, title) {
     string = String(string);
     let s_replaced = string.replace(/\s+/g, "");
     if (title == null || title == undefined) title = "完成";
+    if (id == null || id == undefined) id = "";
     else {
         title = String(title);
         let t_replaced = title.replace(/\s+/g, "");
@@ -151,6 +154,7 @@ function cg(string, title) {
 
     const window = document.createElement("div");
     window.className = "cg-window";
+    window.id = id;
     const square = document.createElement("div");
     square.className = "cg-square";
     const txt = document.createElement("div");
@@ -222,7 +226,7 @@ function cg(string, title) {
 
 // fail 函数。
 
-function fail(string, title) {
+function fail(string, title, id) {
     if (string == null || string == undefined) {
         fail("不能输入 null 或 undefined！");
         return "在 Fail() 函数中，string 参数不能为 null 或 undefined。";
@@ -230,6 +234,7 @@ function fail(string, title) {
     string = String(string);
     let s_replaced = string.replace(/\s+/g, "");
     if (title == null || title == undefined) title = "错误";
+    if (id == null || id == undefined) id = "";
     else {
         title = String(title);
         let t_replaced = title.replace(/\s+/g, "");
@@ -242,6 +247,7 @@ function fail(string, title) {
 
     const window = document.createElement("div");
     window.className = "fail-window";
+    window.id = id;
     const square = document.createElement("div");
     square.className = "fail-square";
     const icon = document.createElement("img");
@@ -314,7 +320,7 @@ function fail(string, title) {
 
 // warn 函数。
 
-function warn(string, title) {
+function warn(string, title, id) {
     if (string == null || string == undefined) {
         fail("不能输入 null 或 undefined！");
         return "在 Warn() 函数中，string 参数不能为 null 或 undefined。";
@@ -322,6 +328,7 @@ function warn(string, title) {
     string = String(string);
     let s_replaced = string.replace(/\s+/g, "");
     if (title == null || title == undefined) title = "注意";
+    if (id == null || id == undefined) id = "";
     else {
         title = String(title);
         let t_replaced = title.replace(/\s+/g, "");
@@ -406,7 +413,7 @@ function warn(string, title) {
 
 // inp 函数。
 
-async function inp(string, title) {
+async function inp(string, title, id) {
     return new Promise((resolve) => {
         if (string == null || string == undefined) {
             fail("不能输入 null 或 undefined！");
@@ -415,6 +422,7 @@ async function inp(string, title) {
         string = String(string);
         let s_replaced = string.replace(/\s+/g, "");
         if (title == null || title == undefined) title = "输入";
+        if (id == null || id == undefined) id = "";
         else {
             title = String(title);
             let t_replaced = title.replace(/\s+/g, "");
@@ -427,6 +435,7 @@ async function inp(string, title) {
 
         const window = document.createElement("div");
         window.className = "inp-window";
+        window.id = id;
         const square = document.createElement("div");
         square.className = "inp-square";
         const icon = document.createElement("img");
@@ -502,16 +511,29 @@ async function inp(string, title) {
 
 // xz 函数。
 
-async function xz(string, n, names, title) {
+async function xz(string, names, title, id) {
     return new Promise((resolve) => {
-        if (n === null || n === undefined) fail("所输入的选项数量必须为数字。");
-        else if (isNaN(n)) fail("所输入的选项数量必须为数字。");
-        else if (n <= 0) fail("请输入一个正整数。")
-        n = Math.ceil(Number(n));
-        const array = Array.from(names);
+        if (string == null || string == undefined) {
+            fail("不能输入 null 或 undefined！");
+            return "在 Xz() 函数中，string 参数不能为 null 或 undefined。";
+        }
+        string = String(string);
+        let s_replaced = string.replace(/\s+/g, "");
+        if (title == null || title == undefined) title = "选择";
+        if (id == null || id == undefined) id = "";
+        else {
+            title = String(title);
+            let t_replaced = title.replace(/\s+/g, "");
+            if (t_replaced === "") title = "选择";
+        }
+        if (s_replaced === "") {
+            warn("不能输入空字符串。");
+            return "在 Xz() 函数中，string 参数不能为空。";
+        }
 
         const window = document.createElement("div");
         window.className = "xz-window";
+        window.id = id;
         const square = document.createElement("div");
         square.className = "xz-square";
         const icon = document.createElement("img");
@@ -526,23 +548,7 @@ async function xz(string, n, names, title) {
         content.className = "fn-content";
         content.style.opacity = 0;
         content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
-
-        if (string == null || string == undefined) {
-            fail("不能输入 null 或 undefined！");
-            return "在 Xz() 函数中，string 参数不能为 null 或 undefined。";
-        }
-        string = String(string);
-        let s_replaced = string.replace(/\s+/g, "");
-        if (title == null || title == undefined) title = "选择";
-        else {
-            title = String(title);
-            let t_replaced = title.replace(/\s+/g, "");
-            if (t_replaced === "") title = "选择";
-        }
-        if (s_replaced === "") {
-            warn("不能输入空字符串。");
-            return "在 Xz() 函数中，string 参数不能为空。";
-        }
+        const array = Array.from(names);
 
         create(window);
         document.body.appendChild(window);
@@ -580,7 +586,7 @@ async function xz(string, n, names, title) {
             return tohex(r, g, b);
         }
 
-        for (let i = 0; i < n; i++) {
+        for (let i = 0; i < array.length; i++) {
             const btn = document.createElement("button");
             array[i] = String(array[i]);
             btn.id = `btn${i}`;
@@ -632,7 +638,7 @@ async function xz(string, n, names, title) {
 
 // synchr 函数。
 
-async function synchr(string, title) {
+async function synchr(string, title, id) {
     if (string == null || string == undefined) {
         fail("不能输入 null 或 undefined！");
         return "在 Synchr() 函数中，string 参数不能为 null 或 undefined。";
@@ -640,6 +646,7 @@ async function synchr(string, title) {
     string = String(string);
     let s_replaced = string.replace(/\s+/g, "");
     if (title == null || title == undefined) title = "同步";
+    if (id == null || id == undefined) id = "";
     else {
         title = String(title);
         let t_replaced = title.replace(/\s+/g, "");
@@ -652,6 +659,7 @@ async function synchr(string, title) {
 
     const window = document.createElement("div");
     window.className = "synchr-window";
+    window.id = id;
     const square = document.createElement("div");
     square.className = "synchr-square";
     const icon = document.createElement("img");
@@ -716,7 +724,7 @@ async function synchr(string, title) {
 
 // lj 函数。
 
-async function lj(string, url, title) {
+async function lj(string, url, title, id) {
     if (string == null || string == undefined) {
         fail("不能输入 null 或 undefined！");
         return "在 Lj() 函数中，string 参数不能为 null 或 undefined。";
@@ -730,6 +738,7 @@ async function lj(string, url, title) {
     let s_replaced = string.replace(/\s+/g, "");
     let u_replaced = url.replace(/\s+/g, "");
     if (title == null || title == undefined) title = "链接";
+    if (id == null || id == undefined) id = "";
     else {
         title = String(title);
         let t_replaced = title.replace(/\s+/g, "");
@@ -746,6 +755,7 @@ async function lj(string, url, title) {
 
     const window = document.createElement("div");
     window.className = "lj-window";
+    window.id = id;
     const square = document.createElement("div");
     square.className = "lj-square";
     const icon = document.createElement("img");
@@ -817,7 +827,7 @@ async function lj(string, url, title) {
 
 // zd 函数。
 
-async function zd(string, title) {
+async function zd(string, title, id) {
     return new Promise((resolve) => {
         if (string == null || string == undefined) {
             fail("不能输入 null 或 undefined！");
@@ -826,6 +836,7 @@ async function zd(string, title) {
         string = String(string);
         let s_replaced = string.replace(/\s+/g, "");
         if (title == null || title == undefined) title = "终端";
+        if (id == null || id == undefined) id = "";
         else {
             title = String(title);
             let t_replaced = title.replace(/\s+/g, "");
@@ -838,6 +849,7 @@ async function zd(string, title) {
 
         const window = document.createElement("div");
         window.className = "zd-window";
+        window.id = id;
         const square = document.createElement("div");
         square.className = "zd-square";
         const icon = document.createElement("img");
@@ -985,7 +997,7 @@ async function zd(string, title) {
 
 // wz 函数。
 
-async function timer(string, time, title) {
+async function timer(string, time, title, id) {
     return new Promise((resolve) => {
         let passed_time = 0;
         let unit;
@@ -1002,6 +1014,7 @@ async function timer(string, time, title) {
         time = Number(time);
         let s_replaced = string.replace(/\s+/g, "");
         if (title == null || title == undefined) title = "计时";
+        if (id == null || id == undefined) id = "";
         if (isNaN(time)) {
             fail("time 参数必须为可识别的数字或纯数字字符串。");
             return "在 Timer() 函数中，time 参数必须为可识别的数字或纯数字字符串。";
@@ -1021,6 +1034,7 @@ async function timer(string, time, title) {
 
         const window = document.createElement("div");
         window.className = "timer-window";
+        window.id = id;
         const square = document.createElement("div");
         square.className = "timer-square";
         const icon = document.createElement("img");

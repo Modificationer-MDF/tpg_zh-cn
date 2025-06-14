@@ -22,11 +22,11 @@ let fail_unv = [];
 let warn_unv = [];
 let synchr_unv = [];
 let timer_unv = [];
-let ls_notiunv = [];
-let ls_cgunv = [];
-let ls_failunv = [];
-let ls_warnunv = [];
-let ls_synchrunv = [];
+let ls_notiunv = 0;
+let ls_cgunv = 0;
+let ls_failunv = 0;
+let ls_warnunv = 0;
+let ls_synchrunv = 0;
 
 document.addEventListener("DOMContentLoaded", function () {
     var start = performance.now();
