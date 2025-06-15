@@ -629,32 +629,34 @@ button {
     background-color: #e11af199;
 }
 
-#notic, #cgc, #failc, #warnc, #synchrc, #timerc {
+.notic, .cgc, .failc, .warnc, .synchrc, .timerc {
     position: relative;
-    transition: height 0.3s ease-in-out;
-    height: 135px;
+    transition: all 0.3s ease-in-out;
+    opacity: 0;
+    visibility: hidden;
+    margin-top: 20px;
 }
 
-#notic {
+.notic {
     background-color: #18a68979;
 }
 
-#cgc {
+.cgc {
     background-color: #1d583779;
 }
 
-#failc {
+.failc {
     background-color: #791e1d79;
 }
 
-#warnc {
+.warnc {
     background-color: #84782979;
 }
 
-#synchrc {
+.synchrc {
     background-color: #9e338979;
 }
 
-#timerc {
+.timerc {
     background-color: #f0f0f079;
 }

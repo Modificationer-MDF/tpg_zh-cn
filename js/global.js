@@ -27,6 +27,7 @@ let ls_cgunv = 0;
 let ls_failunv = 0;
 let ls_warnunv = 0;
 let ls_synchrunv = 0;
+let warned = false;
 
 document.addEventListener("DOMContentLoaded", function () {
     var start = performance.now();

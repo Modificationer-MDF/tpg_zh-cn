@@ -903,18 +903,104 @@ function inf_ui() {
     inf.appendChild(clear);
 }
 
-function inf_cont() { // 更新未读信息。
+async function inf_cont() { // 更新未读信息。
+    const inf = document.querySelector(".information-table");
     const counts = document.getElementById("counts");
     const clear = document.getElementById("clear-all");
-    clear.onclick = () => {
-        noti_unv = [];
-        cg_unv = [];
-        fail_unv = [];
-        warn_unv = [];
-        synchr_unv = [];
-    };
+    let qj_count = noti_unv.length + cg_unv.length + fail_unv.length + warn_unv.length + synchr_unv.length;
 
-    if (noti_unv.length + cg_unv.length + fail_unv.length + warn_unv.length + synchr_unv.length === 0) {
+    function 懒得起名(函数, 数组, 变量) {
+        for (let i = 变量; i < 数组.length; i++) {
+            const 元素 = document.createElement("div");
+            元素.className = `${函数}c`;
+            元素.id = `${函数}c-${i}`;
+            元素.style.position = "relative";
+            元素.style.transition = "opacity 0.3s, transform 0.3s";
+            元素.style.opacity = 0;
+            元素.style.top = "180px";
+            元素.style.transform = "translateY(100%)";
+            const 元素_sq = document.createElement("div");
+            元素_sq.className = `${函数}-square`;
+            元素_sq.style.fontSize = "20px";
+            元素_sq.style.textAlign = "center";
+            const 元素_msg = document.createElement("div");
+            元素_msg.className = "rcont";
+            元素_msg.style.marginTop = "5px";
+            元素_msg.innerHTML = 数组[i];
+            元素_sq.innerHTML = `${xzsj()} ${函数[0].toUpperCase() + 函数.slice(1)}()`;
+            inf.appendChild(元素);
+            元素.appendChild(元素_sq);
+            元素.appendChild(元素_msg);
+
+            setTimeout(() => {
+                元素.style.transform = "translateY(0)";
+                元素.style.visibility = "visible";
+                元素.style.opacity = 1;
+            }, 20);
+        }
+    }
+
+    if (noti_unv.length > ls_notiunv) {
+        懒得起名("noti", noti_unv, ls_notiunv);
+        ls_notiunv = noti_unv.length;
+    } else if (noti_unv.length < ls_notiunv) {
+        if (warned === false) {
+            warn("请不要另辟蹊径地修改 noti_unv。该网站将在 7 秒后刷新。");
+            warned = true;
+            let a = await timer("计时 7 秒。", 7000);
+            if (a) location.reload();
+        } else fail("都是你的错。");
+    }
+
+    if (cg_unv.length > ls_cgunv) {
+        懒得起名("cg", cg_unv, ls_cgunv);
+        ls_cgunv = cg_unv.length;
+    } else if (cg_unv.length < ls_cgunv) {
+        if (warned === false) {
+            warn("请不要另辟蹊径地修改 cg_unv。该网站将在 7 秒后刷新。");
+            warned = true;
+            let a = await timer("计时 7 秒。", 7000);
+            if (a) location.reload();
+        } else fail("都是你的错。");
+    }
+
+    if (fail_unv.length > ls_failunv) {
+        懒得起名("fail", fail_unv, ls_failunv);
+        ls_failunv = fail_unv.length;
+    } else if (fail_unv.length < ls_failunv) {
+        if (warned === false) {
+            warn("请不要另辟蹊径地修改 fail_unv。该网站将在 7 秒后刷新。");
+            warned = true;
+            let a = await timer("计时 7 秒。", 7000);
+            if (a) location.reload();
+        } else fail("都是你的错。");
+    }
+
+    if (warn_unv.length > ls_warnunv) {
+        懒得起名("warn", warn_unv, ls_warnunv);
+        ls_warnunv = warn_unv.length;
+    } else if (warn_unv.length < ls_warnunv) {
+        if (warned === false) {
+            warn("请不要另辟蹊径地修改 warn_unv。该网站将在 7 秒后刷新。");
+            warned = true;
+            let a = await timer("计时 7 秒。", 7000);
+            if (a) location.reload();
+        } else fail("都是你的错。");
+    }
+
+    if (synchr_unv.length > ls_synchrunv) {
+        懒得起名("synchr", synchr_unv, ls_synchrunv);
+        ls_synchrunv = synchr_unv.length;
+    } else if (synchr_unv.length < ls_synchrunv) {
+        if (warned === false) {
+            warn("请不要另辟蹊径地修改 synchr_unv。该网站将在 7 秒后刷新。");
+            warned = true;
+            let a = await timer("计时 7 秒。", 7000);
+            if (a) location.reload();
+        } else fail("都是你的错。");
+    }
+
+    if (qj_count === 0) {
         counts.style.top = "50%";
         counts.innerHTML = "没有未读信息。";
 
@@ -923,60 +1009,41 @@ function inf_cont() { // 更新未读信息。
         clear.style.left = "0%";
     } else {
         counts.style.top = "140px";
-        counts.innerHTML = `有 ${noti_unv.length + cg_unv.length + fail_unv.length + warn_unv.length + synchr_unv.length} 条未读信息。`;
+        counts.innerHTML = `有 ${qj_count} 条未读信息。`;
 
         clear.style.visibility = "visible";
         clear.style.opacity = 1;
         clear.style.left = "50%";
+
+        clear.onclick = () => {
+            const qj_elements = inf.querySelectorAll("[id^='notic-'], [id^='cgc-'], [id^='failc-'], [id^='warnc-'], [id^='synchrc-']");
+            qj_elements.forEach((el, index) => {
+                el.style.opacity = 0;
+                el.style.transform = "translateX(300px)";
+                el.style.transition = "opacity 0.3s, transform 0.3s";
+                
+                el.addEventListener("transitionend", () => {
+                    inf.removeChild(el);
+                }, { once: true }); // once: true 表示在 transition 结束后移除该元素。
+
+                if (index === qj_elements.length - 1) {
+                    setTimeout(() => {
+                        noti_unv = [];
+                        cg_unv = [];
+                        fail_unv = [];
+                        warn_unv = [];
+                        synchr_unv = [];
+
+                        ls_notiunv = 0;
+                        ls_cgunv = 0;
+                        ls_failunv = 0;
+                        ls_warnunv = 0;
+                        ls_synchrunv = 0;
+                    }, 300);
+                }
+            });
+        };
     }
-
-    const notic = document.createElement("div");
-    notic.id = "#notic";
-    notic
-
-//    const notic = document.getElementById("notic");
-//    const noti_msg = notic.querySelector(".rtxt");
-//    noti_msg.innerHTML = (noti_unv.length === 0 ? "空。" : noti_unv.join("<br />"));
-//    notic.style.height = hqgd(notic.innerHTML, "notic", "div");
-//    const noti_btn = notic.querySelector(".inf1");
-//    noti_btn.innerHTML = (noti_unv.length > 0 ? `清空 ${noti_unv.length} 条信息。` : "没有未读信息。");
-//    noti_btn.style.width = hqkd(noti_btn.innerHTML, "inf1", "button");
-
-//    const cgc = document.getElementById("cgc");
-//    const cg_msg = cgc.querySelector(".rtxt");
-//    cg_msg.innerHTML = (cg_unv.length === 0 ? "空。" : cg_unv.join("<br />"));
-//    cgc.style.height = hqgd(cgc.innerHTML, "cgc", "div");
-//    const cg_btn = cgc.querySelector(".inf2");
-//    cg_btn.style.width = "170px";
-//    cg_btn.innerHTML = (cg_unv.length > 0 ? `清空 ${cg_unv.length} 条信息。` : "没有未读信息。");
-//    cg_btn.style.width = hqkd(cg_btn.innerHTML, "inf2", "button");
-
-//    const failc = document.getElementById("failc");
-//    const fail_msg = failc.querySelector(".rtxt");
-//    fail_msg.innerHTML = (fail_unv.length === 0 ? "空。" : fail_unv.join("<br />"));
-//    failc.style.height = hqgd(failc.innerHTML, "failc", "div");
-//    const fail_btn = failc.querySelector(".inf3");
-//    fail_btn.style.width = "170px";
-//    fail_btn.innerHTML = (fail_unv.length > 0 ? `清空 ${fail_unv.length} 条信息。` : "没有未读信息。");
-//    fail_btn.style.width = hqkd(fail_btn.innerHTML, "inf3", "button");
-
-//    const warnc = document.getElementById("warnc");
-//    const warn_msg = warnc.querySelector(".rtxt");
-//    warn_msg.innerHTML = (warn_unv.length === 0 ? "空。" : warn_unv.join("<br />"));
-//    warnc.style.height = hqgd(warnc.innerHTML, "warnc", "div");
-//    const warn_btn = warnc.querySelector(".inf4");
-//    warn_btn.style.width = "170px";
-//    warn_btn.innerHTML = (warn_unv.length > 0 ? `清空 ${warn_unv.length} 条信息。` : "没有未读信息。");
-//    warn_btn.style.width = hqkd(warn_btn.innerHTML, "inf4", "button");
-
-//    const synchrc = document.getElementById("synchrc");
-//    const synchr_msg = synchrc.querySelector(".rtxt");
-//    synchr_msg.innerHTML = (synchr_unv.length === 0 ? "空。" : synchr_unv.join("<br />"));
-//    synchrc.style.height = hqgd(synchrc.innerHTML, "synchrc", "div");
-//    const synchr_btn = synchrc.querySelector(".inf5");
-//    synchr_btn.style.width = "170px";
-//    synchr_btn.innerHTML = (synchr_unv.length > 0 ? `清空 ${synchr_unv.length} 条信息。` : "没有未读信息。");
-//    synchr_btn.style.width = hqkd(synchr_btn.innerHTML, "inf5", "button");
 }
 
 function pos(p) {
@@ -1166,19 +1233,19 @@ function visible(e, fn_name) {
         rz(`请注意，你有一条未读完的 ${fn_name}() 信息。`);
         switch (fn_name) {
             case "Noti":
-                noti_unv.push(`${xzsj()} - ${e.innerHTML}`);
+                noti_unv.push(e.innerHTML);
                 break;
             case "Cg":
-                cg_unv.push(`${xzsj()} - ${e.innerHTML}`);
+                cg_unv.push(e.innerHTML);
                 break;
             case "Fail":
-                fail_unv.push(`${xzsj()} - ${e.innerHTML}`);
+                fail_unv.push(e.innerHTML);
                 break;
             case "Warn":
-                warn_unv.push(`${xzsj()} - ${e.innerHTML}`);
+                warn_unv.push(e.innerHTML);
                 break;
             case "Synchr":
-                synchr_unv.push(`${xzsj()} - ${e.innerHTML}`);
+                synchr_unv.push(e.innerHTML);
                 break;
         }
     }
