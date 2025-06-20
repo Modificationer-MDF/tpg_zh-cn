@@ -744,6 +744,21 @@ function control() { // 选项。
         }
     };
 
+    const rightmenu = document.createElement("p");
+    rightmenu.innerHTML = "右键菜单设置";
+    rightmenu.className = "lcont";
+    const m1 = document.createElement("button");
+    m1.type = "button";
+    m1.innerHTML = "跟随该网站的设置";
+    m1.className = "control9";
+    m1.onclick = () => {
+        if (rightset === "跟随该网站的设置") warn("右键菜单已为该值。");
+        else {
+            rightset = "跟随该网站的设置";
+            cg("重新设置了右键菜单的属性。");
+        }
+    };
+
     const c_block = document.createElement("p");
     c_block.innerHTML = "设置 “选项” 状态";
     c_block.className = "lcont";
@@ -894,6 +909,7 @@ function control() { // 选项。
     const all = [
         ms,
         ts,
+        rightmenu,
         c_block,
         i_block,
         eas,
@@ -909,6 +925,7 @@ function control() { // 选项。
     ctrl.appendChild(title);
     ctrl.appendChild(ms);
     ctrl.appendChild(ts);
+    ctrl.appendChild(rightmenu);
     ctrl.appendChild(c_block);
     ctrl.appendChild(i_block);
     ctrl.appendChild(eas);
@@ -920,6 +937,7 @@ function control() { // 选项。
     ms.appendChild(js);
     ts.appendChild(y);
     ts.appendChild(z);
+    rightmenu.appendChild(m1);
     c_block.appendChild(y1);
     c_block.appendChild(n1);
     i_block.appendChild(y2);

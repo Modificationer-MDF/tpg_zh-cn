@@ -1,5 +1,6 @@
 let mode = "Preset";
 let titleset = "Default";
+let rightset = "跟随该网站的设置";
 let easing = "cubic-bezier(0.14, 1, 0.53, 1)";
 let deftime = "Smart";
 let defwid = 1024;
@@ -128,28 +129,30 @@ document.addEventListener("DOMContentLoaded", function () {
             ld(main, "100%");
             isdimmed = false;
         }
+
+        if (rightset === "跟随该网站的设置") {
+            document.addEventListener("contextmenu", function (e) {
+                e.preventDefault();
+                const menu = document.querySelector(".rightclick-menu");
+                menu.style.visibility = "visible";
+                menu.style.transition = `opacity 0.3s, top 0.3s, left 0.3s ${easing}`;
+                menu.style.opacity = "1";
+                menu.style.left = `${e.pageX}px`;
+                menu.style.top = `${e.pageY}px`;
+            });
+
+            document.addEventListener("click", function (e) {
+                const menu = document.querySelector(".rightclick-menu");
+                menu.style.opacity = "0";
+                menu.style.left = `${e.pageX}px`;
+                menu.style.top = `${e.pageY}px`;
+                menu.addEventListener("transitionend", () => {
+                    menu.style.visibility = "hidden";
+                }, { once: true });
+            });
+        }
     }, 400);
     document.addEventListener("keydown", (event) => {
         if (event.altKey) noti("将鼠标移动至左上角以打开选项；移动到右上角以查看未读信息。")
-    });
-
-    document.addEventListener("contextmenu", function (e) {
-        e.preventDefault();
-        const menu = document.querySelector(".rightclick-menu");
-        menu.style.visibility = "visible";
-        menu.style.transition = `opacity 0.3s, top 0.3s, left 0.3s ${easing}`;
-        menu.style.opacity = "1";
-        menu.style.left = `${e.pageX}px`;
-        menu.style.top = `${e.pageY}px`;
-    });
-
-    document.addEventListener("click", function (e) {
-        const menu = document.querySelector(".rightclick-menu");
-        menu.style.opacity = "0";
-        menu.style.left = `${e.pageX}px`;
-        menu.style.top = `${e.pageY}px`;
-        menu.addEventListener("transitionend", () => {
-            menu.style.visibility = "hidden";
-        }, { once: true });
     });
 });

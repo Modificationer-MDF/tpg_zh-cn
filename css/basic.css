@@ -607,7 +607,7 @@ button {
     opacity: 1;
 }
 
-.control1, .control2, .control3, .control4, .control5, .control6, .control7, .control8, .inf1, .inf2, .inf3, .inf4, .inf5 {
+.control1, .control2, .control3, .control4, .control5, .control6, .control7, .control8, .control9, .control10, .control11, .control12, .control13, .control14, .control15, .control16, .control17, .control18, .control19, .control20, .inf1, .inf2, .inf3, .inf4, .inf5 {
     color: #ffffff;
     z-index: 999;
     margin-left: 30px;
@@ -653,6 +653,54 @@ button {
 
 .control8 {
     background-color: #57cb8599;
+}
+
+.control9 {
+    background-color: #489fb599;
+}
+
+.control10 {
+    background-color: #3ba4c099;
+}
+
+.control11 {
+    background-color: #2b8cad99;
+}
+
+.control12 {
+    background-color: #1c789a99;
+}
+
+.control13 {
+    background-color: #2d7c8a99;
+}
+
+.control14 {
+    background-color: #3d869a99;
+}
+
+.control15 {
+    background-color: #4c90a899;
+}
+
+.control16 {
+    background-color: #5b99b699;
+}
+
+.control17 {
+    background-color: #6aa3c499;
+}
+
+.control18 {
+    background-color: #79adcf99;
+}
+
+.control19 {
+    background-color: #88b7d899;
+}
+
+.control20 {
+    background-color: #97c1e099;
 }
 
 .inf1 {
