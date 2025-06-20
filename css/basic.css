@@ -53,7 +53,7 @@ pre {
     padding: 7px 15px;
 }
 
-@keyframes jr_0head {
+@keyframes jr_head {
     from {
         opacity: 0;
     }
@@ -128,7 +128,7 @@ pre {
     font-size: 36px;
 }
 
-.head3, .head4 {
+.fn1, .fn3 {
     visibility: hidden;
     height: 60px;
     opacity: 0;
@@ -139,7 +139,7 @@ pre {
     border: none;
 }
 
-@keyframes jr1_head3 { /* fn1() */
+@keyframes jr1_fn1 { /* “函数展示” 进入动画。 */
     from {
         visibility: hidden;
         opacity: 0;
@@ -148,45 +148,15 @@ pre {
     to {
         visibility: visible;
         opacity: 1;
-        transform: translateX(5vw);
-    }
-}
-
-@keyframes cc1_head3 {
-    from {
-        visibility: visible;
-        opacity: 1;
-        height: 60px;
-        transform: translateX(5vw);
-    }
-    to {
-        visibility: visible;
-        opacity: 1;
-        height: 1240px;
-        transform: translateX(5vw);
-    }
-}
-
-@keyframes cc1_head4 { /* fn2() */
-    from {
-        visibility: visible;
-        opacity: 1;
-        height: 60px;
         transform: translateX(20vw);
     }
-    to {
-        visibility: visible;
-        opacity: 1;
-        transform: translateX(5vw);
-        height: 650px;
-    }
 }
 
-@keyframes jr1_head5 { /* fn3() */
+@keyframes jr1_fn3 { /* “版本列表” 进入动画 1。 */
     from {
         visibility: hidden;
         opacity: 0;
-        transform: translateX(0vw);
+        transform: translateX(0);
     }
     to {
         visibility: visible;
@@ -195,7 +165,7 @@ pre {
     }
 }
 
-@keyframes cc1_head5 {
+@keyframes jr2_fn1 { /* “演示函数” “预设” 进入动画。 */
     from {
         visibility: visible;
         opacity: 1;
@@ -205,8 +175,83 @@ pre {
     to {
         visibility: visible;
         opacity: 1;
+        height: 1220px;
         transform: translateX(5vw);
-        height: 310px;
+    }
+}
+
+@keyframes cc2_fn1 { /* “演示函数” “预设” 出场动画。 */
+    from {
+        visibility: visible;
+        opacity: 1;
+        height: 1220px;
+        transform: translateX(5vw);
+    }
+    to {
+        visibility: visible;
+        opacity: 1;
+        height: 60px;
+        transform: translateX(20vw);
+    }
+}
+
+@keyframes jr2_fn2 { /* “演示函数” “演示” 进入动画。 */
+    from {
+        visibility: visible;
+        opacity: 1;
+        height: 60px;
+        transform: translateX(20vw);
+    }
+    to {
+        visibility: visible;
+        opacity: 1;
+        height: 615px;
+        transform: translateX(5vw);
+    }
+}
+
+@keyframes cc2_fn2 { /* “演示函数” “演示” 出场动画。 */
+    from {
+        visibility: visible;
+        opacity: 1;
+        height: 615px;
+        transform: translateX(5vw);
+    }
+    to {
+        visibility: visible;
+        opacity: 1;
+        height: 60px;
+        transform: translateX(20vw);
+    }
+}
+
+@keyframes jr2_fn3 { /* “版本列表” 进入动画 2。 */
+    from {
+        visibility: visible;
+        opacity: 1;
+        transform: translateX(20vw);
+        height: 60px;
+    }
+    to {
+        visibility: visible;
+        opacity: 1;
+        transform: translateX(10vw);
+        height: 280px;
+    }
+}
+
+@keyframes cc2_fn3 { /* “版本列表” 出场动画。 */
+    from {
+        visibility: visible;
+        opacity: 1;
+        transform: translateX(10vw);
+        height: 280px;
+    }
+    to {
+        visibility: visible;
+        opacity: 1;
+        transform: translateX(20vw);
+        height: 60px;
     }
 }
 
@@ -396,6 +441,7 @@ button {
     color: #ffffff;
     z-index: 999;
     margin-left: 30px;
+    width: 600px;
     background-color: #ffe20099;
     padding: 14px 25px;
     font-size: 25px;

@@ -4,8 +4,9 @@ let easing = "cubic-bezier(0.14, 1, 0.53, 1)";
 let deftime = "Smart";
 let defwid = 1024;
 let defhei = 768;
-let f1 = false;
-let f2 = false;
+let f1 = false; // “预设” 开关。
+let f2 = false; // “演示” 开关。
+let f3 = false; // “版本列表” 开关。
 let alphabets = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 let marks = `\n\t\r!@#$%^&*()_+-=[]{}|;':\\"',./<>?1234567890！？。“”《》、；‘’【】·~·。，、：；“”‘’《》（）…￥—` + "`";
 let control_block = false; // 锁定 “选项”。
@@ -135,8 +136,8 @@ document.addEventListener("DOMContentLoaded", function () {
     document.addEventListener("contextmenu", function (e) {
         e.preventDefault();
         const menu = document.querySelector(".rightclick-menu");
-        menu.style.transition = `opacity 0.3s, top 0.3s, left 0.3s ${easing}`;
         menu.style.visibility = "visible";
+        menu.style.transition = `opacity 0.3s, top 0.3s, left 0.3s ${easing}`;
         menu.style.opacity = "1";
         menu.style.left = `${e.pageX}px`;
         menu.style.top = `${e.pageY}px`;

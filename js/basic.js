@@ -90,8 +90,8 @@ function openinf() {
 }
 
 function fn0() {
-    if (mode === "Play" && f1 === false) fn1();
-    else if (mode === "Preset" && f2 === false) fn2();
+    if (mode === "Preset" && f2 === false) fn1();
+    else if (mode === "Play" && f1 === false) fn2();
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -99,27 +99,27 @@ document.addEventListener("DOMContentLoaded", () => {
     const h2 = document.querySelector(".head2"); // h2 标签。
     const div = document.querySelector(".top"); // 包含 h1 和 h2 的 div 标签。
     const head = document.querySelector(".head"); // The Play Games 版本标签。
-    const f1 = document.querySelector(".head3"); // 功能按钮组。
-    const f3 = document.querySelector(".head4"); // 功能按钮组。
+    const f1 = document.querySelector(".fn1"); // “函数展示”。
+    const f3 = document.querySelector(".fn3"); // “版本列表”。
 
     h1.style.display = "block";
     h1.style.animation = "jr_head1 1.4s forwards cubic-bezier(0.33, 1, 0.68, 1)";
-    h1.addEventListener("animationend", (e) => {
+    h1.addEventListener("animationend", (e) => { // The Play Games
         if (e.animationName === "jr_head1") {
             h2.style.display = "block";
             h2.style.animation = "jr_head2 1.4s forwards cubic-bezier(0.33, 1, 0.68, 1)";
         }
     });
-    h2.addEventListener("animationend", (e) => {
+    h2.addEventListener("animationend", (e) => { // Let the game-playing easier.
         if (e.animationName === "jr_head2") {
             div.style.animation = "jr_top 0.55s forwards cubic-bezier(0.33, 1, 0.68, 1)";
-            head.style.animation = "jr_0head 0.55s forwards cubic-bezier(0.33, 1, 0.68, 1)";
+            head.style.animation = "jr_head 0.55s forwards cubic-bezier(0.33, 1, 0.68, 1)";
         }
     });
     div.addEventListener("animationend", (e) => {
         if (e.animationName === "jr_top") {
-            f1.style.animation = "jr1_head3 0.55s forwards cubic-bezier(0.33, 1, 0.68, 1)";
-            f3.style.animation = "jr1_head5 0.55s forwards cubic-bezier(0.33, 1, 0.68, 1)";
+            f1.style.animation = "jr1_fn1 0.55s forwards cubic-bezier(0.33, 1, 0.68, 1)"; // “函数展示” 进入动画。
+            f3.style.animation = "jr1_fn3 0.55s forwards cubic-bezier(0.33, 1, 0.68, 1)"; // “版本列表” 进入动画。
         }
     });
 
@@ -153,166 +153,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-function fn1() {
-    f1 = !f1;
+function fn1() { // “函数演示” “预设” 模式。
+    f1 = true; // 打开了 “预设”。
 
-    const div = document.querySelector(".head3");
+    const div = document.querySelector(".fn1");
     const dakai = document.getElementById("1");
-    dakai.style.transition = `all 0.55s ${easing}`;
-    const notibtn = document.createElement("button");
-    notibtn.style.marginTop = "15px";
-    notibtn.innerHTML = "noti";
-    notibtn.className = "btn1";
-    notibtn.onclick = async () => {
-        let res = await inp("输入你想显示在 Noti() 上的信息。", "在此输入。");
-        if (titleset === "Custom") {
-            let t = await inp("请输入 Noti() 上的标题。", "在此输入。");
-            noti(res, t);
-        } else {
-            noti(res, "通知");
-        }
-    };
-    const cgbtn = document.createElement("button");
-    cgbtn.innerHTML = "cg";
-    cgbtn.className = "btn2";
-    cgbtn.onclick = async () => {
-        let res = await inp("输入你想显示在 Cg() 上的信息。", "在此输入。");
-        if (titleset === "Custom") {
-            let t = await inp("请输入 Cg() 上的标题。", "在此输入。");
-            cg(res, t);
-        } else {
-            cg(res, "完成");
-        }
-    };
-    const failbtn = document.createElement("button");
-    failbtn.innerHTML = "fail";
-    failbtn.className = "btn3";
-    failbtn.onclick = async () => {
-        let res = await inp("输入你想显示在 fail() 上的信息。", "在此输入。");
-        if (titleset === "Custom") {
-            let t = await inp("请输入 fail() 上的标题。", "在此输入。");
-            fail(res, t);
-        }
-        else {
-            fail(res, "错误");
-        }
-    };
-    const warnbtn = document.createElement("button");
-    warnbtn.innerHTML = "warn";
-    warnbtn.className = "btn4";
-    warnbtn.onclick = async () => {
-        let res = await inp("输入你想显示在 Warn() 上的信息。", "在此输入。");
-        if (titleset === "Custom") {
-            let t = await inp("请输入 Warn() 上的标题。", "在此输入。");
-            warn(res, t);
-        }
-        else {
-            warn(res, "注意");
-        }
-    };
-    const xzbtn = document.createElement("button");
-    xzbtn.innerHTML = "xz";
-    xzbtn.className = "btn7";
-    xzbtn.onclick = async () => {
-        let res = await inp("输入你想显示在 Xz() 上的信息。", "在此输入。");
-        let n = await inp("请输入 Xz() 上选项的数量。", "在此输入。");
-        n = Number(n);
-        let array = new Array(n);
-        for (let i = 0; i <= n - 1; i++) {
-            array[i] = await inp(`请输入 Xz() 上第 ${i + 1} 个选项。`, "在此输入。");
-        }
-        if (titleset === "Custom") {
-            let t = await inp("请输入 Xz() 上的标题。", "在此输入。");
-            xz(res, array, t);
-        }
-        else {
-            xz(res, array, "选择");
-        }
-    };
-    const ljbtn = document.createElement("button");
-    ljbtn.innerHTML = "lj";
-    ljbtn.className = "btn8";
-    ljbtn.onclick = async () => {
-        let res = await inp("输入你想显示在 Lj() 上的信息。", "在此输入。");
-        let url = await inp("请输入你要链接的地址。", "在此输入。");
-        if (titleset === "Custom") {
-            let t = await inp("请输入 Lj() 上的标题。", "在此输入。");
-            lj(res, url, t);
-        }
-        else {
-            lj(res, url, "链接");
-        }
-    };
-    const timerbtn = document.createElement("button");
-    timerbtn.innerHTML = "timer";
-    timerbtn.className = "btn29";
-    timerbtn.onclick = async () => {
-        let res = await inp("输入你想显示在 Timer() 上的信息。", "在此输入。");
-        let t = await inp("请输入 Timer() 上的计时时间。（单位：毫秒）", "在此输入。");
-        t = Number(t);
-        if (titleset === "Custom") {
-            let t1 = await inp("请输入 Timer() 上的标题。", "在此输入。");
-            timer(res, t, t1);
-        }
-        else {
-            timer(res, t, "计时");
-        }
-    };
-    const wzbtn = document.createElement("button");
-    wzbtn.innerHTML = "wz";
-    wzbtn.className = "btn22";
-    wzbtn.onclick = async () => {
-        let res = await inp("输入你想显示在 Wz() 上的信息。", "在此输入。");
-        wz(res);
-    };
-
-    const all = [
-        notibtn,
-        cgbtn,
-        failbtn,
-        warnbtn,
-        xzbtn,
-        ljbtn,
-        timerbtn,
-        wzbtn,
-    ];
-
-    all.forEach(btn => {
-        btn.style.display = "none";
-    });
-
-    if (div.children.length <= 1) {
-        all.forEach(btn => {
-            div.appendChild(btn);
-        });
-    }
-
-    div.style.animation = "cc1_head4 0.55s forwards cubic-bezier(0.33, 1, 0.68, 1)";
-    dakai.style.backgroundColor = "#001dff99";
-    dakai.style.width = hqkd("在此处演示函数。", "dakai", "button");
-    dakai.textContent = "在此处演示函数。";
-
-    div.addEventListener("animationend", (e) => {
-        if (e.animationName === "cc1_head4") {
-            all.forEach(btn => {
-                btn.style.display = "block";
-                btn.style.color = "#ffffff";
-                btn.style.opacity = "0";
-                btn.style.transition = "opacity 0.55s cubic-bezier(0.33, 1, 0.68, 1)";
-            });
-            setTimeout(() => {
-                all.forEach(btn => {
-                    btn.style.opacity = "1";
-                });
-            }, 0);
-        }
-    });
-}
-
-function fn2() {
-    f2 = !f2;
-
-    const div = document.querySelector(".head3");
     const div1 = document.createElement("div");
     div1.className = "div1";
     div1.textContent = "主函数区";
@@ -322,7 +167,6 @@ function fn2() {
     const div3 = document.createElement("div");
     div3.className = "div3";
     div3.textContent = "调试区";
-    const dakai = document.getElementById("1");
 
     const notibtn = document.createElement("button");
     notibtn.innerHTML = "noti";
@@ -445,9 +289,16 @@ function fn2() {
     div1.style.display = "none";
     div2.style.display = "none";
     div3.style.display = "none";
+    div1.style.opacity = "0";
+    div2.style.opacity = "0";
+    div3.style.opacity = "0";
+
     all.forEach(btn => {
         btn.type = "button";
         btn.style.display = "none";
+        btn.style.color = "#ffffff";
+        btn.style.opacity = "0";
+        btn.style.transition = "opacity 0.55s cubic-bezier(0.33, 1, 0.68, 1)";
     });
 
     if (div.children.length <= 1) {
@@ -463,31 +314,23 @@ function fn2() {
         });
     }
 
-    div.style.animation = "cc1_head3 0.55s forwards cubic-bezier(0.33, 1, 0.68, 1)";
+    div.style.animation = `jr2_fn1 0.55s forwards ${easing}`;
     dakai.textContent = "以下是预设内容。";
     dakai.style.transition = `all 0.55s ${easing}`;
     dakai.style.backgroundColor = "#001dff99";
     dakai.style.width = hqkd("以下是预设内容。", "dakai", "button");
 
     div.addEventListener("animationend", (e) => {
-        if (e.animationName === "cc1_head3") {
-            all.forEach(btn => {
-                btn.style.display = "block";
-                btn.style.color = "#ffffff";
-                btn.style.opacity = "0";
-                btn.style.transition = "opacity 0.55s cubic-bezier(0.33, 1, 0.68, 1)";
-            });
+        if (e.animationName === "jr2_fn1") {
             div1.style.display = "block";
-            div1.style.opacity = "0";
             div1.style.transition = "opacity 0.55s cubic-bezier(0.33, 1, 0.68, 1)";
             div2.style.display = "block";
-            div2.style.opacity = "0";
             div2.style.transition = "opacity 0.55s cubic-bezier(0.33, 1, 0.68, 1)";
             div3.style.display = "block";
-            div3.style.opacity = "0";
             div3.style.transition = "opacity 0.55s cubic-bezier(0.33, 1, 0.68, 1)";
             setTimeout(() => {
                 all.forEach(btn => {
+                    btn.style.display = "block";
                     btn.style.opacity = "1";
                 });
                 div1.style.opacity = "1";
@@ -498,16 +341,227 @@ function fn2() {
     });
 }
 
+function fn2() { // “函数演示” “演示” 模式。
+    f2 = true; // 打开了 “演示”。
+
+    const div = document.querySelector(".fn1");
+    const dakai = document.getElementById("1");
+    dakai.style.transition = `all 0.55s ${easing}`;
+    const container = document.createElement("div");
+    container.id = "fn2_cont";
+    container.transition = `all 0.55s ${easing}`;
+
+    const notibtn = document.createElement("button");
+    notibtn.style.marginTop = "15px";
+    notibtn.innerHTML = "noti";
+    notibtn.className = "btn1";
+    notibtn.onclick = async () => {
+        let res = await inp("输入你想显示在 Noti() 上的信息。", "在此输入。");
+        if (titleset === "Custom") {
+            let t = await inp("请输入 Noti() 上的标题。", "在此输入。");
+            noti(res, t);
+        } else {
+            noti(res, "通知");
+        }
+    };
+    const cgbtn = document.createElement("button");
+    cgbtn.innerHTML = "cg";
+    cgbtn.className = "btn2";
+    cgbtn.onclick = async () => {
+        let res = await inp("输入你想显示在 Cg() 上的信息。", "在此输入。");
+        if (titleset === "Custom") {
+            let t = await inp("请输入 Cg() 上的标题。", "在此输入。");
+            cg(res, t);
+        } else {
+            cg(res, "完成");
+        }
+    };
+    const failbtn = document.createElement("button");
+    failbtn.innerHTML = "fail";
+    failbtn.className = "btn3";
+    failbtn.onclick = async () => {
+        let res = await inp("输入你想显示在 fail() 上的信息。", "在此输入。");
+        if (titleset === "Custom") {
+            let t = await inp("请输入 fail() 上的标题。", "在此输入。");
+            fail(res, t);
+        }
+        else {
+            fail(res, "错误");
+        }
+    };
+    const warnbtn = document.createElement("button");
+    warnbtn.innerHTML = "warn";
+    warnbtn.className = "btn4";
+    warnbtn.onclick = async () => {
+        let res = await inp("输入你想显示在 Warn() 上的信息。", "在此输入。");
+        if (titleset === "Custom") {
+            let t = await inp("请输入 Warn() 上的标题。", "在此输入。");
+            warn(res, t);
+        }
+        else {
+            warn(res, "注意");
+        }
+    };
+    const xzbtn = document.createElement("button");
+    xzbtn.innerHTML = "xz";
+    xzbtn.className = "btn7";
+    xzbtn.onclick = async () => {
+        let res = await inp("输入你想显示在 Xz() 上的信息。", "在此输入。");
+        let n = await inp("请输入 Xz() 上选项的数量。", "在此输入。");
+        n = Number(n);
+        let array = new Array(n);
+        for (let i = 0; i <= n - 1; i++) {
+            array[i] = await inp(`请输入 Xz() 上第 ${i + 1} 个选项。`, "在此输入。");
+        }
+        if (titleset === "Custom") {
+            let t = await inp("请输入 Xz() 上的标题。", "在此输入。");
+            xz(res, array, t);
+        }
+        else {
+            xz(res, array, "选择");
+        }
+    };
+    const ljbtn = document.createElement("button");
+    ljbtn.innerHTML = "lj";
+    ljbtn.className = "btn8";
+    ljbtn.onclick = async () => {
+        let res = await inp("输入你想显示在 Lj() 上的信息。", "在此输入。");
+        let url = await inp("请输入你要链接的地址。", "在此输入。");
+        if (titleset === "Custom") {
+            let t = await inp("请输入 Lj() 上的标题。", "在此输入。");
+            lj(res, url, t);
+        }
+        else {
+            lj(res, url, "链接");
+        }
+    };
+    const timerbtn = document.createElement("button");
+    timerbtn.innerHTML = "timer";
+    timerbtn.className = "btn29";
+    timerbtn.onclick = async () => {
+        let res = await inp("输入你想显示在 Timer() 上的信息。", "在此输入。");
+        let t = await inp("请输入 Timer() 上的计时时间。（单位：毫秒）", "在此输入。");
+        t = Number(t);
+        if (titleset === "Custom") {
+            let t1 = await inp("请输入 Timer() 上的标题。", "在此输入。");
+            timer(res, t, t1);
+        }
+        else {
+            timer(res, t, "计时");
+        }
+    };
+    const wzbtn = document.createElement("button");
+    wzbtn.innerHTML = "wz";
+    wzbtn.className = "btn22";
+    wzbtn.onclick = async () => {
+        let res = await inp("输入你想显示在 Wz() 上的信息。", "在此输入。");
+        wz(res);
+    };
+
+    const all = [
+        notibtn,
+        cgbtn,
+        failbtn,
+        warnbtn,
+        xzbtn,
+        ljbtn,
+        timerbtn,
+        wzbtn,
+    ];
+
+    all.forEach(btn => {
+        btn.style.display = "none";
+    });
+
+    div.appendChild(container);
+    if (div.children.length <= 2) {
+        all.forEach(btn => {
+            container.appendChild(btn);
+        });
+    }
+
+    div.style.animation = `jr2_fn2 0.55s forwards ${easing}`;
+    dakai.style.backgroundColor = "#001dff99";
+    dakai.style.width = hqkd("在此处演示函数。", "dakai", "button");
+    dakai.textContent = "在此处演示函数。";
+
+    div.addEventListener("animationend", (e) => {
+        if (e.animationName === "jr2_fn2") {
+            all.forEach(btn => {
+                btn.style.display = "block";
+                btn.style.color = "#ffffff";
+                btn.style.opacity = "0";
+                btn.style.transition = "opacity 0.55s cubic-bezier(0.33, 1, 0.68, 1)";
+            });
+            setTimeout(() => {
+                all.forEach(btn => {
+                    btn.style.opacity = "1";
+                });
+            }, 0);
+        }
+    });
+}
+
+function opendiv_permission(div) {
+    let ls_visibility = getComputedStyle(div).visibility;
+    let ls_opacity = getComputedStyle(div).opacity;
+    if (ls_visibility === "visible" || ls_opacity === "1") {
+        return true;
+    }
+    else if (ls_visibility === "hidden" || ls_opacity === "0") {
+        return false;
+    } 
+}
+
+function closefn0() {
+    const div = document.querySelector(".fn1");
+    const dakai = document.getElementById("1");
+    dakai.style.backgroundColor = "#ffe20099";
+    dakai.innerHTML = "打开";
+    dakai.style.width = "600px";
+
+    if (f1 === true) { // 打开了 “预设”。
+        const div1 = document.querySelector(".div1");
+        const div2 = document.querySelector(".div2");
+        const div3 = document.querySelector(".div3");
+
+        div1.style.opacity = "0";
+        div2.style.opacity = "0";
+        div3.style.opacity = "0";
+
+        div3.addEventListener("transitionend", () => {
+            div.removeChild(div1);
+            div.removeChild(div2);
+            div.removeChild(div3);
+            div.style.animation = `cc2_fn1 0.55s forwards ${easing}`;
+        });
+        f1 = false;
+    }
+    if (f2 === true) { // 打开了 “演示”。
+        const container = document.getElementById("fn2_cont");
+        container.style.transition = `all 0.55s ${easing}`;
+        container.style.opacity = 0;
+        container.addEventListener("transitionend", () => {
+            div.removeChild(container);
+            div.style.animation = `cc2_fn2 0.55s forwards ${easing}`;
+        });
+        f2 = false;
+    }
+}
+
 function fn3() {
+    f3 = true;
     warn("该文件可能会被误判为恶意软件，请注意甄别。");
 
-    const div = document.querySelector(".head4");
-    div.style.animation = `cc1_head5 0.55s forwards ${easing}`;
+    const div = document.querySelector(".fn3");
+    div.style.animation = `jr2_fn3 0.55s forwards ${easing}`;
     const dakai = document.getElementById("3");
     dakai.style.transition = `all 0.55s ${easing}`;
     dakai.style.backgroundColor = "#001dff99";
     dakai.style.width = hqkd("在此处下载 The Play Games 所有版本。", "dakai", "button");
     dakai.textContent = "在此处下载 The Play Games 所有版本。";
+    const container = document.createElement("div");
+    container.id = "fn3_cont";
 
     const btn1 = document.createElement("button");
     btn1.className = "btn11";
@@ -555,9 +609,10 @@ function fn3() {
     all.forEach(btn => {
         btn.style.display = "none";
     });
-    if (div.children.length <= 1) {
+    div.appendChild(container);
+    if (div.children.length <= 2) {
         all.forEach((btn, index) => {
-            if (index >= 0 && index < 3) div.appendChild(btn);
+            if (index >= 0 && index < 3) container.appendChild(btn);
             else if (index === 3) btn1.appendChild(btn);
             else if (index === 4) btn2.appendChild(btn);
             else if (index === 5) btn3.appendChild(btn);
@@ -565,7 +620,7 @@ function fn3() {
     }
 
     div.addEventListener("animationend", (e) => {
-        if (e.animationName === "cc1_head5") {
+        if (e.animationName === "jr2_fn3") {
             all.forEach(btn => {
                 btn.style.display = "block";
                 btn.color = "#ffffff";
@@ -579,6 +634,28 @@ function fn3() {
             }, 0);
         }
     });
+}
+
+function closefn3() {
+    if (f3 === true) {
+        const div = document.querySelector(".fn3");
+        const dakai = document.getElementById("3");
+        dakai.style.transition = `all 0.55s ${easing}`;
+        dakai.style.backgroundColor = "#ffe20099";
+        dakai.innerHTML = "打开";
+        dakai.style.width = "600px";
+
+        const container = document.getElementById("fn3_cont");
+        container.style.transition = `all 0.55s ${easing}`;
+        container.style.opacity = 0;
+        container.addEventListener("transitionend", () => {
+            div.removeChild(container);
+            div.style.animation = `cc2_fn3 0.55s forwards ${easing}`;
+        });
+        f3 = false;
+    } else {
+        fail("“版本列表” 未打开。")
+    }
 }
 
 function totop() { // 返回顶部。
