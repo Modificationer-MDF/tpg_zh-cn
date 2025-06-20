@@ -1,6 +1,6 @@
 let mode = "Preset";
 let titleset = "Default";
-let easing = "cubic-bezier(0.83, 0, 0.17, 1)";
+let easing = "cubic-bezier(0.14, 1, 0.53, 1)";
 let deftime = "Smart";
 let defwid = 1024;
 let defhei = 768;
@@ -130,5 +130,25 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 400);
     document.addEventListener("keydown", (event) => {
         if (event.altKey) noti("将鼠标移动至左上角以打开选项；移动到右上角以查看未读信息。")
+    });
+
+    document.addEventListener("contextmenu", function (e) {
+        e.preventDefault();
+        const menu = document.querySelector(".rightclick-menu");
+        menu.style.transition = `opacity 0.3s, top 0.3s, left 0.3s ${easing}`;
+        menu.style.visibility = "visible";
+        menu.style.opacity = "1";
+        menu.style.left = `${e.pageX}px`;
+        menu.style.top = `${e.pageY}px`;
+    });
+
+    document.addEventListener("click", function (e) {
+        const menu = document.querySelector(".rightclick-menu");
+        menu.style.opacity = "0";
+        menu.style.left = `${e.pageX}px`;
+        menu.style.top = `${e.pageY}px`;
+        menu.addEventListener("transitionend", () => {
+            menu.style.visibility = "hidden";
+        }, { once: true });
     });
 });

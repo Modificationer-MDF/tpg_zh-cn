@@ -75,38 +75,18 @@ function smarttime(str) {
     }
 }
 
-function hszh(curr, id, xz_text) { // 函数转换。
-    const prev = document.getElementById(id);
-    prev.style.transition = `all 0.55s ${easing}`;
-    const cont = prev.querySelector(".fn-content");
-    //switch (prev.className) {
-    //    case "noti":
-    //        const ls_square = prev.querySelector(".noti-square");
-    //    case "cg":
-    //        const ls_square = prev.querySelector(".cg-square");
-    //    case "fail":
-    //        const ls_square = prev.querySelector(".fail-square");
-    //    case "warn":
-    //        const ls_square = prev.querySelector(".warn-square");
-    //    case "inp":
-    //        const ls_square = prev.querySelector(".inp-square");
-    //        const ls_inputbox = prev.querySelector(".inp-box");
-    //        ls_inputbox.style.transition = `all 0.55s ${easing}`;
-    //    case "synchr":
-    //        const ls_square = prev.querySelector(".synchr-square");
-    //    case "xz":
-    //        const ls_square = prev.querySelector(".xz-square");
-    //    case "lj":
-    //        const ls_square = prev.querySelector(".lj-square");
-    //        const ls_link = prev.querySelector(".lj-link");
-    //    case "zd":
-    //        const ls_square = prev.querySelector(".zd-square");
-    //        const ls_inputbox = prev.querySelector(".zd-box");
-    //        ls_inputbox.style.transition = `all 0.55s ${easing}`;
-    //    case "timer":
-    //        const ls_square = prev.querySelector(".timer-square");
-    //}
-    ls_square.style.transition = `all 0.55s ${easing}`;
+function openctrl() {
+    const ctrl = document.querySelector(".control-pad");
+    ctrl.style.animation = `jr_ctrl 0.55s forwards ${easing}`;
+    control_block = true;
+    noti("已打开并自动锁定 “选项”。");
+}
+
+function openinf() {
+    const inf = document.querySelector(".information-table");
+    inf.style.animation = `jr_inf 0.55s forwards ${easing}`;
+    inf_block = true;
+    noti("已打开并自动锁定 “未读信息”。");
 }
 
 function fn0() {
@@ -1112,14 +1092,20 @@ function check() {
 
 async function fn7() { // 网站介绍。
     let j1 = false; // 移动至 “选项”。
-    let j2 = false;
-    let j3 = false; // 移动至 “未读信息”。
+    let j2 = false; // 移动至 “未读信息”。
+    let j3 = false; // 调出 “右键菜单”。
+    let ls_j2 = false;
+    let ls_j3 = false;
     let w1 = false; // 完成 “选项” 介绍。
     let w2 = false; // 完成 “未读信息” 介绍。
-    let w3 = false; // 完成所有介绍。
+    let w3 = false; // 完成 “右键菜单” 介绍。
+    let w4 = false; // 完成所有介绍。
+    let ls_w4 = false;
 
     const ctrl = document.querySelector(".control-pad");
     const inf = document.querySelector(".information-table");
+    const rmenu = document.querySelector(".rightclick-menu");
+    const main = document.getElementById("main");
     const ebox = document.getElementById("easing");
     const tbox = document.getElementById("deftime");
     const wbox = document.getElementById("defwid");
@@ -1131,6 +1117,7 @@ async function fn7() { // 网站介绍。
 
     const i1 = setInterval(async () => {
         if (getComputedStyle(ctrl).animationName === "jr_ctrl" && j1 === false) {
+            ld(main, "75%");
             j1 = true;
             await wz("正如你所见，这里是该网站的 “选项” 界面！你可以在此处更改网站的各项特殊参数。");
             let q1 = await xz("是否需要演示如何更改？", ["是。", "否。"]);
@@ -1187,18 +1174,20 @@ async function fn7() { // 网站介绍。
                 w1 = true;
             }
             clearInterval(i1);
+            ld(main, "100%");
         }
     }, 250);
 
     const i2 = setInterval(async () => {
-        if (w1 === true && j2 === false) {
-            j2 = true;
+        if (w1 === true && ls_j2 === false) {
+            ls_j2 = true;
             await wz("接下来介绍的是 “未读信息” 界面。");
             noti("请将鼠标移动至右上角。");
             inf_block = true;
             const i3 = setInterval(async () => {
-                if (getComputedStyle(inf).animationName === "jr_inf" && j3 === false) {
-                    j3 = true;
+                if (getComputedStyle(inf).animationName === "jr_inf" && j2 === false) {
+                    ld(main, "75%");
+                    j2 = true;
                     await wz("在 “未读信息” 界面，你可以看到因窗口大小限制而没有看到的内容。");
                     inf_block = false;
                     inf_moved = true;
@@ -1207,16 +1196,35 @@ async function fn7() { // 网站介绍。
                 }
             }, 250);
             clearInterval(i2);
+            ld(main, "100%");
         }
     }, 250);
 
-    const i3 = setInterval(async () => {
-        if (w2 === true && w3 === false) {
-            w3 = true;
-            await wz("恭喜，你已经看完了网站的介绍！感谢你对 The Play Games 的支持。");
-            control_block = false;
-            control_moved = true;
-            clearInterval(i3);
+    const i4 = setInterval(async () => {
+        if (w2 === true && ls_j3 === false) {
+            ls_j3 = true;
+            await wz("然后，我将为你介绍该网站最近更新的 “右键菜单”。");
+            noti("请单击鼠标右键。（可能需要按 2 次）");
+            const i5 = setInterval(async () => {
+                if (rmenu.style.opacity === "1" && j3 === false) {
+                    ld(main, "75%");
+                    j3 = true;
+                    await wz("通过右键菜单，你可以快速完成一些常见操作。");
+                    noti("注：若要打开控制台，请按 F12。");
+                    w3 = true;
+                    clearInterval(i5);
+                }
+            }, 250);
+            clearInterval(i4);
+            ld(main, "100%");
+        }
+    }, 250);
+
+    const i6 = setInterval(async () => {
+        if (w1 === true && w2 === true && w3 === true && ls_w4 === false) {
+            ls_w4 = true;
+            await wz("恭喜，你已经熟悉了该网站的大多功能。感谢你对 The Play Games 的支持！");
+            clearInterval(i6);
         }
     }, 250);
 }
