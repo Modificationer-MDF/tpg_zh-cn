@@ -89,6 +89,20 @@ function openinf() {
     noti("已打开并自动锁定 “未读信息”。");
 }
 
+function closectrl() {
+    const ctrl = document.querySelector(".control-pad");
+    ctrl.style.animation = `cc_ctrl 0.55s forwards ${easing}`;
+    control_block = false;
+    noti("已关闭并自动解锁 “选项”。");
+}
+
+function closeinf() {
+    const inf = document.querySelector(".information-table");
+    inf.style.animation = `cc_inf 0.55s forwards ${easing}`;
+    inf_block = false;
+    noti("已关闭并自动解锁 “未读信息”。");
+}
+
 function fn0() {
     if (mode === "Preset" && f2 === false) fn1();
     else if (mode === "Play" && f1 === false) fn2();
