@@ -70,14 +70,14 @@
 
 @keyframes jr_fn {
     from {
-        transform: translateY(-25%);
+        transform: translateY(-20px);
         width: 0;
         opacity: 0;
         left: 50%;
         right: 50%;
     }
     to {
-        transform: translateY(0%);
+        transform: translateY(0px);
         width: 30ch;
         opacity: 1;
         left: calc(50% - 15ch);
@@ -87,14 +87,14 @@
 
 @keyframes cc_fn {
     from {
-        transform: translateY(0%);
+        transform: translateY(0px);
         width: 30ch;
         opacity: 1;
         left: calc(50% - 15ch);
         right: calc(50% + 15ch);
     }
     to {
-        transform: translateY(-25%);
+        transform: translateY(-20px);
         width: 0;
         opacity: 0;
         left: 50%;
@@ -187,6 +187,34 @@
     background-color: #6a339949;
 }
 
+.xz-confirm, .xz-btn {
+    backdrop-filter: blur(14px) saturate(250%);
+    opacity: 0;
+    transition: all 175ms cubic-bezier(0.33, 1, 0.68, 1);
+    font-size: 20px;
+    border: none;
+    padding: 14px 25px;
+    text-align: center;
+    cursor: pointer;
+    color: white;
+    position: relative;
+    flex: 1;
+}
+
+.xz-confirm {
+    background-color: #a700ffb0;
+    margin-bottom: 14px;
+    width: 100px;
+}
+
+.xz-checkbox {
+    position: relative;
+    width: 25px;
+    height: 25px;
+    margin-right: 14px;
+    cursor: pointer;
+}
+
 .synchr-window {
     background-color: #9e338999;
     border-left: 5px solid #c125abc9;
@@ -219,6 +247,7 @@
     font-size: 20px;
     padding: 14px 25px;
     text-align: center;
+    width: 100%;
     left: 0%;
     backdrop-filter: blur(14px) saturate(250%);
     cursor: pointer;

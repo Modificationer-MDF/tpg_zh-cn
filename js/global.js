@@ -1,7 +1,7 @@
 let mode = "Preset";
 let titleset = "Default";
 let rightset = "跟随该网站的设置";
-let easing = "cubic-bezier(0.14, 1, 0.53, 1)";
+let easing = "cubic-bezier(0.17, 0.9, 0.4, 0.99)";
 let deftime = "Smart";
 let defwid = 1024;
 let defhei = 768;
@@ -29,6 +29,11 @@ let ls_cgunv = 0;
 let ls_failunv = 0;
 let ls_warnunv = 0;
 let ls_synchrunv = 0;
+let qj_notiheight = 0;
+let qj_cgheight = 0;
+let qj_failheight = 0;
+let qj_warnheight = 0;
+let qj_synchrheight = 0;
 let warned = false;
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -93,6 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const inf = document.querySelector(".information-table");
     inf.style.animationName = "cc_inf";
     const main = document.getElementById("main");
+    const menu = document.querySelector(".rightclick-menu");
 
     setInterval(() => {
         let arr = easing.match(/\d+(\.\d+)?/g);
@@ -108,8 +114,8 @@ document.addEventListener("DOMContentLoaded", function () {
         let isdeftime = (deftime >= 1250 || deftime === "Smart");
 
         if (!iseasing) {
-            easing = "cubic-bezier(0.83, 0, 0.17, 1)";
-            fail("easing 的值不合法，已重置为 cubic-bezier(0.83, 0, 0.17, 1)。");
+            easing = "cubic-bezier(0.17, 0.9, 0.4, 0.99)";
+            fail("easing 的值不合法，已重置为 cubic-bezier(0.17, 0.9, 0.4, 0.99)。");
         } if (!isdefhei) {
             defhei = 768;
             fail("defhei 的值不合法，已重置为 768。");
@@ -133,23 +139,20 @@ document.addEventListener("DOMContentLoaded", function () {
         if (rightset === "跟随该网站的设置") {
             document.addEventListener("contextmenu", function (e) {
                 e.preventDefault();
-                const menu = document.querySelector(".rightclick-menu");
                 menu.style.visibility = "visible";
                 menu.style.transition = `opacity 0.3s, top 0.3s, left 0.3s ${easing}`;
                 menu.style.opacity = "1";
                 menu.style.left = `${e.pageX}px`;
                 menu.style.top = `${e.pageY}px`;
-            });
+            }, { once: true });
 
             document.addEventListener("click", function (e) {
                 const menu = document.querySelector(".rightclick-menu");
                 menu.style.opacity = "0";
-                menu.style.left = `${e.pageX}px`;
-                menu.style.top = `${e.pageY}px`;
                 menu.addEventListener("transitionend", () => {
                     menu.style.visibility = "hidden";
                 }, { once: true });
-            });
+            }, { once: true });
         }
     }, 400);
     document.addEventListener("keydown", (event) => {

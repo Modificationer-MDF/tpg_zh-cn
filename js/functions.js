@@ -92,7 +92,7 @@ function noti(string, title, id) {
     txt.innerHTML = title;
 
     window.addEventListener("animationend", () => {
-        content.style.transform = "translateY(0%)";
+        content.style.transform = "translateY(0px)";
         content.style.opacity = 1;
         icon.style.opacity = 1;
         txt.style.opacity = 1;
@@ -118,7 +118,7 @@ function noti(string, title, id) {
 
     setTimeout(() => {
         content.style.opacity = 0;
-        content.style.transform = "translateY(-10%)";
+        content.style.transform = "translateY(-10px)";
         icon.style.opacity = 0;
         txt.style.opacity = 0;
         content.addEventListener("transitionend", () => {
@@ -185,7 +185,7 @@ function cg(string, title, id) {
     txt.innerHTML = title;
 
     window.addEventListener("animationend", () => {
-        content.style.transform = "translateY(0%)";
+        content.style.transform = "translateY(0px)";
         content.style.opacity = 1;
         txt.style.opacity = 1;
         icon.style.opacity = 1;
@@ -211,7 +211,7 @@ function cg(string, title, id) {
 
     setTimeout(() => {
         content.style.opacity = 0;
-        content.style.transform = "translateY(-10%)";
+        content.style.transform = "translateY(-10px)";
         txt.style.opacity = 0;
         icon.style.opacity = 0;
         content.addEventListener("transitionend", () => {
@@ -279,7 +279,7 @@ function fail(string, title, id) {
     txt.innerHTML = title;
 
     window.addEventListener("animationend", () => {
-        content.style.transform = "translateY(0%)";
+        content.style.transform = "translateY(0px)";
         content.style.opacity = 1;
         icon.style.opacity = 1;
         txt.style.opacity = 1;
@@ -305,7 +305,7 @@ function fail(string, title, id) {
 
     setTimeout(() => {
         content.style.opacity = 0;
-        content.style.transform = "translateY(-10%)";
+        content.style.transform = "translateY(-10px)";
         icon.style.opacity = 0;
         txt.style.opacity = 0;
         content.addEventListener("transitionend", () => {
@@ -372,7 +372,7 @@ function warn(string, title, id) {
     txt.innerHTML = title;
 
     window.addEventListener("animationend", () => {
-        content.style.transform = "translateY(0%)";
+        content.style.transform = "translateY(0px)";
         content.style.opacity = 1;
         icon.style.opacity = 1;
         txt.style.opacity = 1;
@@ -398,7 +398,7 @@ function warn(string, title, id) {
 
     setTimeout(() => {
         content.style.opacity = 0;
-        content.style.transform = "translateY(-10%)";
+        content.style.transform = "translateY(-10px)";
         icon.style.opacity = 0;
         txt.style.opacity = 0;
         content.addEventListener("transitionend", () => {
@@ -474,7 +474,7 @@ async function inp(string, title, id) {
         txt.innerHTML = title;
 
         window.addEventListener("animationend", () => {
-            content.style.transform = "translateY(0%)";
+            content.style.transform = "translateY(0px)";
             content.style.opacity = 1;
             box.style.opacity = 1;
             icon.style.opacity = 1;
@@ -491,7 +491,7 @@ async function inp(string, title, id) {
         box.addEventListener("keypress", (event) => {
             if (event.key === "Enter") {
                 const value = box.value;
-                content.style.transform = "translateY(-10%)";
+                content.style.transform = "translateY(-10px)";
                 content.style.opacity = 0;
                 box.style.opacity = 0;
                 icon.style.opacity = 0;
@@ -511,7 +511,7 @@ async function inp(string, title, id) {
 
 // xz 函数。
 
-async function xz(string, names, title, id) {
+async function xz(string, n, names, title, id) {
     return new Promise((resolve) => {
         if (string == null || string == undefined) {
             fail("不能输入 null 或 undefined！");
@@ -521,6 +521,10 @@ async function xz(string, names, title, id) {
         let s_replaced = string.replace(/\s+/g, "");
         if (title == null || title == undefined) title = "选择";
         if (id == null || id == undefined) id = "";
+        if (n > names.length) {
+            fail("所给予的选项数量不足！");
+            return;
+        }
         else {
             title = String(title);
             let t_replaced = title.replace(/\s+/g, "");
@@ -548,7 +552,13 @@ async function xz(string, names, title, id) {
         content.className = "fn-content";
         content.style.opacity = 0;
         content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+        const confirm = document.createElement("button");
+        confirm.className = "xz-confirm";
+        confirm.innerHTML = "确定";
+        confirm.style.opacity = 0;
+
         const array = Array.from(names);
+        const xz_items = []; // 被选择的选项。
 
         create(window);
         document.body.appendChild(window);
@@ -556,6 +566,7 @@ async function xz(string, names, title, id) {
         square.appendChild(icon);
         square.appendChild(txt);
         window.appendChild(content);
+        window.appendChild(confirm);
 
         icon.src = "images/Sel.png";
         window.style.animation = `jr_fn 0.55s forwards ${easing}`;
@@ -585,53 +596,80 @@ async function xz(string, names, title, id) {
             const b = Math.floor(Math.random() * 255);
             return tohex(r, g, b);
         }
+        
+        confirm.onclick = () => {
+            resolve(xz_items);
+            content.style.opacity = 0;
+            content.style.transform = "translateY(-10px)";
+            icon.style.opacity = 0;
+            txt.style.opacity = 0;
+            confirm.style.opacity = 0;
+            content.addEventListener("transitionend", () => {
+                window.style.animation = `cc_fn 0.55s forwards ${easing}`;
+                close(window, windows)
+                setTimeout(() => {
+                    if (document.body.contains(window)) document.body.removeChild(window);
+                }, 550);
+            });
+        };
 
         for (let i = 0; i < array.length; i++) {
+            const container = document.createElement("div");
+            container.style.position = "relative";
+            container.style.display = "flex";
+            container.style.marginBottom = "10px";
+            container.style.left = "0px";
+
+            const checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.className = "xz-checkbox";
+            checkbox.id = `checkbox${i}`;
+            
             const btn = document.createElement("button");
             array[i] = String(array[i]);
             btn.id = `btn${i}`;
+            btn.className = "xz-btn";
             btn.innerHTML = array[i];
 
             btn.style.backgroundColor = `${color()}b0`;
-            btn.style.backdropFilter = "blur(14px) saturate(250%)";
-            btn.style.opacity = 0;
-            btn.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
-            btn.style.fontSize = "20px";
-            btn.style.border = "none";
-            btn.style.padding = "14px 25px";
-            btn.style.textAlign = "center";
-            btn.style.cursor = "pointer";
-            btn.style.color = "white";
-            btn.style.position = "absolute";
-            btn.style.top = `${i * 60 + 60}px`;
-            btn.style.flex = "1";
-            content.style.marginBottom = `${80 + i * 60}px`;
-            btn.style.left = "20px";
+
+            container.appendChild(checkbox);
+            container.appendChild(btn);
+            container.style.top = `${btn.offsetHeight + 25}px`;
+            content.style.marginBottom = `25px`;
 
             window.addEventListener("animationend", () => {
-                content.style.transform = "translateY(0%)";
+                content.style.transform = "translateY(0px)";
                 content.style.opacity = 1;
                 btn.style.opacity = 1;
+                checkbox.style.opacity = 1;
                 icon.style.opacity = 1;
                 txt.style.opacity = 1;
+                confirm.style.opacity = 1;
             });
 
-            btn.onclick = () => {
-                resolve(array[i]);
-                content.style.opacity = 0;
-                content.style.transform = "translateY(-10%)";
-                btn.style.opacity = 0;
-                icon.style.opacity = 0;
-                txt.style.opacity = 0;
-                content.addEventListener("transitionend", () => {
-                    window.style.animation = `cc_fn 0.55s forwards ${easing}`;
-                    close(window, windows)
-                    setTimeout(() => {
-                        if (document.body.contains(window)) document.body.removeChild(window);
-                    }, 550);
-                });
+            checkbox.onchange = () => {
+                if (checkbox.checked) {
+                    if (xz_items.length >= n) {
+                        warn(`勾选的选项数量已达上限。最多可勾选 ${n} 个。`);
+                        checkbox.checked = false;
+                        return;
+                    }
+                    xz_items.push(array[i]);
+                } else {
+                    const index = xz_items.indexOf(array[i]);
+                    if (index > -1) {
+                        xz_items.splice(index, 1);
+                    }
+                }
             };
-            content.appendChild(btn);
+
+            btn.onclick = () => {
+                checkbox.checked = !checkbox.checked;
+                checkbox.dispatchEvent(new Event('change'));
+            };
+
+            content.appendChild(container);
         }
     });
 }
@@ -692,7 +730,7 @@ async function synchr(string, title, id) {
     txt.innerHTML = title;
 
     window.addEventListener("animationend", () => {
-        content.style.transform = "translateY(0%)";
+        content.style.transform = "translateY(0px)";
         content.style.opacity = 1;
         icon.style.opacity = 1;
         txt.style.opacity = 1;
@@ -709,7 +747,7 @@ async function synchr(string, title, id) {
     
     setTimeout(() => {
         content.style.opacity = 0;
-        content.style.transform = "translateY(-10%)";
+        content.style.transform = "translateY(-10px)";
         icon.style.opacity = 0;
         txt.style.opacity = 0;
         content.addEventListener("transitionend", () => {
@@ -792,7 +830,7 @@ async function lj(string, url, title, id) {
     txt.innerHTML = title;
 
     window.addEventListener("animationend", () => {
-        content.style.transform = "translateY(0%)";
+        content.style.transform = "translateY(0px)";
         content.style.opacity = 1;
         btn.style.opacity = 1;
         icon.style.opacity = 1;
@@ -811,7 +849,7 @@ async function lj(string, url, title, id) {
             warn("弹出的窗口被阻止。");
         }
         content.style.opacity = 0;
-        content.style.transform = "translateY(-10%)";
+        content.style.transform = "translateY(-10px)";
         btn.style.opacity = 0;
         icon.style.opacity = 0;
         txt.style.opacity = 0;
@@ -948,7 +986,7 @@ async function zd(string, title, id) {
                     resolve();
                 }
                 content.style.opacity = 0;
-                content.style.transform = "translateY(-10%)";
+                content.style.transform = "translateY(-10px)";
                 box.style.opacity = 0;
                 icon.style.opacity = 0;
                 txt.style.opacity = 0;
@@ -979,7 +1017,7 @@ async function zd(string, title, id) {
         txt.innerHTML = title;
 
         window.addEventListener("animationend", () => {
-            content.style.transform = "translateY(0%)";
+            content.style.transform = "translateY(0px)";
             content.style.opacity = 1;
             box.style.opacity = 1;
             icon.style.opacity = 1;
@@ -1094,7 +1132,7 @@ async function timer(string, time, title, id) {
         }, 10);
 
         window.addEventListener("animationend", () => {
-            content.style.transform = "translateY(0%)";
+            content.style.transform = "translateY(0px)";
             content.style.opacity = 1;
             icon.style.opacity = 1;
             txt.style.opacity = 1;
@@ -1120,7 +1158,7 @@ async function timer(string, time, title, id) {
 
         setTimeout(() => {
             content.style.opacity = 0;
-            content.style.transform = "translateY(-10%)";
+            content.style.transform = "translateY(-10px)";
             icon.style.opacity = 0;
             txt.style.opacity = 0;
             resolve(true);

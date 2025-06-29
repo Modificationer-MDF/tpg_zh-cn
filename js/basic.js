@@ -223,7 +223,8 @@ function fn1() { // “函数演示” “预设” 模式。
     xzbtn.innerHTML = "xz";
     xzbtn.className = "btn7";
     xzbtn.onclick = async () => {
-        var res = await xz("你对以上的函数有什么看法？", ["很不错。", "还可以。", "一般。", "有待改进的空间。"]);
+        var res = await xz("你对以上的函数有什么看法？", 1, ["很不错。", "还可以。", "一般。", "有待改进的空间。"]);
+        res = res.join("");
         switch (res) {
             case "很不错。":
                 noti("非常感谢！你还可以尝试其他的函数。");
@@ -235,7 +236,8 @@ function fn1() { // “函数演示” “预设” 模式。
                 noti("我们可以做得更好。");
                 break;
             case "有待改进的空间。":
-                var r = await xz("你是否想向我反馈你的建议？", ["是。", "否。"]);
+                var r = await xz("你是否想向我反馈你的建议？", 1, ["是。", "否。"]);
+                r = r.join("");
                 if (r === "是。") {
                     await lj("点击以下链接反馈。", "mailto://Feng_14@outlook.com");
                     break;
@@ -423,16 +425,19 @@ function fn2() { // “函数演示” “演示” 模式。
         let res = await inp("输入你想显示在 Xz() 上的信息。", "在此输入。");
         let n = await inp("请输入 Xz() 上选项的数量。", "在此输入。");
         n = Number(n);
+        let ns = await inp("本 Xz() 窗口最多可以选择多少个选项？", "在此输入。");
+        ns = Number(ns);
         let array = new Array(n);
         for (let i = 0; i <= n - 1; i++) {
             array[i] = await inp(`请输入 Xz() 上第 ${i + 1} 个选项。`, "在此输入。");
         }
         if (titleset === "Custom") {
             let t = await inp("请输入 Xz() 上的标题。", "在此输入。");
-            xz(res, array, t);
-        }
-        else {
-            xz(res, array, "选择");
+            let ls_res = await xz(res, ns, array, t);
+            noti(`你选择了：“${ls_res.join("，")}”。`);
+        } else {
+            let ls_res = await xz(res, ns, array, "选择");
+            noti(`你选择了：“${ls_res.join("，")}”。`);
         }
     };
     const ljbtn = document.createElement("button");
@@ -758,6 +763,13 @@ function control() { // 选项。
             cg("重新设置了右键菜单的属性。");
         }
     };
+    const m2 = document.createElement("button");
+    m2.type = "button";
+    m2.innerHTML = "跟随浏览器的设置";
+    m2.className = "control10";
+    m2.onclick = () => {
+        fail("该功能暂未实现。");
+    };
 
     const c_block = document.createElement("p");
     c_block.innerHTML = "设置 “选项” 状态";
@@ -938,6 +950,7 @@ function control() { // 选项。
     ts.appendChild(y);
     ts.appendChild(z);
     rightmenu.appendChild(m1);
+    rightmenu.appendChild(m2);
     c_block.appendChild(y1);
     c_block.appendChild(n1);
     i_block.appendChild(y2);
@@ -977,7 +990,7 @@ function inf_ui() {
     clear.style.transition = `all 0.3s ${easing}`;
     clear.type = "button";
     clear.id = "clear-all";
-    clear.innerHTML = "清空全部信息。";
+    clear.innerHTML = "清空信息。";
     clear.style.width = "15ch";
     clear.className = "inf1";
     clear.style.position = "absolute";
@@ -986,16 +999,25 @@ function inf_ui() {
     clear.style.backgroundColor = "#00000099";
     clear.style.color = "#ffffff";
 
+    const container = document.createElement("div");
+    container.id = "inf_container";
+    container.style.position = "relative";
+    container.style.width = "100%";
+    container.style.height = "100%";
+    container.style.top = "180px";
+
     inf.appendChild(title);
     title.appendChild(jdt);
     inf.appendChild(counts);
     inf.appendChild(clear);
+    inf.appendChild(container);
 }
 
 async function inf_cont() { // 更新未读信息。
     const inf = document.querySelector(".information-table");
     const counts = document.getElementById("counts");
     const clear = document.getElementById("clear-all");
+    const container = document.getElementById("inf_container");
     let qj_count = noti_unv.length + cg_unv.length + fail_unv.length + warn_unv.length + synchr_unv.length;
 
     function 懒得起名(函数, 数组, 变量) {
@@ -1003,10 +1025,9 @@ async function inf_cont() { // 更新未读信息。
             const 元素 = document.createElement("div");
             元素.className = `${函数}c`;
             元素.id = `${函数}c-${i}`;
-            元素.style.position = "relative";
-            元素.style.transition = "opacity 0.3s, transform 0.3s";
+            元素.style.position = "position";
+            元素.style.transition = `opacity 0.3s, transform 0.3s, top 0.3s, margin-bottom 0.3s ${easing}`;
             元素.style.opacity = 0;
-            元素.style.top = "180px";
             元素.style.transform = "translateY(100%)";
             const 元素_sq = document.createElement("div");
             元素_sq.className = `${函数}-square`;
@@ -1017,7 +1038,7 @@ async function inf_cont() { // 更新未读信息。
             元素_msg.style.marginTop = "5px";
             元素_msg.innerHTML = 数组[i];
             元素_sq.innerHTML = `${xzsj()} ${函数[0].toUpperCase() + 函数.slice(1)}()`;
-            inf.appendChild(元素);
+            container.appendChild(元素);
             元素.appendChild(元素_sq);
             元素.appendChild(元素_msg);
 
@@ -1025,6 +1046,17 @@ async function inf_cont() { // 更新未读信息。
                 元素.style.transform = "translateY(0)";
                 元素.style.visibility = "visible";
                 元素.style.opacity = 1;
+                if (函数 == "noti") {
+                    qj_notiheight += 元素.offsetHeight;
+                } else if (函数 == "cg") {
+                    qj_cgheight += 元素.offsetHeight;
+                } else if (函数 == "fail") {
+                    qj_failheight += 元素.offsetHeight;
+                } else if (函数 == "warn") {
+                    qj_warnheight += 元素.offsetHeight;
+                } else if (函数 == "synchr") {
+                    qj_synchrheight += 元素.offsetHeight;
+                }
             }, 20);
         }
     }
@@ -1038,7 +1070,7 @@ async function inf_cont() { // 更新未读信息。
             warned = true;
             let a = await timer("计时 7 秒。", 7000);
             if (a) location.reload();
-        } else fail("都是你的错。");
+        }
     }
 
     if (cg_unv.length > ls_cgunv) {
@@ -1050,7 +1082,7 @@ async function inf_cont() { // 更新未读信息。
             warned = true;
             let a = await timer("计时 7 秒。", 7000);
             if (a) location.reload();
-        } else fail("都是你的错。");
+        }
     }
 
     if (fail_unv.length > ls_failunv) {
@@ -1062,7 +1094,7 @@ async function inf_cont() { // 更新未读信息。
             warned = true;
             let a = await timer("计时 7 秒。", 7000);
             if (a) location.reload();
-        } else fail("都是你的错。");
+        }
     }
 
     if (warn_unv.length > ls_warnunv) {
@@ -1074,7 +1106,7 @@ async function inf_cont() { // 更新未读信息。
             warned = true;
             let a = await timer("计时 7 秒。", 7000);
             if (a) location.reload();
-        } else fail("都是你的错。");
+        }
     }
 
     if (synchr_unv.length > ls_synchrunv) {
@@ -1086,7 +1118,7 @@ async function inf_cont() { // 更新未读信息。
             warned = true;
             let a = await timer("计时 7 秒。", 7000);
             if (a) location.reload();
-        } else fail("都是你的错。");
+        }
     }
 
     if (qj_count === 0) {
@@ -1104,33 +1136,77 @@ async function inf_cont() { // 更新未读信息。
         clear.style.opacity = 1;
         clear.style.left = "50%";
 
-        clear.onclick = () => {
-            const qj_elements = inf.querySelectorAll("[id^='notic-'], [id^='cgc-'], [id^='failc-'], [id^='warnc-'], [id^='synchrc-']");
-            qj_elements.forEach((el, index) => {
-                el.style.opacity = 0;
-                el.style.transform = "translateX(300px)";
-                el.style.transition = "opacity 0.3s, transform 0.3s";
-                
-                el.addEventListener("transitionend", () => {
-                    inf.removeChild(el);
-                }, { once: true }); // once: true 表示在 transition 结束后移除该元素。
+        clear.onclick = async () => {
+            inf_block = true;
 
-                if (index === qj_elements.length - 1) {
-                    setTimeout(() => {
-                        noti_unv = [];
-                        cg_unv = [];
-                        fail_unv = [];
-                        warn_unv = [];
-                        synchr_unv = [];
+            let ls_str = "";
+            let q = await xz("清空哪些信息？", 5, ["Noti()", "Cg()", "Fail()", "Warn()", "Synchr()"]);
+            if (q.includes("Noti()")) {
+                if (noti_unv.length > 0) ls_str += "[id^='notic-'],";
+                else rz("Noti() 没有未读信息。");
+            } if (q.includes("Cg()")) {
+                if (cg_unv.length > 0) ls_str += "[id^='cgc-'],";
+                else rz("Cg() 没有未读信息。");
+            } if (q.includes("Fail()")) {
+                if (fail_unv.length > 0) ls_str += "[id^='failc-'],";
+                else rz("Fail() 没有未读信息。");
+            } if (q.includes("Warn()")) {
+                if (warn_unv.length > 0) ls_str += "[id^='warnc-'],";
+                else rz("Warn() 没有未读信息。");
+            } if (q.includes("Synchr()")) {
+                if (synchr_unv.length > 0) ls_str += "[id^='synchrc-'],";
+                else rz("Synchr() 没有未读信息。");
+            }
+            if (ls_str === "") rz("你没有选择任何信息。");
+            else {
+                ls_str = ls_str.slice(0, -1);
+                const qj_elements = inf.querySelectorAll(ls_str);
+                qj_elements.forEach((el, index) => {
+                    el.style.opacity = 0;
+                    el.style.transform = "translateX(300px)";
+                    if (el.id.includes("notic-")) {
+                        el.style.marginBottom = `-${qj_notiheight / ls_notiunv}px`;
+                    } else if (el.id.includes("cgc-")) {
+                        el.style.marginBottom = `-${qj_cgheight / ls_cgunv}px`;
+                    } else if (el.id.includes("failc-")) {
+                        el.style.marginBottom = `-${qj_failheight / ls_failunv}px`;
+                    } else if (el.id.includes("warnc-")) {
+                        el.style.marginBottom = `-${qj_warnheight / ls_warnunv}px`;
+                    } else if (el.id.includes("synchrc-")) {
+                        el.style.marginBottom = `-${qj_synchrheight / ls_synchrunv}px`;
+                    }
 
-                        ls_notiunv = 0;
-                        ls_cgunv = 0;
-                        ls_failunv = 0;
-                        ls_warnunv = 0;
-                        ls_synchrunv = 0;
-                    }, 300);
-                }
-            });
+                    el.addEventListener("transitionend", () => {
+                        container.removeChild(el);
+                    }, { once: true });
+
+                    if (index === qj_elements.length - 1) {
+                        setTimeout(() => {
+                            if (q.includes("Noti()")) {
+                                noti_unv = [];
+                                ls_notiunv = 0;
+                                qj_notiheight = 0;
+                            } if (q.includes("Cg()")) {
+                                cg_unv = [];
+                                ls_cgunv = 0;
+                                qj_cgheight = 0;
+                            } if (q.includes("Fail()")) {
+                                fail_unv = [];
+                                ls_failunv = 0;
+                                qj_failheight = 0;
+                            } if (q.includes("Warn()")) {
+                                warn_unv = [];
+                                ls_warnunv = 0;
+                                qj_warnheight = 0;
+                            } if (q.includes("Synchr()")) {
+                                synchr_unv = [];
+                                ls_synchrunv = 0;
+                                qj_synchrheight = 0;
+                            }
+                        }, 300);
+                    }
+                });
+            }
         };
     }
 }
@@ -1152,7 +1228,7 @@ function pos(p) {
     }
 }
 
-function create(window) {
+function create(window) { // 创建窗口。
     if (window.className !== "rz-window") {
         windows.push(window);
         pos(true);
@@ -1162,7 +1238,7 @@ function create(window) {
     }
 }
 
-function close(window) {
+function close(window) { // 关闭窗口。
     if (window.className !== "rz-window") {
         windows = windows.filter(win => win !== window);
         pos(true);
@@ -1229,10 +1305,12 @@ async function fn7() { // 网站介绍。
             ld(main, "75%");
             j1 = true;
             await wz("正如你所见，这里是该网站的 “选项” 界面！你可以在此处更改网站的各项特殊参数。");
-            let q1 = await xz("是否需要演示如何更改？", ["是。", "否。"]);
+            let q1 = await xz("是否需要演示如何更改？", 1, ["是。", "否。"]);
+            q1 = q1.join("");
             if (q1 === "是。") {
                 await wz("你可以直接点击相应的按钮便捷更改变量值，也可以通过输入来更改。");
-                let q2 = await xz("选择哪个变量演示呢？", ["easing", "deftime", "defwid", "defhei"]);
+                let q2 = await xz("选择哪个变量演示呢？", 1, ["easing", "deftime", "defwid", "defhei"]);
+                q2 = q2.join("");
                 noti("请修改该值。");
                 switch (q2) {
                     case "easing":
