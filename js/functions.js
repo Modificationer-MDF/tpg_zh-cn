@@ -731,7 +731,6 @@ async function synchr(string, title, id) {
     icon.src = "images/Synchronization.png";
     window.style.animation = `jr_fn 0.55s forwards ${easing}`;
     content.innerHTML = string;
-    rz(string);
     txt.innerHTML = title;
 
     window.addEventListener("animationend", () => {
