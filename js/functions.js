@@ -598,19 +598,24 @@ async function xz(string, n, names, title, id) {
         }
         
         confirm.onclick = () => {
-            resolve(xz_items);
-            content.style.opacity = 0;
-            content.style.transform = "translateY(-10px)";
-            icon.style.opacity = 0;
-            txt.style.opacity = 0;
-            confirm.style.opacity = 0;
-            content.addEventListener("transitionend", () => {
-                window.style.animation = `cc_fn 0.55s forwards ${easing}`;
-                close(window, windows)
-                setTimeout(() => {
-                    if (document.body.contains(window)) document.body.removeChild(window);
-                }, 550);
-            });
+            if (xz_items.length === 0) {
+                warn("你还没有勾选！");
+                return;
+            } else {
+                resolve(xz_items);
+                content.style.opacity = 0;
+                content.style.transform = "translateY(-10px)";
+                icon.style.opacity = 0;
+                txt.style.opacity = 0;
+                confirm.style.opacity = 0;
+                content.addEventListener("transitionend", () => {
+                    window.style.animation = `cc_fn 0.55s forwards ${easing}`;
+                    close(window, windows)
+                    setTimeout(() => {
+                        if (document.body.contains(window)) document.body.removeChild(window);
+                    }, 550);
+                });
+            }
         };
 
         for (let i = 0; i < array.length; i++) {
