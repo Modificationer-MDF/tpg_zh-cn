@@ -18,7 +18,7 @@
     box-shadow: 0px 3px 7px #26c9a9;
 }
 
-.noti-window .noti-square, .cg-window .cg-square, .fail-window .fail-square, .warn-window .warn-square, .inp-window .inp-square, .synchr-window .synchr-square, .xz-window .xz-square, .lj-window .lj-square, .zd-window .zd-square, .timer-window .timer-square {
+.noti-square, .cg-square, .fail-square, .warn-square, .inp-square, .synchr-square, .xz-square, .lj-square, .zd-square, .timer-square {
     width: 100%;
     position: fixed;
     z-index: 1000;

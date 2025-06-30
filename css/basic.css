@@ -723,12 +723,13 @@ button {
     background-color: #e11af199;
 }
 
-.notic, .cgc, .failc, .warnc, .synchrc, .timerc {
+.notic, .cgc, .failc, .warnc, .synchrc {
     position: relative;
     transition: all 0.3s ease-in-out;
     opacity: 0;
     visibility: hidden;
-    margin-bottom: 20px;
+    margin-bottom: 11px;
+    overflow-x: auto;
 }
 
 .notic {
@@ -749,10 +750,6 @@ button {
 
 .synchrc {
     background-color: #9e338979;
-}
-
-.timerc {
-    background-color: #f0f0f079;
 }
 
 .rightclick-menu {

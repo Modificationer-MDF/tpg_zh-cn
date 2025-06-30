@@ -1035,7 +1035,8 @@ async function inf_cont() { // 更新未读信息。
             元素_sq.style.textAlign = "center";
             const 元素_msg = document.createElement("div");
             元素_msg.className = "rcont";
-            元素_msg.style.marginTop = "5px";
+            元素_msg.style.transition = `all 0.2s ${easing}`;
+            元素_msg.style.marginTop = "25px";
             元素_msg.innerHTML = 数组[i];
             元素_sq.innerHTML = `${xzsj()} ${函数[0].toUpperCase() + 函数.slice(1)}()`;
             container.appendChild(元素);
@@ -1046,18 +1047,7 @@ async function inf_cont() { // 更新未读信息。
                 元素.style.transform = "translateY(0)";
                 元素.style.visibility = "visible";
                 元素.style.opacity = 1;
-                if (函数 == "noti") {
-                    qj_notiheight += 元素.offsetHeight;
-                } else if (函数 == "cg") {
-                    qj_cgheight += 元素.offsetHeight;
-                } else if (函数 == "fail") {
-                    qj_failheight += 元素.offsetHeight;
-                } else if (函数 == "warn") {
-                    qj_warnheight += 元素.offsetHeight;
-                } else if (函数 == "synchr") {
-                    qj_synchrheight += 元素.offsetHeight;
-                }
-            }, 20);
+            }, 14);
         }
     }
 
@@ -1164,17 +1154,7 @@ async function inf_cont() { // 更新未读信息。
                 qj_elements.forEach((el, index) => {
                     el.style.opacity = 0;
                     el.style.transform = "translateX(300px)";
-                    if (el.id.includes("notic-")) {
-                        el.style.marginBottom = `-${qj_notiheight / ls_notiunv}px`;
-                    } else if (el.id.includes("cgc-")) {
-                        el.style.marginBottom = `-${qj_cgheight / ls_cgunv}px`;
-                    } else if (el.id.includes("failc-")) {
-                        el.style.marginBottom = `-${qj_failheight / ls_failunv}px`;
-                    } else if (el.id.includes("warnc-")) {
-                        el.style.marginBottom = `-${qj_warnheight / ls_warnunv}px`;
-                    } else if (el.id.includes("synchrc-")) {
-                        el.style.marginBottom = `-${qj_synchrheight / ls_synchrunv}px`;
-                    }
+                    el.style.marginBottom = `-${el.offsetHeight}px`
 
                     el.addEventListener("transitionend", () => {
                         container.removeChild(el);
@@ -1185,23 +1165,18 @@ async function inf_cont() { // 更新未读信息。
                             if (q.includes("Noti()")) {
                                 noti_unv = [];
                                 ls_notiunv = 0;
-                                qj_notiheight = 0;
                             } if (q.includes("Cg()")) {
                                 cg_unv = [];
                                 ls_cgunv = 0;
-                                qj_cgheight = 0;
                             } if (q.includes("Fail()")) {
                                 fail_unv = [];
                                 ls_failunv = 0;
-                                qj_failheight = 0;
                             } if (q.includes("Warn()")) {
                                 warn_unv = [];
                                 ls_warnunv = 0;
-                                qj_warnheight = 0;
                             } if (q.includes("Synchr()")) {
                                 synchr_unv = [];
                                 ls_synchrunv = 0;
-                                qj_synchrheight = 0;
                             }
                         }, 300);
                     }
