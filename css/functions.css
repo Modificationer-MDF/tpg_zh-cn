@@ -76,6 +76,7 @@
         left: 50%;
         right: 50%;
     }
+
     to {
         transform: translateY(0px);
         width: 30ch;
@@ -93,6 +94,7 @@
         left: calc(50% - 15ch);
         right: calc(50% + 15ch);
     }
+
     to {
         transform: translateY(-20px);
         width: 0;
@@ -292,6 +294,7 @@
     from {
         transform: translate(0%, -100%);
     }
+
     to {
         transform: translate(50%, -50%);
     }
@@ -303,6 +306,7 @@
         backdrop-filter: blur(0px) saturate(100%);
         width: 0px;
     }
+
     to {
         transform: translate(50%, -50%);
         width: 50vw;
@@ -316,6 +320,7 @@
         width: 50vw;
         backdrop-filter: blur(14px) saturate(250%);
     }
+
     to {
         transform: translate(50%, -50%);
         backdrop-filter: blur(0px) saturate(100%);
@@ -327,6 +332,7 @@
     from {
         transform: translate(50%, -50%);
     }
+
     to {
         transform: translate(0%, 100%);
     }
@@ -336,6 +342,7 @@
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
@@ -345,6 +352,7 @@
     from {
         opacity: 1;
     }
+
     to {
         opacity: 0;
     }
@@ -354,6 +362,7 @@
     from {
         left: 0;
     }
+
     to {
         right: 0;
     }
@@ -363,6 +372,7 @@
     from {
         transform: translateX(100%);
     }
+
     to {
         transform: translateX(0);
     }
@@ -373,6 +383,7 @@
         transform: translateY(-40px);
         opacity: 0;
     }
+
     to {
         opacity: 1;
         transform: translateY(0px);
@@ -384,6 +395,7 @@
         transform: translateY(0px);
         opacity: 1;
     }
+
     to {
         opacity: 0;
         transform: translateY(40px);
@@ -394,6 +406,7 @@
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
@@ -403,6 +416,7 @@
     from {
         opacity: 1;
     }
+
     to {
         opacity: 0;
     }
@@ -455,13 +469,13 @@
     line-height: 1.4;
 }
 
-.wz-content::-webkit-scrollbar-thumb {
-    border-radius: 4px;
-}
+    .wz-content::-webkit-scrollbar-thumb {
+        border-radius: 4px;
+    }
 
-.wz-content::-webkit-scrollbar-thumb:hover {
-    background-color: #828282;
-}
+        .wz-content::-webkit-scrollbar-thumb:hover {
+            background-color: #828282;
+        }
 
 .wz-icon {
     width: 50px;
@@ -505,6 +519,7 @@
         backdrop-filter: blur(0px) saturate(100%);
         opacity: 0;
     }
+
     to {
         backdrop-filter: blur(14px) saturate(250%);
         opacity: 1;
@@ -516,6 +531,7 @@
         backdrop-filter: blur(14px) saturate(250%);
         opacity: 1;
     }
+
     to {
         backdrop-filter: blur(0px) saturate(100%);
         opacity: 0;

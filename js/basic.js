@@ -372,9 +372,9 @@ function fn2() { // “函数演示” “演示” 模式。
     notibtn.innerHTML = "noti";
     notibtn.className = "btn1";
     notibtn.onclick = async () => {
-        let res = await inp("输入你想显示在 Noti() 上的信息。", "在此输入。");
+        let res = await inp("你想在 Noti() 上显示什么内容？");
         if (titleset === "Custom") {
-            let t = await inp("请输入 Noti() 上的标题。", "在此输入。");
+            let t = await inp("本 Noti() 的标题是什么？");
             noti(res, t);
         } else {
             noti(res, "通知");
@@ -384,9 +384,9 @@ function fn2() { // “函数演示” “演示” 模式。
     cgbtn.innerHTML = "cg";
     cgbtn.className = "btn2";
     cgbtn.onclick = async () => {
-        let res = await inp("输入你想显示在 Cg() 上的信息。", "在此输入。");
+        let res = await inp("你想在 Cg() 上显示什么内容？");
         if (titleset === "Custom") {
-            let t = await inp("请输入 Cg() 上的标题。", "在此输入。");
+            let t = await inp("本 Cg() 的标题是什么？");
             cg(res, t);
         } else {
             cg(res, "完成");
@@ -396,9 +396,9 @@ function fn2() { // “函数演示” “演示” 模式。
     failbtn.innerHTML = "fail";
     failbtn.className = "btn3";
     failbtn.onclick = async () => {
-        let res = await inp("输入你想显示在 fail() 上的信息。", "在此输入。");
+        let res = await inp("你想在 Fail() 上显示什么内容？");
         if (titleset === "Custom") {
-            let t = await inp("请输入 fail() 上的标题。", "在此输入。");
+            let t = await inp("本 Fail() 的标题是什么？");
             fail(res, t);
         }
         else {
@@ -409,9 +409,9 @@ function fn2() { // “函数演示” “演示” 模式。
     warnbtn.innerHTML = "warn";
     warnbtn.className = "btn4";
     warnbtn.onclick = async () => {
-        let res = await inp("输入你想显示在 Warn() 上的信息。", "在此输入。");
+        let res = await inp("你想在 Warn() 上显示什么内容？");
         if (titleset === "Custom") {
-            let t = await inp("请输入 Warn() 上的标题。", "在此输入。");
+            let t = await inp("本 Warn() 的标题是什么？");
             warn(res, t);
         }
         else {
@@ -422,17 +422,17 @@ function fn2() { // “函数演示” “演示” 模式。
     xzbtn.innerHTML = "xz";
     xzbtn.className = "btn7";
     xzbtn.onclick = async () => {
-        let res = await inp("输入你想显示在 Xz() 上的信息。", "在此输入。");
-        let n = await inp("请输入 Xz() 上选项的数量。", "在此输入。");
+        let res = await inp("你想在 Xz() 上显示什么内容？");
+        let n = await inp("本 Xz() 窗口一共有多少个选项？");
         n = Number(n);
-        let ns = await inp("本 Xz() 窗口最多可以选择多少个选项？", "在此输入。");
+        let ns = await inp("最多可以选择多少个选项？");
         ns = Number(ns);
         let array = new Array(n);
         for (let i = 0; i <= n - 1; i++) {
-            array[i] = await inp(`请输入 Xz() 上第 ${i + 1} 个选项。`, "在此输入。");
+            array[i] = await inp(`第 ${i + 1} 个选项是什么？`);
         }
         if (titleset === "Custom") {
-            let t = await inp("请输入 Xz() 上的标题。", "在此输入。");
+            let t = await inp("本 Xz() 的标题是什么？");
             let ls_res = await xz(res, ns, array, t);
             noti(`你选择了：“${ls_res.join("，")}”。`);
         } else {
@@ -444,10 +444,10 @@ function fn2() { // “函数演示” “演示” 模式。
     ljbtn.innerHTML = "lj";
     ljbtn.className = "btn8";
     ljbtn.onclick = async () => {
-        let res = await inp("输入你想显示在 Lj() 上的信息。", "在此输入。");
-        let url = await inp("请输入你要链接的地址。", "在此输入。");
+        let res = await inp("你想在 Lj() 上显示什么内容？");
+        let url = await inp("本 Lj() 上的链接是什么？");
         if (titleset === "Custom") {
-            let t = await inp("请输入 Lj() 上的标题。", "在此输入。");
+            let t = await inp("本 Lj() 的标题是什么？");
             lj(res, url, t);
         }
         else {
@@ -458,11 +458,11 @@ function fn2() { // “函数演示” “演示” 模式。
     timerbtn.innerHTML = "timer";
     timerbtn.className = "btn29";
     timerbtn.onclick = async () => {
-        let res = await inp("输入你想显示在 Timer() 上的信息。", "在此输入。");
-        let t = await inp("请输入 Timer() 上的计时时间。（单位：毫秒）", "在此输入。");
+        let res = await inp("你想在 Timer() 上显示什么内容？");
+        let t = await inp("这次计时多久？（单位：毫秒）");
         t = Number(t);
         if (titleset === "Custom") {
-            let t1 = await inp("请输入 Timer() 上的标题。", "在此输入。");
+            let t1 = await inp("本 Timer() 的标题是什么？");
             timer(res, t, t1);
         }
         else {
@@ -473,7 +473,7 @@ function fn2() { // “函数演示” “演示” 模式。
     wzbtn.innerHTML = "wz";
     wzbtn.className = "btn22";
     wzbtn.onclick = async () => {
-        let res = await inp("输入你想显示在 Wz() 上的信息。", "在此输入。");
+        let res = await inp("你想在 Wz() 上显示什么内容？");
         wz(res);
     };
 

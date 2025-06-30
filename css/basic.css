@@ -10,13 +10,13 @@ body {
     scrollbar-color: #ffffff #00000000;
 }
 
-body::-webkit-scrollbar-thumb {
-    border-radius: 4px;
-}
+    body::-webkit-scrollbar-thumb {
+        border-radius: 4px;
+    }
 
-body::-webkit-scrollbar-thumb:hover {
-    background-color: #828282;
-}
+        body::-webkit-scrollbar-thumb:hover {
+            background-color: #828282;
+        }
 
 h1 h2 {
     color: white;
@@ -57,6 +57,7 @@ pre {
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
@@ -74,6 +75,7 @@ pre {
         width: 55vw;
         background-color: #02211d00;
     }
+
     to {
         width: 100vw;
         background-color: #02211d49;
@@ -94,6 +96,7 @@ pre {
         transform: translateX(50vw);
         opacity: 0;
     }
+
     to {
         letter-spacing: 4px;
         transform: translateX(5vw);
@@ -114,6 +117,7 @@ pre {
         transform: translateX(30vw);
         opacity: 0;
     }
+
     to {
         letter-spacing: 2px;
         transform: translateX(5vw);
@@ -145,6 +149,7 @@ pre {
         opacity: 0;
         transform: translateX(0);
     }
+
     to {
         visibility: visible;
         opacity: 1;
@@ -158,6 +163,7 @@ pre {
         opacity: 0;
         transform: translateX(0);
     }
+
     to {
         visibility: visible;
         opacity: 1;
@@ -172,6 +178,7 @@ pre {
         height: 60px;
         transform: translateX(20vw);
     }
+
     to {
         visibility: visible;
         opacity: 1;
@@ -187,6 +194,7 @@ pre {
         height: 1220px;
         transform: translateX(5vw);
     }
+
     to {
         visibility: visible;
         opacity: 1;
@@ -202,6 +210,7 @@ pre {
         height: 60px;
         transform: translateX(20vw);
     }
+
     to {
         visibility: visible;
         opacity: 1;
@@ -217,6 +226,7 @@ pre {
         height: 615px;
         transform: translateX(5vw);
     }
+
     to {
         visibility: visible;
         opacity: 1;
@@ -232,6 +242,7 @@ pre {
         transform: translateX(20vw);
         height: 60px;
     }
+
     to {
         visibility: visible;
         opacity: 1;
@@ -247,6 +258,7 @@ pre {
         transform: translateX(10vw);
         height: 280px;
     }
+
     to {
         visibility: visible;
         opacity: 1;
@@ -395,6 +407,7 @@ pre {
         opacity: 0;
         transform: translateX(0);
     }
+
     to {
         opacity: 1;
         transform: translateX(5vw);
@@ -412,25 +425,25 @@ a {
     font-size: 20px;
 }
 
-a:link {
-    color: cyan;
-    text-decoration: none;
-}
+    a:link {
+        color: cyan;
+        text-decoration: none;
+    }
 
-a:visited {
-    color: mediumpurple;
-    text-decoration: none;
-}
+    a:visited {
+        color: mediumpurple;
+        text-decoration: none;
+    }
 
-a:hover {
-    color: silver;
-    text-decoration: underline;
-}
+    a:hover {
+        color: silver;
+        text-decoration: underline;
+    }
 
-a:active {
-    color: palegreen;
-    text-decoration: underline;
-}
+    a:active {
+        color: palegreen;
+        text-decoration: underline;
+    }
 
 button {
     font-family: "basic";
@@ -507,19 +520,20 @@ button {
     right: calc(-30vw - 300px);
 }
 
-.control-pad::-webkit-scrollbar-thumb, .information-table::-webkit-scrollbar-thumb {
-    border-radius: 4px;
-}
+    .control-pad::-webkit-scrollbar-thumb, .information-table::-webkit-scrollbar-thumb {
+        border-radius: 4px;
+    }
 
-.control-pad::-webkit-scrollbar-thumb:hover, .information-table::-webkit-scrollbar-thumb:hover {
-    background-color: #828282;
-}
+        .control-pad::-webkit-scrollbar-thumb:hover, .information-table::-webkit-scrollbar-thumb:hover {
+            background-color: #828282;
+        }
 
 @keyframes jr_ctrl {
     from {
         left: calc(-30vw - 300px);
         backdrop-filter: blur(0px) saturate(100%);
     }
+
     to {
         left: 0;
         backdrop-filter: blur(14px) saturate(250%);
@@ -531,6 +545,7 @@ button {
         left: 0;
         backdrop-filter: blur(14px) saturate(250%);
     }
+
     to {
         left: calc(-30vw - 300px);
         backdrop-filter: blur(0px) saturate(100%);
@@ -542,6 +557,7 @@ button {
         right: calc(-30vw - 300px);
         backdrop-filter: blur(0px) saturate(100%);
     }
+
     to {
         right: 0;
         backdrop-filter: blur(14px) saturate(250%);
@@ -553,6 +569,7 @@ button {
         right: 0;
         backdrop-filter: blur(14px) saturate(250%);
     }
+
     to {
         right: calc(-30vw - 300px);
         backdrop-filter: blur(0px) saturate(100%);
@@ -563,9 +580,11 @@ button {
     0% {
         opacity: 1;
     }
+
     50% {
         opacity: 0;
     }
+
     100% {
         opacity: 1;
     }
@@ -704,7 +723,7 @@ button {
 }
 
 .inf1 {
-    background-color:#26c9a999;
+    background-color: #26c9a999;
 }
 
 .inf2 {
@@ -765,12 +784,12 @@ button {
     font-size: 20px;
 }
 
-.rightclick-menu li {
-    padding: 7px 11px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
+    .rightclick-menu li {
+        padding: 7px 11px;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
 
-.rightclick-menu li:hover {
-    background-color: #8e226199;
-}
+        .rightclick-menu li:hover {
+            background-color: #8e226199;
+        }
