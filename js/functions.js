@@ -1177,7 +1177,7 @@ async function timer(string, time, title, id) {
     });
 }
 
-async function wz(string) {
+async function wz(string, qj_title) {
     return new Promise((resolve) => {
         let clicked = false;
         if (string == null || string == undefined) {
@@ -1185,36 +1185,46 @@ async function wz(string) {
             resolve(39);
             return;
         }
+        if (qj_title == null || qj_title == undefined || qj_title.replace(/\s+/g, "") === "") qj_title = "信息";
 
         const window = document.createElement("div");
         window.className = "wz-window";
+        const square = document.createElement("div");
+        square.className = "wz-square";
+        const icon = document.createElement("img");
+        icon.src = "images/Inf.png";
+        icon.style.opacity = 0;
+        icon.style.transistion = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+        const title = document.createElement("div");
+        title.className = "fn-title";
+        title.innerHTML = qj_title;
+        title.style.opacity = 0;
+        title.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
         const txt = document.createElement("pre");
         txt.className = "wz-content";
         txt.innerHTML = string;
         const btn = document.createElement("img");
-        btn.className = "wz-icon";
+        btn.className = "wz-btn";
         btn.src = "images/Next.png";
-        const left = document.createElement("div");
-        left.className = "wz-left";
-        const right = document.createElement("div");
-        right.className = "wz-right";
 
         document.body.appendChild(window);
-        window.appendChild(left);
-        window.appendChild(right);
+        window.appendChild(square);
+        square.appendChild(icon);
+        square.appendChild(title);
         window.appendChild(txt);
+        window.appendChild(btn);
         window.appendChild(btn);
         wzwin.push(window);
 
         window.style.animation = `jr1_wz 0.55s forwards ${easing}`;
-        left.style.animation = `jr1_solid 0.55s forwards ${easing}`;
-        right.style.animation = `jr1_solid 0.55s forwards ${easing}`;
         window.addEventListener("animationend", (e) => {
             if (e.animationName === "jr1_wz") {
                 window.style.animation = `jr2_wz 0.55s forwards ${easing}`;
-                right.style.animation = `jr_right forwards 0.55s ${easing}`;
                 window.addEventListener("animationend", (f) => {
                     if (f.animationName === "jr2_wz") {
+                        icon.style.opacity = 1;
+                        title.style.opacity = 1;
+                        title.style.maxWidth = "calc(50vw - 100px)";
                         txt.style.animation = `jr_txt forwards 0.3s ${easing}`;
                         btn.style.animation = `jr_btn forwards 0.3s ${easing}`;
                     }
@@ -1228,28 +1238,26 @@ async function wz(string) {
                 }
                 txt.style.animation = `cc_txt 0.3s forwards ${easing}`;
                 btn.style.animation = `cc_btn 0.3s forwards ${easing}`;
+                icon.style.opacity = 0;
+                title.style.opacity = 0;
+                title.style.maxWidth = "30ch";
                 txt.addEventListener("animationend", (g) => {
                     if (g.animationName === "cc_txt") {
                         window.style.animation = `cc1_wz 0.55s forwards ${easing}`;
-                        left.style.animation = `cc_left 0.55s forwards ${easing}`;
                         window.addEventListener("animationend", (h) => {
                             if (h.animationName === "cc1_wz") {
                                 window.style.animation = `cc2_wz 0.55s forwards ${easing}`;
-                                left.style.animation = `cc1_solid 0.55s forwards ${easing}`;
-                                right.style.animation = `cc1_solid 0.55s forwards ${easing}`;
                             }
                         });
                     }
                 });
                 clicked = true;
-                const ani_end = () => {
-                    window.removeEventListener("animationend", ani_end);
-                };
-                window.addEventListener("animationend", ani_end);
                 resolve("已确认。");
                 wzwin.pop();
-                right.addEventListener("animationend", () => {
-                    if (document.body.contains(window)) document.body.removeChild(window);
+                window.addEventListener("animationend", (i) => {
+                    if (i.animationName === "cc2_wz") {
+                        if (document.body.contains(window)) document.body.removeChild(window);
+                    }
                 });
             };
         });

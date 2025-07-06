@@ -593,9 +593,11 @@ button {
 .title {
     color: #ffffff;
     position: absolute;
+    top: 30px;
     left: 25px;
     text-align: left;
     font-size: 30px;
+    max-width: 350px;
 }
 
 .lcont, .rcont {

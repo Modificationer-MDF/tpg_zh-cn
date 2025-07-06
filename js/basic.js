@@ -692,10 +692,14 @@ function hqzd(s) { // 获取栈顶元素。
 
 function control() { // 选项。
     const ctrl = document.querySelector(".control-pad");
-    const title = document.createElement("p");
+    const title = document.createElement("div");
     title.innerHTML = "选项";
     title.className = "title";
     title.style.right = "25px";
+    const icon = document.createElement("img");
+    icon.style.position = "absolute";
+    icon.style.right = "0px";
+    icon.src = "images/Options.png";
 
     const ms = document.createElement("p");
     ms.innerHTML = "演示模式";
@@ -775,8 +779,8 @@ function control() { // 选项。
     c_block.innerHTML = "设置 “选项” 状态";
     c_block.className = "lcont";
     const y1 = document.createElement("button");
-    y1.type = "button";
     y1.innerHTML = "锁定";
+    y1.type = "button";
     y1.className = "control5";
     y1.onclick = () => {
         if (control_block === true) warn("“选项” 已锁定。");
@@ -785,6 +789,11 @@ function control() { // 选项。
             cg("“选项” 已锁定。");
         }
     };
+    const img1 = document.createElement("img");
+    img1.src = "images/Lock.png";
+    img1.style.position = "relative";
+    img1.style.left = "10px";
+
     const n1 = document.createElement("button");
     n1.type = "button";
     n1.innerHTML = "解锁";
@@ -796,6 +805,10 @@ function control() { // 选项。
             cg("“选项” 已解锁。");
         }
     };
+    const img2 = document.createElement("img");
+    img2.src = "images/Unlock.png";
+    img2.style.position = "relative";
+    img2.style.left = "10px";
 
     const i_block = document.createElement("p");
     i_block.innerHTML = "设置 “未读信息” 状态";
@@ -811,6 +824,11 @@ function control() { // 选项。
             cg("“未读信息” 已锁定。");
         }
     };
+    const img3 = document.createElement("img");
+    img3.src = "images/Lock.png";
+    img3.style.position = "relative";
+    img3.style.left = "10px";
+
     const n2 = document.createElement("button");
     n2.type = "button";
     n2.innerHTML = "解锁";
@@ -822,6 +840,10 @@ function control() { // 选项。
             cg("“未读信息” 已解锁。");
         }
     };
+    const img4 = document.createElement("img");
+    img4.src = "images/Unlock.png";
+    img4.style.position = "relative";
+    img4.style.left = "10px";
 
     const eas = document.createElement("p");
     eas.innerHTML = "easing";
@@ -944,6 +966,7 @@ function control() { // 选项。
     ctrl.appendChild(mrms);
     ctrl.appendChild(defw);
     ctrl.appendChild(defh);
+    title.appendChild(icon);
     title.appendChild(jdt);
     ms.appendChild(ys);
     ms.appendChild(js);
@@ -952,9 +975,13 @@ function control() { // 选项。
     rightmenu.appendChild(m1);
     rightmenu.appendChild(m2);
     c_block.appendChild(y1);
+    y1.appendChild(img1);
     c_block.appendChild(n1);
+    n1.appendChild(img2);
     i_block.appendChild(y2);
+    y2.appendChild(img3);
     i_block.appendChild(n2);
+    n2.appendChild(img4);
     eas.appendChild(inp1);
     mrms.appendChild(inp2);
     defw.appendChild(inp3);
@@ -963,15 +990,17 @@ function control() { // 选项。
 
 function inf_ui() {
     const inf = document.querySelector(".information-table");
-    const title = document.createElement("p");
+    const title = document.createElement("div");
     title.innerHTML = "未读信息";
     title.className = "title";
-    title.style.right = "25px";
-    title.style.textAlign = "right";
-
+    title.style.right = "0px";
+    const icon = document.createElement("img");
+    icon.style.position = "absolute";
+    icon.style.right = "0px";
+    icon.src = "images/Unread Messages.png";
     const jdt = document.createElement("div");
     jdt.style.height = "7px";
-    jdt.style.width = "100%";
+    jdt.style.width = "350px";
     jdt.style.backgroundColor = "#ffffff99";
 
     const counts = document.createElement("div");
@@ -1007,6 +1036,7 @@ function inf_ui() {
     container.style.top = "180px";
 
     inf.appendChild(title);
+    title.appendChild(icon);
     title.appendChild(jdt);
     inf.appendChild(counts);
     inf.appendChild(clear);
