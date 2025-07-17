@@ -112,7 +112,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const h1 = document.querySelector(".head1"); // h1 标签。
     const h2 = document.querySelector(".head2"); // h2 标签。
     const div = document.querySelector(".top"); // 包含 h1 和 h2 的 div 标签。
-    const head = document.querySelector(".head"); // The Play Games 版本标签。
+    const ps1 = document.getElementById("ps1");
+    const ps2 = document.getElementById("ps2");
     const f1 = document.querySelector(".fn1"); // “函数展示”。
     const f3 = document.querySelector(".fn3"); // “版本列表”。
 
@@ -127,7 +128,8 @@ document.addEventListener("DOMContentLoaded", () => {
     h2.addEventListener("animationend", (e) => { // Let the game-playing easier.
         if (e.animationName === "jr_head2") {
             div.style.animation = "jr_top 0.55s forwards cubic-bezier(0.33, 1, 0.68, 1)";
-            head.style.animation = "jr_head 0.55s forwards cubic-bezier(0.33, 1, 0.68, 1)";
+            ps1.style.animation = "jr_head 0.55s forwards cubic-bezier(0.33, 1, 0.68, 1)";
+            ps2.style.animation = "jr_head 0.55s forwards cubic-bezier(0.33, 1, 0.68, 1)";
         }
     });
     div.addEventListener("animationend", (e) => {
