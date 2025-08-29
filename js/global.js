@@ -5,7 +5,7 @@ let easing = "cubic-bezier(0.17, 0.9, 0.4, 0.99)";
 let deftime = "Smart";
 let defwid = 1024;
 let defhei = 768;
-let qj_multi = 10;
+let timer_speed = 1;
 let f1 = false; // “预设” 开关。
 let f2 = false; // “演示” 开关。
 let f3 = false; // “版本列表” 开关。
@@ -108,6 +108,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let isdefhei = (defhei > 300 && defhei % 1 === 0);
         let isdefwid = (defwid > 300 && defwid % 1 === 0);
         let isdeftime = (deftime >= 1250 || deftime === "Smart");
+        let istimerspeed = (timer_speed > 0);
 
         if (!iseasing) {
             easing = "cubic-bezier(0.17, 0.9, 0.4, 0.99)";
@@ -121,7 +122,11 @@ document.addEventListener("DOMContentLoaded", function () {
         } if (!isdeftime) {
             deftime = "Smart";
             fail("deftime 的值不合法，已重置为 Smart。");
+        } if (!istimerspeed) {
+            timer_speed = 1;
+            fail("timer_speed 的值不合法，已重置为 1。");
         }
+
         width(".top");
         inf_cont();
 

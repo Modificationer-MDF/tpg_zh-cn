@@ -66,6 +66,7 @@ function noti(string, title, id) {
     square.className = "noti-square";
     const icon = document.createElement("img");
     icon.src = "images/Notification.png";
+    icon.alt = "";
     icon.style.opacity = 0;
     icon.style.transistion = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const txt = document.createElement("div");
@@ -162,6 +163,7 @@ function cg(string, title, id) {
     txt.style.opacity = 0;
     txt.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const icon = document.createElement("img");
+    icon.alt = "";
     icon.src = "images/Suc.png";
     icon.style.opacity = 0;
     icon.style.transistion = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
@@ -251,6 +253,7 @@ function fail(string, title, id) {
     const square = document.createElement("div");
     square.className = "fail-square";
     const icon = document.createElement("img");
+    icon.alt = "";
     icon.className = "fail-icon";
     icon.style.opacity = 0;
     icon.style.transistion = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
@@ -344,6 +347,7 @@ function warn(string, title, id) {
     const square = document.createElement("div");
     square.className = "warn-square";
     const icon = document.createElement("img");
+    icon.alt = "";
     icon.className = "warn-icon";
     icon.style.opacity = 0;
     icon.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
@@ -439,6 +443,7 @@ async function inp(string, title, id) {
         const square = document.createElement("div");
         square.className = "inp-square";
         const icon = document.createElement("img");
+        icon.alt = "";
         icon.className = "inp-icon";
         icon.style.opacity = 0;
         icon.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
@@ -541,6 +546,7 @@ async function xz(string, n, names, title, id) {
         const square = document.createElement("div");
         square.className = "xz-square";
         const icon = document.createElement("img");
+        icon.alt = "";
         icon.className = "xz-icon";
         icon.style.opacity = 0;
         icon.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
@@ -706,6 +712,7 @@ async function synchr(string, title, id) {
     const square = document.createElement("div");
     square.className = "synchr-square";
     const icon = document.createElement("img");
+    icon.alt = "";
     icon.className = "synchr-icon";
     icon.style.opacity = 0;
     icon.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
@@ -801,6 +808,7 @@ async function lj(string, url, title, id) {
     const square = document.createElement("div");
     square.className = "lj-square";
     const icon = document.createElement("img");
+    icon.alt = "";
     icon.className = "lj-icon";
     icon.style.opacity = 0;
     icon.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
@@ -895,6 +903,7 @@ async function zd(string, title, id) {
         const square = document.createElement("div");
         square.className = "zd-square";
         const icon = document.createElement("img");
+        icon.alt = "";
         icon.className = "zd-icon";
         icon.style.opacity = 0;
         icon.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
@@ -1044,6 +1053,7 @@ async function timer(string, time, title, id) {
         let passed_time = 0;
         let unit;
         let transfer;
+        let ls_finish = false;
         if (string == null || string == undefined) {
             fail("不能输入 null 或 undefined！");
             return "在 Timer() 函数中，string 参数不能为 null 或 undefined。";
@@ -1080,6 +1090,7 @@ async function timer(string, time, title, id) {
         const square = document.createElement("div");
         square.className = "timer-square";
         const icon = document.createElement("img");
+        icon.alt = "";
         icon.src = "images/Timer.png";
         icon.style.opacity = 0;
         icon.style.transistion = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
@@ -1150,10 +1161,12 @@ async function timer(string, time, title, id) {
                 ls_unitcnt = 5;
                 ls_transfer = 3.15576e10;
             }
-            passed_time += qj_multi;
-            content.innerHTML = `${string}<br />（${(passed_time / ls_transfer).toFixed(2)} ${units[ls_unitcnt]} / ${(time / transfer).toFixed(2)} ${unit}）`;
+            passed_time += timer_speed * 10;
+            content.innerHTML = `${string}<br />${timer_speed === 1 ? "" : "！"}（${(passed_time / ls_transfer).toFixed(2)} ${units[ls_unitcnt]} / ${(time / transfer).toFixed(2)} ${unit}）`;
+            content.style.color = (timer_speed === 1 ? "#ffffff" : "#ff0000");
             if (passed_time >= time) {
                 clearInterval(i);
+                ls_finish = true;
             }
         }, 10);
 
@@ -1175,27 +1188,28 @@ async function timer(string, time, title, id) {
 
         let pro = 0;
         const interval = setInterval(() => {
-            pro += 10 / (time / 100);
+            pro += timer_speed * 10 / (time / 100);
             bar.style.width = `${pro}%`;
             if (pro >= 100) {
                 clearInterval(interval);
             }
         }, 10);
-
-        setTimeout(() => {
-            content.style.opacity = 0;
-            content.style.transform = "translateY(-10px)";
-            icon.style.opacity = 0;
-            txt.style.opacity = 0;
-            resolve(true);
-            content.addEventListener("transitionend", () => {
-                window.style.animation = `cc_fn 0.55s forwards ${easing}`;
-                close(window, windows);
-                setTimeout(() => {
-                    if (document.body.contains(window)) document.body.removeChild(window);
-                }, 550);
-            });
-        }, time);
+        setInterval(() => {
+            if (ls_finish) {
+                content.style.opacity = 0;
+                content.style.transform = "translateY(-10px)";
+                icon.style.opacity = 0;
+                txt.style.opacity = 0;
+                resolve(true);
+                content.addEventListener("transitionend", () => {
+                    window.style.animation = `cc_fn 0.55s forwards ${easing}`;
+                    close(window, windows);
+                    setTimeout(() => {
+                        if (document.body.contains(window)) document.body.removeChild(window);
+                    }, 550);
+                });
+            }
+        }, 25);
     });
 }
 
@@ -1216,6 +1230,7 @@ async function wz(string, qj_title) {
         const square = document.createElement("div");
         square.className = "wz-square";
         const icon = document.createElement("img");
+        icon.alt = "";
         icon.src = "images/Inf.png";
         icon.style.opacity = 0;
         icon.style.transistion = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
@@ -1228,6 +1243,7 @@ async function wz(string, qj_title) {
         txt.className = "wz-content";
         txt.innerHTML = string;
         const btn = document.createElement("img");
+        icon.alt = "下一步";
         btn.className = "wz-btn";
         btn.src = "images/Next.png";
 

@@ -700,6 +700,7 @@ function control() { // 选项。
     title.style.right = "25px";
     const icon = document.createElement("img");
     icon.style.position = "absolute";
+    icon.alt = "";
     icon.style.right = "0px";
     icon.src = "images/Options.png";
 
@@ -793,6 +794,7 @@ function control() { // 选项。
     };
     const img1 = document.createElement("img");
     img1.src = "images/Lock.png";
+    img1.alt = ""
     img1.style.position = "relative";
     img1.style.left = "10px";
 
@@ -809,6 +811,7 @@ function control() { // 选项。
     };
     const img2 = document.createElement("img");
     img2.src = "images/Unlock.png";
+    img2.alt = ""
     img2.style.position = "relative";
     img2.style.left = "10px";
 
@@ -828,6 +831,7 @@ function control() { // 选项。
     };
     const img3 = document.createElement("img");
     img3.src = "images/Lock.png";
+    img3.alt = ""
     img3.style.position = "relative";
     img3.style.left = "10px";
 
@@ -844,14 +848,16 @@ function control() { // 选项。
     };
     const img4 = document.createElement("img");
     img4.src = "images/Unlock.png";
+    img4.alt = ""
     img4.style.position = "relative";
     img4.style.left = "10px";
 
     const eas = document.createElement("div");
-    eas.innerHTML = "easing";
+    eas.innerHTML = "缓动函数（easing）";
     eas.className = "lcont";
     const img5 = document.createElement("img");
     img5.src = "images/Easing.png";
+    img5.alt = ""
     img5.style.position = "relative";
     img5.style.left = "10px";
     const inp1 = document.createElement("input");
@@ -873,10 +879,11 @@ function control() { // 选项。
     });
 
     const mrms = document.createElement("p");
-    mrms.innerHTML = "deftime";
+    mrms.innerHTML = "窗口停留时间（deftime）";
     mrms.className = "lcont";
     const img6 = document.createElement("img");
     img6.src = "images/Deftime.png";
+    img6.alt = ""
     img6.style.position = "relative";
     img6.style.left = "10px";
     const inp2 = document.createElement("input");
@@ -903,10 +910,11 @@ function control() { // 选项。
     });
 
     const defw = document.createElement("p");
-    defw.innerHTML = "defwid";
+    defw.innerHTML = "Lj() 打开的窗口默认宽度（defwid）";
     defw.className = "lcont";
     const img7 = document.createElement("img");
     img7.src = "images/Defwid.png";
+    img7.alt = ""
     img7.style.position = "relative";
     img7.style.left = "10px";
     const inp3 = document.createElement("input");
@@ -928,10 +936,11 @@ function control() { // 选项。
     });
 
     const defh = document.createElement("p");
-    defh.innerHTML = "defhei";
+    defh.innerHTML = "Lj() 打开的窗口默认高度（defhei）";
     defh.className = "lcont";
     const img8 = document.createElement("img");
     img8.src = "images/Defhei.png";
+    img8.alt = ""
     img8.style.position = "relative";
     img8.style.left = "10px";
     const inp4 = document.createElement("input");
@@ -952,6 +961,32 @@ function control() { // 选项。
         }
     });
 
+    const jssd = document.createElement("p");
+    jssd.innerHTML = "Timer() 正计时速度（timer_speed）";
+    jssd.className = "lcont";
+    const img9 = document.createElement("img");
+    img9.src = "images/Timingspeed.png";
+    img9.alt = ""
+    img9.style.position = "relative";
+    img9.style.left = "10px";
+    const inp5 = document.createElement("input");
+    let t5 = false;
+    inp5.type = "number";
+    inp5.id = "timingspeed";
+    inp5.value = timer_speed;
+    inp5.className = "inpbox";
+    inp5.onclick = () => {
+        if (t5 === false) {
+            noti("timer_speed 的数值只能为正数。");
+            t5 = true;
+        }
+    };
+    inp5.addEventListener("keypress", (event) => {
+        if (event.key === "Enter") {
+            timer_speed = Number(inp5.value);
+        }
+    });
+
     const jdt = document.createElement("div");
     jdt.style.left = "25px";
     jdt.style.height = "7px";
@@ -968,22 +1003,17 @@ function control() { // 选项。
         mrms,
         defw,
         defh,
+        jssd,
     ];
 
-    for (var i = 0; i < all.length; i++) {
-        all[i].style.marginTop = `${(i + 1) * 90}px`;
-    }
-
     ctrl.appendChild(title);
-    ctrl.appendChild(ms);
-    ctrl.appendChild(ts);
-    ctrl.appendChild(rightmenu);
-    ctrl.appendChild(c_block);
-    ctrl.appendChild(i_block);
-    ctrl.appendChild(eas);
-    ctrl.appendChild(mrms);
-    ctrl.appendChild(defw);
-    ctrl.appendChild(defh);
+
+    for (var i = 0; i < all.length; i++) {
+        all[i].style.position = "relative";
+        ms.style.marginTop = "100px";
+        all[i].style.marginTop = `${(i + 1) * 10}px`;
+        ctrl.appendChild(all[i]);
+    }
 
     title.appendChild(icon);
     title.appendChild(jdt);
@@ -1018,6 +1048,9 @@ function control() { // 选项。
 
     defh.appendChild(img8);
     defh.appendChild(inp4);
+
+    jssd.appendChild(img9);
+    jssd.appendChild(inp5);
 }
 
 function inf_ui() {
@@ -1028,6 +1061,7 @@ function inf_ui() {
     title.style.right = "0px";
     const icon = document.createElement("img");
     icon.style.position = "absolute";
+    icon.alt = "";
     icon.style.right = "0px";
     icon.src = "images/Unread Messages.png";
     const jdt = document.createElement("div");
@@ -1322,7 +1356,6 @@ async function fn7() { // 网站介绍。
     let w2 = false; // 完成 “未读信息” 介绍。
     let w3 = false; // 完成 “右键菜单” 介绍。
     let w4 = false; // 完成所有介绍。
-    let ls_w4 = false;
 
     const ctrl = document.querySelector(".control-pad");
     const inf = document.querySelector(".information-table");
@@ -1445,8 +1478,8 @@ async function fn7() { // 网站介绍。
     }, 250);
 
     const i6 = setInterval(async () => {
-        if (w1 === true && w2 === true && w3 === true && ls_w4 === false) {
-            ls_w4 = true;
+        if (w1 === true && w2 === true && w3 === true && w4 === false) {
+            w4 = true;
             await wz("恭喜，你已经熟悉了该网站的大多功能。感谢你对 The Play Games 的支持！");
             clearInterval(i6);
         }
