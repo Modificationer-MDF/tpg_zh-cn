@@ -847,9 +847,13 @@ function control() { // 选项。
     img4.style.position = "relative";
     img4.style.left = "10px";
 
-    const eas = document.createElement("p");
+    const eas = document.createElement("div");
     eas.innerHTML = "easing";
     eas.className = "lcont";
+    const img5 = document.createElement("img");
+    img5.src = "images/Easing.png";
+    img5.style.position = "relative";
+    img5.style.left = "10px";
     const inp1 = document.createElement("input");
     inp1.type = "text";
     inp1.id = "easing";
@@ -871,6 +875,10 @@ function control() { // 选项。
     const mrms = document.createElement("p");
     mrms.innerHTML = "deftime";
     mrms.className = "lcont";
+    const img6 = document.createElement("img");
+    img6.src = "images/Deftime.png";
+    img6.style.position = "relative";
+    img6.style.left = "10px";
     const inp2 = document.createElement("input");
     let t2 = false;
     inp2.type = "text";
@@ -897,6 +905,10 @@ function control() { // 选项。
     const defw = document.createElement("p");
     defw.innerHTML = "defwid";
     defw.className = "lcont";
+    const img7 = document.createElement("img");
+    img7.src = "images/Defwid.png";
+    img7.style.position = "relative";
+    img7.style.left = "10px";
     const inp3 = document.createElement("input");
     let t3 = false;
     inp3.type = "number";
@@ -918,6 +930,10 @@ function control() { // 选项。
     const defh = document.createElement("p");
     defh.innerHTML = "defhei";
     defh.className = "lcont";
+    const img8 = document.createElement("img");
+    img8.src = "images/Defhei.png";
+    img8.style.position = "relative";
+    img8.style.left = "10px";
     const inp4 = document.createElement("input");
     let t4 = false;
     inp4.type = "number";
@@ -968,25 +984,39 @@ function control() { // 选项。
     ctrl.appendChild(mrms);
     ctrl.appendChild(defw);
     ctrl.appendChild(defh);
+
     title.appendChild(icon);
     title.appendChild(jdt);
+
     ms.appendChild(ys);
     ms.appendChild(js);
+
     ts.appendChild(y);
     ts.appendChild(z);
+
     rightmenu.appendChild(m1);
     rightmenu.appendChild(m2);
+
     c_block.appendChild(y1);
     y1.appendChild(img1);
     c_block.appendChild(n1);
     n1.appendChild(img2);
+
     i_block.appendChild(y2);
     y2.appendChild(img3);
     i_block.appendChild(n2);
     n2.appendChild(img4);
+
+    eas.appendChild(img5);
     eas.appendChild(inp1);
+
+    mrms.appendChild(img6);
     mrms.appendChild(inp2);
+
+    defw.appendChild(img7);
     defw.appendChild(inp3);
+
+    defh.appendChild(img8);
     defh.appendChild(inp4);
 }
 
