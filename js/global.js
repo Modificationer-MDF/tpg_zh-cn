@@ -5,6 +5,7 @@ let easing = "cubic-bezier(0.17, 0.9, 0.4, 0.99)";
 let deftime = "Smart";
 let defwid = 1024;
 let defhei = 768;
+let qj_multi = 10;
 let f1 = false; // “预设” 开关。
 let f2 = false; // “演示” 开关。
 let f3 = false; // “版本列表” 开关。

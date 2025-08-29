@@ -1150,7 +1150,7 @@ async function timer(string, time, title, id) {
                 ls_unitcnt = 5;
                 ls_transfer = 3.15576e10;
             }
-            passed_time += 10;
+            passed_time += qj_multi;
             content.innerHTML = `${string}<br />（${(passed_time / ls_transfer).toFixed(2)} ${units[ls_unitcnt]} / ${(time / transfer).toFixed(2)} ${unit}）`;
             if (passed_time >= time) {
                 clearInterval(i);
