@@ -1151,9 +1151,9 @@ async function inf_cont() { // 更新未读信息。
         懒得起名("noti", noti_unv, ls_notiunv);
         ls_notiunv = noti_unv.length;
     } else if (noti_unv.length < ls_notiunv) {
-        if (warned === false) {
+        if (unv_warned === false) {
             warn("请不要另辟蹊径地修改 noti_unv。该网站将在 7 秒后刷新。");
-            warned = true;
+            unv_warned = true;
             let a = await timer("计时 7 秒。", 7000);
             if (a) location.reload();
         }
@@ -1163,9 +1163,9 @@ async function inf_cont() { // 更新未读信息。
         懒得起名("cg", cg_unv, ls_cgunv);
         ls_cgunv = cg_unv.length;
     } else if (cg_unv.length < ls_cgunv) {
-        if (warned === false) {
+        if (unv_warned === false) {
             warn("请不要另辟蹊径地修改 cg_unv。该网站将在 7 秒后刷新。");
-            warned = true;
+            unv_warned = true;
             let a = await timer("计时 7 秒。", 7000);
             if (a) location.reload();
         }
@@ -1175,9 +1175,9 @@ async function inf_cont() { // 更新未读信息。
         懒得起名("fail", fail_unv, ls_failunv);
         ls_failunv = fail_unv.length;
     } else if (fail_unv.length < ls_failunv) {
-        if (warned === false) {
+        if (unv_warned === false) {
             warn("请不要另辟蹊径地修改 fail_unv。该网站将在 7 秒后刷新。");
-            warned = true;
+            unv_warned = true;
             let a = await timer("计时 7 秒。", 7000);
             if (a) location.reload();
         }
@@ -1187,9 +1187,9 @@ async function inf_cont() { // 更新未读信息。
         懒得起名("warn", warn_unv, ls_warnunv);
         ls_warnunv = warn_unv.length;
     } else if (warn_unv.length < ls_warnunv) {
-        if (warned === false) {
+        if (unv_warned === false) {
             warn("请不要另辟蹊径地修改 warn_unv。该网站将在 7 秒后刷新。");
-            warned = true;
+            unv_warned = true;
             let a = await timer("计时 7 秒。", 7000);
             if (a) location.reload();
         }
@@ -1199,9 +1199,9 @@ async function inf_cont() { // 更新未读信息。
         懒得起名("synchr", synchr_unv, ls_synchrunv);
         ls_synchrunv = synchr_unv.length;
     } else if (synchr_unv.length < ls_synchrunv) {
-        if (warned === false) {
+        if (unv_warned === false) {
             warn("请不要另辟蹊径地修改 synchr_unv。该网站将在 7 秒后刷新。");
-            warned = true;
+            unv_warned = true;
             let a = await timer("计时 7 秒。", 7000);
             if (a) location.reload();
         }
@@ -1347,6 +1347,13 @@ function check() {
 }
 
 async function fn7() { // 网站介绍。
+    if (during_fn7) {
+        warn("不可同时运行多个介绍程序！");
+        return;
+    } else {
+        during_fn7 = true;
+    }
+
     let j1 = false; // 移动至 “选项”。
     let j2 = false; // 移动至 “未读信息”。
     let j3 = false; // 调出 “右键菜单”。
@@ -1365,6 +1372,7 @@ async function fn7() { // 网站介绍。
     const tbox = document.getElementById("deftime");
     const wbox = document.getElementById("defwid");
     const hbox = document.getElementById("defhei");
+    const tsbox = document.getElementById("timingspeed");
 
     await wz("欢迎来到 The Play Games 官方网站！是时候带你熟悉一下了。");
     noti("请将鼠标移动至左上角。");
@@ -1379,7 +1387,7 @@ async function fn7() { // 网站介绍。
             q1 = q1.join("");
             if (q1 === "是。") {
                 await wz("你可以直接点击相应的按钮便捷更改变量值，也可以通过输入来更改。");
-                let q2 = await xz("选择哪个变量演示呢？", 1, ["easing", "deftime", "defwid", "defhei"]);
+                let q2 = await xz("选择哪个变量演示呢？", 1, ["easing", "deftime", "defwid", "defhei", "timer_speed"]);
                 q2 = q2.join("");
                 noti("请修改该值。");
                 switch (q2) {
@@ -1416,6 +1424,16 @@ async function fn7() { // 网站介绍。
                     case "defhei":
                         hbox.focus();
                         hbox.addEventListener("keypress", (event) => {
+                            if (event.key === "Enter") {
+                                w1 = true;
+                                control_block = false;
+                                control_moved = true;
+                            }
+                        });
+                        break;
+                    case "timer_speed":
+                        tsbox.focus();
+                        tsbox.addEventListener("keypress", (event) => {
                             if (event.key === "Enter") {
                                 w1 = true;
                                 control_block = false;
@@ -1481,6 +1499,7 @@ async function fn7() { // 网站介绍。
         if (w1 === true && w2 === true && w3 === true && w4 === false) {
             w4 = true;
             await wz("恭喜，你已经熟悉了该网站的大多功能。感谢你对 The Play Games 的支持！");
+            during_fn7 = false;
             clearInterval(i6);
         }
     }, 250);

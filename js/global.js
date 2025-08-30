@@ -30,7 +30,8 @@ let ls_cgunv = 0;
 let ls_failunv = 0;
 let ls_warnunv = 0;
 let ls_synchrunv = 0;
-let warned = false;
+let unv_warned = false; // 是否警告过用户不要修改 unv 数组？
+let during_fn7 = false; // fn7() 是否在运行中？
 
 document.addEventListener("DOMContentLoaded", function () {
     var start = performance.now();
@@ -88,6 +89,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 break;
         }
     });
+
+    const mscomb = document.getElementById("ms_comb");
+    const tpginf = document.getElementById("tpg_inf");
 
     const ctrl = document.querySelector(".control-pad");
     ctrl.style.animationName = "cc_ctrl";
@@ -155,7 +159,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 }, { once: true });
             }, { once: true });
         }
-    }, 400);
+        mscomb.textContent = `末纱组合 | 2024.2/6 ~ ${xzsj().split(" ")[0]}`;
+        tpginf.textContent = `The Play Games 网页 | 2024.10/20 ~ ${xzsj().split(" ")[0]}`;
+    }, 500);
     document.addEventListener("keydown", (event) => {
         if (event.altKey) noti("将鼠标移动至左上角以打开选项；移动到右上角以查看未读信息。")
     });
