@@ -1162,8 +1162,15 @@ async function timer(string, time, title, id) {
                 ls_transfer = 3.15576e10;
             }
             passed_time += timer_speed * 10;
-            content.innerHTML = `${string}<br />${timer_speed === 1 ? "" : "！"}（${(passed_time / ls_transfer).toFixed(2)} ${units[ls_unitcnt]} / ${(time / transfer).toFixed(2)} ${unit}）`;
-            content.style.color = (timer_speed === 1 ? "#ffffff" : "#ff0000");
+            content.innerHTML = `${string}<br />${timer_speed > 1 ? ">> +" : ""}${timer_speed < 1 ? "<< -" : ""}（${(passed_time / ls_transfer).toFixed(2)} ${units[ls_unitcnt]} / ${(time / transfer).toFixed(2)} ${unit}）`;
+            if (timer_speed > 1) {
+                content.style.color = "#ff0000";
+            } else if (timer_speed < 1) {
+                content.style.color = "#0000ff";
+            } else {
+                content.style.color = "#000000";
+            }
+
             if (passed_time >= time) {
                 clearInterval(i);
                 ls_finish = true;
@@ -1190,6 +1197,13 @@ async function timer(string, time, title, id) {
         const interval = setInterval(() => {
             pro += timer_speed * 10 / (time / 100);
             bar.style.width = `${pro}%`;
+            if (timer_speed > 1) {
+                bar.style.backgroundColor = "#ff000099";
+            } else if (timer_speed < 1) {
+                bar.style.backgroundColor = "#0000ff99";
+            } else {
+                bar.style.backgroundColor = "#d0d0d099";
+            }
             if (pro >= 100) {
                 clearInterval(interval);
             }

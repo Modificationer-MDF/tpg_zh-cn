@@ -35,6 +35,7 @@
 .fn-content {
     text-align: center;
     transform: translateY(-10%);
+    transition: all 175ms ease;
     font-size: 20px;
     padding: 14px 25px;
     color: white;
@@ -58,7 +59,7 @@
     width: 0;
     height: 5px;
     overflow: hidden;
-    transition: width 10ms ease;
+    transition: all 10ms ease;
     position: relative;
     bottom: 0px;
 }
