@@ -1243,7 +1243,7 @@ async function wz(string, qj_title) {
         txt.className = "wz-content";
         txt.innerHTML = string;
         const btn = document.createElement("img");
-        icon.alt = "下一步";
+        btn.alt = "下一步";
         btn.className = "wz-btn";
         btn.src = "images/Next.png";
 
