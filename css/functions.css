@@ -290,55 +290,35 @@
     background-color: #d0d0d099;
 }
 
-@keyframes jr1_wz {
+@keyframes jr_wz {
     from {
         opacity: 0;
-        transform: translate(0%, -100%);
-    }
-
-    to {
-        opacity: 1;
-        transform: translate(50%, -50%);
-    }
-}
-
-@keyframes jr2_wz {
-    from {
-        transform: translate(50%, -50%);
+        transform: translate(0%, -50%);
         backdrop-filter: blur(0px) saturate(100%);
         width: 0px;
     }
 
     to {
+        opacity: 1;
         transform: translate(50%, -50%);
         width: 50vw;
         backdrop-filter: blur(14px) saturate(250%);
     }
 }
 
-@keyframes cc1_wz {
+@keyframes cc_wz {
     from {
+        opacity: 1;
         transform: translate(50%, -50%);
         width: 50vw;
         backdrop-filter: blur(14px) saturate(250%);
     }
 
     to {
-        transform: translate(50%, -50%);
+        opacity: 0;
+        transform: translate(100%, -50%);
         backdrop-filter: blur(0px) saturate(100%);
         width: 0px;
-    }
-}
-
-@keyframes cc2_wz {
-    from {
-        opacity: 1;
-        transform: translate(50%, -50%);
-    }
-
-    to {
-        opacity: 0;
-        transform: translate(50%, 100%);
     }
 }
 
@@ -472,11 +452,13 @@
 
 @keyframes jr_rz {
     from {
+        left: -250px;
         backdrop-filter: blur(0px) saturate(100%);
         opacity: 0;
     }
 
     to {
+        left: 0px;
         backdrop-filter: blur(14px) saturate(250%);
         opacity: 1;
     }
@@ -484,11 +466,13 @@
 
 @keyframes cc_rz {
     from {
+        left: 0px;
         backdrop-filter: blur(14px) saturate(250%);
         opacity: 1;
     }
 
     to {
+        left: -250px;
         backdrop-filter: blur(0px) saturate(100%);
         opacity: 0;
     }

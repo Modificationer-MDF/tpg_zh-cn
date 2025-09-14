@@ -1247,12 +1247,12 @@ async function wz(string, qj_title) {
         icon.alt = "";
         icon.src = "images/Inf.png";
         icon.style.opacity = 0;
-        icon.style.transistion = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+        icon.style.transistion = "all 75ms cubic-bezier(0.33, 1, 0.68, 1)";
         const title = document.createElement("div");
         title.className = "fn-title";
         title.innerHTML = qj_title;
         title.style.opacity = 0;
-        title.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+        title.style.transition = "all 75ms cubic-bezier(0.33, 1, 0.68, 1)";
         const txt = document.createElement("pre");
         txt.className = "wz-content";
         txt.innerHTML = string;
@@ -1270,50 +1270,40 @@ async function wz(string, qj_title) {
         window.appendChild(btn);
         wzwin.push(window);
 
-        window.style.animation = `jr1_wz 0.55s forwards ${easing}`;
+        window.style.animation = `jr_wz 0.3s forwards ${easing}`;
         window.addEventListener("animationend", (e) => {
-            if (e.animationName === "jr1_wz") {
-                window.style.animation = `jr2_wz 0.55s forwards ${easing}`;
-                window.addEventListener("animationend", (f) => {
-                    if (f.animationName === "jr2_wz") {
-                        icon.style.opacity = 1;
-                        title.style.opacity = 1;
-                        title.style.maxWidth = "calc(50vw - 100px)";
-                        txt.style.animation = `jr_txt forwards 0.3s ${easing}`;
-                        btn.style.animation = `jr_btn forwards 0.3s ${easing}`;
-                    }
-                });
+            if (e.animationName === "jr_wz") {
+                icon.style.opacity = 1;
+                title.style.opacity = 1;
+                title.style.maxWidth = "calc(50vw - 100px)";
+                txt.style.animation = `jr_txt forwards 0.3s ${easing}`;
+                btn.style.animation = `jr_btn forwards 0.3s ${easing}`;
             }
-
-            btn.onclick = () => {
-                if (clicked) {
-                    warn("请勿重复点击。");
-                    return "重复点击可能会导致程序运行异常。";
-                }
-                txt.style.animation = `cc_txt 0.3s forwards ${easing}`;
-                btn.style.animation = `cc_btn 0.3s forwards ${easing}`;
-                icon.style.opacity = 0;
-                title.style.opacity = 0;
-                title.style.maxWidth = "30ch";
-                txt.addEventListener("animationend", (g) => {
-                    if (g.animationName === "cc_txt") {
-                        window.style.animation = `cc1_wz 0.55s forwards ${easing}`;
-                        window.addEventListener("animationend", (h) => {
-                            if (h.animationName === "cc1_wz") {
-                                window.style.animation = `cc2_wz 0.55s forwards ${easing}`;
-                            }
-                        });
-                    }
-                });
-                clicked = true;
-                resolve("已确认。");
-                wzwin.pop();
-                window.addEventListener("animationend", (i) => {
-                    if (i.animationName === "cc2_wz") {
-                        if (document.body.contains(window)) document.body.removeChild(window);
-                    }
-                });
-            };
         });
+
+        btn.onclick = () => {
+            if (clicked) {
+                warn("请勿重复点击。");
+                return "重复点击可能会导致程序运行异常。";
+            }
+            txt.style.animation = `cc_txt 0.3s forwards ${easing}`;
+            btn.style.animation = `cc_btn 0.3s forwards ${easing}`;
+            icon.style.opacity = 0;
+            title.style.opacity = 0;
+            title.style.maxWidth = "30ch";
+            txt.addEventListener("animationend", (g) => {
+                if (g.animationName === "cc_txt") {
+                    window.style.animation = `cc_wz 0.3s forwards ${easing}`;
+                }
+            });
+            clicked = true;
+            resolve("已确认。");
+            wzwin.pop();
+            window.addEventListener("animationend", (i) => {
+                if (i.animationName === "cc_wz") {
+                    if (document.body.contains(window)) document.body.removeChild(window);
+                }
+            });
+        };
     });
 }
