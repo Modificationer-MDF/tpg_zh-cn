@@ -11,7 +11,7 @@ function xzsj() { // 现在时间。
     const h = t.getHours();
     const mi = t.getMinutes();
     const s = t.getSeconds();
-    const time = `${y}.${m}/${d} ${h}:${mi}:${s}`;
+    const time = `${y}.${m}/${d} ${h}:${mi >= 10 ? mi : "0" + String(mi)}:${s >= 10 ? s : "0" + String(s)}`;
     return time;
 }
 
@@ -48,18 +48,18 @@ function hqkd(str, cl, kind) { // 获取元素宽度。
 
 function chara_sort(str) {
     let zh = 0; // 中文字符数。
-    let en = 0; // 英文字符数。
+    let al = 0; // 字符数。
     let ma = 0; // 标点符号数。（包括全角符号和半角符号）
     for (var i = 0; i <= str.length - 1; i++) {
         if (alphabets.includes(str[i])) {
-            en++;
+            al++;
         } else if (marks.includes(str[i])) {
             ma++;
         } else {
             zh++;
         }
     }
-    return [zh, en, ma];
+    return [zh, al, ma];
 }
 
 function smarttime(str) {
@@ -67,8 +67,8 @@ function smarttime(str) {
     str = str.replace(/\s+/g, "");
 
     if (deftime === "Smart") {
-        let [zh, en, ma] = chara_sort(str);
-        let time = zh * 165 + en * 95 + ma * 50;
+        let [zh, al, ma] = chara_sort(str);
+        let time = zh * 165 + al * 95 + ma * 50;
         return (time > 1250 ? time : 1250);
     } else {
         return deftime;

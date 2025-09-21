@@ -97,39 +97,40 @@ function noti(string, title, id) {
         content.style.opacity = 1;
         icon.style.opacity = 1;
         txt.style.opacity = 1;
+        window.style.maxHeight = window.getBoundingClientRect().height + "px";
     });
 
     visible(content, "Noti");
-
-    const l1 = Math.ceil(string.length / 14);
-    const lh1 = parseInt(content.style.lineHeight);
-    content.style.height = `${l1 * lh1}px`;
 
     const l2 = Math.ceil(title.length / 14);
     content.style.marginTop = `${20 * (l2 + 1)}px`;
 
     let pro = 0;
+    let ls_finish = false;
     const interval = setInterval(() => {
         pro += 10 / (smarttime(string) / 100);
         bar.style.width = `${pro}%`;
         if (pro >= 100) {
             clearInterval(interval);
+            ls_finish = true;
         }
     }, 10);
 
-    setTimeout(() => {
-        content.style.opacity = 0;
-        content.style.transform = "translateY(-10px)";
-        icon.style.opacity = 0;
-        txt.style.opacity = 0;
-        content.addEventListener("transitionend", () => {
-            window.style.animation = `cc_fn 0.55s forwards ${easing}`;
-            close(window, windows);
-            setTimeout(() => {
-                if (document.body.contains(window)) document.body.removeChild(window);
-            }, 550);
-        });
-    }, smarttime(string));
+    setInterval(() => {
+        if (ls_finish) {
+            content.style.opacity = 0;
+            content.style.transform = "translateY(-10px)";
+            icon.style.opacity = 0;
+            txt.style.opacity = 0;
+            content.addEventListener("transitionend", () => {
+                window.style.animation = `cc_fn 0.55s forwards ${easing}`;
+                close(window, windows);
+                setTimeout(() => {
+                    if (document.body.contains(window)) document.body.removeChild(window);
+                }, 550);
+            });
+        }
+    }, 25);
 }
 
 // cg 函数。
@@ -191,39 +192,40 @@ function cg(string, title, id) {
         content.style.opacity = 1;
         txt.style.opacity = 1;
         icon.style.opacity = 1;
+        window.style.maxHeight = window.getBoundingClientRect().height + "px";
     });
-
-    const l1 = Math.ceil(string.length / 14);
-    var lh1 = parseInt(content.style.lineHeight);
-    content.style.height = `${l1 * lh1}px`;
 
     const l2 = Math.ceil(title.length / 14);
     content.style.marginTop = `${20 * (l2 + 1)}px`;
 
     let pro = 0;
+    let ls_finish = false;
     const interval = setInterval(() => {
         pro += 10 / (smarttime(string) / 100);
         bar.style.width = `${pro}%`;
         if (pro >= 100) {
             clearInterval(interval);
+            ls_finish = true;
         }
     }, 10);
 
     visible(content, "Cg");
 
-    setTimeout(() => {
-        content.style.opacity = 0;
-        content.style.transform = "translateY(-10px)";
-        txt.style.opacity = 0;
-        icon.style.opacity = 0;
-        content.addEventListener("transitionend", () => {
-            window.style.animation = `cc_fn 0.55s forwards ${easing}`;
-            close(window, windows)
-            setTimeout(() => {
-                if (document.body.contains(window)) document.body.removeChild(window);
-            }, 550);
-        });
-    }, smarttime(string));
+    setInterval(() => {
+        if (ls_finish) {
+            content.style.opacity = 0;
+            content.style.transform = "translateY(-10px)";
+            txt.style.opacity = 0;
+            icon.style.opacity = 0;
+            content.addEventListener("transitionend", () => {
+                window.style.animation = `cc_fn 0.55s forwards ${easing}`;
+                close(window, windows)
+                setTimeout(() => {
+                    if (document.body.contains(window)) document.body.removeChild(window);
+                }, 550);
+            });
+        }
+    }, 25);
 }
 
 // fail 函数。
@@ -286,39 +288,40 @@ function fail(string, title, id) {
         content.style.opacity = 1;
         icon.style.opacity = 1;
         txt.style.opacity = 1;
+        window.style.maxHeight = window.getBoundingClientRect().height + "px";
     });
-
-    const l1 = Math.ceil(string.length / 14);
-    var lh1 = parseInt(content.style.lineHeight);
-    content.style.height = `${l1 * lh1}px`;
 
     const l2 = Math.ceil(title.length / 14);
     content.style.marginTop = `${20 * (l2 + 1)}px`;
 
     let pro = 0;
+    let ls_finish = false;
     const interval = setInterval(() => {
         pro += 10 / (smarttime(string) / 100);
         bar.style.width = `${pro}%`;
         if (pro >= 100) {
             clearInterval(interval);
+            ls_finish = true;
         }
     }, 10);
 
     visible(content, "Fail")
 
-    setTimeout(() => {
-        content.style.opacity = 0;
-        content.style.transform = "translateY(-10px)";
-        icon.style.opacity = 0;
-        txt.style.opacity = 0;
-        content.addEventListener("transitionend", () => {
-            window.style.animation = `cc_fn 0.55s forwards ${easing}`;
-            close(window, windows)
-            setTimeout(() => {
-                if (document.body.contains(window)) document.body.removeChild(window);
-            }, 550);
-        });
-    }, smarttime(string));
+    setInterval(() => {
+        if (ls_finish) {
+            content.style.opacity = 0;
+            content.style.transform = "translateY(-10px)";
+            icon.style.opacity = 0;
+            txt.style.opacity = 0;
+            content.addEventListener("transitionend", () => {
+                window.style.animation = `cc_fn 0.55s forwards ${easing}`;
+                close(window, windows)
+                setTimeout(() => {
+                    if (document.body.contains(window)) document.body.removeChild(window);
+                }, 550);
+            });
+        }
+    }, 25);
 }
 
 // warn 函数。
@@ -380,39 +383,40 @@ function warn(string, title, id) {
         content.style.opacity = 1;
         icon.style.opacity = 1;
         txt.style.opacity = 1;
+        window.style.maxHeight = window.getBoundingClientRect().height + "px";
     });
-
-    const l1 = Math.ceil(string.length / 14);
-    var lh1 = parseInt(content.style.lineHeight);
-    content.style.height = `${l1 * lh1}px`;
 
     const l2 = Math.ceil(title.length / 14);
     content.style.marginTop = `${20 * (l2 + 1)}px`;
 
     let pro = 0;
+    let ls_finish = false;
     const interval = setInterval(() => {
         pro += 10 / (smarttime(string) / 100);
         bar.style.width = `${pro}%`;
         if (pro >= 100) {
             clearInterval(interval);
+            ls_finish = true;
         }
     }, 10);
 
     visible(content, "Warn");
 
-    setTimeout(() => {
-        content.style.opacity = 0;
-        content.style.transform = "translateY(-10px)";
-        icon.style.opacity = 0;
-        txt.style.opacity = 0;
-        content.addEventListener("transitionend", () => {
-            window.style.animation = `cc_fn 0.55s forwards ${easing}`;
-            close(window, windows)
-            setTimeout(() => {
-                if (document.body.contains(window)) document.body.removeChild(window);
-            }, 550);
-        });
-    }, smarttime(string));
+    setInterval(() => {
+        if (ls_finish) {
+            content.style.opacity = 0;
+            content.style.transform = "translateY(-10px)";
+            icon.style.opacity = 0;
+            txt.style.opacity = 0;
+            content.addEventListener("transitionend", () => {
+                window.style.animation = `cc_fn 0.55s forwards ${easing}`;
+                close(window, windows)
+                setTimeout(() => {
+                    if (document.body.contains(window)) document.body.removeChild(window);
+                }, 550);
+            });
+        }
+    }, 25);
 }
 
 // inp 函数。
@@ -484,11 +488,8 @@ async function inp(string, title, id) {
             box.style.opacity = 1;
             icon.style.opacity = 1;
             txt.style.opacity = 1;
+            window.style.maxHeight = window.getBoundingClientRect().height + "px";
         });
-
-        const l1 = Math.ceil(string.length / 14);
-        var lh1 = parseInt(content.style.lineHeight);
-        content.style.height = `${l1 * lh1}px`;
 
         const l2 = Math.ceil(title.length / 14);
         content.style.marginTop = `${20 * (l2 + 1)}px`;
@@ -581,10 +582,6 @@ async function xz(string, n, names, title, id) {
 
         visible(content, "Xz");
 
-        const l1 = Math.ceil(string.length / 14);
-        var lh1 = parseInt(content.style.lineHeight);
-        content.style.height = `${l1 * lh1}px`;
-
         const l2 = Math.ceil(title.length / 14);
         content.style.marginTop = `${20 * (l2 + 1)}px`;
 
@@ -657,6 +654,7 @@ async function xz(string, n, names, title, id) {
                 icon.style.opacity = 1;
                 txt.style.opacity = 1;
                 confirm.style.opacity = 1;
+                window.style.maxHeight = window.getBoundingClientRect().height + "px";
             });
 
             checkbox.onchange = () => {
@@ -745,11 +743,8 @@ async function synchr(string, title, id) {
         content.style.opacity = 1;
         icon.style.opacity = 1;
         txt.style.opacity = 1;
+        window.style.maxHeight = window.getBoundingClientRect().height + "px";
     });
-
-    const l1 = Math.ceil(string.length / 14);
-    var lh1 = parseInt(content.style.lineHeight);
-    content.style.height = `${l1 * lh1}px`;
 
     const l2 = Math.ceil(title.length / 14);
     content.style.marginTop = `${20 * (l2 + 1)}px`;
@@ -820,10 +815,14 @@ async function lj(string, url, title, id) {
     content.className = "fn-content";
     content.style.opacity = 0;
     content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
-    const btn = document.createElement("button");
-    btn.className = "lj-link";
-    btn.style.opacity = 0;
-    btn.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+    const link = document.createElement("button");
+    link.className = "lj-link";
+    link.style.opacity = 0;
+    link.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+    const ignore = document.createElement("button");
+    ignore.className = "lj-ignore";
+    ignore.style.opacity = 0;
+    ignore.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
 
     create(window);
     document.body.appendChild(window);
@@ -831,38 +830,36 @@ async function lj(string, url, title, id) {
     square.appendChild(icon);
     square.appendChild(txt);
     window.appendChild(content);
-    window.appendChild(btn);
+    window.appendChild(link);
+    window.appendChild(ignore);
 
     visible(content, "Lj");
 
     icon.src = "images/Link.png";
     window.style.animation = `jr_fn 0.55s forwards ${easing}`;
     content.innerHTML = string;
-    btn.innerHTML = url;
+    link.innerHTML = url;
+    ignore.innerHTML = "忽略";
     txt.innerHTML = title;
 
     window.addEventListener("animationend", () => {
         content.style.transform = "translateY(0px)";
         content.style.opacity = 1;
-        btn.style.opacity = 1;
+        link.style.opacity = 1;
+        ignore.style.opacity = 1;
         icon.style.opacity = 1;
         txt.style.opacity = 1;
+        window.style.maxHeight = window.getBoundingClientRect().height + "px";
     });
-
-    const l1 = Math.ceil(string.length / 14);
-    var lh1 = parseInt(content.style.lineHeight);
-    content.style.height = `${l1 * lh1}px`;
 
     const l2 = Math.ceil(title.length / 14);
     content.style.marginTop = `${20 * (l2 + 1)}px`;
 
-    btn.onclick = () => {
-        if (!open(url, "_blank", `width=${defwid}, height=${defhei}`)) {
-            warn("弹出的窗口被阻止。");
-        }
+    function guanbi() {
         content.style.opacity = 0;
         content.style.transform = "translateY(-10px)";
-        btn.style.opacity = 0;
+        link.style.opacity = 0;
+        ignore.style.opacity = 0;
         icon.style.opacity = 0;
         txt.style.opacity = 0;
         content.addEventListener("transitionend", () => {
@@ -873,6 +870,17 @@ async function lj(string, url, title, id) {
             }, 550);
         });
     }
+
+    link.onclick = () => {
+        if (!open(url, "_blank", `width=${defwid}, height=${defhei}`)) {
+            warn("弹出的窗口被阻止。");
+        }
+        guanbi();
+    };
+    ignore.onclick = () => {
+        rz("已忽略该链接。");
+        guanbi();
+    };
 }
 
 // zd 函数。
@@ -1035,11 +1043,8 @@ async function zd(string, title, id) {
             box.style.opacity = 1;
             icon.style.opacity = 1;
             txt.style.opacity = 1;
+            window.style.maxHeight = window.getBoundingClientRect().height + "px";
         });
-
-        const l1 = Math.ceil(string.length / 14);
-        var lh1 = parseInt(content.style.lineHeight);
-        content.style.height = `${l1 * lh1}px`;
 
         const l2 = Math.ceil(title.length / 14);
         content.style.marginTop = `${20 * (l2 + 1)}px`;
@@ -1162,10 +1167,10 @@ async function timer(string, time, title, id) {
                 ls_transfer = 3.15576e10;
             }
             passed_time += timer_speed * 10;
-            content.innerHTML = `${string}<br />${timer_speed > 1 ? ">> +" : ""}${timer_speed < 1 ? "<< -" : ""}（${(passed_time / ls_transfer).toFixed(2)} ${units[ls_unitcnt]} / ${(time / transfer).toFixed(2)} ${unit}）`;
+            content.innerHTML = `${string}<br />${timer_speed > 1 ? ">> +" : ""}${timer_speed < 1 && timer_speed > 0 ? ">> -" : ""}（${(passed_time / ls_transfer).toFixed(2)} ${units[ls_unitcnt]} / ${(time / transfer).toFixed(2)} ${unit}）`;
             if (timer_speed > 1) {
                 content.style.color = "#ff0000";
-            } else if (timer_speed < 1) {
+            } else if (timer_speed < 1 && timer_speed > 0) {
                 content.style.color = "#0000ff";
             } else {
                 content.style.color = "#000000";
@@ -1185,10 +1190,6 @@ async function timer(string, time, title, id) {
         });
 
         visible(content, "Timer");
-
-        const l1 = Math.ceil(string.length / 14);
-        const lh1 = parseInt(content.style.lineHeight);
-        content.style.height = `${l1 * lh1}px`;
 
         const l2 = Math.ceil(title.length / 14);
         content.style.marginTop = `${20 * (l2 + 1)}px`;
@@ -1210,6 +1211,7 @@ async function timer(string, time, title, id) {
         }, 10);
         setInterval(() => {
             if (ls_finish) {
+                window.style.maxHeight = window.getBoundingClientRect().height + "px";
                 content.style.opacity = 0;
                 content.style.transform = "translateY(-10px)";
                 icon.style.opacity = 0;
@@ -1247,12 +1249,12 @@ async function wz(string, qj_title) {
         icon.alt = "";
         icon.src = "images/Inf.png";
         icon.style.opacity = 0;
-        icon.style.transistion = "all 75ms cubic-bezier(0.33, 1, 0.68, 1)";
+        icon.style.transistion = "all 150ms cubic-bezier(0.33, 1, 0.68, 1)";
         const title = document.createElement("div");
         title.className = "fn-title";
         title.innerHTML = qj_title;
         title.style.opacity = 0;
-        title.style.transition = "all 75ms cubic-bezier(0.33, 1, 0.68, 1)";
+        title.style.transition = "all 150ms cubic-bezier(0.33, 1, 0.68, 1)";
         const txt = document.createElement("pre");
         txt.className = "wz-content";
         txt.innerHTML = string;
@@ -1270,16 +1272,14 @@ async function wz(string, qj_title) {
         window.appendChild(btn);
         wzwin.push(window);
 
-        window.style.animation = `jr_wz 0.3s forwards ${easing}`;
-        window.addEventListener("animationend", (e) => {
-            if (e.animationName === "jr_wz") {
-                icon.style.opacity = 1;
-                title.style.opacity = 1;
-                title.style.maxWidth = "calc(50vw - 100px)";
-                txt.style.animation = `jr_txt forwards 0.3s ${easing}`;
-                btn.style.animation = `jr_btn forwards 0.3s ${easing}`;
-            }
-        });
+        window.style.animation = `jr_wz 0.5s forwards ${easing}`;
+        setTimeout(() => {
+            icon.style.opacity = 1;
+            title.style.opacity = 1;
+            title.style.maxWidth = "calc(50vw - 100px)";
+            txt.style.animation = `jr_txt forwards 0.3s ${easing}`;
+            btn.style.animation = `jr_btn forwards 0.3s ${easing}`;
+        }, 250);
 
         btn.onclick = () => {
             if (clicked) {
@@ -1291,11 +1291,9 @@ async function wz(string, qj_title) {
             icon.style.opacity = 0;
             title.style.opacity = 0;
             title.style.maxWidth = "30ch";
-            txt.addEventListener("animationend", (g) => {
-                if (g.animationName === "cc_txt") {
-                    window.style.animation = `cc_wz 0.3s forwards ${easing}`;
-                }
-            });
+            setTimeout(() => {
+                window.style.animation = `cc_wz 0.5s forwards ${easing}`;
+            }, 150);
             clicked = true;
             resolve("已确认。");
             wzwin.pop();
