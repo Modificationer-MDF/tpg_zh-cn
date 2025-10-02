@@ -76,9 +76,12 @@ function noti(string, title, id) {
     const content = document.createElement("div");
     content.className = "fn-content";
     content.style.opacity = 0;
-    content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+    content.style.transition = `all 175ms ${easing}`;
     const bar = document.createElement("div");
     bar.className = "noti-progressbar";
+    const timerdesc = document.createElement("div");
+    timerdesc.className = "fn-timerdesc";
+    timerdesc.style.transition = `all 175ms ${easing}`;
 
     create(window);
     document.body.appendChild(window);
@@ -87,16 +90,19 @@ function noti(string, title, id) {
     square.appendChild(txt);
     window.appendChild(content);
     window.appendChild(bar);
+    window.appendChild(timerdesc);
 
     window.style.animation = `jr_fn 0.55s forwards ${easing}`;
     content.innerHTML = string;
     txt.innerHTML = title;
 
     window.addEventListener("animationend", () => {
-        content.style.transform = "translateY(0px)";
+        content.style.transform = "translateY(0)";
         content.style.opacity = 1;
         icon.style.opacity = 1;
         txt.style.opacity = 1;
+        timerdesc.style.opacity = 1;
+        timerdesc.style.transform = "translateX(0)";
         window.style.maxHeight = window.getBoundingClientRect().height + "px";
     });
 
@@ -107,9 +113,12 @@ function noti(string, title, id) {
 
     let pro = 0;
     let ls_finish = false;
+    let passed_time = 0;
     const interval = setInterval(() => {
+        passed_time += 10;
         pro += 10 / (smarttime(string) / 100);
         bar.style.width = `${pro}%`;
+        timerdesc.innerHTML = `${fhsj(passed_time)} / ${fhsj(smarttime(string))} | ${ pro.toFixed(2) }%`;
         if (pro >= 100) {
             clearInterval(interval);
             ls_finish = true;
@@ -120,6 +129,8 @@ function noti(string, title, id) {
         if (ls_finish) {
             content.style.opacity = 0;
             content.style.transform = "translateY(-10px)";
+            timerdesc.style.opacity = 0;
+            timerdesc.style.transform = "translateX(25px)";
             icon.style.opacity = 0;
             txt.style.opacity = 0;
             content.addEventListener("transitionend", () => {
@@ -171,9 +182,12 @@ function cg(string, title, id) {
     const content = document.createElement("div");
     content.className = "fn-content";
     content.style.opacity = 0;
-    content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+    content.style.transition = `all 175ms ${easing}`;
     const bar = document.createElement("div");
     bar.className = "cg-progressbar";
+    const timerdesc = document.createElement("div");
+    timerdesc.className = "fn-timerdesc";
+    timerdesc.style.transition = `all 175ms ${easing}`;
 
     create(window);
     document.body.appendChild(window);
@@ -182,16 +196,19 @@ function cg(string, title, id) {
     square.appendChild(txt);
     window.appendChild(content);
     window.appendChild(bar);
+    window.appendChild(timerdesc);
 
     window.style.animation = `jr_fn 0.55s forwards ${easing}`;
     content.innerHTML = string;
     txt.innerHTML = title;
 
     window.addEventListener("animationend", () => {
-        content.style.transform = "translateY(0px)";
+        content.style.transform = "translateY(0)";
         content.style.opacity = 1;
         txt.style.opacity = 1;
         icon.style.opacity = 1;
+        timerdesc.style.opacity = 1;
+        timerdesc.style.transform = "translateX(0)";
         window.style.maxHeight = window.getBoundingClientRect().height + "px";
     });
 
@@ -200,9 +217,12 @@ function cg(string, title, id) {
 
     let pro = 0;
     let ls_finish = false;
+    let passed_time = 0;
     const interval = setInterval(() => {
         pro += 10 / (smarttime(string) / 100);
+        passed_time += 10;
         bar.style.width = `${pro}%`;
+        timerdesc.innerHTML = `${fhsj(passed_time)} / ${fhsj(smarttime(string))} | ${ pro.toFixed(2) }%`;
         if (pro >= 100) {
             clearInterval(interval);
             ls_finish = true;
@@ -215,6 +235,8 @@ function cg(string, title, id) {
         if (ls_finish) {
             content.style.opacity = 0;
             content.style.transform = "translateY(-10px)";
+            timerdesc.style.opacity = 0;
+            timerdesc.style.transform = "translateX(25px)";
             txt.style.opacity = 0;
             icon.style.opacity = 0;
             content.addEventListener("transitionend", () => {
@@ -266,9 +288,12 @@ function fail(string, title, id) {
     const content = document.createElement("div");
     content.className = "fn-content";
     content.style.opacity = 0;
-    content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+    content.style.transition = `all 175ms ${easing}`;
     const bar = document.createElement("div");
     bar.className = "fail-progressbar";
+    const timerdesc = document.createElement("div");
+    timerdesc.className = "fn-timerdesc";
+    timerdesc.style.transition = `all 175ms ${easing}`;
 
     create(window);
     document.body.appendChild(window);
@@ -277,6 +302,7 @@ function fail(string, title, id) {
     square.appendChild(txt);
     window.appendChild(content);
     window.appendChild(bar);
+    window.appendChild(timerdesc);
 
     icon.src = "images/Err.png";
     window.style.animation = `jr_fn 0.55s forwards ${easing}`;
@@ -284,10 +310,12 @@ function fail(string, title, id) {
     txt.innerHTML = title;
 
     window.addEventListener("animationend", () => {
-        content.style.transform = "translateY(0px)";
+        content.style.transform = "translateY(0)";
         content.style.opacity = 1;
         icon.style.opacity = 1;
         txt.style.opacity = 1;
+        timerdesc.style.opacity = 1;
+        timerdesc.style.transform = "translateX(0)";
         window.style.maxHeight = window.getBoundingClientRect().height + "px";
     });
 
@@ -296,9 +324,12 @@ function fail(string, title, id) {
 
     let pro = 0;
     let ls_finish = false;
+    let passed_time = 0;
     const interval = setInterval(() => {
         pro += 10 / (smarttime(string) / 100);
+        passed_time += 10;
         bar.style.width = `${pro}%`;
+        timerdesc.innerHTML = `${fhsj(passed_time)} / ${fhsj(smarttime(string))} | ${ pro.toFixed(2) }%`;
         if (pro >= 100) {
             clearInterval(interval);
             ls_finish = true;
@@ -313,6 +344,8 @@ function fail(string, title, id) {
             content.style.transform = "translateY(-10px)";
             icon.style.opacity = 0;
             txt.style.opacity = 0;
+            timerdesc.style.opacity = 0;
+            timerdesc.style.transform = "translateX(25px)";
             content.addEventListener("transitionend", () => {
                 window.style.animation = `cc_fn 0.55s forwards ${easing}`;
                 close(window, windows)
@@ -361,9 +394,12 @@ function warn(string, title, id) {
     const content = document.createElement("div");
     content.className = "fn-content";
     content.style.opacity = 0;
-    content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+    content.style.transition = `all 175ms ${easing}`;
     const bar = document.createElement("div");
     bar.className = "warn-progressbar";
+    const timerdesc = document.createElement("div");
+    timerdesc.className = "fn-timerdesc";
+    timerdesc.style.transition = `all 175ms ${easing}`;
 
     create(window);
     document.body.appendChild(window);
@@ -372,6 +408,7 @@ function warn(string, title, id) {
     square.appendChild(txt);
     window.appendChild(content);
     window.appendChild(bar);
+    window.appendChild(timerdesc);
 
     icon.src = "images/Exc.png";
     window.style.animation = `jr_fn 0.55s forwards ${easing}`;
@@ -379,10 +416,12 @@ function warn(string, title, id) {
     txt.innerHTML = title;
 
     window.addEventListener("animationend", () => {
-        content.style.transform = "translateY(0px)";
+        content.style.transform = "translateY(0)";
         content.style.opacity = 1;
         icon.style.opacity = 1;
         txt.style.opacity = 1;
+        timerdesc.style.opacity = 1;
+        timerdesc.style.transform = "translateX(0)";
         window.style.maxHeight = window.getBoundingClientRect().height + "px";
     });
 
@@ -391,9 +430,12 @@ function warn(string, title, id) {
 
     let pro = 0;
     let ls_finish = false;
+    let passed_time = 0;
     const interval = setInterval(() => {
         pro += 10 / (smarttime(string) / 100);
+        passed_time += 10;
         bar.style.width = `${pro}%`;
+        timerdesc.innerHTML = `${fhsj(passed_time)} / ${fhsj(smarttime(string))} | ${ pro.toFixed(2) }%`;
         if (pro >= 100) {
             clearInterval(interval);
             ls_finish = true;
@@ -406,6 +448,8 @@ function warn(string, title, id) {
         if (ls_finish) {
             content.style.opacity = 0;
             content.style.transform = "translateY(-10px)";
+            timerdesc.style.opacity = 0;
+            timerdesc.style.transform = "translateX(25px)";
             icon.style.opacity = 0;
             txt.style.opacity = 0;
             content.addEventListener("transitionend", () => {
@@ -458,7 +502,7 @@ async function inp(string, title, id) {
         const content = document.createElement("div");
         content.className = "fn-content";
         content.style.opacity = 0;
-        content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+        content.style.transition = `all 175ms ${easing}`;
         const box = document.createElement("textarea");
         box.type = "text";
         box.className = "inp-box";
@@ -483,7 +527,7 @@ async function inp(string, title, id) {
         txt.innerHTML = title;
 
         window.addEventListener("animationend", () => {
-            content.style.transform = "translateY(0px)";
+            content.style.transform = "translateY(0)";
             content.style.opacity = 1;
             box.style.opacity = 1;
             icon.style.opacity = 1;
@@ -558,7 +602,7 @@ async function xz(string, n, names, title, id) {
         const content = document.createElement("div");
         content.className = "fn-content";
         content.style.opacity = 0;
-        content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+        content.style.transition = `all 175ms ${easing}`;
         const confirm = document.createElement("button");
         confirm.className = "xz-confirm";
         confirm.innerHTML = "确定";
@@ -647,7 +691,7 @@ async function xz(string, n, names, title, id) {
             content.style.marginBottom = `25px`;
 
             window.addEventListener("animationend", () => {
-                content.style.transform = "translateY(0px)";
+                content.style.transform = "translateY(0)";
                 content.style.opacity = 1;
                 btn.style.opacity = 1;
                 checkbox.style.opacity = 1;
@@ -721,7 +765,7 @@ async function synchr(string, title, id) {
     const content = document.createElement("div");
     content.className = "fn-content";
     content.style.opacity = 0;
-    content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+    content.style.transition = `all 175ms ${easing}`;
     const bar = document.createElement("div");
     bar.className = "synchr-progressbar";
 
@@ -739,7 +783,7 @@ async function synchr(string, title, id) {
     txt.innerHTML = title;
 
     window.addEventListener("animationend", () => {
-        content.style.transform = "translateY(0px)";
+        content.style.transform = "translateY(0)";
         content.style.opacity = 1;
         icon.style.opacity = 1;
         txt.style.opacity = 1;
@@ -814,7 +858,7 @@ async function lj(string, url, title, id) {
     const content = document.createElement("div");
     content.className = "fn-content";
     content.style.opacity = 0;
-    content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+    content.style.transition = `all 175ms ${easing}`;
     const link = document.createElement("button");
     link.className = "lj-link";
     link.style.opacity = 0;
@@ -843,7 +887,7 @@ async function lj(string, url, title, id) {
     txt.innerHTML = title;
 
     window.addEventListener("animationend", () => {
-        content.style.transform = "translateY(0px)";
+        content.style.transform = "translateY(0)";
         content.style.opacity = 1;
         link.style.opacity = 1;
         ignore.style.opacity = 1;
@@ -922,7 +966,7 @@ async function zd(string, title, id) {
         const content = document.createElement("div");
         content.className = "fn-content";
         content.style.opacity = 0;
-        content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+        content.style.transition = `all 175ms ${easing}`;
         const box = document.createElement("textarea");
         box.className = "zd-box";
         box.style.opacity = 0;
@@ -1038,7 +1082,7 @@ async function zd(string, title, id) {
         txt.innerHTML = title;
 
         window.addEventListener("animationend", () => {
-            content.style.transform = "translateY(0px)";
+            content.style.transform = "translateY(0)";
             content.style.opacity = 1;
             box.style.opacity = 1;
             icon.style.opacity = 1;
@@ -1056,8 +1100,6 @@ async function zd(string, title, id) {
 async function timer(string, time, title, id) {
     return new Promise((resolve) => {
         let passed_time = 0;
-        let unit;
-        let transfer;
         let ls_finish = false;
         if (string == null || string == undefined) {
             fail("不能输入 null 或 undefined！");
@@ -1108,9 +1150,13 @@ async function timer(string, time, title, id) {
         content.className = "fn-content";
         content.style.color = "black";
         content.style.opacity = 0;
-        content.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+        content.style.transition = `all 175ms ${easing}`;
         const bar = document.createElement("div");
         bar.className = "timer-progressbar";
+        const timerdesc = document.createElement("div");
+        timerdesc.className = "fn-timerdesc";
+        timerdesc.color = "#000000";
+        timerdesc.style.transition = `all 175ms ${easing}`;
 
         create(window);
         document.body.appendChild(window);
@@ -1119,94 +1165,74 @@ async function timer(string, time, title, id) {
         square.appendChild(txt);
         window.appendChild(content);
         window.appendChild(bar);
+        window.appendChild(timerdesc);
 
         window.style.animation = `jr_fn 0.55s forwards ${easing}`;
         txt.innerHTML = title;
 
-        units = ["秒", "分钟", "小时", "天", "周", "年"];
-        if (time < 6e4) {
-            unit = units[0];
-            transfer = 1000;
-        } else if (time >= 6e4 && time < 3.6e6) {
-            unit = units[1];
-            transfer = 6e4;
-        } else if (time >= 3.6e6 && time < 8.64e7) {
-            unit = units[2];
-            transfer = 3.6e6;
-        } else if (time >= 8.64e7 && time < 6.048e8) {
-            unit = units[3];
-            transfer = 8.64e7;
-        } else if (time >= 6.048e8 && time < 3.15576e10) {
-            unit = units[4];
-            transfer = 6.048e8;
-        } else if (time >= 3.15576e10) {
-            unit = units[5];
-            transfer = 3.15576e10;
-        }
-
         let i = setInterval(() => {
-            let ls_unitcnt;
-            let ls_transfer;
-            if (passed_time < 6e4) {
-                ls_unitcnt = 0;
-                ls_transfer = 1000;
-            } else if (passed_time >= 6e4 && passed_time < 3.6e6) {
-                ls_unitcnt = 1;
-                ls_transfer = 6e4;
-            } else if (passed_time >= 3.6e6 && passed_time < 8.64e7) {
-                ls_unitcnt = 2;
-                ls_transfer = 3.6e6;
-            } else if (passed_time >= 8.64e7 && passed_time < 6.048e8) {
-                ls_unitcnt = 3;
-                ls_transfer = 8.64e7;
-            } else if (passed_time >= 6.048e8 && passed_time < 3.15576e10) {
-                ls_unitcnt = 4;
-                ls_transfer = 6.048e8;
-            } else if (passed_time >= 3.15576e10) {
-                ls_unitcnt = 5;
-                ls_transfer = 3.15576e10;
-            }
             passed_time += timer_speed * 10;
-            content.innerHTML = `${string}<br />${timer_speed > 1 ? ">> +" : ""}${timer_speed < 1 && timer_speed > 0 ? ">> -" : ""}（${(passed_time / ls_transfer).toFixed(2)} ${units[ls_unitcnt]} / ${(time / transfer).toFixed(2)} ${unit}）`;
+            content.innerHTML = string;
             if (timer_speed > 1) {
                 content.style.color = "#ff0000";
             } else if (timer_speed < 1 && timer_speed > 0) {
                 content.style.color = "#0000ff";
+            } else if (timer_speed === 0) {
+                content.style.color = "#d00000";
+            } else if (timer_speed > -1 && timer_speed < 0) {
+                content.style.color = "#d0d000";
+            } else if (timer_speed < -1) {
+                content.style.color = "#d0d0d0";
             } else {
                 content.style.color = "#000000";
-            }
-
-            if (passed_time >= time) {
-                clearInterval(i);
-                ls_finish = true;
             }
         }, 10);
 
         window.addEventListener("animationend", () => {
-            content.style.transform = "translateY(0px)";
+            content.style.transform = "translateY(0)";
             content.style.opacity = 1;
             icon.style.opacity = 1;
             txt.style.opacity = 1;
+            timerdesc.style.opacity = 1;
+            timerdesc.style.transform = "translateX(0)";
         });
 
         visible(content, "Timer");
 
         const l2 = Math.ceil(title.length / 14);
         content.style.marginTop = `${20 * (l2 + 1)}px`;
-
+        
         let pro = 0;
         const interval = setInterval(() => {
+            let timer_backwards = timer_speed < 0;
             pro += timer_speed * 10 / (time / 100);
             bar.style.width = `${pro}%`;
+            timerdesc.innerHTML = `${timer_speed === 0 ? "停滞" : String(timer_speed) + " 倍速"} | ${passed_time > 0 ? fhsj(passed_time) : 0} / ${fhsj(time)} | ${pro > 0 ? pro.toFixed(2) : 0}%`;
             if (timer_speed > 1) {
                 bar.style.backgroundColor = "#ff000099";
-            } else if (timer_speed < 1) {
+                timerdesc.style.color = "#ff0000";
+            } else if (timer_speed < 1 && timer_speed > 0) {
                 bar.style.backgroundColor = "#0000ff99";
-            } else {
+                timerdesc.style.color = "#0000ff";
+            } else if (timer_speed === 0) {
+                bar.style.backgroundColor = "#d0000099";
+                timerdesc.style.color = "#d00000";
+            } else if (timer_speed > -1 && timer_speed < 0) {
+                bar.style.backgroundColor = "#d0d00099";
+                timerdesc.style.color = "#d0d000";
+            } else if (timer_speed < -1) {
                 bar.style.backgroundColor = "#d0d0d099";
+                timerdesc.style.color = "#d0d0d0";
+            } else {
+                bar.style.backgroundColor = "#00000099";
+                timerdesc.style.color = "#000000";
             }
             if (pro >= 100) {
                 clearInterval(interval);
+                ls_finish = true;
+            } else if (timer_backwards && passed_time <= 0) {
+                clearInterval(interval);
+                ls_finish = true;
             }
         }, 10);
         setInterval(() => {
@@ -1216,6 +1242,8 @@ async function timer(string, time, title, id) {
                 content.style.transform = "translateY(-10px)";
                 icon.style.opacity = 0;
                 txt.style.opacity = 0;
+                timerdesc.style.opacity = 0;
+                timerdesc.style.transform = "translateX(25px)";
                 resolve(true);
                 content.addEventListener("transitionend", () => {
                     window.style.animation = `cc_fn 0.55s forwards ${easing}`;

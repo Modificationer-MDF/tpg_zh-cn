@@ -1,5 +1,5 @@
 .noti-window, .cg-window, .fail-window, .warn-window, .inp-window, .synchr-window, .xz-window, .lj-window, .zd-window, .timer-window {
-    z-index: 102;
+    z-index: 100;
     display: flex;
     right: 0px;
     position: fixed;
@@ -21,7 +21,7 @@
 .noti-square, .cg-square, .fail-square, .warn-square, .inp-square, .synchr-square, .xz-square, .lj-square, .zd-square, .timer-square, .wz-square {
     width: 100%;
     position: fixed;
-    z-index: 1000;
+    z-index: 101;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -34,7 +34,7 @@
 
 .fn-content {
     text-align: center;
-    transform: translateY(-10%);
+    transform: translateY(-10px);
     transition: all 175ms ease;
     font-size: 20px;
     padding: 14px 25px;
@@ -55,12 +55,21 @@
     word-break: break-word;
 }
 
+.fn-timerdesc {
+    opacity: 0;
+    width: 100%;
+    z-index: 101;
+    font-size: 3px;
+    text-align: center;
+    transform: translateX(-25px);
+}
+
 .noti-progressbar, .cg-progressbar, .fail-progressbar, .warn-progressbar, .synchr-progressbar, .timer-progressbar {
     width: 0;
-    height: 5px;
+    height: 14px;
     overflow: hidden;
     transition: all 10ms ease;
-    position: relative;
+    position: fixed;
     bottom: 0px;
 }
 
@@ -78,7 +87,7 @@
     }
 
     to {
-        transform: translateY(0px);
+        transform: translateY(0);
         width: 30ch;
         opacity: 1;
         left: calc(50% - 15ch);
@@ -88,7 +97,7 @@
 
 @keyframes cc_fn {
     from {
-        transform: translateY(0px);
+        transform: translateY(0);
         width: 30ch;
         opacity: 1;
         left: calc(50% - 15ch);
@@ -166,7 +175,7 @@
     color: white;
     flex-grow: 1;
     word-break: break-word;
-    font-family: "basic";
+    font-family: "mhmts";
     font-weight: 100;
     border: none;
     backdrop-filter: blur(14px) saturate(250%);
@@ -337,13 +346,13 @@
 
     to {
         opacity: 1;
-        transform: translateY(0px);
+        transform: translateY(0);
     }
 }
 
 @keyframes cc_txt {
     from {
-        transform: translateY(0px);
+        transform: translateY(0);
         opacity: 1;
     }
 

@@ -69,19 +69,18 @@ let during_fn7 = false; // fn7() 是否在运行？
 
 document.addEventListener("DOMContentLoaded", function () {
     var start = performance.now();
-    var font1 = new FontFace("basic", 'url("fonts/Basic Modification Regular.woff2")');
+    var font1 = new FontFace("mhmts", 'url("fonts/Moharmiteksai.woff2")');
     var font2 = new FontFace("lan", 'url("fonts/Lanubu Light.woff2")');
-    var font3 = new FontFace("arno", 'url("fonts/Arno Pro Regular.woff2")');
     font1.load().then(function (f) {
         var end = performance.now();
         document.fonts.add(f);
-        cg(`成功加载字体：Basic Modification Regular。用时 ${((end - start) / 1000).toFixed(3)} 秒。`);
+        cg(`成功加载字体：Moharmiteksai。用时 ${((end - start) / 1000).toFixed(2)} 秒。`);
     }).catch(function (error) {
-        var by_font1 = new FontFace("basic", 'url("fonts/Basic Modification Regular.ttf")');
+        var by_font1 = new FontFace("mhmts", 'url("fonts/Moharmiteksai.otf")');
         by_font1.load().then(function (f) {
             var end = performance.now();
             document.fonts.add(f);
-            cg(`成功加载字体：Basic Modification Regular。用时 ${((end - start) / 1000).toFixed(3)} 秒。`);
+            cg(`成功加载字体：Moharmiteksai。用时 ${((end - start) / 1000).toFixed(2)} 秒。`);
         }).catch(function (error) {
             switch (error.name) {
                 case "NetworkError":
@@ -99,13 +98,13 @@ document.addEventListener("DOMContentLoaded", function () {
     font2.load().then(function (f) {
         var end = performance.now();
         document.fonts.add(f);
-        cg(`成功加载字体：Lanubu Light。用时 ${((end - start) / 1000).toFixed(3)} 秒。`);
+        cg(`成功加载字体：Lanubu Light。用时 ${((end - start) / 1000).toFixed(2)} 秒。`);
     }).catch(function (error) {
         var by_font2 = new FontFace("lan", 'url("fonts/Lanubu Light.ttf")');
         by_font2.load().then(function (f) {
             var end = performance.now();
             document.fonts.add(f);
-            cg(`成功加载字体：Lanubu Light。用时 ${((end - start) / 1000).toFixed(3)} 秒。`);
+            cg(`成功加载字体：Lanubu Light。用时 ${((end - start) / 1000).toFixed(2)} 秒。`);
         }).catch(function (error) {
             switch (error.name) {
                 case "NetworkError":
@@ -119,23 +118,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     break;
             }
         });
-    });
-    font3.load().then(function (f) {
-        var end = performance.now();
-        document.fonts.add(f);
-        cg(`成功加载字体：Arno Pro Regular。用时 ${((end - start) / 1000).toFixed(3)} 秒。`);
-    }).catch(function (error) {
-        switch (error.name) {
-            case "NetworkError":
-                fail("网络或系统错误。");
-                break;
-            case "FontLoadError":
-                fail("字体加载失败。");
-                break;
-            default:
-                fail(`未知错误。（${error}）`);
-                break;
-        }
     });
 
     const mscomb = document.getElementById("ms_comb");
@@ -160,7 +142,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let isdefhei = (defhei > 300 && defhei % 1 === 0);
         let isdefwid = (defwid > 300 && defwid % 1 === 0);
         let isdeftime = (deftime >= 1250 || deftime === "Smart");
-        let istimerspeed = (timer_speed > 0);
+        let istimerspeed = !isNaN(timer_speed);
 
         if (!iseasing) {
             easing = "cubic-bezier(0.17, 0.9, 0.4, 0.99)";

@@ -15,6 +15,30 @@ function xzsj() { // 现在时间。
     return time;
 }
 
+function fhsj(time) { // 返回带正确单位的时间。
+    units = ["秒", "分钟", "小时", "天", "周", "年"];
+    if (time < 6e4) {
+        unit = units[0];
+        transfer = 1000;
+    } else if (time >= 6e4 && time < 3.6e6) {
+        unit = units[1];
+        transfer = 6e4;
+    } else if (time >= 3.6e6 && time < 8.64e7) {
+        unit = units[2];
+        transfer = 3.6e6;
+    } else if (time >= 8.64e7 && time < 6.048e8) {
+        unit = units[3];
+        transfer = 8.64e7;
+    } else if (time >= 6.048e8 && time < 3.15576e10) {
+        unit = units[4];
+        transfer = 6.048e8;
+    } else if (time >= 3.15576e10) {
+        unit = units[5];
+        transfer = 3.15576e10;
+    }
+    return `${(time / transfer).toFixed(2)} ${unit}`;
+}
+
 function width(name) {
     const el = document.querySelector(name);
     el.style.width = window.innerWidth + "px";
@@ -266,7 +290,7 @@ function fn1() { // “函数演示” “预设” 模式。
     timerbtn.onclick = async () => {
         let b = await timer("计时 5 秒。", 5000);
         if (b) {
-            noti("计时结束。");
+            rz("计时结束。");
         }
     };
     const nullbtn = document.createElement("button");
@@ -855,6 +879,9 @@ function control() { // 选项。
     const eas = document.createElement("div");
     eas.innerHTML = "缓动函数（easing）";
     eas.className = "lcont";
+    eas.onclick = () => {
+        wz("cubic-bezier 函数的格式是 cubic-bezier(x1, y1, x2, y2)，其中 x1 和 x2 必须在 0 到 1 之间，y1 和 y2 则可以是任意值；其他 easing 还有 ease、linear、ease-in、ease-out、ease-in-out、step、step-start、step-end。");
+    };
     const img5 = document.createElement("img");
     img5.src = "images/Easing.png";
     img5.alt = ""
@@ -865,13 +892,6 @@ function control() { // 选项。
     inp1.id = "easing";
     inp1.className = "inpbox";
     inp1.value = easing;
-    let t1 = false;
-    inp1.onclick = () => {
-        if (t1 === false) {
-            noti("cubic-bezier 函数的格式是 cubic-bezier(x1, y1, x2, y2)，其中 x1 和 x2 必须在 0 到 1 之间，y1 和 y2 则可以是任意值；其他 easing 还有 ease、linear、ease-in、ease-out、ease-in-out、step、step-start、step-end。");
-            t1 = true;
-        }
-    };
     inp1.addEventListener("keypress", (event) => {
         if (event.key === "Enter") {
             easing = inp1.value;
@@ -881,23 +901,19 @@ function control() { // 选项。
     const mrms = document.createElement("p");
     mrms.innerHTML = "窗口停留时间（deftime）";
     mrms.className = "lcont";
+    mrms.onclick = () => {
+        noti("deftime 的取值既可以为大于等于 1250 的整数，也可以为 Smart。");
+    };
     const img6 = document.createElement("img");
     img6.src = "images/Deftime.png";
     img6.alt = ""
     img6.style.position = "relative";
     img6.style.left = "10px";
     const inp2 = document.createElement("input");
-    let t2 = false;
     inp2.type = "text";
     inp2.id = "deftime";
     inp2.value = deftime;
     inp2.className = "inpbox";
-    inp2.onclick = () => {
-        if (t2 === false) {
-            noti("deftime 的取值既可以为大于等于 1250 的整数，也可以为 Smart。");
-            t2 = true;
-        }
-    };
     inp2.addEventListener("keypress", (event) => {
         if (event.key === "Enter") {
             if (windows.length > 0) {
@@ -912,23 +928,19 @@ function control() { // 选项。
     const defw = document.createElement("p");
     defw.innerHTML = "Lj() 打开的窗口默认宽度（defwid）";
     defw.className = "lcont";
+    defw.onclick = () => {
+        warn("defwid 只能为正整数。");
+    };
     const img7 = document.createElement("img");
     img7.src = "images/Defwid.png";
     img7.alt = ""
     img7.style.position = "relative";
     img7.style.left = "10px";
     const inp3 = document.createElement("input");
-    let t3 = false;
     inp3.type = "number";
     inp3.id = "defwid";
     inp3.value = defwid;
     inp3.className = "inpbox";
-    inp3.onclick = () => {
-        if (t3 === false) {
-            warn("defwid 只能为正整数。");
-            t3 = true;
-        }
-    };
     inp3.addEventListener("keypress", (event) => {
         if (event.key === "Enter") {
             defwid = Number(inp3.value);
@@ -938,23 +950,19 @@ function control() { // 选项。
     const defh = document.createElement("p");
     defh.innerHTML = "Lj() 打开的窗口默认高度（defhei）";
     defh.className = "lcont";
+    defh.onclick = () => {
+        warn("defhei 只能为正整数。");
+    };
     const img8 = document.createElement("img");
     img8.src = "images/Defhei.png";
     img8.alt = ""
     img8.style.position = "relative";
     img8.style.left = "10px";
     const inp4 = document.createElement("input");
-    let t4 = false;
     inp4.type = "number";
     inp4.id = "defhei";
     inp4.value = defhei;
     inp4.className = "inpbox";
-    inp4.onclick = () => {
-        if (t4 === false) {
-            warn("defhei 只能为正整数。");
-            t4 = true;
-        }
-    };
     inp4.addEventListener("keypress", (event) => {
         if (event.key === "Enter") {
             defhei = Number(inp4.value);
@@ -964,23 +972,19 @@ function control() { // 选项。
     const jssd = document.createElement("p");
     jssd.innerHTML = "Timer() 正计时速度（timer_speed）";
     jssd.className = "lcont";
+    jssd.onclick = () => {
+        noti("timer_speed 的数值只能为正数。");
+    };
     const img9 = document.createElement("img");
     img9.src = "images/Timingspeed.png";
     img9.alt = ""
     img9.style.position = "relative";
     img9.style.left = "10px";
     const inp5 = document.createElement("input");
-    let t5 = false;
     inp5.type = "number";
     inp5.id = "timingspeed";
     inp5.value = timer_speed;
     inp5.className = "inpbox";
-    inp5.onclick = () => {
-        if (t5 === false) {
-            noti("timer_speed 的数值只能为正数。");
-            t5 = true;
-        }
-    };
     inp5.addEventListener("keypress", (event) => {
         if (event.key === "Enter") {
             timer_speed = Number(inp5.value);

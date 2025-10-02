@@ -3,7 +3,7 @@ body {
     background-color: black;
     letter-spacing: 1px;
     color: white;
-    font-family: "basic";
+    font-family: "mhmts";
     font-weight: 100;
     scrollbar-width: thin;
     transition: filter 0.3s ease;
@@ -54,7 +54,7 @@ pre {
     font-size: 20px;
     color: white;
     background-color: #00000079;
-    font-family: "basic";
+    font-family: "mhmts";
     border: none;
     padding: 7px 15px;
 }
@@ -452,7 +452,7 @@ a {
     }
 
 button {
-    font-family: "basic";
+    font-family: "mhmts";
     font-weight: 100;
 }
 
