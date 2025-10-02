@@ -972,9 +972,6 @@ function control() { // 选项。
     const jssd = document.createElement("p");
     jssd.innerHTML = "Timer() 正计时速度（timer_speed）";
     jssd.className = "lcont";
-    jssd.onclick = () => {
-        noti("timer_speed 的数值只能为正数。");
-    };
     const img9 = document.createElement("img");
     img9.src = "images/Timingspeed.png";
     img9.alt = ""
