@@ -54,7 +54,7 @@ function hqgd(str, cl, kind) { // 获取元素高度。
     document.body.appendChild(el1);
     let ls_gd = el1.offsetHeight;
     document.body.removeChild(el1);
-    return ls_gd + "px";
+    return String(ls_gd) + "px";
 }
 
 function hqkd(str, cl, kind) { // 获取元素宽度。
@@ -67,7 +67,7 @@ function hqkd(str, cl, kind) { // 获取元素宽度。
     document.body.appendChild(el2);
     let ls_kd = el2.offsetWidth;
     document.body.removeChild(el2);
-    return ls_kd + "px";
+    return String(ls_kd) + "px";
 }
 
 function chara_sort(str) {
@@ -916,7 +916,7 @@ function control() { // 选项。
     inp2.className = "inpbox";
     inp2.addEventListener("keypress", (event) => {
         if (event.key === "Enter") {
-            if (windows.length > 0) {
+            if (mid_win.length > 0) {
                 warn(`现在不能设置 deftime 的值。${check()} 正在运行。`)
             } else {
                 if (!isNaN(Number(inp2.value))) deftime = Number(inp2.value);
@@ -1287,59 +1287,67 @@ function pos(p) {
     let total = 3 * window.innerHeight / 100;
     function fn(w) {
         w.forEach((window) => {
-            const wh = window.offsetHeight;
+            const wh = window.getBoundingClientRect().height;
             window.style.transition = `top 0.55s ${easing}`;
             window.style.top = `${total}px`;
-            total += wh + 3;
+            total += (wh + 5);
         });
     }
-    if (p) {
-        fn(windows);
-    } else {
-        fn(rzwin);
+    if (p === 0) {
+        fn(left_win);
+    } else if (p === 1) {
+        fn(right_win);
+    } else if (p === 2) {
+        fn(mid_win);
     }
 }
 
 function create(window) { // 创建窗口。
-    if (window.className !== "rz-window") {
-        windows.push(window);
-        pos(true);
+    if (window.className === "rz-window") {
+        left_win.push(window);
+        pos(0);
+    } else if (window.className === "mb-window") {
+        right_win.push(window);
+        pos(1);
     } else {
-        rzwin.push(window);
-        pos(false);
+        mid_win.push(window);
+        pos(2);
     }
 }
 
 function close(window) { // 关闭窗口。
-    if (window.className !== "rz-window") {
-        windows = windows.filter(win => win !== window);
-        pos(true);
+    if (window.className === "rz-window") {
+        left_win = left_win.filter(win => win !== window);
+        pos(0);
+    } else if (window.className === "mb-window") {
+        right_win = right_win.filter(win => win !== window);
+        pos(1);
     } else {
-        rzwin = rzwin.filter(win => win !== window);
-        pos(false);
+        mid_win = mid_win.filter(win => win !== window);
+        pos(2);
     }
 }
 
 function check() {
     let string = "";
-    for (var i = 0; i <= windows.length - 1; i++) {
-        if (windows[i].className === "noti-window") {
+    for (var i = 0; i <= mid_win.length - 1; i++) {
+        if (mid_win[i].className === "noti-window") {
             if (!string.includes("Noti()、")) string += "Noti()、";
-        } else if (windows[i].className === "cg-window") {
+        } else if (mid_win[i].className === "cg-window") {
             if (!string.includes("Cg()、")) string += "Cg()、";
-        } else if (windows[i].className === "fail-window") {
-            if (!string.includes("fail()、")) string += "fail()、";
-        } else if (windows[i].className === "warn-window") {
+        } else if (mid_win[i].className === "fail-window") {
+            if (!string.includes("fail()、")) string += "Fail()、";
+        } else if (mid_win[i].className === "warn-window") {
             if (!string.includes("Warn()、")) string += "Warn()、";
-        } else if (windows[i].className === "inp-window") {
+        } else if (mid_win[i].className === "inp-window") {
             if (!string.includes("Inp()、")) string += "Inp()、";
-        } else if (windows[i].className === "synchr-window") {
+        } else if (mid_win[i].className === "synchr-window") {
             if (!string.includes("Synchr()、")) string += "Synchr()、";
-        } else if (windows[i].className === "xz-window") {
+        } else if (mid_win[i].className === "xz-window") {
             if (!string.includes("Xz()、")) string += "Xz()、";
-        } else if (windows[i].className === "lj-window") {
+        } else if (mid_win[i].className === "lj-window") {
             if (!string.includes("Lj()、")) string += "Lj()、";
-        } else if (windows[i].className === "zd-window") {
+        } else if (mid_win[i].className === "zd-window") {
             if (!string.includes("Zd()、")) string += "Zd()、";
         }
     }
@@ -1534,4 +1542,32 @@ function visible(e, fn_name) {
                 break;
         }
     }
+}
+
+async function fn8() {
+    let noti_cnt = 0;
+    let cg_cnt = 0;
+    let fail_cnt = 0;
+    let warn_cnt = 0;
+    let inp_cnt = 0;
+    let synchr_cnt = 0;
+    let xz_cnt = 0;
+    let lj_cnt = 0;
+    let zd_cnt = 0;
+    let timer_cnt = 0;
+
+    for (let i = 0; i < mid_win.length; i++) {
+        if (mid_win[i].className === "noti-window") noti_cnt++;
+        else if (mid_win[i].className === "cg-window") cg_cnt++;
+        else if (mid_win[i].className === "fail-window") fail_cnt++;
+        else if (mid_win[i].className === "warn-window") warn_cnt++;
+        else if (mid_win[i].className === "inp-window") inp_cnt++;
+        else if (mid_win[i].className === "synchr-window") synchr_cnt++;
+        else if (mid_win[i].className === "xz-window") xz_cnt++;
+        else if (mid_win[i].className === "lj-window") lj_cnt++;
+        else if (mid_win[i].className === "zd-window") zd_cnt++;
+        else if (mid_win[i].className === "timer-window") timer_cnt++;
+    }
+
+    mb([`有 ${noti_cnt} 个 Noti() 正在运行。`, `有 ${cg_cnt} 个 Cg() 正在运行。`, `有 ${fail_cnt} 个 Fail() 正在运行。`, `有 ${warn_cnt} 个 Warn() 正在运行。`, `有 ${inp_cnt} 个 Inp() 正在运行。`, `有 ${synchr_cnt} 个 Synchr() 正在运行。`, `有 ${xz_cnt} 个 Xz() 正在运行。`, `有 ${lj_cnt} 个 Lj() 正在运行。`, `有 ${zd_cnt} 个 Zd() 正在运行。`, `有 ${timer_cnt} 个 Timer() 正在运行。`], `${xzsj()} 时状态`);
 }

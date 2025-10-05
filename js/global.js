@@ -50,8 +50,9 @@ let inf_block = false; // 锁定 “未读信息”。
 let control_moved = false; // “选项”。
 let inf_moved = false; // “未读信息”。
 let isdimmed = false;
-let windows = []; // 十函数数组。
-let rzwin = []; // rz() 数组。
+let left_win = []; // 左函数数组。
+let mid_win= []; // 中函数数组。
+let right_win = []; // 右函数数组。
 let wzwin = []; // wz() 数组。
 let noti_unv = [];
 let cg_unv = [];
@@ -163,8 +164,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
         width(".top");
         inf_cont();
+        pos(0);
+        pos(1);
+        pos(2);
 
-        if (windows.length > 0 || rzwin.length > 0 || wzwin.length > 0) {
+        if (mid_win.length > 0 || left_win.length > 0 || wzwin.length > 0 || right_win.length > 0) {
             if (isdimmed === false) ld(main, "75%");
         } else {
             ld(main, "100%");

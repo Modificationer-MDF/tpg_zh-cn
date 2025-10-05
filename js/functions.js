@@ -1,5 +1,4 @@
 // rz 函数。
-
 function rz(string, time) {
     if (string == null) {
         warn("这个值为 null。");
@@ -39,10 +38,9 @@ function rz(string, time) {
 }
 
 // noti 函数。
-
 function noti(string, title, id) {
     if (string == null || string == undefined) {
-        fail("不能输入 null 或 undefined！");
+        fail("不能输入空值！");
         return "在 Noti() 函数中，string 参数不能为 null 或 undefined。";
     }
     string = String(string);
@@ -108,8 +106,9 @@ function noti(string, title, id) {
 
     visible(content, "Noti");
 
-    const l2 = Math.ceil(title.length / 14);
-    content.style.marginTop = `${20 * (l2 + 1)}px`;
+    let square_height = hqgd(txt.innerHTML, "fn-title", "div");
+    square.style.height = square_height;
+    content.style.marginTop = square_height;
 
     let pro = 0;
     let ls_finish = false;
@@ -118,7 +117,7 @@ function noti(string, title, id) {
         passed_time += 10;
         pro += 10 / (smarttime(string) / 100);
         bar.style.width = `${pro}%`;
-        timerdesc.innerHTML = `${fhsj(passed_time)} / ${fhsj(smarttime(string))} | ${ pro.toFixed(2) }%`;
+        timerdesc.innerHTML = `${fhsj(passed_time)} / ${fhsj(smarttime(string))} | ${pro > 100 ? 100 : pro.toFixed(2)}%`;
         if (pro >= 100) {
             clearInterval(interval);
             ls_finish = true;
@@ -134,8 +133,9 @@ function noti(string, title, id) {
             icon.style.opacity = 0;
             txt.style.opacity = 0;
             content.addEventListener("transitionend", () => {
+                square.style.height = "35px";
                 window.style.animation = `cc_fn 0.55s forwards ${easing}`;
-                close(window, windows);
+                close(window);
                 setTimeout(() => {
                     if (document.body.contains(window)) document.body.removeChild(window);
                 }, 550);
@@ -145,10 +145,9 @@ function noti(string, title, id) {
 }
 
 // cg 函数。
-
 function cg(string, title, id) {
     if (string == null || string == undefined) {
-        fail("不能输入 null 或 undefined！");
+        fail("不能输入空值！");
         return "在 Cg() 函数中，string 参数不能为 null 或 undefined。";
     }
     string = String(string);
@@ -212,8 +211,9 @@ function cg(string, title, id) {
         window.style.maxHeight = window.getBoundingClientRect().height + "px";
     });
 
-    const l2 = Math.ceil(title.length / 14);
-    content.style.marginTop = `${20 * (l2 + 1)}px`;
+    let square_height = hqgd(txt.innerHTML, "fn-title", "div");
+    square.style.height = square_height;
+    content.style.marginTop = square_height;
 
     let pro = 0;
     let ls_finish = false;
@@ -222,7 +222,7 @@ function cg(string, title, id) {
         pro += 10 / (smarttime(string) / 100);
         passed_time += 10;
         bar.style.width = `${pro}%`;
-        timerdesc.innerHTML = `${fhsj(passed_time)} / ${fhsj(smarttime(string))} | ${ pro.toFixed(2) }%`;
+        timerdesc.innerHTML = `${fhsj(passed_time)} / ${fhsj(smarttime(string))} | ${pro > 100 ? 100 : pro.toFixed(2)}%`;
         if (pro >= 100) {
             clearInterval(interval);
             ls_finish = true;
@@ -240,8 +240,9 @@ function cg(string, title, id) {
             txt.style.opacity = 0;
             icon.style.opacity = 0;
             content.addEventListener("transitionend", () => {
+                square.style.height = "35px";
                 window.style.animation = `cc_fn 0.55s forwards ${easing}`;
-                close(window, windows)
+                close(window, mid_win)
                 setTimeout(() => {
                     if (document.body.contains(window)) document.body.removeChild(window);
                 }, 550);
@@ -251,10 +252,9 @@ function cg(string, title, id) {
 }
 
 // fail 函数。
-
 function fail(string, title, id) {
     if (string == null || string == undefined) {
-        fail("不能输入 null 或 undefined！");
+        fail("不能输入空值！");
         return "在 Fail() 函数中，string 参数不能为 null 或 undefined。";
     }
     string = String(string);
@@ -319,8 +319,9 @@ function fail(string, title, id) {
         window.style.maxHeight = window.getBoundingClientRect().height + "px";
     });
 
-    const l2 = Math.ceil(title.length / 14);
-    content.style.marginTop = `${20 * (l2 + 1)}px`;
+    let square_height = hqgd(txt.innerHTML, "fn-title", "div");
+    square.style.height = square_height;
+    content.style.marginTop = square_height;
 
     let pro = 0;
     let ls_finish = false;
@@ -329,7 +330,7 @@ function fail(string, title, id) {
         pro += 10 / (smarttime(string) / 100);
         passed_time += 10;
         bar.style.width = `${pro}%`;
-        timerdesc.innerHTML = `${fhsj(passed_time)} / ${fhsj(smarttime(string))} | ${ pro.toFixed(2) }%`;
+        timerdesc.innerHTML = `${fhsj(passed_time)} / ${fhsj(smarttime(string))} | ${pro > 100 ? 100 : pro.toFixed(2)}%`;
         if (pro >= 100) {
             clearInterval(interval);
             ls_finish = true;
@@ -347,8 +348,9 @@ function fail(string, title, id) {
             timerdesc.style.opacity = 0;
             timerdesc.style.transform = "translateX(25px)";
             content.addEventListener("transitionend", () => {
+                square.style.height = "35px";
                 window.style.animation = `cc_fn 0.55s forwards ${easing}`;
-                close(window, windows)
+                close(window, mid_win)
                 setTimeout(() => {
                     if (document.body.contains(window)) document.body.removeChild(window);
                 }, 550);
@@ -358,10 +360,9 @@ function fail(string, title, id) {
 }
 
 // warn 函数。
-
 function warn(string, title, id) {
     if (string == null || string == undefined) {
-        fail("不能输入 null 或 undefined！");
+        fail("不能输入空值！");
         return "在 Warn() 函数中，string 参数不能为 null 或 undefined。";
     }
     string = String(string);
@@ -425,8 +426,9 @@ function warn(string, title, id) {
         window.style.maxHeight = window.getBoundingClientRect().height + "px";
     });
 
-    const l2 = Math.ceil(title.length / 14);
-    content.style.marginTop = `${20 * (l2 + 1)}px`;
+    let square_height = hqgd(txt.innerHTML, "fn-title", "div");
+    square.style.height = square_height;
+    content.style.marginTop = square_height;
 
     let pro = 0;
     let ls_finish = false;
@@ -435,7 +437,7 @@ function warn(string, title, id) {
         pro += 10 / (smarttime(string) / 100);
         passed_time += 10;
         bar.style.width = `${pro}%`;
-        timerdesc.innerHTML = `${fhsj(passed_time)} / ${fhsj(smarttime(string))} | ${ pro.toFixed(2) }%`;
+        timerdesc.innerHTML = `${fhsj(passed_time)} / ${fhsj(smarttime(string))} | ${pro > 100 ? 100 : pro.toFixed(2)}%`;
         if (pro >= 100) {
             clearInterval(interval);
             ls_finish = true;
@@ -453,8 +455,9 @@ function warn(string, title, id) {
             icon.style.opacity = 0;
             txt.style.opacity = 0;
             content.addEventListener("transitionend", () => {
+                square.style.height = "35px";
                 window.style.animation = `cc_fn 0.55s forwards ${easing}`;
-                close(window, windows)
+                close(window, mid_win)
                 setTimeout(() => {
                     if (document.body.contains(window)) document.body.removeChild(window);
                 }, 550);
@@ -464,11 +467,10 @@ function warn(string, title, id) {
 }
 
 // inp 函数。
-
 async function inp(string, title, id) {
     return new Promise((resolve) => {
         if (string == null || string == undefined) {
-            fail("不能输入 null 或 undefined！");
+            fail("不能输入空值！");
             return "在 Inp() 函数中，string 参数不能为 null 或 undefined。";
         }
         string = String(string);
@@ -535,8 +537,9 @@ async function inp(string, title, id) {
             window.style.maxHeight = window.getBoundingClientRect().height + "px";
         });
 
-        const l2 = Math.ceil(title.length / 14);
-        content.style.marginTop = `${20 * (l2 + 1)}px`;
+        let square_height = hqgd(txt.innerHTML, "fn-title", "div");
+        square.style.height = square_height;
+        content.style.marginTop = square_height;
 
         box.addEventListener("keypress", (event) => {
             if (event.key === "Enter") {
@@ -547,8 +550,9 @@ async function inp(string, title, id) {
                 icon.style.opacity = 0;
                 txt.style.opacity = 0;
                 content.addEventListener("transitionend", () => {
+                    square.style.height = "35px";
                     window.style.animation = `cc_fn 0.55s forwards ${easing}`;
-                    close(window, windows);
+                    close(window);
                     resolve(value);
                     setTimeout(() => {
                         if (document.body.contains(window)) document.body.removeChild(window);
@@ -560,11 +564,10 @@ async function inp(string, title, id) {
 }
 
 // xz 函数。
-
 async function xz(string, n, names, title, id) {
     return new Promise((resolve) => {
         if (string == null || string == undefined) {
-            fail("不能输入 null 或 undefined！");
+            fail("不能输入空值！");
             return "在 Xz() 函数中，string 参数不能为 null 或 undefined。";
         }
         string = String(string);
@@ -626,8 +629,9 @@ async function xz(string, n, names, title, id) {
 
         visible(content, "Xz");
 
-        const l2 = Math.ceil(title.length / 14);
-        content.style.marginTop = `${20 * (l2 + 1)}px`;
+        let square_height = hqgd(txt.innerHTML, "fn-title", "div");
+        square.style.height = square_height;
+        content.style.marginTop = square_height;
 
         const tohex = (r, g, b) => {
             const tohex_ = (value) => {
@@ -656,8 +660,9 @@ async function xz(string, n, names, title, id) {
                 txt.style.opacity = 0;
                 confirm.style.opacity = 0;
                 content.addEventListener("transitionend", () => {
+                    square.style.height = "35px";
                     window.style.animation = `cc_fn 0.55s forwards ${easing}`;
-                    close(window, windows)
+                    close(window, mid_win)
                     setTimeout(() => {
                         if (document.body.contains(window)) document.body.removeChild(window);
                     }, 550);
@@ -731,7 +736,7 @@ async function xz(string, n, names, title, id) {
 
 async function synchr(string, title, id) {
     if (string == null || string == undefined) {
-        fail("不能输入 null 或 undefined！");
+        fail("不能输入空值！");
         return "在 Synchr() 函数中，string 参数不能为 null 或 undefined。";
     }
     string = String(string);
@@ -790,8 +795,9 @@ async function synchr(string, title, id) {
         window.style.maxHeight = window.getBoundingClientRect().height + "px";
     });
 
-    const l2 = Math.ceil(title.length / 14);
-    content.style.marginTop = `${20 * (l2 + 1)}px`;
+    let square_height = hqgd(txt.innerHTML, "fn-title", "div");
+    square.style.height = square_height;
+    content.style.marginTop = square_height;
 
     visible(content, "Synchr");
     
@@ -801,8 +807,9 @@ async function synchr(string, title, id) {
         icon.style.opacity = 0;
         txt.style.opacity = 0;
         content.addEventListener("transitionend", () => {
+            square.style.height = "35px";
             window.style.animation = `cc_fn 0.55s forwards ${easing}`;
-            close(window, windows)
+            close(window, mid_win)
             setTimeout(() => {
                 if (document.body.contains(window)) document.body.removeChild(window);
             }, 550);
@@ -811,10 +818,9 @@ async function synchr(string, title, id) {
 }
 
 // lj 函数。
-
 async function lj(string, url, title, id) {
     if (string == null || string == undefined) {
-        fail("不能输入 null 或 undefined！");
+        fail("不能输入空值！");
         return "在 Lj() 函数中，string 参数不能为 null 或 undefined。";
     }
     if (url == null || url == undefined) {
@@ -896,8 +902,9 @@ async function lj(string, url, title, id) {
         window.style.maxHeight = window.getBoundingClientRect().height + "px";
     });
 
-    const l2 = Math.ceil(title.length / 14);
-    content.style.marginTop = `${20 * (l2 + 1)}px`;
+    let square_height = hqgd(txt.innerHTML, "fn-title", "div");
+    square.style.height = square_height;
+    content.style.marginTop = square_height;
 
     function guanbi() {
         content.style.opacity = 0;
@@ -907,8 +914,9 @@ async function lj(string, url, title, id) {
         icon.style.opacity = 0;
         txt.style.opacity = 0;
         content.addEventListener("transitionend", () => {
+            square.style.height = "35px";
             window.style.animation = `cc_fn 0.55s forwards ${easing}`;
-            close(window, windows)
+            close(window, mid_win)
             setTimeout(() => {
                 if (document.body.contains(window)) document.body.removeChild(window);
             }, 550);
@@ -928,11 +936,10 @@ async function lj(string, url, title, id) {
 }
 
 // zd 函数。
-
 async function zd(string, title, id) {
     return new Promise((resolve) => {
         if (string == null || string == undefined) {
-            fail("不能输入 null 或 undefined！");
+            fail("不能输入空值！");
             return "在 Zd() 函数中，string 参数不能为 null 或 undefined。";
         }
         string = String(string);
@@ -1056,8 +1063,9 @@ async function zd(string, title, id) {
                 icon.style.opacity = 0;
                 txt.style.opacity = 0;
                 content.addEventListener("transitionend", () => {
+                    square.style.height = "35px";
                     window.style.animation = `cc_fn 0.55s forwards ${easing}`;
-                    close(window, windows);
+                    close(window);
                     setTimeout(() => {
                         if (document.body.contains(window)) document.body.removeChild(window);
                     }, 550);
@@ -1090,19 +1098,19 @@ async function zd(string, title, id) {
             window.style.maxHeight = window.getBoundingClientRect().height + "px";
         });
 
-        const l2 = Math.ceil(title.length / 14);
-        content.style.marginTop = `${20 * (l2 + 1)}px`;
+        let square_height = hqgd(txt.innerHTML, "fn-title", "div");
+        square.style.height = square_height;
+        content.style.marginTop = square_height;
     });
 }
 
 // timer 函数。
-
 async function timer(string, time, title, id) {
     return new Promise((resolve) => {
         let passed_time = 0;
         let ls_finish = false;
         if (string == null || string == undefined) {
-            fail("不能输入 null 或 undefined！");
+            fail("不能输入空值！");
             return "在 Timer() 函数中，string 参数不能为 null 或 undefined。";
         }
         if (time == null || time == undefined) {
@@ -1199,8 +1207,9 @@ async function timer(string, time, title, id) {
 
         visible(content, "Timer");
 
-        const l2 = Math.ceil(title.length / 14);
-        content.style.marginTop = `${20 * (l2 + 1)}px`;
+        let square_height = hqgd(txt.innerHTML, "fn-title", "div");
+        square.style.height = square_height;
+        content.style.marginTop = square_height;
         
         let pro = 0;
         const interval = setInterval(() => {
@@ -1246,8 +1255,9 @@ async function timer(string, time, title, id) {
                 timerdesc.style.transform = "translateX(25px)";
                 resolve(true);
                 content.addEventListener("transitionend", () => {
+                    square.style.height = "35px";
                     window.style.animation = `cc_fn 0.55s forwards ${easing}`;
-                    close(window, windows);
+                    close(window);
                     setTimeout(() => {
                         if (document.body.contains(window)) document.body.removeChild(window);
                     }, 550);
@@ -1258,12 +1268,10 @@ async function timer(string, time, title, id) {
 }
 
 // wz 函数。
-
 async function wz(string, qj_title) {
     return new Promise((resolve) => {
-        let clicked = false;
         if (string == null || string == undefined) {
-            fail("不能输入 null 或 undefined！");
+            fail("不能输入空值！");
             resolve(39);
             return;
         }
@@ -1310,10 +1318,6 @@ async function wz(string, qj_title) {
         }, 250);
 
         btn.onclick = () => {
-            if (clicked) {
-                warn("请勿重复点击。");
-                return "重复点击可能会导致程序运行异常。";
-            }
             txt.style.animation = `cc_txt 0.3s forwards ${easing}`;
             btn.style.animation = `cc_btn 0.3s forwards ${easing}`;
             icon.style.opacity = 0;
@@ -1322,11 +1326,77 @@ async function wz(string, qj_title) {
             setTimeout(() => {
                 window.style.animation = `cc_wz 0.5s forwards ${easing}`;
             }, 150);
-            clicked = true;
             resolve("已确认。");
             wzwin.pop();
             window.addEventListener("animationend", (i) => {
                 if (i.animationName === "cc_wz") {
+                    if (document.body.contains(window)) document.body.removeChild(window);
+                }
+            });
+        };
+    });
+}
+
+// mb() 函数。
+async function mb(strings, title) {
+    return new Promise((resolve) => {
+        if (strings.length === 0 || strings.includes(null) || strings.includes(undefined)) {
+            fail("不能输入空值！");
+            resolve(39);
+            return;
+        }
+        if (title == null || title == undefined || String(title).replace(/\s+/g, "") === "") title = "面板";
+        else title = String(title);
+
+        const window = document.createElement("div");
+        window.className = "mb-window";
+        const square = document.createElement("div");
+        square.className = "mb-square";
+        const icon = document.createElement("img");
+        icon.alt = "";
+        icon.src = "images/Pad.png";
+        icon.style.transistion = "all 150ms cubic-bezier(0.33, 1, 0.68, 1)";
+        const txt = document.createElement("div");
+        txt.className = "fn-title";
+        txt.style.maxWidth = "36ch";
+        txt.innerHTML = title;
+        const content = document.createElement("div");
+        content.className = "fn-content";
+        content.style.transform = "translateY(0)";
+        content.style.textAlign = "left";
+        const gb = document.createElement("button");
+        gb.type = "button";
+        gb.className = "mb-gb";
+        gb.innerHTML = "关闭";
+
+        create(window);
+        document.body.appendChild(window);
+        window.appendChild(square);
+        square.appendChild(icon);
+        square.appendChild(txt);
+        window.appendChild(content);
+        window.appendChild(gb);
+
+        visible(content, "Mb");
+
+        window.style.animation = `jr_mb 0.5s forwards ${easing}`;
+
+        let square_height = hqgd(txt.innerHTML, "fn-title", "div");
+        square.style.height = square_height;
+        content.style.marginTop = square_height;
+
+        for (let i = 0; i < strings.length; i++) {
+            const li = document.createElement("li");
+            li.innerHTML = strings[i];
+            content.appendChild(li);
+        }
+
+        gb.onclick = () => {
+            window.style.animation = `cc_mb 0.5s forwards ${easing}`;
+            close(window);
+            resolve("已确认。");
+            window.addEventListener("animationend", (i) => {
+                if (i.animationName === "cc_mb") {
                     if (document.body.contains(window)) document.body.removeChild(window);
                 }
             });
