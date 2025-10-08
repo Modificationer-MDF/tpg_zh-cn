@@ -1338,7 +1338,7 @@ async function wz(string, qj_title) {
 }
 
 // mb() 函数。
-async function mb(strings, title) {
+async function mb(strings, title, id) {
     return new Promise((resolve) => {
         if (strings.length === 0 || strings.includes(null) || strings.includes(undefined)) {
             fail("不能输入空值！");
@@ -1347,9 +1347,12 @@ async function mb(strings, title) {
         }
         if (title == null || title == undefined || String(title).replace(/\s+/g, "") === "") title = "面板";
         else title = String(title);
+        if (id == null || id == undefined) id = "";
 
         const window = document.createElement("div");
         window.className = "mb-window";
+        window.style.maxWidth = "450px";
+        window.id = id;
         const square = document.createElement("div");
         square.className = "mb-square";
         const icon = document.createElement("img");
@@ -1358,7 +1361,6 @@ async function mb(strings, title) {
         icon.style.transistion = "all 150ms cubic-bezier(0.33, 1, 0.68, 1)";
         const txt = document.createElement("div");
         txt.className = "fn-title";
-        txt.style.maxWidth = "36ch";
         txt.innerHTML = title;
         const content = document.createElement("div");
         content.className = "fn-content";
@@ -1386,9 +1388,43 @@ async function mb(strings, title) {
         content.style.marginTop = square_height;
 
         for (let i = 0; i < strings.length; i++) {
-            const li = document.createElement("li");
-            li.innerHTML = strings[i];
-            content.appendChild(li);
+            if (strings[i].startsWith("li: ")) {
+                const li = document.createElement("li");
+                li.innerHTML = strings[i].slice(4, strings[i].length);
+                content.appendChild(li);
+            } else if (strings[i].startsWith("h1: ")) {
+                const h1 = document.createElement("h1");
+                h1.innerHTML = strings[i].slice(4, strings[i].length);
+                content.appendChild(h1);
+            } else if (strings[i].startsWith("h2: ")) {
+                const h2 = document.createElement("h2");
+                h2.innerHTML = strings[i].slice(4, strings[i].length);
+                content.appendChild(h2);
+            } else if (strings[i].startsWith("h3: ")) {
+                const h3 = document.createElement("h3");
+                h3.innerHTML = strings[i].slice(4, strings[i].length);
+                content.appendChild(h3);
+            } else if (strings[i].startsWith("h4: ")) {
+                const h4 = document.createElement("h4");
+                h4.innerHTML = strings[i].slice(4, strings[i].length);
+                content.appendChild(h4);
+            } else if (strings[i].startsWith("h5: ")) {
+                const h5 = document.createElement("h5");
+                h5.innerHTML = strings[i].slice(4, strings[i].length);
+            } else if (strings[i].startsWith("code: ")) {
+                const code = document.createElement("code");
+                code.innerHTML = strings[i].slice(6, strings[i].length);
+                content.appendChild(code);
+            } else if (strings[i].startsWith("img: ")) {
+                const img = document.createElement("img");
+                img.src = strings[i].slice(5, strings[i].length);
+                img.alt = "";
+                content.appendChild(img);
+            } else {
+                const p = document.createElement("p");
+                p.innerHTML = strings[i];
+                content.appendChild(p);
+            }
         }
 
         gb.onclick = () => {

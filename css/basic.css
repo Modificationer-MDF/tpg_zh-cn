@@ -188,7 +188,7 @@ pre {
     to {
         visibility: visible;
         opacity: 1;
-        height: 1220px;
+        height: 1100px;
         transform: translateX(5vw);
     }
 }
@@ -197,7 +197,7 @@ pre {
     from {
         visibility: visible;
         opacity: 1;
-        height: 1220px;
+        height: 1100px;
         transform: translateX(5vw);
     }
 

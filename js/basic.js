@@ -293,18 +293,6 @@ function fn1() { // “函数演示” “预设” 模式。
             rz("计时结束。");
         }
     };
-    const nullbtn = document.createElement("button");
-    nullbtn.innerHTML = "在函数的值中输入 null 值。";
-    nullbtn.className = "btn10";
-    nullbtn.onclick = () => {
-        wz(null);
-    };
-    const undefinedbtn = document.createElement("button");
-    undefinedbtn.innerHTML = "在函数的值中输入 undefined 值。";
-    undefinedbtn.className = "btn11";
-    undefinedbtn.onclick = () => {
-        wz(undefined);
-    };
     const imp = document.createElement("button");
     imp.textContent = "wz";
     imp.className = "btn22";
@@ -324,8 +312,6 @@ function fn1() { // “函数演示” “预设” 模式。
         zdbtn,
         timerbtn,
         imp,
-        nullbtn,
-        undefinedbtn,
     ];
 
     div1.style.display = "none";
@@ -350,8 +336,6 @@ function fn1() { // “函数演示” “预设” 模式。
         all.forEach((btn, index) => {
             if (index >= 0 && index < 11) {
                 div1.appendChild(btn);
-            } else {
-                div3.appendChild(btn);
             }
         });
     }
@@ -880,7 +864,7 @@ function control() { // 选项。
     eas.innerHTML = "缓动函数（easing）";
     eas.className = "lcont";
     eas.onclick = () => {
-        wz("cubic-bezier 函数的格式是 cubic-bezier(x1, y1, x2, y2)，其中 x1 和 x2 必须在 0 到 1 之间，y1 和 y2 则可以是任意值；其他 easing 还有 ease、linear、ease-in、ease-out、ease-in-out、step、step-start、step-end。");
+        mb(["cubic-bezier 函数的格式是 cubic-bezier(x1, y1, x2, y2)，其中 x1 和 x2 必须在 0 到 1 之间，y1 和 y2 则可以是任意值；其他 easing 还有 ease、linear、ease-in、ease-out、ease-in-out、step、step-start、step-end。"]);
     };
     const img5 = document.createElement("img");
     img5.src = "images/Easing.png";
@@ -1395,7 +1379,7 @@ async function fn7() { // 网站介绍。
             let q1 = await xz("是否需要演示如何更改？", 1, ["是。", "否。"]);
             q1 = q1.join("");
             if (q1 === "是。") {
-                await wz("你可以直接点击相应的按钮便捷更改变量值，也可以通过输入来更改。");
+                await mb(["你可以直接点击相应的按钮便捷更改变量值，也可以通过输入来更改。"]);
                 let q2 = await xz("选择哪个变量演示呢？", 1, ["easing", "deftime", "defwid", "defhei", "timer_speed"]);
                 q2 = q2.join("");
                 noti("请修改该值。");
@@ -1472,7 +1456,7 @@ async function fn7() { // 网站介绍。
                 if (getComputedStyle(inf).animationName === "jr_inf" && j2 === false) {
                     ld(main, "75%");
                     j2 = true;
-                    await wz("在 “未读信息” 界面，你可以看到因窗口大小限制而没有看到的内容。");
+                    await mb(["在 “未读信息” 界面，你可以看到因窗口大小限制而没有看到的内容。"]);
                     inf_block = false;
                     inf_moved = true;
                     w2 = true;
@@ -1493,7 +1477,7 @@ async function fn7() { // 网站介绍。
                 if (rmenu.style.opacity === "1" && j3 === false) {
                     ld(main, "75%");
                     j3 = true;
-                    await wz("通过右键菜单，你可以快速完成一些常见操作。");
+                    await mb(["通过右键菜单，你可以快速完成一些常见操作。"]);
                     noti("注：若要打开控制台，请按 F12。");
                     w3 = true;
                     clearInterval(i5);
@@ -1569,5 +1553,76 @@ async function fn8() {
         else if (mid_win[i].className === "timer-window") timer_cnt++;
     }
 
-    mb([`有 ${noti_cnt} 个 Noti() 正在运行。`, `有 ${cg_cnt} 个 Cg() 正在运行。`, `有 ${fail_cnt} 个 Fail() 正在运行。`, `有 ${warn_cnt} 个 Warn() 正在运行。`, `有 ${inp_cnt} 个 Inp() 正在运行。`, `有 ${synchr_cnt} 个 Synchr() 正在运行。`, `有 ${xz_cnt} 个 Xz() 正在运行。`, `有 ${lj_cnt} 个 Lj() 正在运行。`, `有 ${zd_cnt} 个 Zd() 正在运行。`, `有 ${timer_cnt} 个 Timer() 正在运行。`], `${xzsj()} 时状态`);
+    mb([`h3: ${xzsj()} 时状态`, `li: 有 ${noti_cnt} 个 Noti() 正在运行。`, `li: 有 ${cg_cnt} 个 Cg() 正在运行。`, `li: 有 ${fail_cnt} 个 Fail() 正在运行。`, `li: 有 ${warn_cnt} 个 Warn() 正在运行。`, `li: 有 ${inp_cnt} 个 Inp() 正在运行。`, `li: 有 ${synchr_cnt} 个 Synchr() 正在运行。`, `li: 有 ${xz_cnt} 个 Xz() 正在运行。`, `li: 有 ${lj_cnt} 个 Lj() 正在运行。`, `li: 有 ${zd_cnt} 个 Zd() 正在运行。`, `li: 有 ${timer_cnt} 个 Timer() 正在运行。`]);
+}
+
+function fn_trans(id, target_fn, targetfn_content, targetfn_title) { // 将一个函数窗口过渡到另一个函数窗口。
+    if (id === null || id === undefined || String(id).replace(/\s/g, "") === "") {
+        fail("请输入有效的窗口 ID！");
+        return "ID 无效。";
+    } if (target_fn === null || target_fn === undefined || String(target_fn).replace(/\s/g, "") === "") {
+        fail("请输入有效的目标函数！");
+        return "目标函数无效。";
+    } if (targetfn_content === null || targetfn_content === undefined || String(targetfn_content).replace(/\s/g, "") === "") {
+        fail("请输入的显示内容！");
+        return "目标函数显示内容无效。";
+    }
+
+    const window = document.getElementById(id);
+    if (window === null || window === undefined) {
+        fail(`不存在 ID 为 ${id} 的窗口！`);
+        return "发生错误。";
+    }
+
+    let fn_style = String(window.className).slice(0, -7);
+    rz(fn_style);
+    const square = window.querySelector(`.${fn_style}-square`);
+    const title = window.querySelector(".fn-title");
+    const content = window.querySelector(".fn-content");
+    const bar = window.querySelector(`.${fn_style}-progressbar`);
+
+    if (targetfn_title === null || targetfn_title === undefined || String(targetfn_title).replace(/\s/g, "") === "") {
+        switch (fn_style) {
+            case "Noti":
+                targetfn_title = "通知";
+                break;
+            case "Cg":
+                targetfn_title = "完成";
+                break;
+            case "Fail":
+                targetfn_title = "错误";
+                break;
+            case "Warn":
+                targetfn_title = "注意";
+                break;
+            case "Inp":
+                targetfn_title = "输入";
+                break;
+            case "Synchr":
+                targetfn_title = "同步";
+                break;
+            case "Xz":
+                targetfn_title = "选择";
+                break;
+            case "Lj":
+                targetfn_title = "链接";
+                break;
+            case "Zd":
+                targetfn_title = "终端";
+                break;
+            case "Timer":
+                targetfn_title = "计时器";
+                break;
+            default:
+                fail("无法识别函数类型！");
+                return "无法识别函数类型。";
+                break;
+        }
+    }
+    square.className = `${target_fn}-square`;
+    title.innerHTML = targetfn_title;
+    content.innerHTML = targetfn_content;
+    bar.className = `${target_fn}-progressbar`;
+
+    return 0;
 }
