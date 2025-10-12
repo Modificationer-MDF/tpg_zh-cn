@@ -1388,38 +1388,50 @@ async function mb(strings, title, id) {
         content.style.marginTop = square_height;
 
         for (let i = 0; i < strings.length; i++) {
-            if (strings[i].startsWith("li: ")) {
-                const li = document.createElement("li");
-                li.innerHTML = strings[i].slice(4, strings[i].length);
-                content.appendChild(li);
-            } else if (strings[i].startsWith("h1: ")) {
-                const h1 = document.createElement("h1");
-                h1.innerHTML = strings[i].slice(4, strings[i].length);
-                content.appendChild(h1);
-            } else if (strings[i].startsWith("h2: ")) {
-                const h2 = document.createElement("h2");
-                h2.innerHTML = strings[i].slice(4, strings[i].length);
-                content.appendChild(h2);
-            } else if (strings[i].startsWith("h3: ")) {
-                const h3 = document.createElement("h3");
-                h3.innerHTML = strings[i].slice(4, strings[i].length);
-                content.appendChild(h3);
-            } else if (strings[i].startsWith("h4: ")) {
-                const h4 = document.createElement("h4");
-                h4.innerHTML = strings[i].slice(4, strings[i].length);
-                content.appendChild(h4);
-            } else if (strings[i].startsWith("h5: ")) {
-                const h5 = document.createElement("h5");
-                h5.innerHTML = strings[i].slice(4, strings[i].length);
-            } else if (strings[i].startsWith("code: ")) {
-                const code = document.createElement("code");
-                code.innerHTML = strings[i].slice(6, strings[i].length);
-                content.appendChild(code);
-            } else if (strings[i].startsWith("img: ")) {
-                const img = document.createElement("img");
-                img.src = strings[i].slice(5, strings[i].length);
-                img.alt = "";
-                content.appendChild(img);
+            if (strings[i].startsWith("[标签] ")) {
+                strings[i] = strings[i].slice(5, strings[i].length);
+                if (strings[i].toLowerCase().startsWith("li: ")) {
+                    const li = document.createElement("li");
+                    li.innerHTML = strings[i].slice(4, strings[i].length);
+                    content.appendChild(li);
+                } else if (strings[i].toLowerCase().startsWith("h1: ")) {
+                    const h1 = document.createElement("h1");
+                    h1.innerHTML = strings[i].slice(4, strings[i].length);
+                    content.appendChild(h1);
+                } else if (strings[i].toLowerCase().startsWith("h2: ")) {
+                    const h2 = document.createElement("h2");
+                    h2.innerHTML = strings[i].slice(4, strings[i].length);
+                    content.appendChild(h2);
+                } else if (strings[i].toLowerCase().startsWith("h3: ")) {
+                    const h3 = document.createElement("h3");
+                    h3.innerHTML = strings[i].slice(4, strings[i].length);
+                    content.appendChild(h3);
+                } else if (strings[i].toLowerCase().startsWith("h4: ")) {
+                    const h4 = document.createElement("h4");
+                    h4.innerHTML = strings[i].slice(4, strings[i].length);
+                    content.appendChild(h4);
+                } else if (strings[i].toLowerCase().startsWith("h5: ")) {
+                    const h5 = document.createElement("h5");
+                    h5.innerHTML = strings[i].slice(4, strings[i].length);
+                } else if (strings[i].toLowerCase().startsWith("code: ")) {
+                    const code = document.createElement("code");
+                    code.innerHTML = strings[i].slice(6, strings[i].length);
+                    content.appendChild(code);
+                } else if (strings[i].toLowerCase().startsWith("img: ")) {
+                    const img = document.createElement("img");
+                    img.src = strings[i].slice(5, strings[i].length);
+                    img.alt = "";
+                    content.appendChild(img);
+                } else if (strings[i].toLowerCase().startsWith("a: ")) {
+                    const a = document.createElement("a");
+                    a.href = strings[i].slice(3, strings[i].length);
+                    a.innerHTML = strings[i].slice(3, strings[i].length);
+                    content.appendChild(a);
+                } else if (strings[i].toLowerCase().startsWith("div: ")) {
+                    const div = document.createElement("div");
+                    div.innerHTML = strings[i].slice(5, strings[i].length);
+                    content.appendChild(div);
+                }
             } else {
                 const p = document.createElement("p");
                 p.innerHTML = strings[i];

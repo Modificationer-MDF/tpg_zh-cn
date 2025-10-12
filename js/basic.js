@@ -1553,7 +1553,7 @@ async function fn8() {
         else if (mid_win[i].className === "timer-window") timer_cnt++;
     }
 
-    mb([`h3: ${xzsj()} 时状态`, `li: 有 ${noti_cnt} 个 Noti() 正在运行。`, `li: 有 ${cg_cnt} 个 Cg() 正在运行。`, `li: 有 ${fail_cnt} 个 Fail() 正在运行。`, `li: 有 ${warn_cnt} 个 Warn() 正在运行。`, `li: 有 ${inp_cnt} 个 Inp() 正在运行。`, `li: 有 ${synchr_cnt} 个 Synchr() 正在运行。`, `li: 有 ${xz_cnt} 个 Xz() 正在运行。`, `li: 有 ${lj_cnt} 个 Lj() 正在运行。`, `li: 有 ${zd_cnt} 个 Zd() 正在运行。`, `li: 有 ${timer_cnt} 个 Timer() 正在运行。`]);
+    mb([`h3: ${xzsj()} 时状态`, `[标签] li: 有 ${noti_cnt} 个 Noti() 正在运行。`, `[标签] li: 有 ${cg_cnt} 个 Cg() 正在运行。`, `[标签] li: 有 ${fail_cnt} 个 Fail() 正在运行。`, `[标签] li: 有 ${warn_cnt} 个 Warn() 正在运行。`, `[标签] li: 有 ${inp_cnt} 个 Inp() 正在运行。`, `[标签] li: 有 ${synchr_cnt} 个 Synchr() 正在运行。`, `[标签] li: 有 ${xz_cnt} 个 Xz() 正在运行。`, `[标签] li: 有 ${lj_cnt} 个 Lj() 正在运行。`, `[标签] li: 有 ${zd_cnt} 个 Zd() 正在运行。`, `[标签] li: 有 ${timer_cnt} 个 Timer() 正在运行。`]);
 }
 
 function fn_trans(id, target_fn, targetfn_content, targetfn_title) { // 将一个函数窗口过渡到另一个函数窗口。
