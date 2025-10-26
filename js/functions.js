@@ -25,11 +25,11 @@ function rz(string, time) {
     window.appendChild(content);
 
     requestAnimationFrame(() => {
-        window.style.animation = `jr_rz 0.55s forwards ${easing}`;
+        window.style.animation = `jr_rz 350ms forwards ${easing}`;
     });
 
     setTimeout(() => {
-        window.style.animation = `cc_rz 0.55s forwards ${easing}`;
+        window.style.animation = `cc_rz 350ms forwards ${easing}`;
         setTimeout(() => {
             if (document.body.contains(window)) document.body.removeChild(window);
             close(window);
@@ -90,7 +90,7 @@ function noti(string, title, id) {
     window.appendChild(bar);
     window.appendChild(timerdesc);
 
-    window.style.animation = `jr_fn 0.55s forwards ${easing}`;
+    window.style.animation = `jr_fn 350ms forwards ${easing}`;
     content.innerHTML = string;
     txt.innerHTML = title;
 
@@ -134,7 +134,7 @@ function noti(string, title, id) {
             txt.style.opacity = 0;
             content.addEventListener("transitionend", () => {
                 square.style.height = "35px";
-                window.style.animation = `cc_fn 0.55s forwards ${easing}`;
+                window.style.animation = `cc_fn 350ms forwards ${easing}`;
                 close(window);
                 setTimeout(() => {
                     if (document.body.contains(window)) document.body.removeChild(window);
@@ -197,7 +197,7 @@ function cg(string, title, id) {
     window.appendChild(bar);
     window.appendChild(timerdesc);
 
-    window.style.animation = `jr_fn 0.55s forwards ${easing}`;
+    window.style.animation = `jr_fn 350ms forwards ${easing}`;
     content.innerHTML = string;
     txt.innerHTML = title;
 
@@ -241,7 +241,7 @@ function cg(string, title, id) {
             icon.style.opacity = 0;
             content.addEventListener("transitionend", () => {
                 square.style.height = "35px";
-                window.style.animation = `cc_fn 0.55s forwards ${easing}`;
+                window.style.animation = `cc_fn 350ms forwards ${easing}`;
                 close(window, mid_win)
                 setTimeout(() => {
                     if (document.body.contains(window)) document.body.removeChild(window);
@@ -305,7 +305,7 @@ function fail(string, title, id) {
     window.appendChild(timerdesc);
 
     icon.src = "images/Err.png";
-    window.style.animation = `jr_fn 0.55s forwards ${easing}`;
+    window.style.animation = `jr_fn 350ms forwards ${easing}`;
     content.innerHTML = string;
     txt.innerHTML = title;
 
@@ -349,7 +349,7 @@ function fail(string, title, id) {
             timerdesc.style.transform = "translateX(25px)";
             content.addEventListener("transitionend", () => {
                 square.style.height = "35px";
-                window.style.animation = `cc_fn 0.55s forwards ${easing}`;
+                window.style.animation = `cc_fn 350ms forwards ${easing}`;
                 close(window, mid_win)
                 setTimeout(() => {
                     if (document.body.contains(window)) document.body.removeChild(window);
@@ -412,7 +412,7 @@ function warn(string, title, id) {
     window.appendChild(timerdesc);
 
     icon.src = "images/Exc.png";
-    window.style.animation = `jr_fn 0.55s forwards ${easing}`;
+    window.style.animation = `jr_fn 350ms forwards ${easing}`;
     content.innerHTML = string;
     txt.innerHTML = title;
 
@@ -456,7 +456,7 @@ function warn(string, title, id) {
             txt.style.opacity = 0;
             content.addEventListener("transitionend", () => {
                 square.style.height = "35px";
-                window.style.animation = `cc_fn 0.55s forwards ${easing}`;
+                window.style.animation = `cc_fn 350ms forwards ${easing}`;
                 close(window, mid_win)
                 setTimeout(() => {
                     if (document.body.contains(window)) document.body.removeChild(window);
@@ -524,7 +524,7 @@ async function inp(string, title, id) {
         window.appendChild(box);
         
         icon.src = "images/Inp.png";
-        window.style.animation = `jr_fn 0.55s forwards ${easing}`;
+        window.style.animation = `jr_fn 350ms forwards ${easing}`;
         content.innerHTML = string;
         txt.innerHTML = title;
 
@@ -551,7 +551,7 @@ async function inp(string, title, id) {
                 txt.style.opacity = 0;
                 content.addEventListener("transitionend", () => {
                     square.style.height = "35px";
-                    window.style.animation = `cc_fn 0.55s forwards ${easing}`;
+                    window.style.animation = `cc_fn 350ms forwards ${easing}`;
                     close(window);
                     resolve(value);
                     setTimeout(() => {
@@ -623,7 +623,7 @@ async function xz(string, n, names, title, id) {
         window.appendChild(confirm);
 
         icon.src = "images/Sel.png";
-        window.style.animation = `jr_fn 0.55s forwards ${easing}`;
+        window.style.animation = `jr_fn 350ms forwards ${easing}`;
         content.innerHTML = string;
         txt.innerHTML = title;
 
@@ -661,7 +661,7 @@ async function xz(string, n, names, title, id) {
                 confirm.style.opacity = 0;
                 content.addEventListener("transitionend", () => {
                     square.style.height = "35px";
-                    window.style.animation = `cc_fn 0.55s forwards ${easing}`;
+                    window.style.animation = `cc_fn 350ms forwards ${easing}`;
                     close(window, mid_win)
                     setTimeout(() => {
                         if (document.body.contains(window)) document.body.removeChild(window);
@@ -783,7 +783,7 @@ async function synchr(string, title, id) {
     window.appendChild(bar);
 
     icon.src = "images/Synchronization.png";
-    window.style.animation = `jr_fn 0.55s forwards ${easing}`;
+    window.style.animation = `jr_fn 350ms forwards ${easing}`;
     content.innerHTML = string;
     txt.innerHTML = title;
 
@@ -808,7 +808,7 @@ async function synchr(string, title, id) {
         txt.style.opacity = 0;
         content.addEventListener("transitionend", () => {
             square.style.height = "35px";
-            window.style.animation = `cc_fn 0.55s forwards ${easing}`;
+            window.style.animation = `cc_fn 350ms forwards ${easing}`;
             close(window, mid_win)
             setTimeout(() => {
                 if (document.body.contains(window)) document.body.removeChild(window);
@@ -886,7 +886,7 @@ async function lj(string, url, title, id) {
     visible(content, "Lj");
 
     icon.src = "images/Link.png";
-    window.style.animation = `jr_fn 0.55s forwards ${easing}`;
+    window.style.animation = `jr_fn 350ms forwards ${easing}`;
     content.innerHTML = string;
     link.innerHTML = url;
     ignore.innerHTML = "忽略";
@@ -915,7 +915,7 @@ async function lj(string, url, title, id) {
         txt.style.opacity = 0;
         content.addEventListener("transitionend", () => {
             square.style.height = "35px";
-            window.style.animation = `cc_fn 0.55s forwards ${easing}`;
+            window.style.animation = `cc_fn 350ms forwards ${easing}`;
             close(window, mid_win)
             setTimeout(() => {
                 if (document.body.contains(window)) document.body.removeChild(window);
@@ -1064,7 +1064,7 @@ async function zd(string, title, id) {
                 txt.style.opacity = 0;
                 content.addEventListener("transitionend", () => {
                     square.style.height = "35px";
-                    window.style.animation = `cc_fn 0.55s forwards ${easing}`;
+                    window.style.animation = `cc_fn 350ms forwards ${easing}`;
                     close(window);
                     setTimeout(() => {
                         if (document.body.contains(window)) document.body.removeChild(window);
@@ -1085,7 +1085,7 @@ async function zd(string, title, id) {
         window.appendChild(box);
 
         icon.src = "images/Com.png";
-        window.style.animation = `jr_fn 0.55s forwards ${easing}`;
+        window.style.animation = `jr_fn 350ms forwards ${easing}`;
         content.innerHTML = string;
         txt.innerHTML = title;
 
@@ -1175,7 +1175,7 @@ async function timer(string, time, title, id) {
         window.appendChild(bar);
         window.appendChild(timerdesc);
 
-        window.style.animation = `jr_fn 0.55s forwards ${easing}`;
+        window.style.animation = `jr_fn 350ms forwards ${easing}`;
         txt.innerHTML = title;
 
         let i = setInterval(() => {
@@ -1256,7 +1256,7 @@ async function timer(string, time, title, id) {
                 resolve(true);
                 content.addEventListener("transitionend", () => {
                     square.style.height = "35px";
-                    window.style.animation = `cc_fn 0.55s forwards ${easing}`;
+                    window.style.animation = `cc_fn 350ms forwards ${easing}`;
                     close(window);
                     setTimeout(() => {
                         if (document.body.contains(window)) document.body.removeChild(window);
