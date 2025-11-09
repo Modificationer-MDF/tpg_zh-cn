@@ -20,7 +20,7 @@ function rz(string, time) {
     const lh = parseInt(content.style.lineHeight);
     content.style.height = `${l * lh}px`;
 
-    create(window);
+    create(window, position);
     document.body.appendChild(window);
     window.appendChild(content);
 
@@ -32,65 +32,76 @@ function rz(string, time) {
         window.style.animation = `cc_rz 350ms forwards ${easing}`;
         setTimeout(() => {
             if (document.body.contains(window)) document.body.removeChild(window);
-            close(window);
+            close(window, position);
         }, 550);
     }, time);
 }
 
 // noti 函数。
-function noti(string, title, id) {
+function noti(string, title, position, id) {
     if (string == null || string == undefined) {
         fail("不能输入空值！");
         return "在 Noti() 函数中，string 参数不能为 null 或 undefined。";
     }
     string = String(string);
     let s_replaced = string.replace(/\s+/g, "");
+    if (s_replaced === "") {
+        warn("不能输入空字符串。");
+        return "在 Noti() 函数中，string 参数不能为空。";
+    }
     if (title == null || title == undefined) title = "通知";
-    if (id == null || id == undefined) id = "";
     else {
         title = String(title);
         let t_replaced = title.replace(/\s+/g, "");
         if (t_replaced === "") title = "通知";
     }
-    if (s_replaced === "") {
-        warn("不能输入空字符串。");
-        return "在 Noti() 函数中，string 参数不能为空。";
-    }
+    if (id == null || id == undefined) id = "";
+    if (position == null || position == undefined) position = "中";
 
     const window = document.createElement("div");
+    const square = document.createElement("div");
+    const icon = document.createElement("img");
+    const txt = document.createElement("div");
+    const content = document.createElement("div");
+    const bar = document.createElement("div");
+    const timerdesc = document.createElement("div");
+
     window.className = "noti-window";
     window.id = id;
-    const square = document.createElement("div");
     square.className = "noti-square";
-    const icon = document.createElement("img");
     icon.src = "images/Notification.png";
     icon.alt = "";
     icon.style.opacity = 0;
     icon.style.transistion = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
-    const txt = document.createElement("div");
     txt.className = "fn-title";
     txt.style.opacity = 0;
     txt.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
-    const content = document.createElement("div");
     content.className = "fn-content";
     content.style.opacity = 0;
+    content.style.textAlign = opt_pos(position)[0];
+    content.style.minWidth = opt_pos(position)[1];
     content.style.transition = `all 175ms ${easing}`;
-    const bar = document.createElement("div");
     bar.className = "noti-progressbar";
-    const timerdesc = document.createElement("div");
     timerdesc.className = "fn-timerdesc";
     timerdesc.style.transition = `all 175ms ${easing}`;
 
-    create(window);
+    create(window, position);
     document.body.appendChild(window);
-    window.appendChild(square);
-    square.appendChild(icon);
-    square.appendChild(txt);
-    window.appendChild(content);
-    window.appendChild(bar);
-    window.appendChild(timerdesc);
 
-    window.style.animation = `jr_fn 350ms forwards ${easing}`;
+    if (position === "中") {
+        window.appendChild(square);
+        square.appendChild(icon);
+        square.appendChild(txt);
+        window.appendChild(content);
+        window.appendChild(bar);
+        window.appendChild(timerdesc);
+    } else if (position === "右") {
+        window.appendChild(content);
+        window.appendChild(bar);
+        window.appendChild(timerdesc);
+    }
+
+    window.style.animation = `jr_${opt_pos(position)[2]}fn 350ms forwards ${easing}`;
     content.innerHTML = string;
     txt.innerHTML = title;
 
@@ -134,8 +145,8 @@ function noti(string, title, id) {
             txt.style.opacity = 0;
             content.addEventListener("transitionend", () => {
                 square.style.height = "35px";
-                window.style.animation = `cc_fn 350ms forwards ${easing}`;
-                close(window);
+                window.style.animation = `cc_${opt_pos(position)[2]}fn 350ms forwards ${easing}`;
+                close(window, position);
                 setTimeout(() => {
                     if (document.body.contains(window)) document.body.removeChild(window);
                 }, 550);
@@ -145,24 +156,25 @@ function noti(string, title, id) {
 }
 
 // cg 函数。
-function cg(string, title, id) {
+function cg(string, title, position, id) {
     if (string == null || string == undefined) {
         fail("不能输入空值！");
         return "在 Cg() 函数中，string 参数不能为 null 或 undefined。";
     }
     string = String(string);
     let s_replaced = string.replace(/\s+/g, "");
+    if (s_replaced === "") {
+        warn("不能输入空字符串。");
+        return "在 Cg() 函数中，string 参数不能为空。";
+    }
     if (title == null || title == undefined) title = "完成";
-    if (id == null || id == undefined) id = "";
     else {
         title = String(title);
         let t_replaced = title.replace(/\s+/g, "");
         if (t_replaced === "") title = "完成";
     }
-    if (s_replaced === "") {
-        warn("不能输入空字符串。");
-        return "在 Cg() 函数中，string 参数不能为空。";
-    }
+    if (id == null || id == undefined) id = "";
+    if (position == null || position == undefined) position = "中";
 
     const window = document.createElement("div");
     window.className = "cg-window";
@@ -188,16 +200,23 @@ function cg(string, title, id) {
     timerdesc.className = "fn-timerdesc";
     timerdesc.style.transition = `all 175ms ${easing}`;
 
-    create(window);
+    create(window, position);
     document.body.appendChild(window);
-    window.appendChild(square);
-    square.appendChild(icon);
-    square.appendChild(txt);
-    window.appendChild(content);
-    window.appendChild(bar);
-    window.appendChild(timerdesc);
 
-    window.style.animation = `jr_fn 350ms forwards ${easing}`;
+    if (position === "中") {
+        window.appendChild(square);
+        square.appendChild(icon);
+        square.appendChild(txt);
+        window.appendChild(content);
+        window.appendChild(bar);
+        window.appendChild(timerdesc);
+    } else if (position === "右") {
+        window.appendChild(content);
+        window.appendChild(bar);
+        window.appendChild(timerdesc);
+    }
+
+    window.style.animation = `jr_${opt_pos(position)[2]}fn 350ms forwards ${easing}`;
     content.innerHTML = string;
     txt.innerHTML = title;
 
@@ -241,8 +260,8 @@ function cg(string, title, id) {
             icon.style.opacity = 0;
             content.addEventListener("transitionend", () => {
                 square.style.height = "35px";
-                window.style.animation = `cc_fn 350ms forwards ${easing}`;
-                close(window, mid_win)
+                window.style.animation = `cc_${opt_pos(position)[2]}fn 350ms forwards ${easing}`;
+                close(window, position)
                 setTimeout(() => {
                     if (document.body.contains(window)) document.body.removeChild(window);
                 }, 550);
@@ -252,24 +271,25 @@ function cg(string, title, id) {
 }
 
 // fail 函数。
-function fail(string, title, id) {
+function fail(string, title, position, id) {
     if (string == null || string == undefined) {
         fail("不能输入空值！");
         return "在 Fail() 函数中，string 参数不能为 null 或 undefined。";
     }
     string = String(string);
     let s_replaced = string.replace(/\s+/g, "");
+    if (s_replaced === "") {
+        warn("不能输入空字符串。");
+        return "在 Fail() 函数中，string 参数不能为空。";
+    }
     if (title == null || title == undefined) title = "错误";
-    if (id == null || id == undefined) id = "";
     else {
         title = String(title);
         let t_replaced = title.replace(/\s+/g, "");
         if (t_replaced === "") title = "错误";
     }
-    if (s_replaced === "") {
-        warn("不能输入空字符串。");
-        return "在 Fail() 函数中，string 参数不能为空。";
-    }
+    if (id == null || id == undefined) id = "";
+    if (position == null || position == undefined) position = "中";
 
     const window = document.createElement("div");
     window.className = "fail-window";
@@ -295,17 +315,24 @@ function fail(string, title, id) {
     timerdesc.className = "fn-timerdesc";
     timerdesc.style.transition = `all 175ms ${easing}`;
 
-    create(window);
+    create(window, position);
     document.body.appendChild(window);
-    window.appendChild(square);
-    square.appendChild(icon);
-    square.appendChild(txt);
-    window.appendChild(content);
-    window.appendChild(bar);
-    window.appendChild(timerdesc);
+
+    if (position === "中") {
+        window.appendChild(square);
+        square.appendChild(icon);
+        square.appendChild(txt);
+        window.appendChild(content);
+        window.appendChild(bar);
+        window.appendChild(timerdesc);
+    } else if (position === "右") {
+        window.appendChild(content);
+        window.appendChild(bar);
+        window.appendChild(timerdesc);
+    }
 
     icon.src = "images/Err.png";
-    window.style.animation = `jr_fn 350ms forwards ${easing}`;
+    window.style.animation = `jr_${opt_pos(position)[2]}fn 350ms forwards ${easing}`;
     content.innerHTML = string;
     txt.innerHTML = title;
 
@@ -349,8 +376,8 @@ function fail(string, title, id) {
             timerdesc.style.transform = "translateX(25px)";
             content.addEventListener("transitionend", () => {
                 square.style.height = "35px";
-                window.style.animation = `cc_fn 350ms forwards ${easing}`;
-                close(window, mid_win)
+                window.style.animation = `cc_${opt_pos(position)[2]}fn 350ms forwards ${easing}`;
+                close(window, position)
                 setTimeout(() => {
                     if (document.body.contains(window)) document.body.removeChild(window);
                 }, 550);
@@ -360,24 +387,25 @@ function fail(string, title, id) {
 }
 
 // warn 函数。
-function warn(string, title, id) {
+function warn(string, title, position, id) {
     if (string == null || string == undefined) {
         fail("不能输入空值！");
         return "在 Warn() 函数中，string 参数不能为 null 或 undefined。";
     }
     string = String(string);
     let s_replaced = string.replace(/\s+/g, "");
+    if (s_replaced === "") {
+        warn("不能输入空字符串。");
+        return "在 Warn() 函数中，string 参数不能为空。";
+    }
     if (title == null || title == undefined) title = "注意";
-    if (id == null || id == undefined) id = "";
     else {
         title = String(title);
         let t_replaced = title.replace(/\s+/g, "");
         if (t_replaced === "") title = "注意";
     }
-    if (s_replaced === "") {
-        warn("不能输入空字符串。");
-        return "在 Warn() 函数中，string 参数不能为空。";
-    }
+    if (id == null || id == undefined) id = "";
+    if (position == null || position == undefined) position = "中";
 
     const window = document.createElement("div");
     window.className = "warn-window";
@@ -402,17 +430,24 @@ function warn(string, title, id) {
     timerdesc.className = "fn-timerdesc";
     timerdesc.style.transition = `all 175ms ${easing}`;
 
-    create(window);
+    create(window, position);
     document.body.appendChild(window);
-    window.appendChild(square);
-    square.appendChild(icon);
-    square.appendChild(txt);
-    window.appendChild(content);
-    window.appendChild(bar);
-    window.appendChild(timerdesc);
+
+    if (position === "中") {
+        window.appendChild(square);
+        square.appendChild(icon);
+        square.appendChild(txt);
+        window.appendChild(content);
+        window.appendChild(bar);
+        window.appendChild(timerdesc);
+    } else if (position === "右") {
+        window.appendChild(content);
+        window.appendChild(bar);
+        window.appendChild(timerdesc);
+    }
 
     icon.src = "images/Exc.png";
-    window.style.animation = `jr_fn 350ms forwards ${easing}`;
+    window.style.animation = `jr_${opt_pos(position)[2]}fn 350ms forwards ${easing}`;
     content.innerHTML = string;
     txt.innerHTML = title;
 
@@ -456,8 +491,8 @@ function warn(string, title, id) {
             txt.style.opacity = 0;
             content.addEventListener("transitionend", () => {
                 square.style.height = "35px";
-                window.style.animation = `cc_fn 350ms forwards ${easing}`;
-                close(window, mid_win)
+                window.style.animation = `cc_${opt_pos(position)[2]}fn 350ms forwards ${easing}`;
+                close(window, position)
                 setTimeout(() => {
                     if (document.body.contains(window)) document.body.removeChild(window);
                 }, 550);
@@ -467,7 +502,7 @@ function warn(string, title, id) {
 }
 
 // inp 函数。
-async function inp(string, title, id) {
+async function inp(string, title, position, id) {
     return new Promise((resolve) => {
         if (string == null || string == undefined) {
             fail("不能输入空值！");
@@ -475,17 +510,18 @@ async function inp(string, title, id) {
         }
         string = String(string);
         let s_replaced = string.replace(/\s+/g, "");
+        if (s_replaced === "") {
+            warn("不能输入空字符串。");
+            return "在 Inp() 函数中，string 参数不能为空。";
+        }
         if (title == null || title == undefined) title = "输入";
-        if (id == null || id == undefined) id = "";
         else {
             title = String(title);
             let t_replaced = title.replace(/\s+/g, "");
             if (t_replaced === "") title = "输入";
         }
-        if (s_replaced === "") {
-            warn("不能输入空字符串。");
-            return "在 Inp() 函数中，string 参数不能为空。";
-        }
+        if (id == null || id == undefined) id = "";
+        if (position == null || position == undefined) position = "中";
 
         const window = document.createElement("div");
         window.className = "inp-window";
@@ -515,16 +551,22 @@ async function inp(string, title, id) {
 
         visible(content, "Inp");
 
-        create(window);
+        create(window, position);
         document.body.appendChild(window);
-        window.appendChild(square);
-        square.appendChild(icon);
-        square.appendChild(txt);
-        window.appendChild(content);
-        window.appendChild(box);
+
+        if (position === "中") {
+            window.appendChild(square);
+            square.appendChild(icon);
+            square.appendChild(txt);
+            window.appendChild(content);
+            window.appendChild(box);
+        } else if (position === "右") {
+            window.appendChild(content);
+            window.appendChild(box);
+        }
         
         icon.src = "images/Inp.png";
-        window.style.animation = `jr_fn 350ms forwards ${easing}`;
+        window.style.animation = `jr_${opt_pos(position)[2]}fn 350ms forwards ${easing}`;
         content.innerHTML = string;
         txt.innerHTML = title;
 
@@ -551,8 +593,8 @@ async function inp(string, title, id) {
                 txt.style.opacity = 0;
                 content.addEventListener("transitionend", () => {
                     square.style.height = "35px";
-                    window.style.animation = `cc_fn 350ms forwards ${easing}`;
-                    close(window);
+                    window.style.animation = `cc_${opt_pos(position)[2]}fn 350ms forwards ${easing}`;
+                    close(window, position);
                     resolve(value);
                     setTimeout(() => {
                         if (document.body.contains(window)) document.body.removeChild(window);
@@ -564,7 +606,7 @@ async function inp(string, title, id) {
 }
 
 // xz 函数。
-async function xz(string, n, names, title, id) {
+async function xz(string, n, names, title, position, id) {
     return new Promise((resolve) => {
         if (string == null || string == undefined) {
             fail("不能输入空值！");
@@ -572,21 +614,22 @@ async function xz(string, n, names, title, id) {
         }
         string = String(string);
         let s_replaced = string.replace(/\s+/g, "");
-        if (title == null || title == undefined) title = "选择";
-        if (id == null || id == undefined) id = "";
-        if (n > names.length) {
-            fail("所给予的选项数量不足！");
-            return;
+        if (s_replaced === "") {
+            warn("不能输入空字符串。");
+            return "在 Xz() 函数中，string 参数不能为空。";
         }
+        if (title == null || title == undefined) title = "选择";
         else {
             title = String(title);
             let t_replaced = title.replace(/\s+/g, "");
             if (t_replaced === "") title = "选择";
         }
-        if (s_replaced === "") {
-            warn("不能输入空字符串。");
-            return "在 Xz() 函数中，string 参数不能为空。";
+        if (id == null || id == undefined) id = "";
+        if (n > names.length) {
+            fail("所给予的选项数量不足！");
+            return;
         }
+        if (position === null || position == undefined) position = "中";
 
         const window = document.createElement("div");
         window.className = "xz-window";
@@ -614,16 +657,22 @@ async function xz(string, n, names, title, id) {
         const array = Array.from(names);
         const xz_items = []; // 被选择的选项。
 
-        create(window);
+        create(window, position);
         document.body.appendChild(window);
-        window.appendChild(square);
-        square.appendChild(icon);
-        square.appendChild(txt);
-        window.appendChild(content);
-        window.appendChild(confirm);
+
+        if (position === "中") {
+            window.appendChild(square);
+            square.appendChild(icon);
+            square.appendChild(txt);
+            window.appendChild(content);
+            window.appendChild(confirm);
+        } else if (position === "右") {
+            window.appendChild(content);
+            window.appendChild(confirm);
+        }
 
         icon.src = "images/Sel.png";
-        window.style.animation = `jr_fn 350ms forwards ${easing}`;
+        window.style.animation = `jr_${opt_pos(position)[2]}fn 350ms forwards ${easing}`;
         content.innerHTML = string;
         txt.innerHTML = title;
 
@@ -661,8 +710,8 @@ async function xz(string, n, names, title, id) {
                 confirm.style.opacity = 0;
                 content.addEventListener("transitionend", () => {
                     square.style.height = "35px";
-                    window.style.animation = `cc_fn 350ms forwards ${easing}`;
-                    close(window, mid_win)
+                    window.style.animation = `cc_${opt_pos(position)[2]}fn 350ms forwards ${easing}`;
+                    close(window, position)
                     setTimeout(() => {
                         if (document.body.contains(window)) document.body.removeChild(window);
                     }, 550);
@@ -709,7 +758,7 @@ async function xz(string, n, names, title, id) {
             checkbox.onchange = () => {
                 if (checkbox.checked) {
                     if (xz_items.length >= n) {
-                        warn(`勾选的选项数量已达上限。最多可勾选 ${n} 个。`);
+                        warn(`勾选的选项数量已达上限。最多可勾选 ${n} 个。`, "注意", position);
                         checkbox.checked = false;
                         return;
                     }
@@ -734,24 +783,25 @@ async function xz(string, n, names, title, id) {
 
 // synchr 函数。
 
-async function synchr(string, title, id) {
+async function synchr(string, title, position, id) {
     if (string == null || string == undefined) {
         fail("不能输入空值！");
         return "在 Synchr() 函数中，string 参数不能为 null 或 undefined。";
     }
     string = String(string);
     let s_replaced = string.replace(/\s+/g, "");
+    if (s_replaced === "") {
+        warn("不能输入空字符串。");
+        return "在 Synchr() 函数中，string 参数不能为空。";
+    }
     if (title == null || title == undefined) title = "同步";
-    if (id == null || id == undefined) id = "";
     else {
         title = String(title);
         let t_replaced = title.replace(/\s+/g, "");
         if (t_replaced === "") title = "同步";
     }
-    if (s_replaced === "") {
-        warn("不能输入空字符串。");
-        return "在 Synchr() 函数中，string 参数不能为空。";
-    }
+    if (id == null || id == undefined) id = "";
+    if (position == null || position == undefined) position = "中";
 
     const window = document.createElement("div");
     window.className = "synchr-window";
@@ -773,17 +823,28 @@ async function synchr(string, title, id) {
     content.style.transition = `all 175ms ${easing}`;
     const bar = document.createElement("div");
     bar.className = "synchr-progressbar";
+    const desc = document.createElement("div");
+    desc.className = "fn-timerdesc";
+    desc.innerHTML = "无任务";
 
-    create(window);
+    create(window, position);
     document.body.appendChild(window);
-    window.appendChild(square);
-    square.appendChild(icon);
-    square.appendChild(txt);
-    window.appendChild(content);
-    window.appendChild(bar);
+
+    if (position === "中") {
+        window.appendChild(square);
+        square.appendChild(icon);
+        square.appendChild(txt);
+        window.appendChild(content);
+        window.appendChild(bar);
+        window.appendChild(desc);
+    } else if (position === "右") {
+        window.appendChild(content);
+        window.appendChild(bar);
+        window.appendChild(desc);
+    }
 
     icon.src = "images/Synchronization.png";
-    window.style.animation = `jr_fn 350ms forwards ${easing}`;
+    window.style.animation = `jr_${opt_pos(position)[2]}fn 350ms forwards ${easing}`;
     content.innerHTML = string;
     txt.innerHTML = title;
 
@@ -808,8 +869,8 @@ async function synchr(string, title, id) {
         txt.style.opacity = 0;
         content.addEventListener("transitionend", () => {
             square.style.height = "35px";
-            window.style.animation = `cc_fn 350ms forwards ${easing}`;
-            close(window, mid_win)
+            window.style.animation = `cc_${opt_pos(position)[2]}fn 350ms forwards ${easing}`;
+            close(window, position)
             setTimeout(() => {
                 if (document.body.contains(window)) document.body.removeChild(window);
             }, 550);
@@ -818,7 +879,7 @@ async function synchr(string, title, id) {
 }
 
 // lj 函数。
-async function lj(string, url, title, id) {
+async function lj(string, url, title, position, id) {
     if (string == null || string == undefined) {
         fail("不能输入空值！");
         return "在 Lj() 函数中，string 参数不能为 null 或 undefined。";
@@ -830,22 +891,23 @@ async function lj(string, url, title, id) {
     string = String(string);
     url = String(url);
     let s_replaced = string.replace(/\s+/g, "");
+    if (s_replaced === "") {
+        warn("不能输入空字符串。");
+        return "在 Lj() 函数中，string 参数不能为空。";
+    }
     let u_replaced = url.replace(/\s+/g, "");
+    if (u_replaced === "") {
+        warn("无法跳转至空地址。");
+        return "在 Lj() 函数中，url 参数不能为空。";
+    }
     if (title == null || title == undefined) title = "链接";
-    if (id == null || id == undefined) id = "";
     else {
         title = String(title);
         let t_replaced = title.replace(/\s+/g, "");
         if (t_replaced === "") title = "链接";
     }
-    if (s_replaced === "") {
-        warn("不能输入空字符串。");
-        return "在 Lj() 函数中，string 参数不能为空。";
-    }
-    if (u_replaced === "") {
-        warn("无法跳转至空地址。");
-        return "在 Lj() 函数中，url 参数不能为空。";
-    }
+    if (id == null || id == undefined) id = "";
+    if (position == null || position == undefined) position = "中";
 
     const window = document.createElement("div");
     window.className = "lj-window";
@@ -874,19 +936,26 @@ async function lj(string, url, title, id) {
     ignore.style.opacity = 0;
     ignore.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
 
-    create(window);
+    create(window, position);
     document.body.appendChild(window);
-    window.appendChild(square);
-    square.appendChild(icon);
-    square.appendChild(txt);
-    window.appendChild(content);
-    window.appendChild(link);
-    window.appendChild(ignore);
+
+    if (position === "中") {
+        window.appendChild(square);
+        square.appendChild(icon);
+        square.appendChild(txt);
+        window.appendChild(content);
+        window.appendChild(link);
+        window.appendChild(ignore);
+    } else if (position === "右") {
+        window.appendChild(content);
+        window.appendChild(link);
+        window.appendChild(ignore);
+    }
 
     visible(content, "Lj");
 
     icon.src = "images/Link.png";
-    window.style.animation = `jr_fn 350ms forwards ${easing}`;
+    window.style.animation = `jr_${opt_pos(position)[2]}fn 350ms forwards ${easing}`;
     content.innerHTML = string;
     link.innerHTML = url;
     ignore.innerHTML = "忽略";
@@ -915,8 +984,8 @@ async function lj(string, url, title, id) {
         txt.style.opacity = 0;
         content.addEventListener("transitionend", () => {
             square.style.height = "35px";
-            window.style.animation = `cc_fn 350ms forwards ${easing}`;
-            close(window, mid_win)
+            window.style.animation = `cc_${opt_pos(position)[2]}fn 350ms forwards ${easing}`;
+            close(window, position)
             setTimeout(() => {
                 if (document.body.contains(window)) document.body.removeChild(window);
             }, 550);
@@ -936,7 +1005,7 @@ async function lj(string, url, title, id) {
 }
 
 // zd 函数。
-async function zd(string, title, id) {
+async function zd(string, title, position, id) {
     return new Promise((resolve) => {
         if (string == null || string == undefined) {
             fail("不能输入空值！");
@@ -944,17 +1013,18 @@ async function zd(string, title, id) {
         }
         string = String(string);
         let s_replaced = string.replace(/\s+/g, "");
+        if (s_replaced === "") {
+            warn("不能输入空字符串。");
+            return "在 Zd() 函数中，string 参数不能为空。";
+        }
         if (title == null || title == undefined) title = "终端";
-        if (id == null || id == undefined) id = "";
         else {
             title = String(title);
             let t_replaced = title.replace(/\s+/g, "");
             if (t_replaced === "") title = "终端";
         }
-        if (s_replaced === "") {
-            warn("不能输入空字符串。");
-            return "在 Zd() 函数中，string 参数不能为空。";
-        }
+        if (id == null || id == undefined) id = "";
+        if (position == null || position == undefined) position = "中";
 
         const window = document.createElement("div");
         window.className = "zd-window";
@@ -1064,8 +1134,8 @@ async function zd(string, title, id) {
                 txt.style.opacity = 0;
                 content.addEventListener("transitionend", () => {
                     square.style.height = "35px";
-                    window.style.animation = `cc_fn 350ms forwards ${easing}`;
-                    close(window);
+                    window.style.animation = `cc_${opt_pos(position)[2]}fn 350ms forwards ${easing}`;
+                    close(window, position);
                     setTimeout(() => {
                         if (document.body.contains(window)) document.body.removeChild(window);
                     }, 550);
@@ -1076,16 +1146,22 @@ async function zd(string, title, id) {
             }
         });
 
-        create(window);
+        create(window, position);
         document.body.appendChild(window);
-        window.appendChild(square);
-        square.appendChild(icon);
-        square.appendChild(txt);
-        window.appendChild(content);
-        window.appendChild(box);
+
+        if (position === "中") {
+            window.appendChild(square);
+            square.appendChild(icon);
+            square.appendChild(txt);
+            window.appendChild(content);
+            window.appendChild(box);
+        } else if (position === "右") {
+            window.appendChild(content);
+            window.appendChild(box);
+        }
 
         icon.src = "images/Com.png";
-        window.style.animation = `jr_fn 350ms forwards ${easing}`;
+        window.style.animation = `jr_${opt_pos(position)[2]}fn 350ms forwards ${easing}`;
         content.innerHTML = string;
         txt.innerHTML = title;
 
@@ -1105,7 +1181,7 @@ async function zd(string, title, id) {
 }
 
 // timer 函数。
-async function timer(string, time, title, id) {
+async function timer(string, time, title, position, id) {
     return new Promise((resolve) => {
         let passed_time = 0;
         let ls_finish = false;
@@ -1120,7 +1196,13 @@ async function timer(string, time, title, id) {
         string = String(string);
         time = Number(time);
         let s_replaced = string.replace(/\s+/g, "");
+        if (s_replaced === "") string = "";
         if (title == null || title == undefined) title = "计时";
+        else {
+            title = String(title);
+            let t_replaced = title.replace(/\s+/g, "");
+            if (t_replaced === "") title = "计时";
+        }
         if (id == null || id == undefined) id = "";
         if (isNaN(time)) {
             fail("time 参数必须为可识别的数字或纯数字字符串。");
@@ -1132,12 +1214,7 @@ async function timer(string, time, title, id) {
             warn("time 的值过大，无法正常计时。");
             return "在 Timer() 函数中，time 的值必须小于等于 6.048e10。";
         }
-        else {
-            title = String(title);
-            let t_replaced = title.replace(/\s+/g, "");
-            if (t_replaced === "") title = "计时";
-        }
-        if (s_replaced === "") string = "";
+        if (position == null || position == undefined) position = "中";
 
         const window = document.createElement("div");
         window.className = "timer-window";
@@ -1166,16 +1243,23 @@ async function timer(string, time, title, id) {
         timerdesc.color = "#000000";
         timerdesc.style.transition = `all 175ms ${easing}`;
 
-        create(window);
+        create(window, position);
         document.body.appendChild(window);
-        window.appendChild(square);
-        square.appendChild(icon);
-        square.appendChild(txt);
-        window.appendChild(content);
-        window.appendChild(bar);
-        window.appendChild(timerdesc);
 
-        window.style.animation = `jr_fn 350ms forwards ${easing}`;
+        if (position === "中") {
+            window.appendChild(square);
+            square.appendChild(icon);
+            square.appendChild(txt);
+            window.appendChild(content);
+            window.appendChild(bar);
+            window.appendChild(timerdesc);
+        } else if (position === "右") {
+            window.appendChild(content);
+            window.appendChild(bar);
+            window.appendChild(timerdesc);
+        }
+
+        window.style.animation = `jr_${opt_pos(position)[2]}fn 350ms forwards ${easing}`;
         txt.innerHTML = title;
 
         let i = setInterval(() => {
@@ -1256,8 +1340,8 @@ async function timer(string, time, title, id) {
                 resolve(true);
                 content.addEventListener("transitionend", () => {
                     square.style.height = "35px";
-                    window.style.animation = `cc_fn 350ms forwards ${easing}`;
-                    close(window);
+                    window.style.animation = `cc_${opt_pos(position)[2]}fn 350ms forwards ${easing}`;
+                    close(window, position);
                     setTimeout(() => {
                         if (document.body.contains(window)) document.body.removeChild(window);
                     }, 550);
@@ -1271,7 +1355,7 @@ async function timer(string, time, title, id) {
 async function wz(string, qj_title) {
     return new Promise((resolve) => {
         if (string == null || string == undefined) {
-            fail("不能输入空值！");
+            fail("不能输入空值！", "错误", "中");
             resolve(39);
             return;
         }
@@ -1338,7 +1422,7 @@ async function wz(string, qj_title) {
 }
 
 // mb() 函数。
-async function mb(strings, title, id) {
+async function mb(strings, title, position, id) {
     return new Promise((resolve) => {
         if (strings.length === 0 || strings.includes(null) || strings.includes(undefined)) {
             fail("不能输入空值！");
@@ -1348,6 +1432,7 @@ async function mb(strings, title, id) {
         if (title == null || title == undefined || String(title).replace(/\s+/g, "") === "") title = "面板";
         else title = String(title);
         if (id == null || id == undefined) id = "";
+        if (position == null || position == undefined) position = "中";
 
         const window = document.createElement("div");
         window.className = "mb-window";
@@ -1358,30 +1443,51 @@ async function mb(strings, title, id) {
         const icon = document.createElement("img");
         icon.alt = "";
         icon.src = "images/Pad.png";
-        icon.style.transistion = "all 150ms cubic-bezier(0.33, 1, 0.68, 1)";
+        icon.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+        icon.style.opacity = 0;
         const txt = document.createElement("div");
         txt.className = "fn-title";
         txt.innerHTML = title;
+        txt.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+        txt.style.opacity = 0;
         const content = document.createElement("div");
         content.className = "fn-content";
-        content.style.transform = "translateY(0)";
-        content.style.textAlign = "left";
+        content.style.transition = `all 175ms ${easing}`;
+        content.style.opacity = 0;
         const gb = document.createElement("button");
         gb.type = "button";
         gb.className = "mb-gb";
         gb.innerHTML = "关闭";
+        gb.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+        gb.style.opacity = 0;
 
-        create(window);
+        create(window, position);
         document.body.appendChild(window);
-        window.appendChild(square);
-        square.appendChild(icon);
-        square.appendChild(txt);
-        window.appendChild(content);
-        window.appendChild(gb);
+
+        if (position === "中") {
+            window.appendChild(square);
+            square.appendChild(icon);
+            square.appendChild(txt);
+            window.appendChild(content);
+            window.appendChild(gb);
+        } else if (position === "右") {
+            window.appendChild(content);
+            window.appendChild(gb);
+        }
 
         visible(content, "Mb");
 
-        window.style.animation = `jr_mb 0.5s forwards ${easing}`;
+        window.style.animation = `jr_${opt_pos(position)[2]}fn 0.5s forwards ${easing}`;
+
+        window.addEventListener("animationend", () => {
+            content.style.transform = "translateY(0)";
+            square.style.opacity = 1;
+            content.style.opacity = 1;
+            icon.style.opacity = 1;
+            txt.style.opacity = 1;
+            gb.style.opacity = 1;
+            window.style.height = hqgd(window.innerHTML, "mb-window", "div");
+        });
 
         let square_height = hqgd(txt.innerHTML, "fn-title", "div");
         square.style.height = square_height;
@@ -1440,13 +1546,20 @@ async function mb(strings, title, id) {
         }
 
         gb.onclick = () => {
-            window.style.animation = `cc_mb 0.5s forwards ${easing}`;
-            close(window);
+            square.style.opacity = 0;
+            content.style.opacity = 0;
+            content.style.transform = "translateY(-10px)";
+            icon.style.opacity = 0;
+            txt.style.opacity = 0;
+            gb.style.opacity = 0;
             resolve("已确认。");
-            window.addEventListener("animationend", (i) => {
-                if (i.animationName === "cc_mb") {
+            content.addEventListener("transitionend", (i) => {
+                square.style.height = "35px";
+                window.style.animation = `cc_${opt_pos(position)[2]}fn 0.5s forwards ${easing}`;
+                close(window, position);
+                setTimeout(() => {
                     if (document.body.contains(window)) document.body.removeChild(window);
-                }
+                }, 550);
             });
         };
     });

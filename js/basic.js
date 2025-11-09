@@ -1286,31 +1286,39 @@ function pos(p) {
     }
 }
 
-function create(window) { // 创建窗口。
+function create(window, position) { // 创建窗口。
     if (window.className === "rz-window") {
         left_win.push(window);
         pos(0);
-    } else if (window.className === "mb-window") {
+    } else if (position === "右") {
         right_win.push(window);
         pos(1);
-    } else {
+    } else if (position === "中") {
         mid_win.push(window);
         pos(2);
     }
 }
 
-function close(window) { // 关闭窗口。
+function close(window, position) { // 关闭窗口。
     if (window.className === "rz-window") {
         left_win = left_win.filter(win => win !== window);
         pos(0);
-    } else if (window.className === "mb-window") {
+    } else if (position === "右") {
         right_win = right_win.filter(win => win !== window);
         pos(1);
-    } else {
+    } else if (position === "中") {
         mid_win = mid_win.filter(win => win !== window);
         pos(2);
     }
 }
+
+function opt_pos(position) { // 确定窗口设置。（[字体对齐, 文字最小宽度, 动画方位]）
+    if (position === "右") {
+        return ["left", "10ch", "r"];
+    } else {
+        return ["center", "30ch", "m"];
+    }
+} 
 
 function check() {
     let string = "";
@@ -1500,12 +1508,7 @@ async function fn7() { // 网站介绍。
 
 function visible(e, fn_name) {
     const rect = e.getBoundingClientRect();
-    const viewport = (
-        rect.top >= 0 &&
-        rect.left >= 0 &&
-        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-    );
+    const viewport = rect.top >= 0 && rect.left >= 0;
     if (viewport === false) {
         rz(`请注意，你有一条未读完的 ${fn_name}() 信息。`);
         switch (fn_name) {

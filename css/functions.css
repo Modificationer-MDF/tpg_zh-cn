@@ -30,6 +30,67 @@
     line-height: 1.4;
 }
 
+@keyframes jr_mfn {
+    from {
+        transform: translateY(-20px);
+        width: 0;
+        opacity: 0;
+        left: 50%;
+        right: 50%;
+    }
+
+    to {
+        transform: translateY(0);
+        width: 30ch;
+        opacity: 1;
+        left: calc(50% - 15ch);
+        right: calc(50% + 15ch);
+    }
+}
+
+@keyframes cc_mfn {
+    from {
+        transform: translateY(0);
+        width: 30ch;
+        opacity: 1;
+        left: calc(50% - 15ch);
+        right: calc(50% + 15ch);
+    }
+
+    to {
+        transform: translateY(-20px);
+        width: 0;
+        opacity: 0;
+        left: 50%;
+        right: 50%;
+    }
+}
+
+@keyframes jr_rfn {
+    from {
+        transform: translateX(-50vw);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes cc_rfn {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateX(0);
+        transform: translateY(-200px);
+        opacity: 0;
+    }
+}
+
 .noti-window, .cg-window, .fail-window, .warn-window, .inp-window, .synchr-window, .xz-window, .lj-window, .zd-window, .timer-window, .mb-window {
     transition: all 175ms ease;
     z-index: 100;
@@ -77,42 +138,6 @@
 
 .noti-progressbar {
     background-color: #06b48499;
-}
-
-@keyframes jr_fn {
-    from {
-        transform: translateY(-20px);
-        width: 0;
-        opacity: 0;
-        left: 50%;
-        right: 50%;
-    }
-
-    to {
-        transform: translateY(0);
-        width: 30ch;
-        opacity: 1;
-        left: calc(50% - 15ch);
-        right: calc(50% + 15ch);
-    }
-}
-
-@keyframes cc_fn {
-    from {
-        transform: translateY(0);
-        width: 30ch;
-        opacity: 1;
-        left: calc(50% - 15ch);
-        right: calc(50% + 15ch);
-    }
-
-    to {
-        transform: translateY(-20px);
-        width: 0;
-        opacity: 0;
-        left: 50%;
-        right: 50%;
-    }
 }
 
 .cg-window {
@@ -509,28 +534,4 @@
 
 .mb-gb {
     background-color: #8fbc22b0;
-}
-
-@keyframes jr_mb {
-    from {
-        transform: translateX(550px);
-        opacity: 0;
-    }
-
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
-@keyframes cc_mb {
-    from {
-        transform: translateX(0);
-        opacity: 1;
-    }
-
-    to {
-        transform: translateX(550px);
-        opacity: 0;
-    }
 }
