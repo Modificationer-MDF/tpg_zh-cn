@@ -39,8 +39,10 @@ function rz(string, time) {
 
 // noti 函数。
 function noti(string, title, position, id) {
+    if (position == null || position == undefined) position = "中";
+    else if (position !== "中" && position !== "右") fail("输入正确的 position 参数。");
     if (string == null || string == undefined) {
-        fail("不能输入空值！");
+        fail("不能输入空值！", "错误", position);
         return "在 Noti() 函数中，string 参数不能为 null 或 undefined。";
     }
     string = String(string);
@@ -56,7 +58,6 @@ function noti(string, title, position, id) {
         if (t_replaced === "") title = "通知";
     }
     if (id == null || id == undefined) id = "";
-    if (position == null || position == undefined) position = "中";
 
     const window = document.createElement("div");
     const square = document.createElement("div");
@@ -157,6 +158,8 @@ function noti(string, title, position, id) {
 
 // cg 函数。
 function cg(string, title, position, id) {
+    if (position == null || position == undefined) position = "中";
+    else if (position !== "中" && position !== "右") fail("输入正确的 position 参数。", "错误", position);
     if (string == null || string == undefined) {
         fail("不能输入空值！");
         return "在 Cg() 函数中，string 参数不能为 null 或 undefined。";
@@ -174,7 +177,6 @@ function cg(string, title, position, id) {
         if (t_replaced === "") title = "完成";
     }
     if (id == null || id == undefined) id = "";
-    if (position == null || position == undefined) position = "中";
 
     const window = document.createElement("div");
     window.className = "cg-window";
@@ -193,6 +195,8 @@ function cg(string, title, position, id) {
     const content = document.createElement("div");
     content.className = "fn-content";
     content.style.opacity = 0;
+    content.style.textAlign = opt_pos(position)[0];
+    content.style.minWidth = opt_pos(position)[1];
     content.style.transition = `all 175ms ${easing}`;
     const bar = document.createElement("div");
     bar.className = "cg-progressbar";
@@ -272,6 +276,8 @@ function cg(string, title, position, id) {
 
 // fail 函数。
 function fail(string, title, position, id) {
+    if (position == null || position == undefined) position = "中";
+    else if (position !== "中" && position !== "右") fail("输入正确的 position 参数。", "错误", position);
     if (string == null || string == undefined) {
         fail("不能输入空值！");
         return "在 Fail() 函数中，string 参数不能为 null 或 undefined。";
@@ -289,7 +295,6 @@ function fail(string, title, position, id) {
         if (t_replaced === "") title = "错误";
     }
     if (id == null || id == undefined) id = "";
-    if (position == null || position == undefined) position = "中";
 
     const window = document.createElement("div");
     window.className = "fail-window";
@@ -308,6 +313,8 @@ function fail(string, title, position, id) {
     const content = document.createElement("div");
     content.className = "fn-content";
     content.style.opacity = 0;
+    content.style.textAlign = opt_pos(position)[0];
+    content.style.minWidth = opt_pos(position)[1];
     content.style.transition = `all 175ms ${easing}`;
     const bar = document.createElement("div");
     bar.className = "fail-progressbar";
@@ -388,6 +395,8 @@ function fail(string, title, position, id) {
 
 // warn 函数。
 function warn(string, title, position, id) {
+    if (position == null || position == undefined) position = "中";
+    else if (position !== "中" && position !== "右") fail("输入正确的 position 参数。", "错误", position);
     if (string == null || string == undefined) {
         fail("不能输入空值！");
         return "在 Warn() 函数中，string 参数不能为 null 或 undefined。";
@@ -405,7 +414,6 @@ function warn(string, title, position, id) {
         if (t_replaced === "") title = "注意";
     }
     if (id == null || id == undefined) id = "";
-    if (position == null || position == undefined) position = "中";
 
     const window = document.createElement("div");
     window.className = "warn-window";
@@ -423,6 +431,8 @@ function warn(string, title, position, id) {
     const content = document.createElement("div");
     content.className = "fn-content";
     content.style.opacity = 0;
+    content.style.textAlign = opt_pos(position)[0];
+    content.style.minWidth = opt_pos(position)[1];
     content.style.transition = `all 175ms ${easing}`;
     const bar = document.createElement("div");
     bar.className = "warn-progressbar";
@@ -504,6 +514,8 @@ function warn(string, title, position, id) {
 // inp 函数。
 async function inp(string, title, position, id) {
     return new Promise((resolve) => {
+        if (position == null || position == undefined) position = "中";
+        else if (position !== "中" && position !== "右") fail("输入正确的 position 参数。", "错误", position);
         if (string == null || string == undefined) {
             fail("不能输入空值！");
             return "在 Inp() 函数中，string 参数不能为 null 或 undefined。";
@@ -521,7 +533,6 @@ async function inp(string, title, position, id) {
             if (t_replaced === "") title = "输入";
         }
         if (id == null || id == undefined) id = "";
-        if (position == null || position == undefined) position = "中";
 
         const window = document.createElement("div");
         window.className = "inp-window";
@@ -540,9 +551,12 @@ async function inp(string, title, position, id) {
         const content = document.createElement("div");
         content.className = "fn-content";
         content.style.opacity = 0;
+        content.style.textAlign = opt_pos(position)[0];
+        content.style.minWidth = opt_pos(position)[1];
         content.style.transition = `all 175ms ${easing}`;
         const box = document.createElement("textarea");
         box.type = "text";
+        box.placeholder = "请输入内容.……";
         box.className = "inp-box";
         box.style.opacity = 0;
         box.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
@@ -561,6 +575,8 @@ async function inp(string, title, position, id) {
             window.appendChild(content);
             window.appendChild(box);
         } else if (position === "右") {
+            box.style.position = "relative";
+            box.style.height = "100%";
             window.appendChild(content);
             window.appendChild(box);
         }
@@ -608,6 +624,8 @@ async function inp(string, title, position, id) {
 // xz 函数。
 async function xz(string, n, names, title, position, id) {
     return new Promise((resolve) => {
+        if (position === null || position == undefined) position = "中";
+        else if (position !== "中" && position !== "右") fail("输入正确的 position 参数。", "错误", position);
         if (string == null || string == undefined) {
             fail("不能输入空值！");
             return "在 Xz() 函数中，string 参数不能为 null 或 undefined。";
@@ -629,7 +647,6 @@ async function xz(string, n, names, title, position, id) {
             fail("所给予的选项数量不足！");
             return;
         }
-        if (position === null || position == undefined) position = "中";
 
         const window = document.createElement("div");
         window.className = "xz-window";
@@ -648,6 +665,8 @@ async function xz(string, n, names, title, position, id) {
         const content = document.createElement("div");
         content.className = "fn-content";
         content.style.opacity = 0;
+        content.style.textAlign = opt_pos(position)[0];
+        content.style.minWidth = opt_pos(position)[1];
         content.style.transition = `all 175ms ${easing}`;
         const confirm = document.createElement("button");
         confirm.className = "xz-confirm";
@@ -784,6 +803,8 @@ async function xz(string, n, names, title, position, id) {
 // synchr 函数。
 
 async function synchr(string, title, position, id) {
+    if (position == null || position == undefined) position = "中";
+    else if (position !== "中" && position !== "右") fail("输入正确的 position 参数。", "错误", position);
     if (string == null || string == undefined) {
         fail("不能输入空值！");
         return "在 Synchr() 函数中，string 参数不能为 null 或 undefined。";
@@ -801,7 +822,6 @@ async function synchr(string, title, position, id) {
         if (t_replaced === "") title = "同步";
     }
     if (id == null || id == undefined) id = "";
-    if (position == null || position == undefined) position = "中";
 
     const window = document.createElement("div");
     window.className = "synchr-window";
@@ -820,6 +840,8 @@ async function synchr(string, title, position, id) {
     const content = document.createElement("div");
     content.className = "fn-content";
     content.style.opacity = 0;
+    content.style.textAlign = opt_pos(position)[0];
+    content.style.minWidth = opt_pos(position)[1];
     content.style.transition = `all 175ms ${easing}`;
     const bar = document.createElement("div");
     bar.className = "synchr-progressbar";
@@ -880,6 +902,8 @@ async function synchr(string, title, position, id) {
 
 // lj 函数。
 async function lj(string, url, title, position, id) {
+    if (position == null || position == undefined) position = "中";
+    else if (position !== "中" && position !== "右") fail("输入正确的 position 参数。", "错误", position);
     if (string == null || string == undefined) {
         fail("不能输入空值！");
         return "在 Lj() 函数中，string 参数不能为 null 或 undefined。";
@@ -907,7 +931,6 @@ async function lj(string, url, title, position, id) {
         if (t_replaced === "") title = "链接";
     }
     if (id == null || id == undefined) id = "";
-    if (position == null || position == undefined) position = "中";
 
     const window = document.createElement("div");
     window.className = "lj-window";
@@ -926,6 +949,8 @@ async function lj(string, url, title, position, id) {
     const content = document.createElement("div");
     content.className = "fn-content";
     content.style.opacity = 0;
+    content.style.textAlign = opt_pos(position)[0];
+    content.style.minWidth = opt_pos(position)[1];
     content.style.transition = `all 175ms ${easing}`;
     const link = document.createElement("button");
     link.className = "lj-link";
@@ -1007,6 +1032,8 @@ async function lj(string, url, title, position, id) {
 // zd 函数。
 async function zd(string, title, position, id) {
     return new Promise((resolve) => {
+        if (position == null || position == undefined) position = "中";
+        else if (position !== "中" && position !== "右") fail("输入正确的 position 参数。", "错误", position);
         if (string == null || string == undefined) {
             fail("不能输入空值！");
             return "在 Zd() 函数中，string 参数不能为 null 或 undefined。";
@@ -1024,7 +1051,6 @@ async function zd(string, title, position, id) {
             if (t_replaced === "") title = "终端";
         }
         if (id == null || id == undefined) id = "";
-        if (position == null || position == undefined) position = "中";
 
         const window = document.createElement("div");
         window.className = "zd-window";
@@ -1043,6 +1069,8 @@ async function zd(string, title, position, id) {
         const content = document.createElement("div");
         content.className = "fn-content";
         content.style.opacity = 0;
+        content.style.textAlign = opt_pos(position)[0];
+        content.style.minWidth = opt_pos(position)[1];
         content.style.transition = `all 175ms ${easing}`;
         const box = document.createElement("textarea");
         box.className = "zd-box";
@@ -1185,6 +1213,8 @@ async function timer(string, time, title, position, id) {
     return new Promise((resolve) => {
         let passed_time = 0;
         let ls_finish = false;
+        if (position == null || position == undefined) position = "中";
+        else if (position !== "中" && position !== "右") fail("输入正确的 position 参数。", "错误", position);
         if (string == null || string == undefined) {
             fail("不能输入空值！");
             return "在 Timer() 函数中，string 参数不能为 null 或 undefined。";
@@ -1214,7 +1244,6 @@ async function timer(string, time, title, position, id) {
             warn("time 的值过大，无法正常计时。");
             return "在 Timer() 函数中，time 的值必须小于等于 6.048e10。";
         }
-        if (position == null || position == undefined) position = "中";
 
         const window = document.createElement("div");
         window.className = "timer-window";
@@ -1235,6 +1264,8 @@ async function timer(string, time, title, position, id) {
         content.className = "fn-content";
         content.style.color = "black";
         content.style.opacity = 0;
+        content.style.textAlign = opt_pos(position)[0];
+        content.style.minWidth = opt_pos(position)[1];
         content.style.transition = `all 175ms ${easing}`;
         const bar = document.createElement("div");
         bar.className = "timer-progressbar";
@@ -1424,6 +1455,8 @@ async function wz(string, qj_title) {
 // mb() 函数。
 async function mb(strings, title, position, id) {
     return new Promise((resolve) => {
+        if (position == null || position == undefined) position = "中";
+        else if (position !== "中" && position !== "右") fail("输入正确的 position 参数。", "错误", position);
         if (strings.length === 0 || strings.includes(null) || strings.includes(undefined)) {
             fail("不能输入空值！");
             resolve(39);
@@ -1432,7 +1465,6 @@ async function mb(strings, title, position, id) {
         if (title == null || title == undefined || String(title).replace(/\s+/g, "") === "") title = "面板";
         else title = String(title);
         if (id == null || id == undefined) id = "";
-        if (position == null || position == undefined) position = "中";
 
         const window = document.createElement("div");
         window.className = "mb-window";
@@ -1452,8 +1484,10 @@ async function mb(strings, title, position, id) {
         txt.style.opacity = 0;
         const content = document.createElement("div");
         content.className = "fn-content";
-        content.style.transition = `all 175ms ${easing}`;
         content.style.opacity = 0;
+        content.style.textAlign = opt_pos(position)[0];
+        content.style.minWidth = opt_pos(position)[1];
+        content.style.transition = `all 175ms ${easing}`;
         const gb = document.createElement("button");
         gb.type = "button";
         gb.className = "mb-gb";
