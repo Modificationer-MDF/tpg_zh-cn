@@ -1286,39 +1286,25 @@ function pos(p) {
     }
 }
 
-function create(window, position) { // 创建窗口。
+function create(window) { // 创建窗口。
     if (window.className === "rz-window") {
         left_win.push(window);
         pos(0);
-    } else if (position === "右") {
-        right_win.push(window);
-        pos(1);
-    } else if (position === "中") {
+    } else if (midwins.includes(window.className)) {
         mid_win.push(window);
         pos(2);
     }
 }
 
-function close(window, position) { // 关闭窗口。
+function close(window) { // 关闭窗口。
     if (window.className === "rz-window") {
         left_win = left_win.filter(win => win !== window);
         pos(0);
-    } else if (position === "右") {
-        right_win = right_win.filter(win => win !== window);
-        pos(1);
-    } else if (position === "中") {
+    } else if (midwins.includes(window.className)) {
         mid_win = mid_win.filter(win => win !== window);
         pos(2);
     }
 }
-
-function opt_pos(position) { // 确定窗口设置。（[字体对齐, 文字最小宽度, 动画方位]）
-    if (position === "右") {
-        return ["left", "10ch", "r"];
-    } else {
-        return ["center", "30ch", "m"];
-    }
-} 
 
 function check() {
     let string = "";

@@ -20,7 +20,7 @@ function rz(string, time) {
     const lh = parseInt(content.style.lineHeight);
     content.style.height = `${l * lh}px`;
 
-    create(window, "左");
+    create(window);
     document.body.appendChild(window);
     window.appendChild(content);
 
@@ -32,17 +32,15 @@ function rz(string, time) {
         window.style.animation = `cc_rz 350ms forwards ${easing}`;
         setTimeout(() => {
             if (document.body.contains(window)) document.body.removeChild(window);
-            close(window, "左");
+            close(window);
         }, 550);
     }, time);
 }
 
 // noti 函数。
-function noti(string, title, position, id) {
-    if (position == null || position == undefined) position = "中";
-    else if (position !== "中" && position !== "右") fail("输入正确的 position 参数。");
+function noti(string, title, id) {
     if (string == null || string == undefined) {
-        fail("不能输入空值！", "错误", position);
+        fail("不能输入空值！");
         return "在 Noti() 函数中，string 参数不能为 null 或 undefined。";
     }
     string = String(string);
@@ -79,30 +77,24 @@ function noti(string, title, position, id) {
     txt.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     content.className = "fn-content";
     content.style.opacity = 0;
-    content.style.textAlign = opt_pos(position)[0];
-    content.style.minWidth = opt_pos(position)[1];
+    content.style.textAlign = "center";
+    content.style.minWidth = "30ch";
     content.style.transition = `all 175ms ${easing}`;
     bar.className = "noti-progressbar";
     timerdesc.className = "fn-timerdesc";
     timerdesc.style.transition = `all 175ms ${easing}`;
 
-    create(window, position);
+    create(window);
     document.body.appendChild(window);
 
-    if (position === "中") {
-        window.appendChild(square);
-        square.appendChild(icon);
-        square.appendChild(txt);
-        window.appendChild(content);
-        window.appendChild(bar);
-        window.appendChild(timerdesc);
-    } else if (position === "右") {
-        window.appendChild(content);
-        window.appendChild(bar);
-        window.appendChild(timerdesc);
-    }
+    window.appendChild(square);
+    square.appendChild(icon);
+    square.appendChild(txt);
+    window.appendChild(content);
+    window.appendChild(bar);
+    window.appendChild(timerdesc);
 
-    window.style.animation = `jr_${opt_pos(position)[2]}fn 350ms forwards ${easing}`;
+    window.style.animation = `jr_mfn 350ms forwards ${easing}`;
     content.innerHTML = string;
     txt.innerHTML = title;
 
@@ -113,6 +105,9 @@ function noti(string, title, position, id) {
         txt.style.opacity = 1;
         timerdesc.style.opacity = 1;
         timerdesc.style.transform = "translateX(0)";
+        window.style.width = "30ch";
+        window.style.left = "calc(50% - 15ch)";
+        window.style.right = "calc(50% + 15ch)";
         window.style.maxHeight = window.getBoundingClientRect().height + "px";
     });
 
@@ -146,8 +141,8 @@ function noti(string, title, position, id) {
             txt.style.opacity = 0;
             content.addEventListener("transitionend", () => {
                 square.style.height = "35px";
-                window.style.animation = `cc_${opt_pos(position)[2]}fn 350ms forwards ${easing}`;
-                close(window, position);
+                window.style.animation = `cc_mfn 350ms forwards ${easing}`;
+                close(window);
                 setTimeout(() => {
                     if (document.body.contains(window)) document.body.removeChild(window);
                 }, 550);
@@ -157,9 +152,7 @@ function noti(string, title, position, id) {
 }
 
 // cg 函数。
-function cg(string, title, position, id) {
-    if (position == null || position == undefined) position = "中";
-    else if (position !== "中" && position !== "右") fail("输入正确的 position 参数。", "错误", position);
+function cg(string, title,  id) {
     if (string == null || string == undefined) {
         fail("不能输入空值！");
         return "在 Cg() 函数中，string 参数不能为 null 或 undefined。";
@@ -195,8 +188,8 @@ function cg(string, title, position, id) {
     const content = document.createElement("div");
     content.className = "fn-content";
     content.style.opacity = 0;
-    content.style.textAlign = opt_pos(position)[0];
-    content.style.minWidth = opt_pos(position)[1];
+    content.style.textAlign = "center";
+    content.style.minWidth = "30ch";
     content.style.transition = `all 175ms ${easing}`;
     const bar = document.createElement("div");
     bar.className = "cg-progressbar";
@@ -204,33 +197,30 @@ function cg(string, title, position, id) {
     timerdesc.className = "fn-timerdesc";
     timerdesc.style.transition = `all 175ms ${easing}`;
 
-    create(window, position);
+    create(window);
     document.body.appendChild(window);
 
-    if (position === "中") {
-        window.appendChild(square);
-        square.appendChild(icon);
-        square.appendChild(txt);
-        window.appendChild(content);
-        window.appendChild(bar);
-        window.appendChild(timerdesc);
-    } else if (position === "右") {
-        window.appendChild(content);
-        window.appendChild(bar);
-        window.appendChild(timerdesc);
-    }
+    window.appendChild(square);
+    square.appendChild(icon);
+    square.appendChild(txt);
+    window.appendChild(content);
+    window.appendChild(bar);
+    window.appendChild(timerdesc);
 
-    window.style.animation = `jr_${opt_pos(position)[2]}fn 350ms forwards ${easing}`;
+    window.style.animation = `jr_mfn 350ms forwards ${easing}`;
     content.innerHTML = string;
     txt.innerHTML = title;
 
     window.addEventListener("animationend", () => {
         content.style.transform = "translateY(0)";
         content.style.opacity = 1;
-        txt.style.opacity = 1;
         icon.style.opacity = 1;
+        txt.style.opacity = 1;
         timerdesc.style.opacity = 1;
         timerdesc.style.transform = "translateX(0)";
+        window.style.width = "30ch";
+        window.style.left = "calc(50% - 15ch)";
+        window.style.right = "calc(50% + 15ch)";
         window.style.maxHeight = window.getBoundingClientRect().height + "px";
     });
 
@@ -264,8 +254,8 @@ function cg(string, title, position, id) {
             icon.style.opacity = 0;
             content.addEventListener("transitionend", () => {
                 square.style.height = "35px";
-                window.style.animation = `cc_${opt_pos(position)[2]}fn 350ms forwards ${easing}`;
-                close(window, position)
+                window.style.animation = `cc_mfn 350ms forwards ${easing}`;
+                close(window)
                 setTimeout(() => {
                     if (document.body.contains(window)) document.body.removeChild(window);
                 }, 550);
@@ -275,9 +265,7 @@ function cg(string, title, position, id) {
 }
 
 // fail 函数。
-function fail(string, title, position, id) {
-    if (position == null || position == undefined) position = "中";
-    else if (position !== "中" && position !== "右") fail("输入正确的 position 参数。", "错误", position);
+function fail(string, title, id) {
     if (string == null || string == undefined) {
         fail("不能输入空值！");
         return "在 Fail() 函数中，string 参数不能为 null 或 undefined。";
@@ -313,8 +301,8 @@ function fail(string, title, position, id) {
     const content = document.createElement("div");
     content.className = "fn-content";
     content.style.opacity = 0;
-    content.style.textAlign = opt_pos(position)[0];
-    content.style.minWidth = opt_pos(position)[1];
+    content.style.textAlign = "center";
+    content.style.minWidth = "30ch";
     content.style.transition = `all 175ms ${easing}`;
     const bar = document.createElement("div");
     bar.className = "fail-progressbar";
@@ -322,24 +310,18 @@ function fail(string, title, position, id) {
     timerdesc.className = "fn-timerdesc";
     timerdesc.style.transition = `all 175ms ${easing}`;
 
-    create(window, position);
+    create(window);
     document.body.appendChild(window);
 
-    if (position === "中") {
-        window.appendChild(square);
-        square.appendChild(icon);
-        square.appendChild(txt);
-        window.appendChild(content);
-        window.appendChild(bar);
-        window.appendChild(timerdesc);
-    } else if (position === "右") {
-        window.appendChild(content);
-        window.appendChild(bar);
-        window.appendChild(timerdesc);
-    }
+    window.appendChild(square);
+    square.appendChild(icon);
+    square.appendChild(txt);
+    window.appendChild(content);
+    window.appendChild(bar);
+    window.appendChild(timerdesc);
 
     icon.src = "images/Err.png";
-    window.style.animation = `jr_${opt_pos(position)[2]}fn 350ms forwards ${easing}`;
+    window.style.animation = `jr_mfn 350ms forwards ${easing}`;
     content.innerHTML = string;
     txt.innerHTML = title;
 
@@ -350,6 +332,9 @@ function fail(string, title, position, id) {
         txt.style.opacity = 1;
         timerdesc.style.opacity = 1;
         timerdesc.style.transform = "translateX(0)";
+        window.style.width = "30ch";
+        window.style.left = "calc(50% - 15ch)";
+        window.style.right = "calc(50% + 15ch)";
         window.style.maxHeight = window.getBoundingClientRect().height + "px";
     });
 
@@ -383,8 +368,8 @@ function fail(string, title, position, id) {
             timerdesc.style.transform = "translateX(25px)";
             content.addEventListener("transitionend", () => {
                 square.style.height = "35px";
-                window.style.animation = `cc_${opt_pos(position)[2]}fn 350ms forwards ${easing}`;
-                close(window, position)
+                window.style.animation = `cc_mfn 350ms forwards ${easing}`;
+                close(window)
                 setTimeout(() => {
                     if (document.body.contains(window)) document.body.removeChild(window);
                 }, 550);
@@ -394,9 +379,7 @@ function fail(string, title, position, id) {
 }
 
 // warn 函数。
-function warn(string, title, position, id) {
-    if (position == null || position == undefined) position = "中";
-    else if (position !== "中" && position !== "右") fail("输入正确的 position 参数。", "错误", position);
+function warn(string, title, id) {
     if (string == null || string == undefined) {
         fail("不能输入空值！");
         return "在 Warn() 函数中，string 参数不能为 null 或 undefined。";
@@ -431,8 +414,8 @@ function warn(string, title, position, id) {
     const content = document.createElement("div");
     content.className = "fn-content";
     content.style.opacity = 0;
-    content.style.textAlign = opt_pos(position)[0];
-    content.style.minWidth = opt_pos(position)[1];
+    content.style.textAlign = "center";
+    content.style.minWidth = "30ch";
     content.style.transition = `all 175ms ${easing}`;
     const bar = document.createElement("div");
     bar.className = "warn-progressbar";
@@ -440,24 +423,18 @@ function warn(string, title, position, id) {
     timerdesc.className = "fn-timerdesc";
     timerdesc.style.transition = `all 175ms ${easing}`;
 
-    create(window, position);
+    create(window);
     document.body.appendChild(window);
 
-    if (position === "中") {
-        window.appendChild(square);
-        square.appendChild(icon);
-        square.appendChild(txt);
-        window.appendChild(content);
-        window.appendChild(bar);
-        window.appendChild(timerdesc);
-    } else if (position === "右") {
-        window.appendChild(content);
-        window.appendChild(bar);
-        window.appendChild(timerdesc);
-    }
+    window.appendChild(square);
+    square.appendChild(icon);
+    square.appendChild(txt);
+    window.appendChild(content);
+    window.appendChild(bar);
+    window.appendChild(timerdesc);
 
     icon.src = "images/Exc.png";
-    window.style.animation = `jr_${opt_pos(position)[2]}fn 350ms forwards ${easing}`;
+    window.style.animation = `jr_mfn 350ms forwards ${easing}`;
     content.innerHTML = string;
     txt.innerHTML = title;
 
@@ -468,6 +445,9 @@ function warn(string, title, position, id) {
         txt.style.opacity = 1;
         timerdesc.style.opacity = 1;
         timerdesc.style.transform = "translateX(0)";
+        window.style.width = "30ch";
+        window.style.left = "calc(50% - 15ch)";
+        window.style.right = "calc(50% + 15ch)";
         window.style.maxHeight = window.getBoundingClientRect().height + "px";
     });
 
@@ -501,8 +481,8 @@ function warn(string, title, position, id) {
             txt.style.opacity = 0;
             content.addEventListener("transitionend", () => {
                 square.style.height = "35px";
-                window.style.animation = `cc_${opt_pos(position)[2]}fn 350ms forwards ${easing}`;
-                close(window, position)
+                window.style.animation = `cc_mfn 350ms forwards ${easing}`;
+                close(window)
                 setTimeout(() => {
                     if (document.body.contains(window)) document.body.removeChild(window);
                 }, 550);
@@ -512,10 +492,8 @@ function warn(string, title, position, id) {
 }
 
 // inp 函数。
-async function inp(string, title, position, id) {
+async function inp(string, title, id) {
     return new Promise((resolve) => {
-        if (position == null || position == undefined) position = "中";
-        else if (position !== "中" && position !== "右") fail("输入正确的 position 参数。", "错误", position);
         if (string == null || string == undefined) {
             fail("不能输入空值！");
             return "在 Inp() 函数中，string 参数不能为 null 或 undefined。";
@@ -551,8 +529,8 @@ async function inp(string, title, position, id) {
         const content = document.createElement("div");
         content.className = "fn-content";
         content.style.opacity = 0;
-        content.style.textAlign = opt_pos(position)[0];
-        content.style.minWidth = opt_pos(position)[1];
+        content.style.textAlign = "center";
+        content.style.minWidth = "30ch";
         content.style.transition = `all 175ms ${easing}`;
         const box = document.createElement("textarea");
         box.type = "text";
@@ -565,33 +543,29 @@ async function inp(string, title, position, id) {
 
         visible(content, "Inp");
 
-        create(window, position);
+        create(window);
         document.body.appendChild(window);
 
-        if (position === "中") {
-            window.appendChild(square);
-            square.appendChild(icon);
-            square.appendChild(txt);
-            window.appendChild(content);
-            window.appendChild(box);
-        } else if (position === "右") {
-            box.style.position = "relative";
-            box.style.height = "100%";
-            window.appendChild(content);
-            window.appendChild(box);
-        }
+        window.appendChild(square);
+        square.appendChild(icon);
+        square.appendChild(txt);
+        window.appendChild(content);
+        window.appendChild(box);
         
         icon.src = "images/Inp.png";
-        window.style.animation = `jr_${opt_pos(position)[2]}fn 350ms forwards ${easing}`;
+        window.style.animation = `jr_mfn 350ms forwards ${easing}`;
         content.innerHTML = string;
         txt.innerHTML = title;
 
         window.addEventListener("animationend", () => {
             content.style.transform = "translateY(0)";
             content.style.opacity = 1;
-            box.style.opacity = 1;
             icon.style.opacity = 1;
             txt.style.opacity = 1;
+            box.style.opacity = 1;
+            window.style.width = "30ch";
+            window.style.left = "calc(50% - 15ch)";
+            window.style.right = "calc(50% + 15ch)";
             window.style.maxHeight = window.getBoundingClientRect().height + "px";
         });
 
@@ -609,8 +583,8 @@ async function inp(string, title, position, id) {
                 txt.style.opacity = 0;
                 content.addEventListener("transitionend", () => {
                     square.style.height = "35px";
-                    window.style.animation = `cc_${opt_pos(position)[2]}fn 350ms forwards ${easing}`;
-                    close(window, position);
+                    window.style.animation = `cc_mfn 350ms forwards ${easing}`;
+                    close(window);
                     resolve(value);
                     setTimeout(() => {
                         if (document.body.contains(window)) document.body.removeChild(window);
@@ -622,10 +596,8 @@ async function inp(string, title, position, id) {
 }
 
 // xz 函数。
-async function xz(string, n, names, title, position, id) {
+async function xz(string, n, names, title, id) {
     return new Promise((resolve) => {
-        if (position === null || position == undefined) position = "中";
-        else if (position !== "中" && position !== "右") fail("输入正确的 position 参数。", "错误", position);
         if (string == null || string == undefined) {
             fail("不能输入空值！");
             return "在 Xz() 函数中，string 参数不能为 null 或 undefined。";
@@ -665,8 +637,8 @@ async function xz(string, n, names, title, position, id) {
         const content = document.createElement("div");
         content.className = "fn-content";
         content.style.opacity = 0;
-        content.style.textAlign = opt_pos(position)[0];
-        content.style.minWidth = opt_pos(position)[1];
+        content.style.textAlign = "center";
+        content.style.minWidth = "30ch";
         content.style.transition = `all 175ms ${easing}`;
         const confirm = document.createElement("button");
         confirm.className = "xz-confirm";
@@ -676,24 +648,30 @@ async function xz(string, n, names, title, position, id) {
         const array = Array.from(names);
         const xz_items = []; // 被选择的选项。
 
-        create(window, position);
+        create(window);
         document.body.appendChild(window);
 
-        if (position === "中") {
-            window.appendChild(square);
-            square.appendChild(icon);
-            square.appendChild(txt);
-            window.appendChild(content);
-            window.appendChild(confirm);
-        } else if (position === "右") {
-            window.appendChild(content);
-            window.appendChild(confirm);
-        }
+        window.appendChild(square);
+        square.appendChild(icon);
+        square.appendChild(txt);
+        window.appendChild(content);
+        window.appendChild(confirm);
 
         icon.src = "images/Sel.png";
-        window.style.animation = `jr_${opt_pos(position)[2]}fn 350ms forwards ${easing}`;
+        window.style.animation = `jr_mfn 350ms forwards ${easing}`;
         content.innerHTML = string;
         txt.innerHTML = title;
+
+        window.addEventListener("animationend", () => {
+            content.style.transform = "translateY(0)";
+            content.style.opacity = 1;
+            icon.style.opacity = 1;
+            txt.style.opacity = 1;
+            window.style.width = "30ch";
+            window.style.left = "calc(50% - 15ch)";
+            window.style.right = "calc(50% + 15ch)";
+            window.style.maxHeight = window.getBoundingClientRect().height + "px";
+        });
 
         visible(content, "Xz");
 
@@ -719,6 +697,10 @@ async function xz(string, n, names, title, position, id) {
         confirm.onclick = () => {
             if (xz_items.length === 0) {
                 warn("你还没有勾选！");
+                window.style.animation = `mfn_shake1 0.3s ${easing}`;
+                window.addEventListener("animationend", () => {
+                    window.style.animation = "";
+                }, { once: true });
                 return;
             } else {
                 resolve(xz_items);
@@ -729,8 +711,8 @@ async function xz(string, n, names, title, position, id) {
                 confirm.style.opacity = 0;
                 content.addEventListener("transitionend", () => {
                     square.style.height = "35px";
-                    window.style.animation = `cc_${opt_pos(position)[2]}fn 350ms forwards ${easing}`;
-                    close(window, position)
+                    window.style.animation = `cc_mfn 350ms forwards ${easing}`;
+                    close(window)
                     setTimeout(() => {
                         if (document.body.contains(window)) document.body.removeChild(window);
                     }, 550);
@@ -777,7 +759,11 @@ async function xz(string, n, names, title, position, id) {
             checkbox.onchange = () => {
                 if (checkbox.checked) {
                     if (xz_items.length >= n) {
-                        warn(`勾选的选项数量已达上限。最多可勾选 ${n} 个。`, "注意", position);
+                        warn(`勾选的选项数量已达上限。最多可勾选 ${n} 个。`);
+                        window.style.animation = `mfn_shake2 0.3s ${easing}`;
+                        window.addEventListener("animationend", () => {
+                            window.style.animation = "";
+                        }, { once: true });
                         checkbox.checked = false;
                         return;
                     }
@@ -802,9 +788,7 @@ async function xz(string, n, names, title, position, id) {
 
 // synchr 函数。
 
-async function synchr(string, title, position, id) {
-    if (position == null || position == undefined) position = "中";
-    else if (position !== "中" && position !== "右") fail("输入正确的 position 参数。", "错误", position);
+async function synchr(string, title, id) {
     if (string == null || string == undefined) {
         fail("不能输入空值！");
         return "在 Synchr() 函数中，string 参数不能为 null 或 undefined。";
@@ -840,8 +824,8 @@ async function synchr(string, title, position, id) {
     const content = document.createElement("div");
     content.className = "fn-content";
     content.style.opacity = 0;
-    content.style.textAlign = opt_pos(position)[0];
-    content.style.minWidth = opt_pos(position)[1];
+    content.style.textAlign = "center";
+    content.style.minWidth = "30ch";
     content.style.transition = `all 175ms ${easing}`;
     const bar = document.createElement("div");
     bar.className = "synchr-progressbar";
@@ -849,24 +833,18 @@ async function synchr(string, title, position, id) {
     desc.className = "fn-timerdesc";
     desc.innerHTML = "无任务";
 
-    create(window, position);
+    create(window);
     document.body.appendChild(window);
 
-    if (position === "中") {
-        window.appendChild(square);
-        square.appendChild(icon);
-        square.appendChild(txt);
-        window.appendChild(content);
-        window.appendChild(bar);
-        window.appendChild(desc);
-    } else if (position === "右") {
-        window.appendChild(content);
-        window.appendChild(bar);
-        window.appendChild(desc);
-    }
+    window.appendChild(square);
+    square.appendChild(icon);
+    square.appendChild(txt);
+    window.appendChild(content);
+    window.appendChild(bar);
+    window.appendChild(desc);
 
     icon.src = "images/Synchronization.png";
-    window.style.animation = `jr_${opt_pos(position)[2]}fn 350ms forwards ${easing}`;
+    window.style.animation = `jr_mfn 350ms forwards ${easing}`;
     content.innerHTML = string;
     txt.innerHTML = title;
 
@@ -875,6 +853,9 @@ async function synchr(string, title, position, id) {
         content.style.opacity = 1;
         icon.style.opacity = 1;
         txt.style.opacity = 1;
+        window.style.width = "30ch";
+        window.style.left = "calc(50% - 15ch)";
+        window.style.right = "calc(50% + 15ch)";
         window.style.maxHeight = window.getBoundingClientRect().height + "px";
     });
 
@@ -891,8 +872,8 @@ async function synchr(string, title, position, id) {
         txt.style.opacity = 0;
         content.addEventListener("transitionend", () => {
             square.style.height = "35px";
-            window.style.animation = `cc_${opt_pos(position)[2]}fn 350ms forwards ${easing}`;
-            close(window, position)
+            window.style.animation = `cc_mfn 350ms forwards ${easing}`;
+            close(window)
             setTimeout(() => {
                 if (document.body.contains(window)) document.body.removeChild(window);
             }, 550);
@@ -901,9 +882,7 @@ async function synchr(string, title, position, id) {
 }
 
 // lj 函数。
-async function lj(string, url, title, position, id) {
-    if (position == null || position == undefined) position = "中";
-    else if (position !== "中" && position !== "右") fail("输入正确的 position 参数。", "错误", position);
+async function lj(string, url, title, id) {
     if (string == null || string == undefined) {
         fail("不能输入空值！");
         return "在 Lj() 函数中，string 参数不能为 null 或 undefined。";
@@ -949,8 +928,8 @@ async function lj(string, url, title, position, id) {
     const content = document.createElement("div");
     content.className = "fn-content";
     content.style.opacity = 0;
-    content.style.textAlign = opt_pos(position)[0];
-    content.style.minWidth = opt_pos(position)[1];
+    content.style.textAlign = "center";
+    content.style.minWidth = "30ch";
     content.style.transition = `all 175ms ${easing}`;
     const link = document.createElement("button");
     link.className = "lj-link";
@@ -961,26 +940,20 @@ async function lj(string, url, title, position, id) {
     ignore.style.opacity = 0;
     ignore.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
 
-    create(window, position);
+    create(window);
     document.body.appendChild(window);
 
-    if (position === "中") {
-        window.appendChild(square);
-        square.appendChild(icon);
-        square.appendChild(txt);
-        window.appendChild(content);
-        window.appendChild(link);
-        window.appendChild(ignore);
-    } else if (position === "右") {
-        window.appendChild(content);
-        window.appendChild(link);
-        window.appendChild(ignore);
-    }
+    window.appendChild(square);
+    square.appendChild(icon);
+    square.appendChild(txt);
+    window.appendChild(content);
+    window.appendChild(link);
+    window.appendChild(ignore);
 
     visible(content, "Lj");
 
     icon.src = "images/Link.png";
-    window.style.animation = `jr_${opt_pos(position)[2]}fn 350ms forwards ${easing}`;
+    window.style.animation = `jr_mfn 350ms forwards ${easing}`;
     content.innerHTML = string;
     link.innerHTML = url;
     ignore.innerHTML = "忽略";
@@ -989,10 +962,13 @@ async function lj(string, url, title, position, id) {
     window.addEventListener("animationend", () => {
         content.style.transform = "translateY(0)";
         content.style.opacity = 1;
-        link.style.opacity = 1;
-        ignore.style.opacity = 1;
         icon.style.opacity = 1;
         txt.style.opacity = 1;
+        link.style.opacity = 1;
+        ignore.style.opacity = 1;
+        window.style.width = "30ch";
+        window.style.left = "calc(50% - 15ch)";
+        window.style.right = "calc(50% + 15ch)";
         window.style.maxHeight = window.getBoundingClientRect().height + "px";
     });
 
@@ -1009,8 +985,8 @@ async function lj(string, url, title, position, id) {
         txt.style.opacity = 0;
         content.addEventListener("transitionend", () => {
             square.style.height = "35px";
-            window.style.animation = `cc_${opt_pos(position)[2]}fn 350ms forwards ${easing}`;
-            close(window, position)
+            window.style.animation = `cc_mfn 350ms forwards ${easing}`;
+            close(window)
             setTimeout(() => {
                 if (document.body.contains(window)) document.body.removeChild(window);
             }, 550);
@@ -1030,10 +1006,8 @@ async function lj(string, url, title, position, id) {
 }
 
 // zd 函数。
-async function zd(string, title, position, id) {
+async function zd(string, title, id) {
     return new Promise((resolve) => {
-        if (position == null || position == undefined) position = "中";
-        else if (position !== "中" && position !== "右") fail("输入正确的 position 参数。", "错误", position);
         if (string == null || string == undefined) {
             fail("不能输入空值！");
             return "在 Zd() 函数中，string 参数不能为 null 或 undefined。";
@@ -1069,8 +1043,8 @@ async function zd(string, title, position, id) {
         const content = document.createElement("div");
         content.className = "fn-content";
         content.style.opacity = 0;
-        content.style.textAlign = opt_pos(position)[0];
-        content.style.minWidth = opt_pos(position)[1];
+        content.style.textAlign = "center";
+        content.style.minWidth = "30ch";
         content.style.transition = `all 175ms ${easing}`;
         const box = document.createElement("textarea");
         box.className = "zd-box";
@@ -1162,8 +1136,8 @@ async function zd(string, title, position, id) {
                 txt.style.opacity = 0;
                 content.addEventListener("transitionend", () => {
                     square.style.height = "35px";
-                    window.style.animation = `cc_${opt_pos(position)[2]}fn 350ms forwards ${easing}`;
-                    close(window, position);
+                    window.style.animation = `cc_mfn 350ms forwards ${easing}`;
+                    close(window);
                     setTimeout(() => {
                         if (document.body.contains(window)) document.body.removeChild(window);
                     }, 550);
@@ -1174,31 +1148,29 @@ async function zd(string, title, position, id) {
             }
         });
 
-        create(window, position);
+        create(window);
         document.body.appendChild(window);
 
-        if (position === "中") {
-            window.appendChild(square);
-            square.appendChild(icon);
-            square.appendChild(txt);
-            window.appendChild(content);
-            window.appendChild(box);
-        } else if (position === "右") {
-            window.appendChild(content);
-            window.appendChild(box);
-        }
+        window.appendChild(square);
+        square.appendChild(icon);
+        square.appendChild(txt);
+        window.appendChild(content);
+        window.appendChild(box);
 
         icon.src = "images/Com.png";
-        window.style.animation = `jr_${opt_pos(position)[2]}fn 350ms forwards ${easing}`;
+        window.style.animation = `jr_mfn 350ms forwards ${easing}`;
         content.innerHTML = string;
         txt.innerHTML = title;
 
         window.addEventListener("animationend", () => {
             content.style.transform = "translateY(0)";
             content.style.opacity = 1;
-            box.style.opacity = 1;
             icon.style.opacity = 1;
             txt.style.opacity = 1;
+            box.style.opacity = 1;
+            window.style.width = "30ch";
+            window.style.left = "calc(50% - 15ch)";
+            window.style.right = "calc(50% + 15ch)";
             window.style.maxHeight = window.getBoundingClientRect().height + "px";
         });
 
@@ -1209,12 +1181,10 @@ async function zd(string, title, position, id) {
 }
 
 // timer 函数。
-async function timer(string, time, title, position, id) {
+async function timer(string, time, title, id) {
     return new Promise((resolve) => {
         let passed_time = 0;
         let ls_finish = false;
-        if (position == null || position == undefined) position = "中";
-        else if (position !== "中" && position !== "右") fail("输入正确的 position 参数。", "错误", position);
         if (string == null || string == undefined) {
             fail("不能输入空值！");
             return "在 Timer() 函数中，string 参数不能为 null 或 undefined。";
@@ -1264,8 +1234,8 @@ async function timer(string, time, title, position, id) {
         content.className = "fn-content";
         content.style.color = "black";
         content.style.opacity = 0;
-        content.style.textAlign = opt_pos(position)[0];
-        content.style.minWidth = opt_pos(position)[1];
+        content.style.textAlign = "center";
+        content.style.minWidth = "30ch";
         content.style.transition = `all 175ms ${easing}`;
         const bar = document.createElement("div");
         bar.className = "timer-progressbar";
@@ -1274,23 +1244,17 @@ async function timer(string, time, title, position, id) {
         timerdesc.color = "#000000";
         timerdesc.style.transition = `all 175ms ${easing}`;
 
-        create(window, position);
+        create(window);
         document.body.appendChild(window);
 
-        if (position === "中") {
-            window.appendChild(square);
-            square.appendChild(icon);
-            square.appendChild(txt);
-            window.appendChild(content);
-            window.appendChild(bar);
-            window.appendChild(timerdesc);
-        } else if (position === "右") {
-            window.appendChild(content);
-            window.appendChild(bar);
-            window.appendChild(timerdesc);
-        }
+        window.appendChild(square);
+        square.appendChild(icon);
+        square.appendChild(txt);
+        window.appendChild(content);
+        window.appendChild(bar);
+        window.appendChild(timerdesc);
 
-        window.style.animation = `jr_${opt_pos(position)[2]}fn 350ms forwards ${easing}`;
+        window.style.animation = `jr_mfn 350ms forwards ${easing}`;
         txt.innerHTML = title;
 
         let i = setInterval(() => {
@@ -1318,6 +1282,10 @@ async function timer(string, time, title, position, id) {
             txt.style.opacity = 1;
             timerdesc.style.opacity = 1;
             timerdesc.style.transform = "translateX(0)";
+            window.style.width = "30ch";
+            window.style.left = "calc(50% - 15ch)";
+            window.style.right = "calc(50% + 15ch)";
+            window.style.maxHeight = window.getBoundingClientRect().height + "px";
         });
 
         visible(content, "Timer");
@@ -1371,8 +1339,8 @@ async function timer(string, time, title, position, id) {
                 resolve(true);
                 content.addEventListener("transitionend", () => {
                     square.style.height = "35px";
-                    window.style.animation = `cc_${opt_pos(position)[2]}fn 350ms forwards ${easing}`;
-                    close(window, position);
+                    window.style.animation = `cc_mfn 350ms forwards ${easing}`;
+                    close(window);
                     setTimeout(() => {
                         if (document.body.contains(window)) document.body.removeChild(window);
                     }, 550);
@@ -1453,10 +1421,8 @@ async function wz(string, qj_title) {
 }
 
 // mb() 函数。
-async function mb(strings, title, position, id) {
+async function mb(strings, title, id) {
     return new Promise((resolve) => {
-        if (position == null || position == undefined) position = "中";
-        else if (position !== "中" && position !== "右") fail("输入正确的 position 参数。", "错误", position);
         if (strings.length === 0 || strings.includes(null) || strings.includes(undefined)) {
             fail("不能输入空值！");
             resolve(39);
@@ -1485,8 +1451,8 @@ async function mb(strings, title, position, id) {
         const content = document.createElement("div");
         content.className = "fn-content";
         content.style.opacity = 0;
-        content.style.textAlign = opt_pos(position)[0];
-        content.style.minWidth = opt_pos(position)[1];
+        content.style.textAlign = "center";
+        content.style.minWidth = "30ch";
         content.style.transition = `all 175ms ${easing}`;
         const gb = document.createElement("button");
         gb.type = "button";
@@ -1495,32 +1461,29 @@ async function mb(strings, title, position, id) {
         gb.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
         gb.style.opacity = 0;
 
-        create(window, position);
+        create(window);
         document.body.appendChild(window);
 
-        if (position === "中") {
-            window.appendChild(square);
-            square.appendChild(icon);
-            square.appendChild(txt);
-            window.appendChild(content);
-            window.appendChild(gb);
-        } else if (position === "右") {
-            window.appendChild(content);
-            window.appendChild(gb);
-        }
+        window.appendChild(square);
+        square.appendChild(icon);
+        square.appendChild(txt);
+        window.appendChild(content);
+        window.appendChild(gb);
 
         visible(content, "Mb");
 
-        window.style.animation = `jr_${opt_pos(position)[2]}fn 0.5s forwards ${easing}`;
+        window.style.animation = `jr_mfn 0.5s forwards ${easing}`;
 
         window.addEventListener("animationend", () => {
             content.style.transform = "translateY(0)";
-            square.style.opacity = 1;
             content.style.opacity = 1;
+            square.style.opacity = 1;
             icon.style.opacity = 1;
             txt.style.opacity = 1;
-            gb.style.opacity = 1;
-            window.style.height = hqgd(window.innerHTML, "mb-window", "div");
+            window.style.width = "30ch";
+            window.style.left = "calc(50% - 15ch)";
+            window.style.right = "calc(50% + 15ch)";
+            window.style.maxHeight = window.getBoundingClientRect().height + "px";
         });
 
         let square_height = hqgd(txt.innerHTML, "fn-title", "div");
@@ -1589,8 +1552,8 @@ async function mb(strings, title, position, id) {
             resolve("已确认。");
             content.addEventListener("transitionend", (i) => {
                 square.style.height = "35px";
-                window.style.animation = `cc_${opt_pos(position)[2]}fn 0.5s forwards ${easing}`;
-                close(window, position);
+                window.style.animation = `cc_mfn 0.5s forwards ${easing}`;
+                close(window);
                 setTimeout(() => {
                     if (document.body.contains(window)) document.body.removeChild(window);
                 }, 550);

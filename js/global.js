@@ -67,6 +67,7 @@ let ls_warnunv = 0;
 let ls_synchrunv = 0;
 let unv_warned = false; // 是否警告过用户不要修改 unv 数组？
 let during_fn7 = false; // fn7() 是否在运行？
+let midwins = ["noti-window", "cg-window", "fail-window", "warn-window", "inp-window", "xz-window", "lj-window", "synchr-window", "zd-window", "timer-window"];
 
 document.addEventListener("DOMContentLoaded", function () {
     var start = performance.now();

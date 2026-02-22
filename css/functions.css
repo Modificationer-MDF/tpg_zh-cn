@@ -257,6 +257,50 @@
     cursor: pointer;
 }
 
+@keyframes mfn_shake1 {
+    20% {
+        left: calc(50% - 15ch + 10px);
+    }
+
+    40% {
+        left: calc(50% - 15ch - 10px);
+    }
+
+    60% {
+        left: calc(50% - 15ch + 5px);
+    }
+
+    80% {
+        left: calc(50% - 15ch - 5px);
+    }
+
+    100% {
+        left: calc(50% - 15ch);
+    }
+}
+
+@keyframes mfn_shake2 {
+    20% {
+        left: calc(50% - 15ch + 25px);
+    }
+
+    40% {
+        left: calc(50% - 15ch - 25px);
+    }
+
+    60% {
+        left: calc(50% - 15ch + 15px);
+    }
+
+    80% {
+        left: calc(50% - 15ch - 15px);
+    }
+
+    100% {
+        left: calc(50% - 15ch);
+    }
+}
+
 .synchr-window {
     background-color: #9e338999;
     border-left: 5px solid #c125abc9;
