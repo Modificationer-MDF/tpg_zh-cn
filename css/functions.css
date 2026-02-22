@@ -159,11 +159,11 @@
     background-color: #791e1d99;
     border-left: 5px solid #4a1514c9;
     border-right: 5px solid #4a1514c9;
-    box-shadow: 0px 3px 7px #4a1514;
+    box-shadow: 0px 3px 7px #5e2423;
 }
 
 .fail-square {
-    background-color: #4a151449;
+    background-color: #5e242349;
 }
 
 .fail-progressbar {
