@@ -32,7 +32,7 @@ function rz(string, time) {
         window.style.animation = `cc_rz 350ms forwards ${easing}`;
         setTimeout(() => {
             if (document.body.contains(window)) document.body.removeChild(window);
-            close(window, position);
+            close(window, "左");
         }, 550);
     }, time);
 }
