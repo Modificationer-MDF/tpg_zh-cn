@@ -20,7 +20,7 @@ function rz(string, time) {
     const lh = parseInt(content.style.lineHeight);
     content.style.height = `${l * lh}px`;
 
-    create(window, position);
+    create(window, "左");
     document.body.appendChild(window);
     window.appendChild(content);
 
