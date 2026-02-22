@@ -1480,6 +1480,7 @@ async function mb(strings, title, id) {
             square.style.opacity = 1;
             icon.style.opacity = 1;
             txt.style.opacity = 1;
+            gb.style.opacity = 1;
             window.style.width = "30ch";
             window.style.left = "calc(50% - 15ch)";
             window.style.right = "calc(50% + 15ch)";
