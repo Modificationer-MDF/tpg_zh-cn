@@ -62,8 +62,7 @@ function noti(string, title, id) {
     const icon = document.createElement("img");
     const txt = document.createElement("div");
     const content = document.createElement("div");
-    const bar = document.createElement("div");
-    const timerdesc = document.createElement("div");
+    const okey = document.createElement("button");
 
     window.className = "noti-window";
     window.id = id;
@@ -80,9 +79,12 @@ function noti(string, title, id) {
     content.style.textAlign = "center";
     content.style.minWidth = "30ch";
     content.style.transition = `all 175ms ${easing}`;
-    bar.className = "noti-progressbar";
-    timerdesc.className = "fn-timerdesc";
-    timerdesc.style.transition = `all 175ms ${easing}`;
+    okey.type = "button";
+    okey.className = "noti-okey";
+    okey.innerHTML = "确定";
+    okey.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+    okey.style.opacity = 0;
+    okey.style.width = 0;
 
     create(window);
     document.body.appendChild(window);
@@ -91,8 +93,7 @@ function noti(string, title, id) {
     square.appendChild(icon);
     square.appendChild(txt);
     window.appendChild(content);
-    window.appendChild(bar);
-    window.appendChild(timerdesc);
+    window.appendChild(okey);
 
     window.style.animation = `jr_mfn 350ms forwards ${easing}`;
     content.innerHTML = string;
@@ -103,8 +104,8 @@ function noti(string, title, id) {
         content.style.opacity = 1;
         icon.style.opacity = 1;
         txt.style.opacity = 1;
-        timerdesc.style.opacity = 1;
-        timerdesc.style.transform = "translateX(0)";
+        okey.style.opacity = 1;
+        okey.style.width = "100%";
         window.style.width = "30ch";
         window.style.left = "calc(50% - 15ch)";
         window.style.right = "calc(50% + 15ch)";
@@ -117,26 +118,12 @@ function noti(string, title, id) {
     square.style.height = square_height;
     content.style.marginTop = square_height;
 
-    let pro = 0;
-    let ls_finish = false;
-    let passed_time = 0;
-    const interval = setInterval(() => {
-        passed_time += 10;
-        pro += 10 / (smarttime(string) / 100);
-        bar.style.width = `${pro}%`;
-        timerdesc.innerHTML = `${fhsj(passed_time)} / ${fhsj(smarttime(string))} | ${pro > 100 ? 100 : pro.toFixed(2)}%`;
-        if (pro >= 100) {
-            clearInterval(interval);
-            ls_finish = true;
-        }
-    }, 10);
-
     setInterval(() => {
-        if (ls_finish) {
+        okey.onclick = () => {
             content.style.opacity = 0;
             content.style.transform = "translateY(-10px)";
-            timerdesc.style.opacity = 0;
-            timerdesc.style.transform = "translateX(25px)";
+            okey.style.opacity = 0;
+            okey.style.width = 0;
             icon.style.opacity = 0;
             txt.style.opacity = 0;
             content.addEventListener("transitionend", () => {
@@ -147,12 +134,12 @@ function noti(string, title, id) {
                     if (document.body.contains(window)) document.body.removeChild(window);
                 }, 550);
             });
-        }
+        };
     }, 25);
 }
 
 // cg 函数。
-function cg(string, title,  id) {
+function cg(string, title, id) {
     if (string == null || string == undefined) {
         fail("不能输入空值！");
         return "在 Cg() 函数中，string 参数不能为 null 或 undefined。";
@@ -191,11 +178,13 @@ function cg(string, title,  id) {
     content.style.textAlign = "center";
     content.style.minWidth = "30ch";
     content.style.transition = `all 175ms ${easing}`;
-    const bar = document.createElement("div");
-    bar.className = "cg-progressbar";
-    const timerdesc = document.createElement("div");
-    timerdesc.className = "fn-timerdesc";
-    timerdesc.style.transition = `all 175ms ${easing}`;
+    const okey = document.createElement("button");
+    okey.type = "button";
+    okey.className = "cg-okey";
+    okey.innerHTML = "确定";
+    okey.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+    okey.style.opacity = 0;
+    okey.style.width = 0;
 
     create(window);
     document.body.appendChild(window);
@@ -204,8 +193,7 @@ function cg(string, title,  id) {
     square.appendChild(icon);
     square.appendChild(txt);
     window.appendChild(content);
-    window.appendChild(bar);
-    window.appendChild(timerdesc);
+    window.appendChild(okey);
 
     window.style.animation = `jr_mfn 350ms forwards ${easing}`;
     content.innerHTML = string;
@@ -216,8 +204,8 @@ function cg(string, title,  id) {
         content.style.opacity = 1;
         icon.style.opacity = 1;
         txt.style.opacity = 1;
-        timerdesc.style.opacity = 1;
-        timerdesc.style.transform = "translateX(0)";
+        okey.style.opacity = 1;
+        okey.style.width = "100%";
         window.style.width = "30ch";
         window.style.left = "calc(50% - 15ch)";
         window.style.right = "calc(50% + 15ch)";
@@ -228,28 +216,14 @@ function cg(string, title,  id) {
     square.style.height = square_height;
     content.style.marginTop = square_height;
 
-    let pro = 0;
-    let ls_finish = false;
-    let passed_time = 0;
-    const interval = setInterval(() => {
-        pro += 10 / (smarttime(string) / 100);
-        passed_time += 10;
-        bar.style.width = `${pro}%`;
-        timerdesc.innerHTML = `${fhsj(passed_time)} / ${fhsj(smarttime(string))} | ${pro > 100 ? 100 : pro.toFixed(2)}%`;
-        if (pro >= 100) {
-            clearInterval(interval);
-            ls_finish = true;
-        }
-    }, 10);
-
     visible(content, "Cg");
 
     setInterval(() => {
-        if (ls_finish) {
+        okey.onclick = () => {
             content.style.opacity = 0;
             content.style.transform = "translateY(-10px)";
-            timerdesc.style.opacity = 0;
-            timerdesc.style.transform = "translateX(25px)";
+            okey.style.opacity = 0;
+            okey.style.width = 0;
             txt.style.opacity = 0;
             icon.style.opacity = 0;
             content.addEventListener("transitionend", () => {
@@ -260,7 +234,7 @@ function cg(string, title,  id) {
                     if (document.body.contains(window)) document.body.removeChild(window);
                 }, 550);
             });
-        }
+        };
     }, 25);
 }
 
@@ -304,11 +278,13 @@ function fail(string, title, id) {
     content.style.textAlign = "center";
     content.style.minWidth = "30ch";
     content.style.transition = `all 175ms ${easing}`;
-    const bar = document.createElement("div");
-    bar.className = "fail-progressbar";
-    const timerdesc = document.createElement("div");
-    timerdesc.className = "fn-timerdesc";
-    timerdesc.style.transition = `all 175ms ${easing}`;
+    const okey = document.createElement("button");
+    okey.type = "button";
+    okey.className = "fail-lj";
+    okey.innerHTML = "了解";
+    okey.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+    okey.style.opacity = 0;
+    okey.style.width = 0;
 
     create(window);
     document.body.appendChild(window);
@@ -317,8 +293,7 @@ function fail(string, title, id) {
     square.appendChild(icon);
     square.appendChild(txt);
     window.appendChild(content);
-    window.appendChild(bar);
-    window.appendChild(timerdesc);
+    window.appendChild(okey);
 
     icon.src = "images/Err.png";
     window.style.animation = `jr_mfn 350ms forwards ${easing}`;
@@ -330,8 +305,8 @@ function fail(string, title, id) {
         content.style.opacity = 1;
         icon.style.opacity = 1;
         txt.style.opacity = 1;
-        timerdesc.style.opacity = 1;
-        timerdesc.style.transform = "translateX(0)";
+        okey.style.opacity = 1;
+        okey.style.width = "100%";
         window.style.width = "30ch";
         window.style.left = "calc(50% - 15ch)";
         window.style.right = "calc(50% + 15ch)";
@@ -342,30 +317,16 @@ function fail(string, title, id) {
     square.style.height = square_height;
     content.style.marginTop = square_height;
 
-    let pro = 0;
-    let ls_finish = false;
-    let passed_time = 0;
-    const interval = setInterval(() => {
-        pro += 10 / (smarttime(string) / 100);
-        passed_time += 10;
-        bar.style.width = `${pro}%`;
-        timerdesc.innerHTML = `${fhsj(passed_time)} / ${fhsj(smarttime(string))} | ${pro > 100 ? 100 : pro.toFixed(2)}%`;
-        if (pro >= 100) {
-            clearInterval(interval);
-            ls_finish = true;
-        }
-    }, 10);
-
     visible(content, "Fail")
 
     setInterval(() => {
-        if (ls_finish) {
+        okey.onclick = () => {
             content.style.opacity = 0;
             content.style.transform = "translateY(-10px)";
             icon.style.opacity = 0;
             txt.style.opacity = 0;
-            timerdesc.style.opacity = 0;
-            timerdesc.style.transform = "translateX(25px)";
+            okey.style.opacity = 0;
+            okey.style.width = 0;
             content.addEventListener("transitionend", () => {
                 square.style.height = "35px";
                 window.style.animation = `cc_mfn 350ms forwards ${easing}`;
@@ -374,7 +335,7 @@ function fail(string, title, id) {
                     if (document.body.contains(window)) document.body.removeChild(window);
                 }, 550);
             });
-        }
+        };
     }, 25);
 }
 
@@ -417,11 +378,13 @@ function warn(string, title, id) {
     content.style.textAlign = "center";
     content.style.minWidth = "30ch";
     content.style.transition = `all 175ms ${easing}`;
-    const bar = document.createElement("div");
-    bar.className = "warn-progressbar";
-    const timerdesc = document.createElement("div");
-    timerdesc.className = "fn-timerdesc";
-    timerdesc.style.transition = `all 175ms ${easing}`;
+    const okey = document.createElement("button");
+    okey.type = "button";
+    okey.className = "warn-zx";
+    okey.innerHTML = "知晓";
+    okey.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+    okey.style.opacity = 0;
+    okey.style.width = 0;
 
     create(window);
     document.body.appendChild(window);
@@ -430,8 +393,7 @@ function warn(string, title, id) {
     square.appendChild(icon);
     square.appendChild(txt);
     window.appendChild(content);
-    window.appendChild(bar);
-    window.appendChild(timerdesc);
+    window.appendChild(okey);
 
     icon.src = "images/Exc.png";
     window.style.animation = `jr_mfn 350ms forwards ${easing}`;
@@ -443,8 +405,8 @@ function warn(string, title, id) {
         content.style.opacity = 1;
         icon.style.opacity = 1;
         txt.style.opacity = 1;
-        timerdesc.style.opacity = 1;
-        timerdesc.style.transform = "translateX(0)";
+        okey.style.opacity = 1;
+        okey.style.width = "100%";
         window.style.width = "30ch";
         window.style.left = "calc(50% - 15ch)";
         window.style.right = "calc(50% + 15ch)";
@@ -455,28 +417,14 @@ function warn(string, title, id) {
     square.style.height = square_height;
     content.style.marginTop = square_height;
 
-    let pro = 0;
-    let ls_finish = false;
-    let passed_time = 0;
-    const interval = setInterval(() => {
-        pro += 10 / (smarttime(string) / 100);
-        passed_time += 10;
-        bar.style.width = `${pro}%`;
-        timerdesc.innerHTML = `${fhsj(passed_time)} / ${fhsj(smarttime(string))} | ${pro > 100 ? 100 : pro.toFixed(2)}%`;
-        if (pro >= 100) {
-            clearInterval(interval);
-            ls_finish = true;
-        }
-    }, 10);
-
     visible(content, "Warn");
 
     setInterval(() => {
-        if (ls_finish) {
+        okey.onclick = () => {
             content.style.opacity = 0;
             content.style.transform = "translateY(-10px)";
-            timerdesc.style.opacity = 0;
-            timerdesc.style.transform = "translateX(25px)";
+            okey.style.opacity = 0;
+            okey.style.width = 0;
             icon.style.opacity = 0;
             txt.style.opacity = 0;
             content.addEventListener("transitionend", () => {
@@ -487,7 +435,7 @@ function warn(string, title, id) {
                     if (document.body.contains(window)) document.body.removeChild(window);
                 }, 550);
             });
-        }
+        };
     }, 25);
 }
 
@@ -551,7 +499,7 @@ async function inp(string, title, id) {
         square.appendChild(txt);
         window.appendChild(content);
         window.appendChild(box);
-        
+
         icon.src = "images/Inp.png";
         window.style.animation = `jr_mfn 350ms forwards ${easing}`;
         content.innerHTML = string;
@@ -693,7 +641,7 @@ async function xz(string, n, names, title, id) {
             const b = Math.floor(Math.random() * 255);
             return tohex(r, g, b);
         }
-        
+
         confirm.onclick = () => {
             if (xz_items.length === 0) {
                 warn("你还没有勾选！");
@@ -731,7 +679,7 @@ async function xz(string, n, names, title, id) {
             checkbox.type = "checkbox";
             checkbox.className = "xz-checkbox";
             checkbox.id = `checkbox${i}`;
-            
+
             const btn = document.createElement("button");
             array[i] = String(array[i]);
             btn.id = `btn${i}`;
@@ -864,7 +812,7 @@ async function synchr(string, title, id) {
     content.style.marginTop = square_height;
 
     visible(content, "Synchr");
-    
+
     setTimeout(() => {
         content.style.opacity = 0;
         content.style.transform = "translateY(-10px)";
@@ -1060,6 +1008,12 @@ async function zd(string, title, id) {
                 const value = box.value.trim();
                 if (value === "") {
                     warn("不能输入空字符串。");
+                    window.style.animation = `mfn_shake1 0.3s ${easing}`;
+                    box.style.backgroundColor = "#ffff0099";
+                    window.addEventListener("animationend", () => {
+                        window.style.animation = "";
+                        box.style.backgroundColor = "#22222299";
+                    }, { once: true });
                     return;
                 }
                 try {
@@ -1075,6 +1029,8 @@ async function zd(string, title, id) {
                         resolve();
                     }
                 } catch (error) {
+                    window.style.animation = `mfn_shake2 0.3s ${easing}`;
+                    box.style.backgroundColor = "#ff000099";
                     switch (error.name) {
                         case "ReferenceError":
                             let vof = error.message.split(" is not defined");
@@ -1293,7 +1249,7 @@ async function timer(string, time, title, id) {
         let square_height = hqgd(txt.innerHTML, "fn-title", "div");
         square.style.height = square_height;
         content.style.marginTop = square_height;
-        
+
         let pro = 0;
         const interval = setInterval(() => {
             let timer_backwards = timer_speed < 0;

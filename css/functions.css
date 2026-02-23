@@ -116,13 +116,27 @@
     backdrop-filter: blur(14px) saturate(250%);
 }
 
-.noti-progressbar, .cg-progressbar, .fail-progressbar, .warn-progressbar, .synchr-progressbar, .timer-progressbar {
+.synchr-progressbar, .timer-progressbar {
     width: 0;
     height: 15px;
     overflow: hidden;
     transition: all 10ms ease;
     position: fixed;
     bottom: 0px;
+}
+
+.noti-okey, .cg-okey, .warn-zx, .fail-lj, .lj-link, .lj-ignore, .mb-gb {
+    border: none;
+    font-size: 20px;
+    padding: 14px 25px;
+    text-align: center;
+    width: 100%;
+    backdrop-filter: blur(14px) saturate(250%);
+    cursor: pointer;
+    color: white;
+    position: relative;
+    margin-bottom: 20px;
+    white-space: nowrap;
 }
 
 .noti-window {
@@ -136,8 +150,8 @@
     background-color: #26c9a949;
 }
 
-.noti-progressbar {
-    background-color: #06b48499;
+.noti-okey {
+    background-color: #00dd99b0;
 }
 
 .cg-window {
@@ -151,8 +165,8 @@
     background-color: #204e3049;
 }
 
-.cg-progressbar {
-    background-color: #14be6b99;
+.cg-okey {
+    background-color: #09401699;
 }
 
 .fail-window {
@@ -166,8 +180,8 @@
     background-color: #5e242349;
 }
 
-.fail-progressbar {
-    background-color: #e0111199;
+.fail-lj {
+    background-color: #b91a1899;
 }
 
 .warn-window {
@@ -181,8 +195,8 @@
     background-color: #9c8d2c49;
 }
 
-.warn-progressbar {
-    background-color: #ffad0099;
+.warn-zx {
+    background-color: #ad9c2c99;
 }
 
 .inp-window {
@@ -325,20 +339,6 @@
 
 .lj-square {
     background-color: #9c501d49;
-}
-
-.lj-link, .lj-ignore, .mb-gb {
-    border: none;
-    font-size: 20px;
-    padding: 14px 25px;
-    text-align: center;
-    width: 100%;
-    left: 0%;
-    backdrop-filter: blur(14px) saturate(250%);
-    cursor: pointer;
-    color: white;
-    position: relative;
-    margin-bottom: 20px;
 }
 
 .lj-link {
