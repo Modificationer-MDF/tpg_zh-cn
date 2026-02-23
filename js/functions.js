@@ -119,6 +119,12 @@ function noti(string, title, id) {
     content.style.marginTop = square_height;
 
     setInterval(() => {
+        okey.onmouseover = () => {
+            okey.style.backgroundColor = "#08674ab0";
+        };
+        okey.onmouseleave = () => {
+            okey.style.backgroundColor = "#00dd99b0";
+        }
         okey.onclick = () => {
             content.style.opacity = 0;
             content.style.transform = "translateY(-10px)";
@@ -219,6 +225,12 @@ function cg(string, title, id) {
     visible(content, "Cg");
 
     setInterval(() => {
+        okey.onmouseover = () => {
+            okey.style.backgroundColor = "#012b1699";
+        };
+        okey.onmouseleave = () => {
+            okey.style.backgroundColor = "#09401699";
+        }
         okey.onclick = () => {
             content.style.opacity = 0;
             content.style.transform = "translateY(-10px)";
@@ -320,6 +332,12 @@ function fail(string, title, id) {
     visible(content, "Fail")
 
     setInterval(() => {
+        okey.onmouseover = () => {
+            okey.style.backgroundColor = "#4a020199";
+        };
+        okey.onmouseleave = () => {
+            okey.style.backgroundColor = "#b91a1899";
+        };
         okey.onclick = () => {
             content.style.opacity = 0;
             content.style.transform = "translateY(-10px)";
@@ -420,6 +438,12 @@ function warn(string, title, id) {
     visible(content, "Warn");
 
     setInterval(() => {
+        okey.onmouseover = () => {
+            okey.style.backgroundColor = "#5c510599";
+        };
+        okey.onmouseleave = () => {
+            okey.style.backgroundColor = "#ad9c2c99";
+        };
         okey.onclick = () => {
             content.style.opacity = 0;
             content.style.transform = "translateY(-10px)";
