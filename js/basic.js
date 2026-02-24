@@ -1361,22 +1361,22 @@ async function fn7() { // 网站介绍。
     const hbox = document.getElementById("defhei");
     const tsbox = document.getElementById("timingspeed");
 
-    await wz("欢迎来到 The Play Games 官方网站！是时候带你熟悉一下了。");
-    noti("请将鼠标移动至左上角。");
+    await noti("欢迎来到 The Play Games 官方网站！是时候带你熟悉一下了。");
+    rz("请将鼠标移动至左上角。");
     control_block = true;
 
     const i1 = setInterval(async () => {
         if (getComputedStyle(ctrl).animationName === "jr_ctrl" && j1 === false) {
             ld(main, "75%");
             j1 = true;
-            await wz("正如你所见，这里是该网站的 “选项” 界面！你可以在此处更改网站的各项特殊参数。");
+            await noti("正如你所见，这里是该网站的 “选项” 界面！你可以在此处更改网站的各项特殊参数。");
             let q1 = await xz("是否需要演示如何更改？", 1, ["是。", "否。"]);
             q1 = q1.join("");
             if (q1 === "是。") {
-                await mb(["你可以直接点击相应的按钮便捷更改变量值，也可以通过输入来更改。"]);
+                rz("你可以直接点击相应的按钮便捷更改变量值，也可以通过输入来更改。");
                 let q2 = await xz("选择哪个变量演示呢？", 1, ["easing", "deftime", "defwid", "defhei", "timer_speed"]);
                 q2 = q2.join("");
-                noti("请修改该值。");
+                rz("请修改该值。");
                 switch (q2) {
                     case "easing":
                         ebox.focus();
@@ -1430,7 +1430,7 @@ async function fn7() { // 网站介绍。
                         break;
                 }
             } else {
-                await wz("好的，那我们继续。");
+                await noti("好的，那我们继续。");
                 control_block = false;
                 control_moved = true;
                 w1 = true;
@@ -1443,14 +1443,14 @@ async function fn7() { // 网站介绍。
     const i2 = setInterval(async () => {
         if (w1 === true && ls_j2 === false) {
             ls_j2 = true;
-            await wz("接下来介绍的是 “未读信息” 界面。");
-            noti("请将鼠标移动至右上角。");
+            await noti("接下来介绍的是 “未读信息” 界面。");
+            rz("请将鼠标移动至右上角。");
             inf_block = true;
             const i3 = setInterval(async () => {
                 if (getComputedStyle(inf).animationName === "jr_inf" && j2 === false) {
                     ld(main, "75%");
                     j2 = true;
-                    await mb(["在 “未读信息” 界面，你可以看到因窗口大小限制而没有看到的内容。"]);
+                    await noti("在 “未读信息” 界面，你可以看到因窗口大小限制而没有看到的内容。");
                     inf_block = false;
                     inf_moved = true;
                     w2 = true;
@@ -1465,14 +1465,14 @@ async function fn7() { // 网站介绍。
     const i4 = setInterval(async () => {
         if (w2 === true && ls_j3 === false) {
             ls_j3 = true;
-            await wz("然后，我将为你介绍该网站最近更新的 “右键菜单”。");
-            noti("请单击鼠标右键。（可能需要按 2 次）");
+            await noti("然后，我将为你介绍该网站最近更新的 “右键菜单”。");
+            rz("请单击鼠标右键。（可能需要按 2 次）");
             const i5 = setInterval(async () => {
                 if (rmenu.style.opacity === "1" && j3 === false) {
                     ld(main, "75%");
                     j3 = true;
-                    await mb(["通过右键菜单，你可以快速完成一些常见操作。"]);
-                    noti("注：若要打开控制台，请按 F12。");
+                    await noti("通过右键菜单，你可以快速完成一些常见操作。");
+                    rz("注：若要打开控制台，请按 F12。");
                     w3 = true;
                     clearInterval(i5);
                 }

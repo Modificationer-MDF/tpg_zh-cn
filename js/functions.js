@@ -38,429 +38,441 @@ function rz(string, time) {
 }
 
 // noti 函数。
-function noti(string, title, id) {
-    if (string == null || string == undefined) {
-        fail("不能输入空值！");
-        return "在 Noti() 函数中，string 参数不能为 null 或 undefined。";
-    }
-    string = String(string);
-    let s_replaced = string.replace(/\s+/g, "");
-    if (s_replaced === "") {
-        warn("不能输入空字符串。");
-        return "在 Noti() 函数中，string 参数不能为空。";
-    }
-    if (title == null || title == undefined) title = "通知";
-    else {
-        title = String(title);
-        let t_replaced = title.replace(/\s+/g, "");
-        if (t_replaced === "") title = "通知";
-    }
-    if (id == null || id == undefined) id = "";
-
-    const window = document.createElement("div");
-    const square = document.createElement("div");
-    const icon = document.createElement("img");
-    const txt = document.createElement("div");
-    const content = document.createElement("div");
-    const okey = document.createElement("button");
-
-    window.className = "noti-window";
-    window.id = id;
-    square.className = "noti-square";
-    icon.src = "images/Notification.png";
-    icon.alt = "";
-    icon.style.opacity = 0;
-    icon.style.transistion = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
-    txt.className = "fn-title";
-    txt.style.opacity = 0;
-    txt.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
-    content.className = "fn-content";
-    content.style.opacity = 0;
-    content.style.textAlign = "center";
-    content.style.minWidth = "30ch";
-    content.style.transition = `all 175ms ${easing}`;
-    okey.type = "button";
-    okey.className = "noti-okey";
-    okey.innerHTML = "确定";
-    okey.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
-    okey.style.opacity = 0;
-    okey.style.width = 0;
-
-    create(window);
-    document.body.appendChild(window);
-
-    window.appendChild(square);
-    square.appendChild(icon);
-    square.appendChild(txt);
-    window.appendChild(content);
-    window.appendChild(okey);
-
-    window.style.animation = `jr_mfn 350ms forwards ${easing}`;
-    content.innerHTML = string;
-    txt.innerHTML = title;
-
-    window.addEventListener("animationend", () => {
-        content.style.transform = "translateY(0)";
-        content.style.opacity = 1;
-        icon.style.opacity = 1;
-        txt.style.opacity = 1;
-        okey.style.opacity = 1;
-        okey.style.width = "100%";
-        window.style.width = "30ch";
-        window.style.left = "calc(50% - 15ch)";
-        window.style.right = "calc(50% + 15ch)";
-        window.style.maxHeight = window.getBoundingClientRect().height + "px";
-    });
-
-    visible(content, "Noti");
-
-    let square_height = hqgd(txt.innerHTML, "fn-title", "div");
-    square.style.height = square_height;
-    content.style.marginTop = square_height;
-
-    setInterval(() => {
-        okey.onmouseover = () => {
-            okey.style.backgroundColor = "#08674ab0";
-        };
-        okey.onmouseleave = () => {
-            okey.style.backgroundColor = "#00dd99b0";
+async function noti(string, title, id) {
+    return new Promise((resolve) => {
+        if (string == null || string == undefined) {
+            fail("不能输入空值！");
+            return "在 Noti() 函数中，string 参数不能为 null 或 undefined。";
         }
-        okey.onclick = () => {
-            content.style.opacity = 0;
-            content.style.transform = "translateY(-10px)";
-            okey.style.opacity = 0;
-            okey.style.width = 0;
-            icon.style.opacity = 0;
-            txt.style.opacity = 0;
-            content.addEventListener("transitionend", () => {
-                square.style.height = "35px";
-                window.style.animation = `cc_mfn 350ms forwards ${easing}`;
-                close(window);
-                setTimeout(() => {
-                    if (document.body.contains(window)) document.body.removeChild(window);
-                }, 550);
-            });
-        };
-    }, 25);
+        string = String(string);
+        let s_replaced = string.replace(/\s+/g, "");
+        if (s_replaced === "") {
+            warn("不能输入空字符串。");
+            return "在 Noti() 函数中，string 参数不能为空。";
+        }
+        if (title == null || title == undefined) title = "通知";
+        else {
+            title = String(title);
+            let t_replaced = title.replace(/\s+/g, "");
+            if (t_replaced === "") title = "通知";
+        }
+        if (id == null || id == undefined) id = "";
+
+        const window = document.createElement("div");
+        const square = document.createElement("div");
+        const icon = document.createElement("img");
+        const txt = document.createElement("div");
+        const content = document.createElement("div");
+        const okey = document.createElement("button");
+
+        window.className = "noti-window";
+        window.id = id;
+        square.className = "noti-square";
+        icon.src = "images/Notification.png";
+        icon.alt = "";
+        icon.style.opacity = 0;
+        icon.style.transistion = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+        txt.className = "fn-title";
+        txt.style.opacity = 0;
+        txt.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+        content.className = "fn-content";
+        content.style.opacity = 0;
+        content.style.textAlign = "center";
+        content.style.minWidth = "30ch";
+        content.style.transition = `all 175ms ${easing}`;
+        okey.type = "button";
+        okey.className = "noti-okey";
+        okey.innerHTML = "清楚了";
+        okey.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+        okey.style.opacity = 0;
+        okey.style.width = 0;
+
+        create(window);
+        document.body.appendChild(window);
+
+        window.appendChild(square);
+        square.appendChild(icon);
+        square.appendChild(txt);
+        window.appendChild(content);
+        window.appendChild(okey);
+
+        window.style.animation = `jr_mfn 350ms forwards ${easing}`;
+        content.innerHTML = string;
+        txt.innerHTML = title;
+
+        window.addEventListener("animationend", () => {
+            content.style.transform = "translateY(0)";
+            content.style.opacity = 1;
+            icon.style.opacity = 1;
+            txt.style.opacity = 1;
+            okey.style.opacity = 1;
+            okey.style.width = "100%";
+            window.style.width = "30ch";
+            window.style.left = "calc(50% - 15ch)";
+            window.style.right = "calc(50% + 15ch)";
+            window.style.maxHeight = window.getBoundingClientRect().height + "px";
+        });
+
+        visible(content, "Noti");
+
+        let square_height = hqgd(txt.innerHTML, "fn-title", "div");
+        square.style.height = square_height;
+        content.style.marginTop = square_height;
+
+        setInterval(() => {
+            okey.onmouseover = () => {
+                okey.style.backgroundColor = "#08674ab0";
+            };
+            okey.onmouseleave = () => {
+                okey.style.backgroundColor = "#00dd99b0";
+            }
+            okey.onclick = () => {
+                content.style.opacity = 0;
+                content.style.transform = "translateY(-10px)";
+                okey.style.opacity = 0;
+                okey.style.width = 0;
+                icon.style.opacity = 0;
+                txt.style.opacity = 0;
+                resolve()
+                content.addEventListener("transitionend", () => {
+                    square.style.height = "35px";
+                    window.style.animation = `cc_mfn 350ms forwards ${easing}`;
+                    close(window);
+                    setTimeout(() => {
+                        if (document.body.contains(window)) document.body.removeChild(window);
+                    }, 550);
+                });
+            };
+        }, 25);
+    });
 }
 
 // cg 函数。
-function cg(string, title, id) {
-    if (string == null || string == undefined) {
-        fail("不能输入空值！");
-        return "在 Cg() 函数中，string 参数不能为 null 或 undefined。";
-    }
-    string = String(string);
-    let s_replaced = string.replace(/\s+/g, "");
-    if (s_replaced === "") {
-        warn("不能输入空字符串。");
-        return "在 Cg() 函数中，string 参数不能为空。";
-    }
-    if (title == null || title == undefined) title = "完成";
-    else {
-        title = String(title);
-        let t_replaced = title.replace(/\s+/g, "");
-        if (t_replaced === "") title = "完成";
-    }
-    if (id == null || id == undefined) id = "";
-
-    const window = document.createElement("div");
-    window.className = "cg-window";
-    window.id = id;
-    const square = document.createElement("div");
-    square.className = "cg-square";
-    const txt = document.createElement("div");
-    txt.className = "fn-title";
-    txt.style.opacity = 0;
-    txt.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
-    const icon = document.createElement("img");
-    icon.alt = "";
-    icon.src = "images/Suc.png";
-    icon.style.opacity = 0;
-    icon.style.transistion = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
-    const content = document.createElement("div");
-    content.className = "fn-content";
-    content.style.opacity = 0;
-    content.style.textAlign = "center";
-    content.style.minWidth = "30ch";
-    content.style.transition = `all 175ms ${easing}`;
-    const okey = document.createElement("button");
-    okey.type = "button";
-    okey.className = "cg-okey";
-    okey.innerHTML = "确定";
-    okey.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
-    okey.style.opacity = 0;
-    okey.style.width = 0;
-
-    create(window);
-    document.body.appendChild(window);
-
-    window.appendChild(square);
-    square.appendChild(icon);
-    square.appendChild(txt);
-    window.appendChild(content);
-    window.appendChild(okey);
-
-    window.style.animation = `jr_mfn 350ms forwards ${easing}`;
-    content.innerHTML = string;
-    txt.innerHTML = title;
-
-    window.addEventListener("animationend", () => {
-        content.style.transform = "translateY(0)";
-        content.style.opacity = 1;
-        icon.style.opacity = 1;
-        txt.style.opacity = 1;
-        okey.style.opacity = 1;
-        okey.style.width = "100%";
-        window.style.width = "30ch";
-        window.style.left = "calc(50% - 15ch)";
-        window.style.right = "calc(50% + 15ch)";
-        window.style.maxHeight = window.getBoundingClientRect().height + "px";
-    });
-
-    let square_height = hqgd(txt.innerHTML, "fn-title", "div");
-    square.style.height = square_height;
-    content.style.marginTop = square_height;
-
-    visible(content, "Cg");
-
-    setInterval(() => {
-        okey.onmouseover = () => {
-            okey.style.backgroundColor = "#012b1699";
-        };
-        okey.onmouseleave = () => {
-            okey.style.backgroundColor = "#09401699";
+async function cg(string, title, id) {
+    return new Promise((resolve) => {
+        if (string == null || string == undefined) {
+            fail("不能输入空值！");
+            return "在 Cg() 函数中，string 参数不能为 null 或 undefined。";
         }
-        okey.onclick = () => {
-            content.style.opacity = 0;
-            content.style.transform = "translateY(-10px)";
-            okey.style.opacity = 0;
-            okey.style.width = 0;
-            txt.style.opacity = 0;
-            icon.style.opacity = 0;
-            content.addEventListener("transitionend", () => {
-                square.style.height = "35px";
-                window.style.animation = `cc_mfn 350ms forwards ${easing}`;
-                close(window)
-                setTimeout(() => {
-                    if (document.body.contains(window)) document.body.removeChild(window);
-                }, 550);
-            });
-        };
-    }, 25);
+        string = String(string);
+        let s_replaced = string.replace(/\s+/g, "");
+        if (s_replaced === "") {
+            warn("不能输入空字符串。");
+            return "在 Cg() 函数中，string 参数不能为空。";
+        }
+        if (title == null || title == undefined) title = "完成";
+        else {
+            title = String(title);
+            let t_replaced = title.replace(/\s+/g, "");
+            if (t_replaced === "") title = "完成";
+        }
+        if (id == null || id == undefined) id = "";
+
+        const window = document.createElement("div");
+        window.className = "cg-window";
+        window.id = id;
+        const square = document.createElement("div");
+        square.className = "cg-square";
+        const txt = document.createElement("div");
+        txt.className = "fn-title";
+        txt.style.opacity = 0;
+        txt.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+        const icon = document.createElement("img");
+        icon.alt = "";
+        icon.src = "images/Suc.png";
+        icon.style.opacity = 0;
+        icon.style.transistion = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+        const content = document.createElement("div");
+        content.className = "fn-content";
+        content.style.opacity = 0;
+        content.style.textAlign = "center";
+        content.style.minWidth = "30ch";
+        content.style.transition = `all 175ms ${easing}`;
+        const okey = document.createElement("button");
+        okey.type = "button";
+        okey.className = "cg-okey";
+        okey.innerHTML = "确定";
+        okey.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+        okey.style.opacity = 0;
+        okey.style.width = 0;
+
+        create(window);
+        document.body.appendChild(window);
+
+        window.appendChild(square);
+        square.appendChild(icon);
+        square.appendChild(txt);
+        window.appendChild(content);
+        window.appendChild(okey);
+
+        window.style.animation = `jr_mfn 350ms forwards ${easing}`;
+        content.innerHTML = string;
+        txt.innerHTML = title;
+
+        window.addEventListener("animationend", () => {
+            content.style.transform = "translateY(0)";
+            content.style.opacity = 1;
+            icon.style.opacity = 1;
+            txt.style.opacity = 1;
+            okey.style.opacity = 1;
+            okey.style.width = "100%";
+            window.style.width = "30ch";
+            window.style.left = "calc(50% - 15ch)";
+            window.style.right = "calc(50% + 15ch)";
+            window.style.maxHeight = window.getBoundingClientRect().height + "px";
+        });
+
+        let square_height = hqgd(txt.innerHTML, "fn-title", "div");
+        square.style.height = square_height;
+        content.style.marginTop = square_height;
+
+        visible(content, "Cg");
+
+        setInterval(() => {
+            okey.onmouseover = () => {
+                okey.style.backgroundColor = "#012b1699";
+            };
+            okey.onmouseleave = () => {
+                okey.style.backgroundColor = "#09401699";
+            }
+            okey.onclick = () => {
+                content.style.opacity = 0;
+                content.style.transform = "translateY(-10px)";
+                okey.style.opacity = 0;
+                okey.style.width = 0;
+                txt.style.opacity = 0;
+                icon.style.opacity = 0;
+                content.addEventListener("transitionend", () => {
+                    square.style.height = "35px";
+                    window.style.animation = `cc_mfn 350ms forwards ${easing}`;
+                    close(window);
+                    resolve();
+                    setTimeout(() => {
+                        if (document.body.contains(window)) document.body.removeChild(window);
+                    }, 550);
+                });
+            };
+        }, 25);
+    });
 }
 
 // fail 函数。
-function fail(string, title, id) {
-    if (string == null || string == undefined) {
-        fail("不能输入空值！");
-        return "在 Fail() 函数中，string 参数不能为 null 或 undefined。";
-    }
-    string = String(string);
-    let s_replaced = string.replace(/\s+/g, "");
-    if (s_replaced === "") {
-        warn("不能输入空字符串。");
-        return "在 Fail() 函数中，string 参数不能为空。";
-    }
-    if (title == null || title == undefined) title = "错误";
-    else {
-        title = String(title);
-        let t_replaced = title.replace(/\s+/g, "");
-        if (t_replaced === "") title = "错误";
-    }
-    if (id == null || id == undefined) id = "";
+async function fail(string, title, id) {
+    return new Promise((resolve) => {
+        if (string == null || string == undefined) {
+            fail("不能输入空值！");
+            return "在 Fail() 函数中，string 参数不能为 null 或 undefined。";
+        }
+        string = String(string);
+        let s_replaced = string.replace(/\s+/g, "");
+        if (s_replaced === "") {
+            warn("不能输入空字符串。");
+            return "在 Fail() 函数中，string 参数不能为空。";
+        }
+        if (title == null || title == undefined) title = "错误";
+        else {
+            title = String(title);
+            let t_replaced = title.replace(/\s+/g, "");
+            if (t_replaced === "") title = "错误";
+        }
+        if (id == null || id == undefined) id = "";
 
-    const window = document.createElement("div");
-    window.className = "fail-window";
-    window.id = id;
-    const square = document.createElement("div");
-    square.className = "fail-square";
-    const icon = document.createElement("img");
-    icon.alt = "";
-    icon.className = "fail-icon";
-    icon.style.opacity = 0;
-    icon.style.transistion = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
-    const txt = document.createElement("div");
-    txt.className = "fn-title";
-    txt.style.opacity = 0;
-    txt.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
-    const content = document.createElement("div");
-    content.className = "fn-content";
-    content.style.opacity = 0;
-    content.style.textAlign = "center";
-    content.style.minWidth = "30ch";
-    content.style.transition = `all 175ms ${easing}`;
-    const okey = document.createElement("button");
-    okey.type = "button";
-    okey.className = "fail-lj";
-    okey.innerHTML = "了解";
-    okey.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
-    okey.style.opacity = 0;
-    okey.style.width = 0;
+        const window = document.createElement("div");
+        window.className = "fail-window";
+        window.id = id;
+        const square = document.createElement("div");
+        square.className = "fail-square";
+        const icon = document.createElement("img");
+        icon.alt = "";
+        icon.className = "fail-icon";
+        icon.style.opacity = 0;
+        icon.style.transistion = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+        const txt = document.createElement("div");
+        txt.className = "fn-title";
+        txt.style.opacity = 0;
+        txt.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+        const content = document.createElement("div");
+        content.className = "fn-content";
+        content.style.opacity = 0;
+        content.style.textAlign = "center";
+        content.style.minWidth = "30ch";
+        content.style.transition = `all 175ms ${easing}`;
+        const okey = document.createElement("button");
+        okey.type = "button";
+        okey.className = "fail-lj";
+        okey.innerHTML = "了解";
+        okey.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+        okey.style.opacity = 0;
+        okey.style.width = 0;
 
-    create(window);
-    document.body.appendChild(window);
+        create(window);
+        document.body.appendChild(window);
 
-    window.appendChild(square);
-    square.appendChild(icon);
-    square.appendChild(txt);
-    window.appendChild(content);
-    window.appendChild(okey);
+        window.appendChild(square);
+        square.appendChild(icon);
+        square.appendChild(txt);
+        window.appendChild(content);
+        window.appendChild(okey);
 
-    icon.src = "images/Err.png";
-    window.style.animation = `jr_mfn 350ms forwards ${easing}`;
-    content.innerHTML = string;
-    txt.innerHTML = title;
+        icon.src = "images/Err.png";
+        window.style.animation = `jr_mfn 350ms forwards ${easing}`;
+        content.innerHTML = string;
+        txt.innerHTML = title;
 
-    window.addEventListener("animationend", () => {
-        content.style.transform = "translateY(0)";
-        content.style.opacity = 1;
-        icon.style.opacity = 1;
-        txt.style.opacity = 1;
-        okey.style.opacity = 1;
-        okey.style.width = "100%";
-        window.style.width = "30ch";
-        window.style.left = "calc(50% - 15ch)";
-        window.style.right = "calc(50% + 15ch)";
-        window.style.maxHeight = window.getBoundingClientRect().height + "px";
+        window.addEventListener("animationend", () => {
+            content.style.transform = "translateY(0)";
+            content.style.opacity = 1;
+            icon.style.opacity = 1;
+            txt.style.opacity = 1;
+            okey.style.opacity = 1;
+            okey.style.width = "100%";
+            window.style.width = "30ch";
+            window.style.left = "calc(50% - 15ch)";
+            window.style.right = "calc(50% + 15ch)";
+            window.style.maxHeight = window.getBoundingClientRect().height + "px";
+        });
+
+        let square_height = hqgd(txt.innerHTML, "fn-title", "div");
+        square.style.height = square_height;
+        content.style.marginTop = square_height;
+
+        visible(content, "Fail")
+
+        setInterval(() => {
+            okey.onmouseover = () => {
+                okey.style.backgroundColor = "#4a020199";
+            };
+            okey.onmouseleave = () => {
+                okey.style.backgroundColor = "#b91a1899";
+            };
+            okey.onclick = () => {
+                content.style.opacity = 0;
+                content.style.transform = "translateY(-10px)";
+                icon.style.opacity = 0;
+                txt.style.opacity = 0;
+                okey.style.opacity = 0;
+                okey.style.width = 0;
+                content.addEventListener("transitionend", () => {
+                    square.style.height = "35px";
+                    window.style.animation = `cc_mfn 350ms forwards ${easing}`;
+                    close(window);
+                    resolve();
+                    setTimeout(() => {
+                        if (document.body.contains(window)) document.body.removeChild(window);
+                    }, 550);
+                });
+            };
+        }, 25);
     });
-
-    let square_height = hqgd(txt.innerHTML, "fn-title", "div");
-    square.style.height = square_height;
-    content.style.marginTop = square_height;
-
-    visible(content, "Fail")
-
-    setInterval(() => {
-        okey.onmouseover = () => {
-            okey.style.backgroundColor = "#4a020199";
-        };
-        okey.onmouseleave = () => {
-            okey.style.backgroundColor = "#b91a1899";
-        };
-        okey.onclick = () => {
-            content.style.opacity = 0;
-            content.style.transform = "translateY(-10px)";
-            icon.style.opacity = 0;
-            txt.style.opacity = 0;
-            okey.style.opacity = 0;
-            okey.style.width = 0;
-            content.addEventListener("transitionend", () => {
-                square.style.height = "35px";
-                window.style.animation = `cc_mfn 350ms forwards ${easing}`;
-                close(window)
-                setTimeout(() => {
-                    if (document.body.contains(window)) document.body.removeChild(window);
-                }, 550);
-            });
-        };
-    }, 25);
 }
 
 // warn 函数。
-function warn(string, title, id) {
-    if (string == null || string == undefined) {
-        fail("不能输入空值！");
-        return "在 Warn() 函数中，string 参数不能为 null 或 undefined。";
-    }
-    string = String(string);
-    let s_replaced = string.replace(/\s+/g, "");
-    if (s_replaced === "") {
-        warn("不能输入空字符串。");
-        return "在 Warn() 函数中，string 参数不能为空。";
-    }
-    if (title == null || title == undefined) title = "注意";
-    else {
-        title = String(title);
-        let t_replaced = title.replace(/\s+/g, "");
-        if (t_replaced === "") title = "注意";
-    }
-    if (id == null || id == undefined) id = "";
+async function warn(string, title, id) {
+    return new Promise((resolve) => {
+        if (string == null || string == undefined) {
+            fail("不能输入空值！");
+            return "在 Warn() 函数中，string 参数不能为 null 或 undefined。";
+        }
+        string = String(string);
+        let s_replaced = string.replace(/\s+/g, "");
+        if (s_replaced === "") {
+            warn("不能输入空字符串。");
+            return "在 Warn() 函数中，string 参数不能为空。";
+        }
+        if (title == null || title == undefined) title = "注意";
+        else {
+            title = String(title);
+            let t_replaced = title.replace(/\s+/g, "");
+            if (t_replaced === "") title = "注意";
+        }
+        if (id == null || id == undefined) id = "";
 
-    const window = document.createElement("div");
-    window.className = "warn-window";
-    const square = document.createElement("div");
-    square.className = "warn-square";
-    const icon = document.createElement("img");
-    icon.alt = "";
-    icon.className = "warn-icon";
-    icon.style.opacity = 0;
-    icon.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
-    const txt = document.createElement("div");
-    txt.className = "fn-title";
-    txt.style.opacity = 0;
-    txt.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
-    const content = document.createElement("div");
-    content.className = "fn-content";
-    content.style.opacity = 0;
-    content.style.textAlign = "center";
-    content.style.minWidth = "30ch";
-    content.style.transition = `all 175ms ${easing}`;
-    const okey = document.createElement("button");
-    okey.type = "button";
-    okey.className = "warn-zx";
-    okey.innerHTML = "知晓";
-    okey.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
-    okey.style.opacity = 0;
-    okey.style.width = 0;
+        const window = document.createElement("div");
+        window.className = "warn-window";
+        const square = document.createElement("div");
+        square.className = "warn-square";
+        const icon = document.createElement("img");
+        icon.alt = "";
+        icon.className = "warn-icon";
+        icon.style.opacity = 0;
+        icon.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+        const txt = document.createElement("div");
+        txt.className = "fn-title";
+        txt.style.opacity = 0;
+        txt.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+        const content = document.createElement("div");
+        content.className = "fn-content";
+        content.style.opacity = 0;
+        content.style.textAlign = "center";
+        content.style.minWidth = "30ch";
+        content.style.transition = `all 175ms ${easing}`;
+        const okey = document.createElement("button");
+        okey.type = "button";
+        okey.className = "warn-zx";
+        okey.innerHTML = "知晓";
+        okey.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
+        okey.style.opacity = 0;
+        okey.style.width = 0;
 
-    create(window);
-    document.body.appendChild(window);
+        create(window);
+        document.body.appendChild(window);
 
-    window.appendChild(square);
-    square.appendChild(icon);
-    square.appendChild(txt);
-    window.appendChild(content);
-    window.appendChild(okey);
+        window.appendChild(square);
+        square.appendChild(icon);
+        square.appendChild(txt);
+        window.appendChild(content);
+        window.appendChild(okey);
 
-    icon.src = "images/Exc.png";
-    window.style.animation = `jr_mfn 350ms forwards ${easing}`;
-    content.innerHTML = string;
-    txt.innerHTML = title;
+        icon.src = "images/Exc.png";
+        window.style.animation = `jr_mfn 350ms forwards ${easing}`;
+        content.innerHTML = string;
+        txt.innerHTML = title;
 
-    window.addEventListener("animationend", () => {
-        content.style.transform = "translateY(0)";
-        content.style.opacity = 1;
-        icon.style.opacity = 1;
-        txt.style.opacity = 1;
-        okey.style.opacity = 1;
-        okey.style.width = "100%";
-        window.style.width = "30ch";
-        window.style.left = "calc(50% - 15ch)";
-        window.style.right = "calc(50% + 15ch)";
-        window.style.maxHeight = window.getBoundingClientRect().height + "px";
+        window.addEventListener("animationend", () => {
+            content.style.transform = "translateY(0)";
+            content.style.opacity = 1;
+            icon.style.opacity = 1;
+            txt.style.opacity = 1;
+            okey.style.opacity = 1;
+            okey.style.width = "100%";
+            window.style.width = "30ch";
+            window.style.left = "calc(50% - 15ch)";
+            window.style.right = "calc(50% + 15ch)";
+            window.style.maxHeight = window.getBoundingClientRect().height + "px";
+        });
+
+        let square_height = hqgd(txt.innerHTML, "fn-title", "div");
+        square.style.height = square_height;
+        content.style.marginTop = square_height;
+
+        visible(content, "Warn");
+
+        setInterval(() => {
+            okey.onmouseover = () => {
+                okey.style.backgroundColor = "#5c510599";
+            };
+            okey.onmouseleave = () => {
+                okey.style.backgroundColor = "#ad9c2c99";
+            };
+            okey.onclick = () => {
+                content.style.opacity = 0;
+                content.style.transform = "translateY(-10px)";
+                okey.style.opacity = 0;
+                okey.style.width = 0;
+                icon.style.opacity = 0;
+                txt.style.opacity = 0;
+                content.addEventListener("transitionend", () => {
+                    square.style.height = "35px";
+                    window.style.animation = `cc_mfn 350ms forwards ${easing}`;
+                    close(window);
+                    resolve();
+                    setTimeout(() => {
+                        if (document.body.contains(window)) document.body.removeChild(window);
+                    }, 550);
+                });
+            };
+        }, 25);
     });
-
-    let square_height = hqgd(txt.innerHTML, "fn-title", "div");
-    square.style.height = square_height;
-    content.style.marginTop = square_height;
-
-    visible(content, "Warn");
-
-    setInterval(() => {
-        okey.onmouseover = () => {
-            okey.style.backgroundColor = "#5c510599";
-        };
-        okey.onmouseleave = () => {
-            okey.style.backgroundColor = "#ad9c2c99";
-        };
-        okey.onclick = () => {
-            content.style.opacity = 0;
-            content.style.transform = "translateY(-10px)";
-            okey.style.opacity = 0;
-            okey.style.width = 0;
-            icon.style.opacity = 0;
-            txt.style.opacity = 0;
-            content.addEventListener("transitionend", () => {
-                square.style.height = "35px";
-                window.style.animation = `cc_mfn 350ms forwards ${easing}`;
-                close(window)
-                setTimeout(() => {
-                    if (document.body.contains(window)) document.body.removeChild(window);
-                }, 550);
-            });
-        };
-    }, 25);
 }
 
 // inp 函数。
@@ -684,7 +696,7 @@ async function xz(string, n, names, title, id) {
                 content.addEventListener("transitionend", () => {
                     square.style.height = "35px";
                     window.style.animation = `cc_mfn 350ms forwards ${easing}`;
-                    close(window)
+                    close(window);
                     setTimeout(() => {
                         if (document.body.contains(window)) document.body.removeChild(window);
                     }, 550);
@@ -845,7 +857,7 @@ async function synchr(string, title, id) {
         content.addEventListener("transitionend", () => {
             square.style.height = "35px";
             window.style.animation = `cc_mfn 350ms forwards ${easing}`;
-            close(window)
+            close(window);
             setTimeout(() => {
                 if (document.body.contains(window)) document.body.removeChild(window);
             }, 550);
@@ -958,7 +970,7 @@ async function lj(string, url, title, id) {
         content.addEventListener("transitionend", () => {
             square.style.height = "35px";
             window.style.animation = `cc_mfn 350ms forwards ${easing}`;
-            close(window)
+            close(window);
             setTimeout(() => {
                 if (document.body.contains(window)) document.body.removeChild(window);
             }, 550);
