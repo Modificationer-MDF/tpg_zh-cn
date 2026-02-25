@@ -121,11 +121,11 @@ async function noti(string, title, id) {
 
         setInterval(() => {
             okey.onmouseover = () => {
-                okey.style.backgroundColor = "#08674ab0";
+                ld(okey, "75%");
             };
             okey.onmouseleave = () => {
-                okey.style.backgroundColor = "#00dd99b0";
-            }
+                ld(okey, "100%");
+            };
             okey.onclick = () => {
                 content.style.opacity = 0;
                 content.style.transform = "translateY(-10px)";
@@ -133,7 +133,7 @@ async function noti(string, title, id) {
                 okey.style.width = 0;
                 icon.style.opacity = 0;
                 txt.style.opacity = 0;
-                resolve()
+                resolve();
                 content.addEventListener("transitionend", () => {
                     square.style.height = "35px";
                     window.style.animation = `cc_mfn 350ms forwards ${easing}`;
@@ -230,11 +230,11 @@ async function cg(string, title, id) {
 
         setInterval(() => {
             okey.onmouseover = () => {
-                okey.style.backgroundColor = "#012b1699";
+                ld(okey, "75%");
             };
             okey.onmouseleave = () => {
-                okey.style.backgroundColor = "#09401699";
-            }
+                ld(okey, "100%");
+            };
             okey.onclick = () => {
                 content.style.opacity = 0;
                 content.style.transform = "translateY(-10px)";
@@ -340,10 +340,10 @@ async function fail(string, title, id) {
 
         setInterval(() => {
             okey.onmouseover = () => {
-                okey.style.backgroundColor = "#4a020199";
+                ld(okey, "75%");
             };
             okey.onmouseleave = () => {
-                okey.style.backgroundColor = "#b91a1899";
+                ld(okey, "100%");
             };
             okey.onclick = () => {
                 content.style.opacity = 0;
@@ -449,10 +449,10 @@ async function warn(string, title, id) {
 
         setInterval(() => {
             okey.onmouseover = () => {
-                okey.style.backgroundColor = "#5c510599";
+                ld(okey, "75%");
             };
             okey.onmouseleave = () => {
-                okey.style.backgroundColor = "#ad9c2c99";
+                ld(okey, "100%");
             };
             okey.onclick = () => {
                 content.style.opacity = 0;
@@ -628,9 +628,17 @@ async function xz(string, n, names, title, id) {
         confirm.className = "xz-confirm";
         confirm.innerHTML = "确定";
         confirm.style.opacity = 0;
+        confirm.style.width = 0;
+        confirm.style.transition = `all 175ms ${easing}`;
+        const giveup = document.createElement("button");
+        giveup.className = "xz-giveup";
+        giveup.innerHTML = "放弃选择";
+        giveup.style.opacity = 0;
+        giveup.style.width = 0;
+        giveup.style.transition = `all 175ms ${easing}`;
 
         const array = Array.from(names);
-        const xz_items = []; // 被选择的选项。
+        const xz_items = []; // 被选项。
 
         create(window);
         document.body.appendChild(window);
@@ -640,6 +648,7 @@ async function xz(string, n, names, title, id) {
         square.appendChild(txt);
         window.appendChild(content);
         window.appendChild(confirm);
+        window.appendChild(giveup);
 
         icon.src = "images/Sel.png";
         window.style.animation = `jr_mfn 350ms forwards ${easing}`;
@@ -651,11 +660,21 @@ async function xz(string, n, names, title, id) {
             content.style.opacity = 1;
             icon.style.opacity = 1;
             txt.style.opacity = 1;
+            confirm.style.opacity = 1;
+            confirm.style.width = "100%";
             window.style.width = "30ch";
             window.style.left = "calc(50% - 15ch)";
             window.style.right = "calc(50% + 15ch)";
-            window.style.maxHeight = window.getBoundingClientRect().height + "px";
+            confirm.addEventListener(("transitionend"), () => {
+                giveup.style.opacity = 1;
+                giveup.style.width = "100%";
+            });
+            window.style.height = window.scrollHeight + "px";
         });
+
+        giveup.addEventListener(("transitionend"), () => {
+            window.style.height = `calc(${window.scrollHeight + 20}px)`;
+        }, { once: true });
 
         visible(content, "Xz");
 
@@ -678,28 +697,73 @@ async function xz(string, n, names, title, id) {
             return tohex(r, g, b);
         }
 
-        confirm.onclick = () => {
-            if (xz_items.length === 0) {
-                warn("你还没有勾选！");
-                window.style.animation = `mfn_shake1 0.3s ${easing}`;
-                window.addEventListener("animationend", () => {
-                    window.style.animation = "";
-                }, { once: true });
-                return;
-            } else {
-                resolve(xz_items);
+        giveup.onmouseover = () => {
+            ld(giveup, "75%");
+        };
+        giveup.onmouseleave = () => {
+            ld(giveup, "100%");
+        }
+        giveup.onclick = () => {
+            resolve(null);
+            giveup.style.opacity = 0;
+            giveup.style.width = 0;
+            giveup.addEventListener("transitionend", () => {
+                giveup.style.visibility = "hidden";
                 content.style.opacity = 0;
                 content.style.transform = "translateY(-10px)";
                 icon.style.opacity = 0;
                 txt.style.opacity = 0;
                 confirm.style.opacity = 0;
-                content.addEventListener("transitionend", () => {
+                confirm.style.width = 0;
+                confirm.style.visibility = "hidden";
+                confirm.addEventListener("transitionend", () => {
                     square.style.height = "35px";
-                    window.style.animation = `cc_mfn 350ms forwards ${easing}`;
+                    window.style.animation = `cc_mfn 550ms forwards ${easing}`;
                     close(window);
                     setTimeout(() => {
                         if (document.body.contains(window)) document.body.removeChild(window);
                     }, 550);
+                });
+            });
+        }
+
+        confirm.onmouseover = () => {
+            ld(confirm, "75%");
+        };
+        confirm.onmouseleave = () => {
+            ld(confirm, "100%");
+        }
+        confirm.onclick = () => {
+            if (xz_items.length === 0) {
+                warn("你还没有勾选！");
+                window.style.animation = `mfn_shake1 0.3s ${easing}`;
+                confirm.style.backgroundColor = "#ffff00b0";
+                window.addEventListener("animationend", () => {
+                    window.style.animation = "";
+                    confirm.style.backgroundColor = "#a700ffb0";
+                }, { once: true });
+                return;
+            } else {
+                resolve(xz_items);
+                confirm.style.opacity = 0;
+                confirm.style.width = 0;
+                confirm.addEventListener("transitionend", () => {
+                    confirm.style.visibility = "hidden";
+                    content.style.opacity = 0;
+                    content.style.transform = "translateY(-10px)";
+                    icon.style.opacity = 0;
+                    txt.style.opacity = 0;
+                    giveup.style.opacity = 0;
+                    giveup.style.width = 0;
+                    giveup.style.visibility = "hidden";
+                    giveup.addEventListener("transitionend", () => {
+                        square.style.height = "35px";
+                        window.style.animation = `cc_mfn 550ms forwards ${easing}`;
+                        close(window);
+                        setTimeout(() => {
+                            if (document.body.contains(window)) document.body.removeChild(window);
+                        }, 550);
+                    });
                 });
             }
         };
@@ -720,33 +784,30 @@ async function xz(string, n, names, title, id) {
             array[i] = String(array[i]);
             btn.id = `btn${i}`;
             btn.className = "xz-btn";
+            btn.style.marginBottom = "10px";
             btn.innerHTML = array[i];
+            btn.style.opacity = 0;
 
             btn.style.backgroundColor = `${color()}b0`;
+
+            window.addEventListener("animationend", () => {
+                btn.style.opacity = 1;
+            }, { once: true });
 
             container.appendChild(checkbox);
             container.appendChild(btn);
             container.style.top = `${btn.offsetHeight + 25}px`;
             content.style.marginBottom = `25px`;
 
-            window.addEventListener("animationend", () => {
-                content.style.transform = "translateY(0)";
-                content.style.opacity = 1;
-                btn.style.opacity = 1;
-                checkbox.style.opacity = 1;
-                icon.style.opacity = 1;
-                txt.style.opacity = 1;
-                confirm.style.opacity = 1;
-                window.style.maxHeight = window.getBoundingClientRect().height + "px";
-            });
-
             checkbox.onchange = () => {
                 if (checkbox.checked) {
                     if (xz_items.length >= n) {
-                        warn(`勾选的选项数量已达上限。最多可勾选 ${n} 个。`);
+                        fail(`勾选的选项数量已达上限。最多可勾选 ${n} 个。`);
                         window.style.animation = `mfn_shake2 0.3s ${easing}`;
+                        confirm.style.backgroundColor = "#ff0000b0";
                         window.addEventListener("animationend", () => {
                             window.style.animation = "";
+                            confirm.style.backgroundColor = "#a700ffb0";
                         }, { once: true });
                         checkbox.checked = false;
                         return;
@@ -760,6 +821,12 @@ async function xz(string, n, names, title, id) {
                 }
             };
 
+            btn.onmouseover = () => {
+                ld(btn, "75%");
+            };
+            btn.onmouseleave = () => {
+                ld(btn, "100%");
+            };
             btn.onclick = () => {
                 checkbox.checked = !checkbox.checked;
                 checkbox.dispatchEvent(new Event('change'));
@@ -918,10 +985,12 @@ async function lj(string, url, title, id) {
     const link = document.createElement("button");
     link.className = "lj-link";
     link.style.opacity = 0;
+    link.style.width = 0;
     link.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
     const ignore = document.createElement("button");
     ignore.className = "lj-ignore";
     ignore.style.opacity = 0;
+    ignore.style.width = 0;
     ignore.style.transition = "all 175ms cubic-bezier(0.33, 1, 0.68, 1)";
 
     create(window);
@@ -949,43 +1018,85 @@ async function lj(string, url, title, id) {
         icon.style.opacity = 1;
         txt.style.opacity = 1;
         link.style.opacity = 1;
-        ignore.style.opacity = 1;
+        link.style.width = "100%";
         window.style.width = "30ch";
         window.style.left = "calc(50% - 15ch)";
         window.style.right = "calc(50% + 15ch)";
-        window.style.maxHeight = window.getBoundingClientRect().height + "px";
+        window.style.height = window.scrollHeight + "px";
+        link.addEventListener(("transitionend"), () => {
+            ignore.style.opacity = 1;
+            ignore.style.width = "100%";
+        }, { once: true });
     });
+
+    ignore.addEventListener("transitionend", () => {
+        window.style.height = `${window.scrollHeight + 20}px`;
+    }, { once: true });
 
     let square_height = hqgd(txt.innerHTML, "fn-title", "div");
     square.style.height = square_height;
     content.style.marginTop = square_height;
 
-    function guanbi() {
-        content.style.opacity = 0;
-        content.style.transform = "translateY(-10px)";
-        link.style.opacity = 0;
-        ignore.style.opacity = 0;
-        icon.style.opacity = 0;
-        txt.style.opacity = 0;
-        content.addEventListener("transitionend", () => {
-            square.style.height = "35px";
-            window.style.animation = `cc_mfn 350ms forwards ${easing}`;
-            close(window);
-            setTimeout(() => {
-                if (document.body.contains(window)) document.body.removeChild(window);
-            }, 550);
-        });
+    link.onmouseover = () => {
+        ld(link, "75%");
+    };
+    link.onmouseleave = () => {
+        ld(link, "100%");
     }
-
     link.onclick = () => {
         if (!open(url, "_blank", `width=${defwid}, height=${defhei}`)) {
             warn("弹出的窗口被阻止。");
         }
-        guanbi();
+        link.style.opacity = 0;
+        link.style.width = 0;
+        link.style.visibility = "hidden";
+        link.addEventListener(("transitionend"), () => {
+            content.style.opacity = 0;
+            content.style.transform = "translateY(-10px)";
+            icon.style.opacity = 0;
+            txt.style.opacity = 0;
+            ignore.style.opacity = 0;
+            ignore.style.width = 0;
+            ignore.style.visibility = "hidden";
+            ignore.addEventListener("transitionend", () => {
+                square.style.height = "35px";
+                window.style.animation = `cc_mfn 350ms forwards ${easing}`;
+                close(window);
+                setTimeout(() => {
+                    if (document.body.contains(window)) document.body.removeChild(window);
+                }, 550);
+            });
+        }, { once: true });
     };
+
+    ignore.onmouseover = () => {
+        ld(ignore, "75%");
+    };
+    ignore.onmouseleave = () => {
+        ld(ignore, "100%");
+    }
     ignore.onclick = () => {
         rz("已忽略该链接。");
-        guanbi();
+        ignore.style.opacity = 0;
+        ignore.style.width = 0;
+        ignore.style.visibility = "hidden";
+        ignore.addEventListener(("transitionend"), () => {
+            content.style.opacity = 0;
+            content.style.transform = "translateY(-10px)";
+            link.style.opacity = 0;
+            link.style.width = 0;
+            link.style.visibility = "hidden";
+            icon.style.opacity = 0;
+            txt.style.opacity = 0;
+            link.addEventListener("transitionend", () => {
+                square.style.height = "35px";
+                window.style.animation = `cc_mfn 350ms forwards ${easing}`;
+                close(window);
+                setTimeout(() => {
+                    if (document.body.contains(window)) document.body.removeChild(window);
+                }, 550);
+            });
+        }, { once: true });
     };
 }
 

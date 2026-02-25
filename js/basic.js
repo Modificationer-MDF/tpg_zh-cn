@@ -1,6 +1,10 @@
 function ld(el, percent) { // 控制亮度。
-    el.style.transition = "filter 0.2s ease-in-out";
+    let ls_t = getComputedStyle(el).transition;
+    el.style.transition = `all 0.2s ${easing}`;
     el.style.filter = `brightness(${percent})`;
+    el.addEventListener("transitionend", () => {
+        el.style.transition = ls_t;
+    }, { once: true });
 }
 
 function xzsj() { // 现在时间。
@@ -250,26 +254,31 @@ function fn1() { // “函数演示” “预设” 模式。
     xzbtn.className = "btn7";
     xzbtn.onclick = async () => {
         var res = await xz("你对以上的函数有什么看法？", 1, ["很不错。", "还可以。", "一般。", "有待改进的空间。"]);
-        res = res.join("");
-        switch (res) {
-            case "很不错。":
-                noti("非常感谢！你还可以尝试其他的函数。");
-                break;
-            case "还可以。":
-                noti("谢谢你的评价！");
-                break;
-            case "一般。":
-                noti("我们可以做得更好。");
-                break;
-            case "有待改进的空间。":
-                var r = await xz("你是否想向我反馈你的建议？", 1, ["是。", "否。"]);
-                r = r.join("");
-                if (r === "是。") {
-                    await lj("点击以下链接反馈。", "mailto://Feng_14@outlook.com");
+        if (res === null) {
+            noti("好的，我们再见。");
+            return;
+        } else {
+            res = res.join("");
+            switch (res) {
+                case "很不错。":
+                    noti("非常感谢！你还可以尝试其他的函数。");
                     break;
-                } else {
-                    noti("好的，我们再见。");
-                }
+                case "还可以。":
+                    noti("谢谢你的评价！");
+                    break;
+                case "一般。":
+                    noti("我们可以做得更好。");
+                    break;
+                case "有待改进的空间。":
+                    var r = await xz("你是否想向我反馈你的建议？", 1, ["是。", "否。"]);
+                    r = r.join("");
+                    if (r === "是。") {
+                        await lj("点击以下链接反馈。", "mailto://Feng_14@outlook.com");
+                        break;
+                    } else {
+                        noti("好的，我们再见。");
+                    }
+            }
         }
     };
     const ljbtn = document.createElement("button");
@@ -864,7 +873,7 @@ function control() { // 选项。
     eas.innerHTML = "缓动函数（easing）";
     eas.className = "lcont";
     eas.onclick = () => {
-        mb(["cubic-bezier 函数的格式是 cubic-bezier(x1, y1, x2, y2)，其中 x1 和 x2 必须在 0 到 1 之间，y1 和 y2 则可以是任意值；其他 easing 还有 ease、linear、ease-in、ease-out、ease-in-out、step、step-start、step-end。"]);
+        noti("cubic-bezier 函数的格式是 cubic-bezier(x1, y1, x2, y2)，其中 x1 和 x2 必须在 0 到 1 之间，y1 和 y2 则可以是任意值；其他 easing 还有 ease、linear、ease-in、ease-out、ease-in-out、step、step-start、step-end。");
     };
     const img5 = document.createElement("img");
     img5.src = "images/Easing.png";
@@ -1272,9 +1281,9 @@ function pos(p) {
     function fn(w) {
         w.forEach((window) => {
             const wh = window.getBoundingClientRect().height;
-            window.style.transition = `top 0.55s ${easing}`;
+            window.style.transition = `all 0.55s ${easing}`;
             window.style.top = `${total}px`;
-            total += (wh + 5);
+            total += (wh + 3);
         });
     }
     if (p === 0) {
