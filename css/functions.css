@@ -283,20 +283,40 @@
 }
 
 @keyframes mfn_shake2 {
+    10% {
+        left: calc(50% - 15ch + 45px);
+    }
+
     20% {
-        left: calc(50% - 15ch + 25px);
+        left: calc(50% - 15ch - 45px);
+    }
+
+    30% {
+        left: calc(50% - 15ch + 35px);
     }
 
     40% {
-        left: calc(50% - 15ch - 25px);
+        left: calc(50% - 15ch - 35px);
+    }
+
+    50% {
+        left: calc(50% - 15ch + 25px);
     }
 
     60% {
+        left: calc(50% - 15ch - 25px);
+    }
+
+    70% {
         left: calc(50% - 15ch + 15px);
     }
 
     80% {
         left: calc(50% - 15ch - 15px);
+    }
+
+    90% {
+        left: calc(50% - 15ch - 5px);
     }
 
     100% {
